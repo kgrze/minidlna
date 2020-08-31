@@ -477,14 +477,6 @@ AC_CHECK_LIB(vorbisfile, vorbis_comment_query,
         AM_CONDITIONAL(NEED_VORBIS, true),
         -logg)
 
-AC_CHECK_LIB(avahi-client, avahi_threaded_poll_new,
-        [AC_CHECK_HEADERS([avahi-common/thread-watch.h],
-         AM_CONDITIONAL(HAVE_AVAHI, true)
-         AC_DEFINE(HAVE_AVAHI,1,[Have avahi]),
-         AM_CONDITIONAL(HAVE_AVAHI, false))],
-         AM_CONDITIONAL(HAVE_AVAHI, false),
-        -lavahi-client -lavahi-common)
-
 ################################################################################################################
 ### Header checks
 
@@ -542,23 +534,6 @@ AC_ARG_WITH(os-url,
 AC_DEFINE_UNQUOTED([OS_URL],"${with_osurl}",[OS URL])
 
 
-AC_MSG_CHECKING([whether to enable TiVo support])
-AC_ARG_ENABLE(tivo,
-	[  --enable-tivo           enable TiVo support],[
-	if test "$enableval" = "yes"; then
-		AC_DEFINE(TIVO_SUPPORT, 1, [Define to 1 if you want to enable TiVo support])
-		AM_CONDITIONAL(TIVO_SUPPORT, true)
-		AC_MSG_RESULT([yes])
-	else
-		AM_CONDITIONAL(TIVO_SUPPORT, false)
-		AC_MSG_RESULT([no])
-	fi
-	],[
-		AM_CONDITIONAL(TIVO_SUPPORT, false)
-		AC_MSG_RESULT([no])
-	]
-)
-
 AC_MSG_CHECKING([whether to enable generic NETGEAR device support])
 AC_ARG_ENABLE(netgear,
 	[  --enable-netgear        enable generic NETGEAR device support],[
@@ -584,13 +559,11 @@ AC_ARG_ENABLE(readynas,
 	if test "$enableval" = "yes"; then
 		AC_DEFINE([NETGEAR],[1],[Define to 1 if you want to enable generic NETGEAR device support])
 		AC_DEFINE([READYNAS],[1],[Define to 1 if you want to enable NETGEAR ReadyNAS support])
-		AC_DEFINE([TIVO_SUPPORT], 1, [Define to 1 if you want to enable TiVo support])
 		AC_DEFINE_UNQUOTED([OS_URL],"http://www.readynas.com/")
 		AC_DEFINE_UNQUOTED([ROOTDEV_MANUFACTURERURL],"http://www.netgear.com/")
 		AC_DEFINE_UNQUOTED([ROOTDEV_MANUFACTURER],"NETGEAR")
 		AC_DEFINE_UNQUOTED([ROOTDEV_MODELNAME],"Windows Media Connect compatible (ReadyDLNA)")
 		AC_DEFINE_UNQUOTED([ROOTDEV_MODELDESCRIPTION],"ReadyDLNA")
-		AM_CONDITIONAL(TIVO_SUPPORT, true)
 		AC_MSG_RESULT([yes])
 	else
 		AC_MSG_RESULT([no])

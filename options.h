@@ -51,7 +51,6 @@ enum upnpconfigoptions {
 	UPNPLOGDIR,			/* base directory to store the log file */
 	UPNPLOGLEVEL,			/* logging verbosity */
 	UPNPMINISSDPDSOCKET,		/* minissdpdsocket */
-	ENABLE_TIVO,			/* enable support for streaming images and music to TiVo */
 	ENABLE_DLNA_STRICT,		/* strictly adhere to DLNA specs */
 	ROOT_CONTAINER,			/* root ObjectID (instead of "0") */
 	USER_ACCOUNT,			/* user account to run as */
@@ -59,7 +58,6 @@ enum upnpconfigoptions {
 	MAX_CONNECTIONS,		/* maximum number of simultaneous connections */
 	MERGE_MEDIA_DIRS,		/* don't add an extra directory level when there are multiple media dirs */
 	WIDE_LINKS,			/* allow following symlinks outside the defined media_dirs */
-	TIVO_DISCOVERY,			/* TiVo discovery protocol: bonjour or beacon. Defaults to bonjour if supported */
 };
 
 /* readoptionsfile()

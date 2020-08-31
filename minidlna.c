@@ -92,9 +92,6 @@
 #include "scanner.h"
 #include "monitor.h"
 #include "log.h"
-#include "tivo_beacon.h"
-#include "tivo_utils.h"
-#include "avahi.h"
 
 #if SQLITE_VERSION_NUMBER < 3005001
 # warning "Your SQLite3 library appears to be too old!  Please use 3.5.1 or newer."
@@ -504,7 +501,7 @@ init(int argc, char **argv)
 	char *string, *word;
 	char *path;
 	char buf[PATH_MAX];
-	char log_str[75] = "general,artwork,database,inotify,scanner,metadata,http,ssdp,tivo=warn";
+	char log_str[75] = "general,artwork,database,inotify,scanner,metadata,http,ssdp=warn";
 	char *log_level = NULL;
 	struct media_dir_s *media_dir;
 	int ifaces = 0;
@@ -680,10 +677,6 @@ init(int argc, char **argv)
 			if (!strtobool(ary_options[i].value))
 				CLEARFLAG(INOTIFY_MASK);
 			break;
-		case ENABLE_TIVO:
-			if (strtobool(ary_options[i].value))
-				SETFLAG(TIVO_MASK);
-			break;
 		case ENABLE_DLNA_STRICT:
 			if (strtobool(ary_options[i].value))
 				SETFLAG(DLNA_STRICT_MASK);
@@ -747,10 +740,6 @@ init(int argc, char **argv)
 		case WIDE_LINKS:
 			if (strtobool(ary_options[i].value))
 				SETFLAG(WIDE_LINKS_MASK);
-			break;
-		case TIVO_DISCOVERY:
-			if (strcasecmp(ary_options[i].value, "beacon") == 0)
-				CLEARFLAG(TIVO_BONJOUR_MASK);
 			break;
 		default:
 			DPRINTF(E_ERROR, L_GENERAL, "Unknown option in file %s\n",
@@ -1030,12 +1019,6 @@ main(int argc, char **argv)
 	int last_changecnt = 0;
 	pid_t scanner_pid = 0;
 	pthread_t inotify_thread = 0;
-#ifdef TIVO_SUPPORT
-	uint8_t beacon_interval = 5;
-	int sbeacon = -1;
-	struct sockaddr_in tivo_bcast;
-	struct timeval lastbeacontime = {0, 0};
-#endif
 
 	for (i = 0; i < L_MAX; i++)
 		log_level[i] = E_WARN;
@@ -1088,32 +1071,6 @@ main(int argc, char **argv)
 		DPRINTF(E_FATAL, L_GENERAL, "Failed to open socket for HTTP. EXITING\n");
 	DPRINTF(E_WARN, L_GENERAL, "HTTP listening on port %d\n", runtime_vars.port);
 
-#ifdef TIVO_SUPPORT
-	if (GETFLAG(TIVO_MASK))
-	{
-		DPRINTF(E_WARN, L_GENERAL, "TiVo support is enabled.\n");
-		/* Add TiVo-specific randomize function to sqlite */
-		ret = sqlite3_create_function(db, "tivorandom", 1, SQLITE_UTF8, NULL, &TiVoRandomSeedFunc, NULL, NULL);
-		if (ret != SQLITE_OK)
-			DPRINTF(E_ERROR, L_TIVO, "ERROR: Failed to add sqlite randomize function for TiVo!\n");
-		if (GETFLAG(TIVO_BONJOUR_MASK))
-		{
-			tivo_bonjour_register();
-		}
-		else
-		{
-			/* open socket for sending Tivo notifications */
-			sbeacon = OpenAndConfTivoBeaconSocket();
-			if(sbeacon < 0)
-				DPRINTF(E_FATAL, L_GENERAL, "Failed to open sockets for sending Tivo beacon notify "
-					"messages. EXITING\n");
-			tivo_bcast.sin_family = AF_INET;
-			tivo_bcast.sin_addr.s_addr = htonl(getBcastAddress());
-			tivo_bcast.sin_port = htons(2190);
-		}
-	}
-#endif
-
 	reload_ifaces(0);
 	lastnotifytime.tv_sec = time(NULL) + runtime_vars.notify_interval;
 
@@ -1156,27 +1113,6 @@ main(int argc, char **argv)
 				else
 					timeout.tv_usec = lastnotifytime.tv_usec - timeofday.tv_usec;
 			}
-#ifdef TIVO_SUPPORT
-			if (sbeacon >= 0)
-			{
-				if (timeofday.tv_sec >= (lastbeacontime.tv_sec + beacon_interval))
-				{
-					sendBeaconMessage(sbeacon, &tivo_bcast, sizeof(struct sockaddr_in), 1);
-					memcpy(&lastbeacontime, &timeofday, sizeof(struct timeval));
-					if (timeout.tv_sec > beacon_interval)
-					{
-						timeout.tv_sec = beacon_interval;
-						timeout.tv_usec = 0;
-					}
-					/* Beacons should be sent every 5 seconds or so for the first minute,
-					 * then every minute or so thereafter. */
-					if (beacon_interval == 5 && (timeofday.tv_sec - startup_time) > 60)
-						beacon_interval = 60;
-				}
-				else if (timeout.tv_sec > (lastbeacontime.tv_sec + beacon_interval + 1 - timeofday.tv_sec))
-					timeout.tv_sec = lastbeacontime.tv_sec + beacon_interval - timeofday.tv_sec;
-			}
-#endif
 		}
 
 		if (GETFLAG(SCANNING_MASK))
@@ -1203,13 +1139,6 @@ main(int argc, char **argv)
 			FD_SET(shttpl, &readset);
 			max_fd = MAX(max_fd, shttpl);
 		}
-#ifdef TIVO_SUPPORT
-		if (sbeacon >= 0) 
-		{
-			FD_SET(sbeacon, &readset);
-			max_fd = MAX(max_fd, sbeacon);
-		}
-#endif
 		if (smonitor >= 0) 
 		{
 			FD_SET(smonitor, &readset);
@@ -1244,13 +1173,6 @@ main(int argc, char **argv)
 			/*DPRINTF(E_DEBUG, L_GENERAL, "Received SSDP Packet\n");*/
 			ProcessSSDPRequest(sssdp, (unsigned short)runtime_vars.port);
 		}
-#ifdef TIVO_SUPPORT
-		if (sbeacon >= 0 && FD_ISSET(sbeacon, &readset))
-		{
-			/*DPRINTF(E_DEBUG, L_GENERAL, "Received UDP Packet\n");*/
-			ProcessTiVoBeacon(sbeacon);
-		}
-#endif
 		if (smonitor >= 0 && FD_ISSET(smonitor, &readset))
 		{
 			ProcessMonitorEvent(smonitor);
@@ -1346,10 +1268,6 @@ shutdown:
 		close(sssdp);
 	if (shttpl >= 0)
 		close(shttpl);
-#ifdef TIVO_SUPPORT
-	if (sbeacon >= 0)
-		close(sbeacon);
-#endif
 	if (smonitor >= 0)
 		close(smonitor);
 	

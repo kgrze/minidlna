@@ -160,7 +160,6 @@
 	"http-get:*:video/x-ms-wmv:*," \
 	"http-get:*:video/x-msvideo:*," \
 	"http-get:*:video/x-flv:*," \
-	"http-get:*:video/x-tivo-mpeg:*," \
 	"http-get:*:video/quicktime:*," \
 	"http-get:*:audio/mp4:*," \
 	"http-get:*:audio/x-wav:*," \
@@ -182,17 +181,11 @@ extern struct runtime_vars_s runtime_vars;
 /* runtime boolean flags */
 extern uint32_t runtime_flags;
 #define INOTIFY_MASK          0x0001
-#define TIVO_MASK             0x0002
 #define DLNA_STRICT_MASK      0x0004
 #define NO_PLAYLIST_MASK      0x0008
 #define SYSTEMD_MASK          0x0010
 #define MERGE_MEDIA_DIRS_MASK 0x0020
 #define WIDE_LINKS_MASK       0x0040
-#ifdef HAVE_AVAHI
-#define TIVO_BONJOUR_MASK     0x0080
-#else
-#define TIVO_BONJOUR_MASK     0x0000
-#endif
 #define SCANNING_MASK         0x0100
 #define RESCAN_MASK           0x0200
 

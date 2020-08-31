@@ -76,8 +76,6 @@
 #include "log.h"
 #include "sql.h"
 #include <libexif/exif-loader.h>
-#include "tivo_utils.h"
-#include "tivo_commands.h"
 #include "clients.h"
 #include "process.h"
 #include "sendfile.h"
@@ -969,29 +967,6 @@ ProcessHttpQuery_upnphttp(struct upnphttp * h)
 		{
 			SendResp_albumArt(h, HttpUrl+10);
 		}
-		#ifdef TIVO_SUPPORT
-		else if(strncmp(HttpUrl, "/TiVoConnect", 12) == 0)
-		{
-			if( GETFLAG(TIVO_MASK) )
-			{
-				if( *(HttpUrl+12) == '?' )
-				{
-					ProcessTiVoCommand(h, HttpUrl+13);
-				}
-				else
-				{
-					DPRINTF(E_WARN, L_HTTP, "Invalid TiVo request! %s\n", HttpUrl+12);
-					Send404(h);
-				}
-			}
-			else
-			{
-				DPRINTF(E_WARN, L_HTTP, "TiVo request with out TiVo support enabled! %s\n",
-					HttpUrl+12);
-				Send404(h);
-			}
-		}
-		#endif
 		else if(strncmp(HttpUrl, "/Resized/", 9) == 0)
 		{
 			SendResp_resizedimg(h, HttpUrl+9);
@@ -1655,7 +1630,6 @@ SendResp_resizedimg(struct upnphttp * h, char * object)
 	path = saveptr ? saveptr + 1 : object;
 	for( item = strtok_r(path, "&,", &saveptr); item != NULL; item = strtok_r(NULL, "&,", &saveptr) )
 	{
-		decodeString(item, 1);
 		val = item;
 		key = strsep(&val, "=");
 		if( !val )

@@ -37,7 +37,6 @@
 #include "tagutils/tagutils.h"
 #include "image_utils.h"
 #include "upnpreplyparse.h"
-#include "tivo_utils.h"
 #include "metadata.h"
 #include "albumart.h"
 #include "utils.h"
@@ -1480,19 +1479,6 @@ GetVideoMetadata(const char *path, const char *name)
 	#endif
 	#endif
 video_no_dlna:
-
-#ifdef TIVO_SUPPORT
-	if( ends_with(path, ".TiVo") && is_tivo_file(path) )
-	{
-		if( m.dlna_pn )
-		{
-			free(m.dlna_pn);
-			m.dlna_pn = NULL;
-		}
-		m.mime = realloc(m.mime, 21);
-		strcpy(m.mime, "video/x-tivo-mpeg");
-	}
-#endif
 
 	strcpy(nfo, path);
 	ext = strrchr(nfo, '.');

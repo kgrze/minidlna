@@ -41,7 +41,6 @@ const char *facility_name[] = {
 	"metadata",
 	"http",
 	"ssdp",
-	"tivo",
 	0
 };
 

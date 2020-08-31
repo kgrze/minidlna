@@ -58,7 +58,6 @@ static const struct {
 	{ UPNPLOGDIR, "log_dir" },
 	{ UPNPLOGLEVEL, "log_level" },
 	{ UPNPMINISSDPDSOCKET, "minissdpdsocket"},
-	{ ENABLE_TIVO, "enable_tivo" },
 	{ ENABLE_DLNA_STRICT, "strict_dlna" },
 	{ ROOT_CONTAINER, "root_container" },
 	{ USER_ACCOUNT, "user" },
@@ -66,7 +65,6 @@ static const struct {
 	{ MAX_CONNECTIONS, "max_connections" },
 	{ MERGE_MEDIA_DIRS, "merge_media_dirs" },
 	{ WIDE_LINKS, "wide_links" },
-	{ TIVO_DISCOVERY, "tivo_discovery" },
 };
 
 int

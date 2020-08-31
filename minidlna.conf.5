@@ -119,7 +119,7 @@ section can use a different level: off, fatal, error, warn, info, or debug
 .nf
 
 Example
-log_level=general,artwork,database,inotify,scanner,metadata,http,ssdp,tivo=warn
+log_level=general,artwork,database,inotify,scanner,metadata,http,ssdp=warn
 .fi
 
 .IP "\fBinotify\fP"
@@ -136,14 +136,6 @@ album_art_names=Cover.jpg/cover.jpg/AlbumArtSmall.jpg/albumartsmall.jpg/AlbumArt
 /albumart.jpg/Album.jpg/album.jpg/Folder.jpg/folder.jpg/Thumb.jpg/thumb.jpg
 
 .fi
-
-.IP "\fBenable_tivo\fP"
-Set this to yes to enable support for streaming .jpg and .mp3 files to a TiVo 
-supporting HMO, default is no.
-
-.IP "\fBtivo_discovery\fP"
-Set this to 'beacon' to use the legacy TiVo broadcast discovery method. Defaults to
-using Bonjour if Avahi support is available.
 
 .IP "\fBroot_container\fP" 
 Use a different container as the root of the tree exposed to clients.

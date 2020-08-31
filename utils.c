@@ -373,9 +373,6 @@ mime_to_ext(const char * mime)
 				return "mov";
 			else if( strcmp(mime+6, "3gpp") == 0 )
 				return "3gp";
-			else if( strncmp(mime+6, "x-tivo-mpeg", 11) == 0 )
-				return "TiVo";
-			break;
 		case 'i':
 			if( strcmp(mime+6, "jpeg") == 0 )
 				return "jpg";
@@ -399,9 +396,6 @@ is_video(const char * file)
 		ends_with(file, ".m2t") || ends_with(file, ".mkv")   ||
 		ends_with(file, ".vob") || ends_with(file, ".ts")    ||
 		ends_with(file, ".flv") || ends_with(file, ".xvid")  ||
-#ifdef TIVO_SUPPORT
-		ends_with(file, ".TiVo") ||
-#endif
 		ends_with(file, ".mov") || ends_with(file, ".3gp"));
 }
 
