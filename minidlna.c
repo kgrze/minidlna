@@ -912,7 +912,7 @@ init(int argc, char **argv)
 
 	if (verbose_flag)
 	{
-		strcpy(log_str+65, "debug");
+		strcpy(log_str+60, "debug");
 		log_level = log_str;
 	}
 	else if (!log_level)
@@ -923,7 +923,7 @@ init(int argc, char **argv)
 	if (debug_flag)
 	{
 		pid = getpid();
-		strcpy(log_str+65, "maxdebug");
+		strcpy(log_str+60, "maxdebug");
 		log_level = log_str;
 	}
 	else if (GETFLAG(SYSTEMD_MASK))
