@@ -46,8 +46,6 @@ enum upnpconfigoptions {
 	UPNPFRIENDLYNAME,		/* how the system should show up to DLNA clients */
 	UPNPMEDIADIR,			/* directory to search for UPnP-A/V content */
 	UPNPINOTIFY,			/* enable inotify on the media directories */
-	UPNPDBDIR,			/* base directory to store the database and album art cache */
-	UPNPLOGDIR,			/* base directory to store the log file */
 	UPNPLOGLEVEL,			/* logging verbosity */
 	UPNPMINISSDPDSOCKET,		/* minissdpdsocket */
 	ENABLE_DLNA_STRICT,		/* strictly adhere to DLNA specs */

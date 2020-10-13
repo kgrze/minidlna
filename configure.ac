@@ -553,26 +553,6 @@ AC_ARG_ENABLE(netgear,
         ]
 )
 
-AC_MSG_CHECKING([whether to enable NETGEAR ReadyNAS support])
-AC_ARG_ENABLE(readynas,
-	[  --enable-readynas       enable NETGEAR ReadyNAS support],[
-	if test "$enableval" = "yes"; then
-		AC_DEFINE([NETGEAR],[1],[Define to 1 if you want to enable generic NETGEAR device support])
-		AC_DEFINE([READYNAS],[1],[Define to 1 if you want to enable NETGEAR ReadyNAS support])
-		AC_DEFINE_UNQUOTED([OS_URL],"http://www.readynas.com/")
-		AC_DEFINE_UNQUOTED([ROOTDEV_MANUFACTURERURL],"http://www.netgear.com/")
-		AC_DEFINE_UNQUOTED([ROOTDEV_MANUFACTURER],"NETGEAR")
-		AC_DEFINE_UNQUOTED([ROOTDEV_MODELNAME],"Windows Media Connect compatible (ReadyDLNA)")
-		AC_DEFINE_UNQUOTED([ROOTDEV_MODELDESCRIPTION],"ReadyDLNA")
-		AC_MSG_RESULT([yes])
-	else
-		AC_MSG_RESULT([no])
-	fi
-	],[
-		AC_MSG_RESULT([no])
-	]
-)
-
 AC_MSG_CHECKING([whether to build a static binary executable])
 AC_ARG_ENABLE(static,
 	[  --enable-static         build a static binary executable],[

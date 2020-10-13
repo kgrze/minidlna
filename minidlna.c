@@ -198,45 +198,6 @@ getfriendlyname(char *buf, int len)
 
 	off = strlen(buf);
 	off += snprintf(buf+off, len-off, ": ");
-#ifdef READYNAS
-	FILE *info;
-	char ibuf[64], *key, *val;
-	snprintf(buf+off, len-off, "ReadyNAS");
-	info = fopen("/proc/sys/dev/boot/info", "r");
-	if (!info)
-		return;
-	while ((val = fgets(ibuf, 64, info)) != NULL)
-	{
-		key = strsep(&val, ": \t");
-		val = trim(val);
-		if (strcmp(key, "model") == 0)
-		{
-			snprintf(buf+off, len-off, "%s", val);
-			key = strchr(val, ' ');
-			if (key)
-			{
-				strncpyt(modelnumber, key+1, MODELNUMBER_MAX_LEN);
-				*key = '\0';
-			}
-			snprintf(modelname, MODELNAME_MAX_LEN,
-				"Windows Media Connect compatible (%s)", val);
-		}
-		else if (strcmp(key, "serial") == 0)
-		{
-			strncpyt(serialnumber, val, SERIALNUMBER_MAX_LEN);
-			if (serialnumber[0] == '\0')
-			{
-				char mac_str[13];
-				if (getsyshwaddr(mac_str, sizeof(mac_str)) == 0)
-					strcpy(serialnumber, mac_str);
-				else
-					strcpy(serialnumber, "0");
-			}
-			break;
-		}
-	}
-	fclose(info);
-#else
 	char * logname;
 	logname = getenv("LOGNAME");
 #ifndef STATIC // Disable for static linking
@@ -249,7 +210,6 @@ getfriendlyname(char *buf, int len)
 	}
 #endif
 	snprintf(buf+off, len-off, "%s", logname?logname:"Unknown");
-#endif
 }
 
 static time_t
@@ -630,24 +590,6 @@ init(int argc, char **argv)
 			else
 				media_dirs = media_dir;
 			break;
-		case UPNPDBDIR:
-			path = realpath(ary_options[i].value, buf);
-			if (!path)
-				path = (ary_options[i].value);
-			make_dir(path, S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO);
-			if (access(path, F_OK) != 0)
-				DPRINTF(E_FATAL, L_GENERAL, "Database path not accessible! [%s]\n", path);
-			strncpyt(db_path, path, PATH_MAX);
-			break;
-		case UPNPLOGDIR:
-			path = realpath(ary_options[i].value, buf);
-			if (!path)
-				path = (ary_options[i].value);
-			make_dir(path, S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO);
-			if (access(path, F_OK) != 0)
-				DPRINTF(E_FATAL, L_GENERAL, "Log path not accessible! [%s]\n", path);
-			strncpyt(log_path, path, PATH_MAX);
-			break;
 		case UPNPLOGLEVEL:
 			log_level = ary_options[i].value;
 			break;
@@ -911,15 +853,10 @@ init(int argc, char **argv)
 	else
 	{
 		pid = process_daemonize();
-		#ifdef READYNAS
-		unlink("/ramfs/.upnp-av_scan");
-		path = "/var/log/upnp-av.log";
-		#else
 		if (access(db_path, F_OK) != 0)
 			make_dir(db_path, S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO);
 		snprintf(buf, sizeof(buf), "%s/minidlna.log", log_path);
 		path = buf;
-		#endif
 	}
 	log_init(path, log_level);
 

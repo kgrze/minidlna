@@ -583,23 +583,6 @@ sendXMLdesc(struct upnphttp * h, char * (f)(int *))
 	free(desc);
 }
 
-#ifdef READYNAS
-static void
-SendResp_readynas_admin(struct upnphttp * h)
-{
-	char body[128];
-	int l;
-
-	h->respflags = FLAG_HTML;
-	l = snprintf(body, sizeof(body), "<meta http-equiv=\"refresh\" content=\"0; url=https://%s/admin/\">",
-	              lan_addr[h->iface].str);
-
-	BuildResp_upnphttp(h, body, l);
-	SendResp_upnphttp(h);
-	CloseSocket_upnphttp(h);
-}
-#endif
-
 static void
 SendResp_presentation(struct upnphttp * h)
 {
@@ -980,11 +963,7 @@ ProcessHttpQuery_upnphttp(struct upnphttp * h)
 		}
 		else if(strcmp(HttpUrl, "/") == 0)
 		{
-			#ifdef READYNAS
-			SendResp_readynas_admin(h);
-			#else
 			SendResp_presentation(h);
-			#endif
 		}
 		else
 		{

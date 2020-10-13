@@ -53,8 +53,6 @@ static const struct {
 	{ UPNPFRIENDLYNAME, "friendly_name"},
 	{ UPNPMEDIADIR, "media_dir"},
 	{ UPNPINOTIFY, "inotify" },
-	{ UPNPDBDIR, "db_dir" },
-	{ UPNPLOGDIR, "log_dir" },
 	{ UPNPLOGLEVEL, "log_level" },
 	{ UPNPMINISSDPDSOCKET, "minissdpdsocket"},
 	{ ENABLE_DLNA_STRICT, "strict_dlna" },
