@@ -35,3 +35,7 @@ po/stamp-po
 stamp-h1
 .deps/
 *.o
+minidlnad
+config.h.in~
+minidlnad
+linux/minidlna.init.d.script
