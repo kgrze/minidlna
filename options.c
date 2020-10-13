@@ -52,7 +52,6 @@ static const struct {
 	{ UPNPMODEL_NUMBER, "model_number"},
 	{ UPNPFRIENDLYNAME, "friendly_name"},
 	{ UPNPMEDIADIR, "media_dir"},
-	{ UPNPALBUMART_NAMES, "album_art_names"},
 	{ UPNPINOTIFY, "inotify" },
 	{ UPNPDBDIR, "db_dir" },
 	{ UPNPLOGDIR, "log_dir" },
@@ -183,7 +182,6 @@ void
 freeoptions(void)
 {
 	struct media_dir_s *media_path, *last_path;
-	struct album_art_name_s *art_names, *last_name;
 	
 	media_path = media_dirs;
 	while (media_path)
@@ -192,15 +190,6 @@ freeoptions(void)
 		last_path = media_path;
 		media_path = media_path->next;
 		free(last_path);
-	}
-
-	art_names = album_art_names;
-	while (art_names)
-	{
-		free(art_names->name);
-		last_name = art_names;
-		art_names = art_names->next;
-		free(last_name);
 	}
 
 	if(ary_options)

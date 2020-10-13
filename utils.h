@@ -93,7 +93,6 @@ int is_caption(const char * file);
 media_types get_media_type(const char *file);
 media_types valid_media_types(const char *path);
 
-int is_album_art(const char * name);
 int resolve_unknown_type(const char * path, media_types dir_type);
 const char *mime_to_ext(const char * mime);
 

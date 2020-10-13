@@ -35,7 +35,6 @@
 #define MUSIC_PLIST_ID		"1$F"
 #define MUSIC_DIR_ID		"1$14"
 #define MUSIC_CONTRIB_ARTIST_ID	"1$100"
-#define MUSIC_ALBUM_ARTIST_ID	"1$107"
 #define MUSIC_COMPOSER_ID	"1$108"
 #define MUSIC_RATING_ID		"1$101"
 

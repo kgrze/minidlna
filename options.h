@@ -45,7 +45,6 @@ enum upnpconfigoptions {
 	UPNPMODEL_NUMBER,		/* model_number */
 	UPNPFRIENDLYNAME,		/* how the system should show up to DLNA clients */
 	UPNPMEDIADIR,			/* directory to search for UPnP-A/V content */
-	UPNPALBUMART_NAMES,		/* list of '/'-delimited file names to check for album art */
 	UPNPINOTIFY,			/* enable inotify on the media directories */
 	UPNPDBDIR,			/* base directory to store the database and album art cache */
 	UPNPLOGDIR,			/* base directory to store the log file */

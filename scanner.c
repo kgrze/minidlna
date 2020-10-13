@@ -43,7 +43,6 @@
 #include "utils.h"
 #include "sql.h"
 #include "scanner.h"
-#include "albumart.h"
 #include "containers.h"
 #include "log.h"
 #include "monitor.h"
@@ -88,7 +87,7 @@ get_next_available_id(const char *table, const char *parentID)
 
 int
 insert_container(const char *item, const char *rootParent, const char *refID, const char *class,
-                 const char *artist, const char *genre, const char *album_art, int64_t *objectID, int64_t *parentID)
+                 const char *artist, const char *genre, int64_t *objectID, int64_t *parentID)
 {
 	char *result;
 	char *base;
@@ -123,7 +122,7 @@ insert_container(const char *item, const char *rootParent, const char *refID, co
 		}
 		if( !detailID )
 		{
-			detailID = GetFolderMetadata(item, NULL, artist, genre, (album_art ? strtoll(album_art, NULL, 10) : 0));
+			detailID = GetFolderMetadata(item, NULL, artist, genre);
 		}
 		ret = sql_exec(db, "INSERT into OBJECTS"
 		                   " (OBJECT_ID, PARENT_ID, REF_ID, DETAIL_ID, CLASS, NAME) "
@@ -175,7 +174,7 @@ insert_containers(const char *name, const char *path, const char *refID, const c
 		}
 		else
 		{
-			insert_container(date_taken, IMAGE_DATE_ID, NULL, "album.photoAlbum", NULL, NULL, NULL, &objectID, &parentID);
+			insert_container(date_taken, IMAGE_DATE_ID, NULL, "album.photoAlbum", NULL, NULL, &objectID, &parentID);
 			sprintf(last_date.parentID, IMAGE_DATE_ID"$%llX", (unsigned long long)parentID);
 			last_date.objectID = objectID;
 			strncpyt(last_date.name, date_taken, sizeof(last_date.name));
@@ -189,7 +188,7 @@ insert_containers(const char *name, const char *path, const char *refID, const c
 
 		if( !valid_cache || strcmp(camera, last_cam.name) != 0 )
 		{
-			insert_container(camera, IMAGE_CAMERA_ID, NULL, "storageFolder", NULL, NULL, NULL, &objectID, &parentID);
+			insert_container(camera, IMAGE_CAMERA_ID, NULL, "storageFolder", NULL, NULL, &objectID, &parentID);
 			sprintf(last_cam.parentID, IMAGE_CAMERA_ID"$%llX", (long long)parentID);
 			strncpyt(last_cam.name, camera, sizeof(last_cam.name));
 			/* Invalidate last_camdate cache */
@@ -202,7 +201,7 @@ insert_containers(const char *name, const char *path, const char *refID, const c
 		}
 		else
 		{
-			insert_container(date_taken, last_cam.parentID, NULL, "album.photoAlbum", NULL, NULL, NULL, &objectID, &parentID);
+			insert_container(date_taken, last_cam.parentID, NULL, "album.photoAlbum", NULL, NULL, &objectID, &parentID);
 			sprintf(last_camdate.parentID, "%s$%llX", last_cam.parentID, (long long)parentID);
 			last_camdate.objectID = objectID;
 			strncpyt(last_camdate.name, date_taken, sizeof(last_camdate.name));
@@ -226,7 +225,7 @@ insert_containers(const char *name, const char *path, const char *refID, const c
 	}
 	else if( strstr(class, "audioItem") )
 	{
-		snprintf(sql, sizeof(sql), "SELECT ALBUM, ARTIST, GENRE, ALBUM_ART from DETAILS where ID = %lld", (long long)detailID);
+		snprintf(sql, sizeof(sql), "SELECT ALBUM, ARTIST, GENRE from DETAILS where ID = %lld", (long long)detailID);
 		ret = sql_get_table(db, sql, &result, &row, &cols);
 		if( ret != SQLITE_OK )
 			return;
@@ -236,7 +235,6 @@ insert_containers(const char *name, const char *path, const char *refID, const c
 			return;
 		}
 		char *album = result[4], *artist = result[5], *genre = result[6];
-		char *album_art = result[7];
 		static struct virtual_item last_album;
 		static struct virtual_item last_artist;
 		static struct virtual_item last_artistAlbum;
@@ -256,7 +254,7 @@ insert_containers(const char *name, const char *path, const char *refID, const c
 			else
 			{
 				strncpyt(last_album.name, album, sizeof(last_album.name));
-				insert_container(album, MUSIC_ALBUM_ID, NULL, "album.musicAlbum", artist, genre, album_art, &objectID, &parentID);
+				insert_container(album, MUSIC_ALBUM_ID, NULL, "album.musicAlbum", artist, genre, &objectID, &parentID);
 				sprintf(last_album.parentID, MUSIC_ALBUM_ID"$%llX", (long long)parentID);
 				last_album.objectID = objectID;
 				//DEBUG DPRINTF(E_DEBUG, L_SCANNER, "Creating cached album item: %s/%s/%X\n", last_album.name, last_album.parentID, last_album.objectID);
@@ -271,12 +269,12 @@ insert_containers(const char *name, const char *path, const char *refID, const c
 		{
 			if( !valid_cache || strcmp(artist, last_artist.name) != 0 )
 			{
-				insert_container(artist, MUSIC_ARTIST_ID, NULL, "person.musicArtist", NULL, genre, NULL, &objectID, &parentID);
+				insert_container(artist, MUSIC_ARTIST_ID, NULL, "person.musicArtist", NULL, genre, &objectID, &parentID);
 				sprintf(last_artist.parentID, MUSIC_ARTIST_ID"$%llX", (long long)parentID);
 				strncpyt(last_artist.name, artist, sizeof(last_artist.name));
 				last_artistAlbum.name[0] = '\0';
 				/* Add this file to the "- All Albums -" container as well */
-				insert_container(_("- All Albums -"), last_artist.parentID, NULL, "album", artist, genre, NULL, &objectID, &parentID);
+				insert_container(_("- All Albums -"), last_artist.parentID, NULL, "album", artist, genre, &objectID, &parentID);
 				sprintf(last_artistAlbumAll.parentID, "%s$%llX", last_artist.parentID, (long long)parentID);
 				last_artistAlbumAll.objectID = objectID;
 			}
@@ -292,7 +290,7 @@ insert_containers(const char *name, const char *path, const char *refID, const c
 			else
 			{
 				insert_container(album?album:_("Unknown Album"), last_artist.parentID, album?last_album.parentID:NULL,
-				                 "album.musicAlbum", artist, genre, album_art, &objectID, &parentID);
+				                 "album.musicAlbum", artist, genre, &objectID, &parentID);
 				sprintf(last_artistAlbum.parentID, "%s$%llX", last_artist.parentID, (long long)parentID);
 				last_artistAlbum.objectID = objectID;
 				strncpyt(last_artistAlbum.name, album ? album : _("Unknown Album"), sizeof(last_artistAlbum.name));
@@ -313,11 +311,11 @@ insert_containers(const char *name, const char *path, const char *refID, const c
 		{
 			if( !valid_cache || strcmp(genre, last_genre.name) != 0 )
 			{
-				insert_container(genre, MUSIC_GENRE_ID, NULL, "genre.musicGenre", NULL, NULL, NULL, &objectID, &parentID);
+				insert_container(genre, MUSIC_GENRE_ID, NULL, "genre.musicGenre", NULL, NULL, &objectID, &parentID);
 				sprintf(last_genre.parentID, MUSIC_GENRE_ID"$%llX", (long long)parentID);
 				strncpyt(last_genre.name, genre, sizeof(last_genre.name));
 				/* Add this file to the "- All Artists -" container as well */
-				insert_container(_("- All Artists -"), last_genre.parentID, NULL, "person", NULL, genre, NULL, &objectID, &parentID);
+				insert_container(_("- All Artists -"), last_genre.parentID, NULL, "person", NULL, genre, &objectID, &parentID);
 				sprintf(last_genreArtistAll.parentID, "%s$%llX", last_genre.parentID, (long long)parentID);
 				last_genreArtistAll.objectID = objectID;
 			}
@@ -332,7 +330,7 @@ insert_containers(const char *name, const char *path, const char *refID, const c
 			else
 			{
 				insert_container(artist?artist:_("Unknown Artist"), last_genre.parentID, artist?last_artist.parentID:NULL,
-				                 "person.musicArtist", NULL, genre, NULL, &objectID, &parentID);
+				                 "person.musicArtist", NULL, genre, &objectID, &parentID);
 				sprintf(last_genreArtist.parentID, "%s$%llX", last_genre.parentID, (long long)parentID);
 				last_genreArtist.objectID = objectID;
 				strncpyt(last_genreArtist.name, artist ? artist : _("Unknown Artist"), sizeof(last_genreArtist.name));
@@ -436,7 +434,7 @@ insert_directory(const char *name, const char *path, const char *base, const cha
 		return 0;
 	}
 
-	detailID = GetFolderMetadata(name, path, NULL, NULL, find_album_art(path, NULL, 0));
+	detailID = GetFolderMetadata(name, path, NULL, NULL);
 	sql_exec(db, "INSERT into OBJECTS"
 	             " (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME) "
 	             "VALUES"
@@ -460,8 +458,6 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 
 	if( mtype == TYPE_IMAGE && (types & TYPE_IMAGE) )
 	{
-		if( is_album_art(name) )
-			return -1;
 		strcpy(base, IMAGE_DIR_ID);
 		class = "item.imageItem.photo";
 		detailID = GetImageMetadata(path, name);
@@ -558,9 +554,6 @@ CreateDatabase(void)
 	ret = sql_exec(db, create_detailTable_sqlite);
 	if( ret != SQLITE_OK )
 		goto sql_failed;
-	ret = sql_exec(db, create_albumArtTable_sqlite);
-	if( ret != SQLITE_OK )
-		goto sql_failed;
 	ret = sql_exec(db, create_captionTable_sqlite);
 	if( ret != SQLITE_OK )
 		goto sql_failed;
@@ -581,7 +574,7 @@ CreateDatabase(void)
 		ret = sql_exec(db, "INSERT into OBJECTS (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME)"
 		                   " values "
 		                   "('%s', '%s', %lld, 'container.storageFolder', '%q')",
-		                   containers[i], containers[i+1], GetFolderMetadata(containers[i+2], NULL, NULL, NULL, 0), containers[i+2]);
+		                   containers[i], containers[i+1], GetFolderMetadata(containers[i+2], NULL, NULL, NULL), containers[i+2]);
 		if( ret != SQLITE_OK )
 			goto sql_failed;
 	}
@@ -599,7 +592,7 @@ CreateDatabase(void)
 			                   " values "
 					   "('%s', '%s', %lld, 'container.storageFolder', '%q')",
 					   magic->objectid_match, parent,
-					   GetFolderMetadata(_(magic->name), NULL, NULL, NULL, 0), _(magic->name));
+					   GetFolderMetadata(_(magic->name), NULL, NULL, NULL), _(magic->name));
 			free(parent);
 			if( ret != SQLITE_OK )
 				goto sql_failed;
@@ -611,7 +604,6 @@ CreateDatabase(void)
 	sql_exec(db, "create INDEX IDX_OBJECTS_CLASS ON OBJECTS(CLASS);");
 	sql_exec(db, "create INDEX IDX_DETAILS_PATH ON DETAILS(PATH);");
 	sql_exec(db, "create INDEX IDX_DETAILS_ID ON DETAILS(ID);");
-	sql_exec(db, "create INDEX IDX_ALBUM_ART ON ALBUM_ART(ID);");
 	sql_exec(db, "create INDEX IDX_SCANNER_OPT ON OBJECTS(PARENT_ID, NAME, OBJECT_ID);");
 
 sql_failed:
@@ -923,7 +915,7 @@ start_scanner(void)
 			parent = buf;
 		}
 		else
-			id = GetFolderMetadata(bname, media_path->path, NULL, NULL, 0);
+			id = GetFolderMetadata(bname, media_path->path, NULL, NULL);
 		/* Use TIMESTAMP to store the media type */
 		sql_exec(db, "UPDATE DETAILS set TIMESTAMP = %d where ID = %lld", media_path->types, (long long)id);
 		ScanDirectory(media_path->path, parent, media_path->types);

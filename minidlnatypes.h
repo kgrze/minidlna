@@ -81,10 +81,4 @@ struct media_dir_s {
  	struct media_dir_s *next;
 };
 
-struct album_art_name_s {
-	char *name;             /* base path */
-	uint8_t wildcard;
-	struct album_art_name_s *next;
-};
-
 #endif

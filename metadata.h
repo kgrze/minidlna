@@ -89,7 +89,7 @@ void
 check_for_captions(const char *path, int64_t detailID);
 
 int64_t
-GetFolderMetadata(const char *name, const char *path, const char *artist, const char *genre, int64_t album_art);
+GetFolderMetadata(const char *name, const char *path, const char *artist, const char *genre);
 
 int64_t
 GetAudioMetadata(const char *path, const char *name);

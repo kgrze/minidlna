@@ -630,28 +630,6 @@ init(int argc, char **argv)
 			else
 				media_dirs = media_dir;
 			break;
-		case UPNPALBUMART_NAMES:
-			for (string = ary_options[i].value; (word = strtok(string, "/")); string = NULL)
-			{
-				struct album_art_name_s * this_name = calloc(1, sizeof(struct album_art_name_s));
-				int len = strlen(word);
-				if (word[len-1] == '*')
-				{
-					word[len-1] = '\0';
-					this_name->wildcard = 1;
-				}
-				this_name->name = strdup(word);
-				if (album_art_names)
-				{
-					struct album_art_name_s * all_names = album_art_names;
-					while( all_names->next )
-						all_names = all_names->next;
-					all_names->next = this_name;
-				}
-				else
-					album_art_names = this_name;
-			}
-			break;
 		case UPNPDBDIR:
 			path = realpath(ary_options[i].value, buf);
 			if (!path)

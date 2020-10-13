@@ -52,15 +52,9 @@ char create_detailTable_sqlite[] = "CREATE TABLE DETAILS ("
 					"DATE DATE, "
 					"RESOLUTION TEXT, "
 					"THUMBNAIL BOOL DEFAULT 0, "
-					"ALBUM_ART INTEGER DEFAULT 0, "
 					"ROTATION INTEGER, "
 					"DLNA_PN TEXT, "
 					"MIME TEXT"
-					");";
-
-char create_albumArtTable_sqlite[] = "CREATE TABLE ALBUM_ART ("
-					"ID INTEGER PRIMARY KEY AUTOINCREMENT, "
-					"PATH TEXT NOT NULL"
 					");";
 
 char create_captionTable_sqlite[] = "CREATE TABLE CAPTIONS ("

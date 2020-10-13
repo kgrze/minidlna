@@ -26,7 +26,7 @@ minidlnad_SOURCES = minidlna.c upnphttp.c upnpdescgen.c upnpsoap.c \
 			getifaddr.c process.c upnpglobalvars.c \
 			options.c minissdp.c uuid.c upnpevents.c \
 			sql.c utils.c metadata.c scanner.c monitor.c \
-			playlist.c image_utils.c albumart.c log.c \
+			playlist.c image_utils.c log.c \
 			containers.c tagutils/tagutils.c
 
 if HAVE_VORBISFILE

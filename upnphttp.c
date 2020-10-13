@@ -94,7 +94,6 @@ enum event_type {
 };
 
 static void SendResp_icon(struct upnphttp *, char * url);
-static void SendResp_albumArt(struct upnphttp *, char * url);
 static void SendResp_caption(struct upnphttp *, char * url);
 static void SendResp_resizedimg(struct upnphttp *, char * url);
 static void SendResp_thumbnail(struct upnphttp *, char * url);
@@ -963,10 +962,6 @@ ProcessHttpQuery_upnphttp(struct upnphttp * h)
 		{
 			SendResp_thumbnail(h, HttpUrl+12);
 		}
-		else if(strncmp(HttpUrl, "/AlbumArt/", 10) == 0)
-		{
-			SendResp_albumArt(h, HttpUrl+10);
-		}
 		else if(strncmp(HttpUrl, "/Resized/", 9) == 0)
 		{
 			SendResp_resizedimg(h, HttpUrl+9);
@@ -1410,63 +1405,6 @@ SendResp_icon(struct upnphttp * h, char * icon)
 }
 
 static void
-SendResp_albumArt(struct upnphttp * h, char * object)
-{
-	char header[512];
-	char *path;
-	off_t size;
-	long long id;
-	int fd;
-	struct string_s str;
-
-	if( h->reqflags & (FLAG_XFERSTREAMING|FLAG_RANGE) )
-	{
-		DPRINTF(E_WARN, L_HTTP, "Client tried to specify transferMode as Streaming with an image!\n");
-		Send406(h);
-		return;
-	}
-
-	id = strtoll(object, NULL, 10);
-
-	path = sql_get_text_field(db, "SELECT PATH from ALBUM_ART where ID = '%lld'", id);
-	if( !path )
-	{
-		DPRINTF(E_WARN, L_HTTP, "ALBUM_ART ID %s not found, responding ERROR 404\n", object);
-		Send404(h);
-		return;
-	}
-	DPRINTF(E_INFO, L_HTTP, "Serving album art ID: %lld [%s]\n", id, path);
-
-	fd = _open_file(path);
-	if( fd < 0 ) {
-		sqlite3_free(path);
-		if (fd == -403)
-			Send403(h);
-		else
-			Send404(h);
-		return;
-	}
-	sqlite3_free(path);
-	size = lseek(fd, 0, SEEK_END);
-	lseek(fd, 0, SEEK_SET);
-
-	INIT_STR(str, header);
-
-	start_dlna_header(&str, 200, "Interactive", "image/jpeg");
-	strcatf(&str, "Content-Length: %jd\r\n"
-	              "contentFeatures.dlna.org: DLNA.ORG_PN=JPEG_TN\r\n\r\n",
-	              (intmax_t)size);
-
-	if( send_data(h, str.data, str.off, MSG_MORE) == 0 )
-	{
-		if( h->req_command != EHead )
-			send_file(h, fd, 0, size-1);
-	}
-	close(fd);
-	CloseSocket_upnphttp(h);
-}
-
-static void
 SendResp_caption(struct upnphttp * h, char * object)
 {
 	char header[512];
@@ -1834,22 +1772,6 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 #endif
 
 	id = strtoll(object, NULL, 10);
-	if( cflags & FLAG_MS_PFS )
-	{
-		if( strstr(object, "?albumArt=true") )
-		{
-			char *art;
-			art = sql_get_text_field(db, "SELECT ALBUM_ART from DETAILS where ID = '%lld'", id);
-			if (art)
-			{
-				SendResp_albumArt(h, art);
-				sqlite3_free(art);
-			}
-			else
-				Send404(h);
-			return;
-		}
-	}
 	if( id != last_file.id || ctype != last_file.client )
 	{
 		snprintf(buf, sizeof(buf), "SELECT PATH, MIME, DLNA_PN from DETAILS where ID = '%lld'", (long long)id);

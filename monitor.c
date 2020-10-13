@@ -47,7 +47,6 @@
 #include "sql.h"
 #include "scanner.h"
 #include "metadata.h"
-#include "albumart.h"
 #include "playlist.h"
 #include "log.h"
 
@@ -358,9 +357,7 @@ monitor_insert_file(const char *name, const char *path)
 	struct stat st;
 
 	/* Is it cover art for another file? */
-	if (mtype == TYPE_IMAGE)
-		update_if_album_art(path);
-	else if (mtype == TYPE_CAPTION)
+	if (mtype == TYPE_CAPTION)
 		check_for_captions(path, 0);
 	else if (mtype == TYPE_PLAYLIST)
 		tbl = "PLAYLISTS";
@@ -594,8 +591,6 @@ monitor_remove_directory(int fd, const char * path)
 		sqlite3_free_table(result);
 	}
 	sqlite3_free(sql);
-	/* Clean up any album art entries in the deleted directory */
-	sql_exec(db, "DELETE from ALBUM_ART where (PATH > '%q/' and PATH <= '%q/%c')", path, path, 0xFF);
 
 	return ret;
 }
