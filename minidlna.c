@@ -525,21 +525,9 @@ init(int argc, char **argv)
 			break;
 		case UPNPPORT:
 			runtime_vars.port = atoi(ary_options[i].value);
-			break;
-		case UPNPPRESENTATIONURL:
-			presurl = ary_options[i].value;
-			break;
-		case UPNPNOTIFY_INTERVAL:
-			runtime_vars.notify_interval = atoi(ary_options[i].value);
-			break;
-		case UPNPSERIAL:
-			strncpyt(serialnumber, ary_options[i].value, SERIALNUMBER_MAX_LEN);
-			break;				
+			break;			
 		case UPNPMODEL_NAME:
 			strncpyt(modelname, ary_options[i].value, MODELNAME_MAX_LEN);
-			break;
-		case UPNPMODEL_NUMBER:
-			strncpyt(modelnumber, ary_options[i].value, MODELNUMBER_MAX_LEN);
 			break;
 		case UPNPFRIENDLYNAME:
 			strncpyt(friendly_name, ary_options[i].value, FRIENDLYNAME_MAX_LEN);
@@ -593,45 +581,6 @@ init(int argc, char **argv)
 		case UPNPLOGLEVEL:
 			log_level = ary_options[i].value;
 			break;
-		case UPNPINOTIFY:
-			if (!strtobool(ary_options[i].value))
-				CLEARFLAG(INOTIFY_MASK);
-			break;
-		case ENABLE_DLNA_STRICT:
-			if (strtobool(ary_options[i].value))
-				SETFLAG(DLNA_STRICT_MASK);
-			break;
-		case ROOT_CONTAINER:
-			switch (ary_options[i].value[0]) {
-			case '.':
-				runtime_vars.root_container = NULL;
-				break;
-			case 'B':
-			case 'b':
-				runtime_vars.root_container = BROWSEDIR_ID;
-				break;
-			case 'M':
-			case 'm':
-				runtime_vars.root_container = MUSIC_ID;
-				break;
-			case 'V':
-			case 'v':
-				runtime_vars.root_container = VIDEO_ID;
-				break;
-			case 'P':
-			case 'p':
-				runtime_vars.root_container = IMAGE_ID;
-				break;
-			default:
-				runtime_vars.root_container = ary_options[i].value;
-				DPRINTF(E_WARN, L_GENERAL, "Using arbitrary root container [%s]\n",
-					ary_options[i].value);
-				break;
-			}
-			break;
-		case UPNPMINISSDPDSOCKET:
-			minissdpdsocketpath = ary_options[i].value;
-			break;
 		case UPNPUUID:
 			strcpy(uuidvalue+5, ary_options[i].value);
 			break;
@@ -646,20 +595,6 @@ init(int argc, char **argv)
 						ary_options[i].value);
 				uid = entry->pw_uid;
 			}
-			break;
-		case FORCE_SORT_CRITERIA:
-			force_sort_criteria = ary_options[i].value;
-			break;
-		case MAX_CONNECTIONS:
-			runtime_vars.max_connections = atoi(ary_options[i].value);
-			break;
-		case MERGE_MEDIA_DIRS:
-			if (strtobool(ary_options[i].value))
-				SETFLAG(MERGE_MEDIA_DIRS_MASK);
-			break;
-		case WIDE_LINKS:
-			if (strtobool(ary_options[i].value))
-				SETFLAG(WIDE_LINKS_MASK);
 			break;
 		default:
 			DPRINTF(E_ERROR, L_GENERAL, "Unknown option in file %s\n",

@@ -37,24 +37,12 @@ enum upnpconfigoptions {
 	UPNP_INVALID = 0,
 	UPNPIFNAME = 1,			/* ext_ifname */
 	UPNPPORT,			/* port */
-	UPNPPRESENTATIONURL,		/* presentation_url */
-	UPNPNOTIFY_INTERVAL,		/* notify_interval */
 	UPNPUUID,			/* uuid */
-	UPNPSERIAL,			/* serial */
 	UPNPMODEL_NAME,			/* model_name */
-	UPNPMODEL_NUMBER,		/* model_number */
 	UPNPFRIENDLYNAME,		/* how the system should show up to DLNA clients */
 	UPNPMEDIADIR,			/* directory to search for UPnP-A/V content */
-	UPNPINOTIFY,			/* enable inotify on the media directories */
 	UPNPLOGLEVEL,			/* logging verbosity */
-	UPNPMINISSDPDSOCKET,		/* minissdpdsocket */
-	ENABLE_DLNA_STRICT,		/* strictly adhere to DLNA specs */
-	ROOT_CONTAINER,			/* root ObjectID (instead of "0") */
 	USER_ACCOUNT,			/* user account to run as */
-	FORCE_SORT_CRITERIA,		/* force sorting by a given sort criteria */
-	MAX_CONNECTIONS,		/* maximum number of simultaneous connections */
-	MERGE_MEDIA_DIRS,		/* don't add an extra directory level when there are multiple media dirs */
-	WIDE_LINKS,			/* allow following symlinks outside the defined media_dirs */
 };
 
 /* readoptionsfile()

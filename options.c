@@ -44,24 +44,12 @@ static const struct {
 } optionids[] = {
 	{ UPNPIFNAME, "network_interface" },
 	{ UPNPPORT, "port" },
-	{ UPNPPRESENTATIONURL, "presentation_url" },
-	{ UPNPNOTIFY_INTERVAL, "notify_interval" },
 	{ UPNPUUID, "uuid"},
-	{ UPNPSERIAL, "serial"},
 	{ UPNPMODEL_NAME, "model_name"},
-	{ UPNPMODEL_NUMBER, "model_number"},
 	{ UPNPFRIENDLYNAME, "friendly_name"},
 	{ UPNPMEDIADIR, "media_dir"},
-	{ UPNPINOTIFY, "inotify" },
 	{ UPNPLOGLEVEL, "log_level" },
-	{ UPNPMINISSDPDSOCKET, "minissdpdsocket"},
-	{ ENABLE_DLNA_STRICT, "strict_dlna" },
-	{ ROOT_CONTAINER, "root_container" },
 	{ USER_ACCOUNT, "user" },
-	{ FORCE_SORT_CRITERIA, "force_sort_criteria" },
-	{ MAX_CONNECTIONS, "max_connections" },
-	{ MERGE_MEDIA_DIRS, "merge_media_dirs" },
-	{ WIDE_LINKS, "wide_links" },
 };
 
 int
