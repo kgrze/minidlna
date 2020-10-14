@@ -274,7 +274,7 @@ GetFolderMetadata(const char *name, const char *path, const char *artist, const 
 	ret = sql_exec(db, "INSERT into DETAILS"
 	                   " (TITLE, PATH, CREATOR, ARTIST, GENRE) "
 	                   "VALUES"
-	                   " ('%q', %Q, %Q, %Q, %Q, %lld);",
+	                   " ('%q', %Q, %Q, %Q, %Q);",
 	                   name, path, artist, artist, genre);
 	if( ret != SQLITE_OK )
 		ret = 0;

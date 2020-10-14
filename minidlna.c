@@ -83,7 +83,6 @@
 #include "minidlnapath.h"
 #include "getifaddr.h"
 #include "upnpsoap.h"
-#include "options.h"
 #include "utils.h"
 #include "minissdp.h"
 #include "minidlnatypes.h"
@@ -177,39 +176,6 @@ static void
 set_startup_time(void)
 {
 	startup_time = time(NULL);
-}
-
-static void
-getfriendlyname(char *buf, int len)
-{
-	char *p = NULL;
-	char hn[256];
-	int off;
-
-	if (gethostname(hn, sizeof(hn)) == 0)
-	{
-		strncpyt(buf, hn, len);
-		p = strchr(buf, '.');
-		if (p)
-			*p = '\0';
-	}
-	else
-		strcpy(buf, "Unknown");
-
-	off = strlen(buf);
-	off += snprintf(buf+off, len-off, ": ");
-	char * logname;
-	logname = getenv("LOGNAME");
-#ifndef STATIC // Disable for static linking
-	if (!logname)
-	{
-		struct passwd * pwent;
-		pwent = getpwuid(getuid());
-		if (pwent)
-			logname = pwent->pw_name;
-	}
-#endif
-	snprintf(buf+off, len-off, "%s", logname?logname:"Unknown");
 }
 
 static time_t
@@ -330,7 +296,6 @@ rescan:
 			start_scanner();
 			sqlite3_close(db);
 			log_close();
-			freeoptions();
 			free(children);
 			exit(EXIT_SUCCESS);
 		}
@@ -409,13 +374,6 @@ writepidfile(const char *fname, int pid, uid_t uid)
 	return ret;
 }
 
-static int strtobool(const char *str)
-{
-	return ((strcasecmp(str, "yes") == 0) ||
-		(strcasecmp(str, "true") == 0) ||
-		(atoi(str) == 1));
-}
-
 static void init_nls(void)
 {
 #ifdef ENABLE_NLS
@@ -453,31 +411,17 @@ init(int argc, char **argv)
 	int pid;
 	int debug_flag = 0;
 	int verbose_flag = 0;
-	int options_flag = 0;
 	struct sigaction sa;
 	const char * presurl = NULL;
-	const char * optionsfile = "/etc/minidlna.conf";
 	char mac_str[13];
-	char *string, *word;
+	char *string;
 	char *path;
 	char buf[PATH_MAX];
 	char log_str[75] = "general,artwork,database,inotify,scanner,metadata,http,ssdp=warn";
 	char *log_level = NULL;
 	struct media_dir_s *media_dir;
 	int ifaces = 0;
-	media_types types;
 	uid_t uid = 0;
-
-	/* first check if "-f" option is used */
-	for (i=2; i<argc; i++)
-	{
-		if (strcmp(argv[i-1], "-f") == 0)
-		{
-			optionsfile = argv[i];
-			options_flag = 1;
-			break;
-		}
-	}
 
 	/* set up uuid based on mac address */
 	if (getsyshwaddr(mac_str, sizeof(mac_str)) < 0)
@@ -487,8 +431,6 @@ init(int argc, char **argv)
 	}
 	strcpy(uuidvalue+5, "4d696e69-444c-164e-9d41-");
 	strncat(uuidvalue, mac_str, 12);
-
-	getfriendlyname(friendly_name, FRIENDLYNAME_MAX_LEN);
 	
 	runtime_vars.port = 8200;
 	runtime_vars.notify_interval = 895;	/* seconds between SSDP announces */
@@ -496,111 +438,19 @@ init(int argc, char **argv)
 	runtime_vars.root_container = NULL;
 	runtime_vars.ifaces[0] = NULL;
 
-	/* read options file first since
-	 * command line arguments have final say */
-	if (readoptionsfile(optionsfile) < 0)
+	media_dir = calloc(1, sizeof(struct media_dir_s));
+	media_dir->path = strdup(realpath("./media", buf));
+	media_dir->types = ALL_MEDIA;
+	if (media_dirs)
 	{
-		/* only error if file exists or using -f */
-		if(access(optionsfile, F_OK) == 0 || options_flag)
-			DPRINTF(E_FATAL, L_GENERAL, "Error reading configuration file %s\n", optionsfile);
+		struct media_dir_s *all_dirs = media_dirs;
+		while( all_dirs->next )
+			all_dirs = all_dirs->next;
+		all_dirs->next = media_dir;
 	}
+	else
+		media_dirs = media_dir;
 
-	for (i=0; i<num_options; i++)
-	{
-		switch (ary_options[i].id)
-		{
-		case UPNPIFNAME:
-			for (string = ary_options[i].value; (word = strtok(string, ",")); string = NULL)
-			{
-				if (ifaces >= MAX_LAN_ADDR)
-				{
-					DPRINTF(E_ERROR, L_GENERAL, "Too many interfaces (max: %d), ignoring %s\n",
-						MAX_LAN_ADDR, word);
-					break;
-				}
-				while (isspace(*word))
-					word++;
-				runtime_vars.ifaces[ifaces++] = word;
-			}
-			break;
-		case UPNPPORT:
-			runtime_vars.port = atoi(ary_options[i].value);
-			break;			
-		case UPNPMODEL_NAME:
-			strncpyt(modelname, ary_options[i].value, MODELNAME_MAX_LEN);
-			break;
-		case UPNPFRIENDLYNAME:
-			strncpyt(friendly_name, ary_options[i].value, FRIENDLYNAME_MAX_LEN);
-			break;
-		case UPNPMEDIADIR:
-			types = ALL_MEDIA;
-			path = ary_options[i].value;
-			word = strchr(path, ',');
-			if (word && (access(path, F_OK) != 0))
-			{
-				types = 0;
-				while (*path)
-				{
-					if (*path == ',')
-					{
-						path++;
-						break;
-					}
-					else if (*path == 'A' || *path == 'a')
-						types |= TYPE_AUDIO;
-					else if (*path == 'V' || *path == 'v')
-						types |= TYPE_VIDEO;
-					else if (*path == 'P' || *path == 'p')
-						types |= TYPE_IMAGE;
-					else
-						DPRINTF(E_FATAL, L_GENERAL, "Media directory entry not understood [%s]\n",
-							ary_options[i].value);
-					path++;
-				}
-			}
-			path = realpath(path, buf);
-			if (!path || access(path, F_OK) != 0)
-			{
-				DPRINTF(E_ERROR, L_GENERAL, "Media directory \"%s\" not accessible [%s]\n",
-					ary_options[i].value, strerror(errno));
-				break;
-			}
-			media_dir = calloc(1, sizeof(struct media_dir_s));
-			media_dir->path = strdup(path);
-			media_dir->types = types;
-			if (media_dirs)
-			{
-				struct media_dir_s *all_dirs = media_dirs;
-				while( all_dirs->next )
-					all_dirs = all_dirs->next;
-				all_dirs->next = media_dir;
-			}
-			else
-				media_dirs = media_dir;
-			break;
-		case UPNPLOGLEVEL:
-			log_level = ary_options[i].value;
-			break;
-		case UPNPUUID:
-			strcpy(uuidvalue+5, ary_options[i].value);
-			break;
-		case USER_ACCOUNT:
-			uid = strtoul(ary_options[i].value, &string, 0);
-			if (*string)
-			{
-				/* Symbolic username given, not UID. */
-				struct passwd *entry = getpwnam(ary_options[i].value);
-				if (!entry)
-					DPRINTF(E_FATAL, L_GENERAL, "Bad user '%s'.\n",
-						ary_options[i].value);
-				uid = entry->pw_uid;
-			}
-			break;
-		default:
-			DPRINTF(E_ERROR, L_GENERAL, "Unknown option in file %s\n",
-				optionsfile);
-		}
-	}
 	if (log_path[0] == '\0')
 	{
 		if (db_path[0] == '\0')
@@ -1146,7 +996,6 @@ shutdown:
 		DPRINTF(E_ERROR, L_GENERAL, "Failed to remove pidfile %s: %s\n", pidfilename, strerror(errno));
 
 	log_close();
-	freeoptions();
 
 	exit(EXIT_SUCCESS);
 }

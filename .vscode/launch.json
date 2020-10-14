@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/minidlnad",
-            "args": ["-d", "-f", "minidlna.conf"],
+            "args": ["-d"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

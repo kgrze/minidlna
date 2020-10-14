@@ -899,31 +899,8 @@ ProcessHttpQuery_upnphttp(struct upnphttp * h)
 		}
 		if(strcmp(ROOTDESC_PATH, HttpUrl) == 0)
 		{
-			/* If it's a Xbox360, we might need a special friendly_name to be recognized */
-			if( h->req_client && h->req_client->type->type == EXbox )
-			{
-				char model_sav[2];
-				i = 0;
-				memcpy(model_sav, modelnumber, 2);
-				strcpy(modelnumber, "1");
-				if( !strchr(friendly_name, ':') )
-				{
-					i = strlen(friendly_name);
-					snprintf(friendly_name+i, FRIENDLYNAME_MAX_LEN-i, ": 1");
-				}
-				sendXMLdesc(h, genRootDesc);
-				if( i )
-					friendly_name[i] = '\0';
-				memcpy(modelnumber, model_sav, 2);
-			}
-			else if( h->req_client && h->req_client->type->flags & FLAG_SAMSUNG_DCM10 )
-			{
-				sendXMLdesc(h, genRootDescSamsung);
-			}
-			else
-			{
-				sendXMLdesc(h, genRootDesc);
-			}
+
+			sendXMLdesc(h, genRootDesc);
 		}
 		else if(strcmp(CONTENTDIRECTORY_PATH, HttpUrl) == 0)
 		{
