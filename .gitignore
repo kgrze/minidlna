@@ -37,8 +37,5 @@ stamp-h1
 *.o
 minidlnad
 config.h.in~
-minidlnad
 linux/minidlna.init.d.script
 tagutils/.dirstamp
-minidlnad
-minidlnad
