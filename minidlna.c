@@ -397,9 +397,6 @@ static void init_nls(void)
 }
 
 /* init phase :
- * 1) read configuration file
- * 2) read command line arguments
- * 3) daemonize
  * 4) check and write pid file
  * 5) set startup time stamp
  * 6) compute presentation URL
@@ -407,20 +404,13 @@ static void init_nls(void)
 static int
 init(int argc, char **argv)
 {
-	int i;
 	int pid;
-	int debug_flag = 0;
-	int verbose_flag = 0;
 	struct sigaction sa;
-	const char * presurl = NULL;
 	char mac_str[13];
-	char *string;
-	char *path;
 	char buf[PATH_MAX];
 	char log_str[75] = "general,artwork,database,inotify,scanner,metadata,http,ssdp=warn";
 	char *log_level = NULL;
 	struct media_dir_s *media_dir;
-	int ifaces = 0;
 	uid_t uid = 0;
 
 	/* set up uuid based on mac address */
@@ -441,223 +431,23 @@ init(int argc, char **argv)
 	media_dir = calloc(1, sizeof(struct media_dir_s));
 	media_dir->path = strdup(realpath("./media", buf));
 	media_dir->types = ALL_MEDIA;
-	if (media_dirs)
-	{
-		struct media_dir_s *all_dirs = media_dirs;
-		while( all_dirs->next )
-			all_dirs = all_dirs->next;
-		all_dirs->next = media_dir;
-	}
-	else
-		media_dirs = media_dir;
+	media_dirs = media_dir;
 
-	if (log_path[0] == '\0')
-	{
-		if (db_path[0] == '\0')
-			strncpyt(log_path, DEFAULT_LOG_PATH, PATH_MAX);
-		else
-			strncpyt(log_path, db_path, PATH_MAX);
-	}
-	if (db_path[0] == '\0')
-		strncpyt(db_path, DEFAULT_DB_PATH, PATH_MAX);
 
-	/* command line arguments processing */
-	for (i=1; i<argc; i++)
-	{
-		if (argv[i][0] != '-')
-		{
-			DPRINTF(E_FATAL, L_GENERAL, "Unknown option: %s\n", argv[i]);
-		}
-		else if (strcmp(argv[i], "--help") == 0)
-		{
-			runtime_vars.port = -1;
-			break;
-		}
-		else switch(argv[i][1])
-		{
-		case 't':
-			if (i+1 < argc)
-				runtime_vars.notify_interval = atoi(argv[++i]);
-			else
-				DPRINTF(E_FATAL, L_GENERAL, "Option -%c takes one argument.\n", argv[i][1]);
-			break;
-		case 's':
-			if (i+1 < argc)
-				strncpyt(serialnumber, argv[++i], SERIALNUMBER_MAX_LEN);
-			else
-				DPRINTF(E_FATAL, L_GENERAL, "Option -%c takes one argument.\n", argv[i][1]);
-			break;
-		case 'm':
-			if (i+1 < argc)
-				strncpyt(modelnumber, argv[++i], MODELNUMBER_MAX_LEN);
-			else
-				DPRINTF(E_FATAL, L_GENERAL, "Option -%c takes one argument.\n", argv[i][1]);
-			break;
-		case 'p':
-			if (i+1 < argc)
-				runtime_vars.port = atoi(argv[++i]);
-			else
-				DPRINTF(E_FATAL, L_GENERAL, "Option -%c takes one argument.\n", argv[i][1]);
-			break;
-		case 'P':
-			if (i+1 < argc)
-			{
-				if (argv[++i][0] != '/')
-					DPRINTF(E_FATAL, L_GENERAL, "Option -%c requires an absolute filename.\n", argv[i-1][1]);
-				else
-					pidfilename = argv[i];
-			}
-			else
-				DPRINTF(E_FATAL, L_GENERAL, "Option -%c takes one argument.\n", argv[i][1]);
-			break;
-		case 'd':
-			debug_flag = 1;
-		case 'v':
-			verbose_flag = 1;
-			break;
-		case 'L':
-			SETFLAG(NO_PLAYLIST_MASK);
-			break;
-		case 'w':
-			if (i+1 < argc)
-				presurl = argv[++i];
-			else
-				DPRINTF(E_FATAL, L_GENERAL, "Option -%c takes one argument.\n", argv[i][1]);
-			break;
-		case 'i':
-			if (i+1 < argc)
-			{
-				i++;
-				if (ifaces >= MAX_LAN_ADDR)
-				{
-					DPRINTF(E_ERROR, L_GENERAL, "Too many interfaces (max: %d), ignoring %s\n",
-						MAX_LAN_ADDR, argv[i]);
-					break;
-				}
-				runtime_vars.ifaces[ifaces++] = argv[i];
-			}
-			else
-				DPRINTF(E_FATAL, L_GENERAL, "Option -%c takes one argument.\n", argv[i][1]);
-			break;
-		case 'f':
-			i++;	/* discarding, the config file is already read */
-			break;
-		case 'h':
-			runtime_vars.port = -1; // triggers help display
-			break;
-		case 'r':
-			SETFLAG(RESCAN_MASK);
-			break;
-		case 'R':
-			snprintf(buf, sizeof(buf), "rm -rf %s/files.db %s/art_cache", db_path, db_path);
-			if (system(buf) != 0)
-				DPRINTF(E_FATAL, L_GENERAL, "Failed to clean old file cache. EXITING\n");
-			break;
-		case 'u':
-			if (i+1 != argc)
-			{
-				i++;
-				uid = strtoul(argv[i], &string, 0);
-				if (*string)
-				{
-					/* Symbolic username given, not UID. */
-					struct passwd *entry = getpwnam(argv[i]);
-					if (!entry)
-						DPRINTF(E_FATAL, L_GENERAL, "Bad user '%s'.\n", argv[i]);
-					uid = entry->pw_uid;
-				}
-			}
-			else
-				DPRINTF(E_FATAL, L_GENERAL, "Option -%c takes one argument.\n", argv[i][1]);
-			break;
-			break;
-#ifdef __linux__
-		case 'S':
-			SETFLAG(SYSTEMD_MASK);
-			break;
-#endif
-		case 'V':
-			printf("Version " MINIDLNA_VERSION "\n");
-			exit(0);
-			break;
-		default:
-			DPRINTF(E_ERROR, L_GENERAL, "Unknown option: %s\n", argv[i]);
-			runtime_vars.port = -1; // triggers help display
-		}
-	}
-
-	if (runtime_vars.port <= 0)
-	{
-		printf("Usage:\n\t"
-			"%s [-d] [-v] [-f config_file] [-p port]\n"
-			"\t\t[-i network_interface] [-u uid_to_run_as]\n"
-			"\t\t[-t notify_interval] [-P pid_filename]\n"
-			"\t\t[-s serial] [-m model_number]\n"
-#ifdef __linux__
-			"\t\t[-w url] [-r] [-R] [-L] [-S] [-V] [-h]\n"
-#else
-			"\t\t[-w url] [-r] [-R] [-L] [-V] [-h]\n"
-#endif
-			"\nNotes:\n\tNotify interval is in seconds. Default is 895 seconds.\n"
-			"\tDefault pid file is %s.\n"
-			"\tWith -d minidlna will run in debug mode (not daemonize).\n"
-			"\t-w sets the presentation url. Default is http address on port 80\n"
-			"\t-v enables verbose output\n"
-			"\t-h displays this text\n"
-			"\t-r forces a rescan\n"
-			"\t-R forces a rebuild\n"
-			"\t-L do not create playlists\n"
-#ifdef __linux__
-			"\t-S changes behaviour for systemd\n"
-#endif
-			"\t-V print the version number\n",
-			argv[0], pidfilename);
-		return 1;
-	}
-
-	if (verbose_flag)
-	{
-		strcpy(log_str+60, "debug");
-		log_level = log_str;
-	}
-	else if (!log_level)
-		log_level = log_str;
+	strncpyt(log_path, DEFAULT_LOG_PATH, PATH_MAX);
+	strncpyt(db_path, DEFAULT_DB_PATH, PATH_MAX);
 
 	/* Set the default log file path to NULL (stdout) */
-	path = NULL;
-	if (debug_flag)
-	{
-		pid = getpid();
-		strcpy(log_str+60, "maxdebug");
-		log_level = log_str;
-	}
-	else if (GETFLAG(SYSTEMD_MASK))
-	{
-		pid = getpid();
-	}
-	else
-	{
-		pid = process_daemonize();
-		if (access(db_path, F_OK) != 0)
-			make_dir(db_path, S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO);
-		snprintf(buf, sizeof(buf), "%s/minidlna.log", log_path);
-		path = buf;
-	}
-	log_init(path, log_level);
+	pid = getpid();
+	strcpy(log_str+60, "maxdebug");
+	log_level = log_str;
 
-	if (process_check_if_running(pidfilename) < 0)
-	{
-		DPRINTF(E_ERROR, L_GENERAL, SERVER_NAME " is already running. EXITING.\n");
-		return 1;
-	}	
+	log_init(NULL, log_level);
 
 	set_startup_time();
 
 	/* presentation url */
-	if (presurl)
-		strncpyt(presentationurl, presurl, PRESENTATIONURL_MAX_LEN);
-	else
-		strcpy(presentationurl, "/");
+	strcpy(presentationurl, "/");
 
 	/* set signal handlers */
 	memset(&sa, 0, sizeof(struct sigaction));
