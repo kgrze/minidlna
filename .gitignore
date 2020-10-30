@@ -1,6 +1,7 @@
 bin/*
 .deps/*
 po/*.po
-src/*.gcna
+src/*.gcda
 src/*.gcno
 src/*.o
+./mindlna
