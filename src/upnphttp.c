@@ -85,15 +85,12 @@
 
 #define INIT_STR(s, d) { s.data = d; s.size = sizeof(d); s.off = 0; }
 
-#include "icons.c"
-
 enum event_type {
 	E_INVALID,
 	E_SUBSCRIBE,
 	E_RENEW
 };
 
-static void SendResp_icon(struct upnphttp *, char * url);
 static void SendResp_caption(struct upnphttp *, char * url);
 static void SendResp_resizedimg(struct upnphttp *, char * url);
 static void SendResp_thumbnail(struct upnphttp *, char * url);
@@ -926,10 +923,6 @@ ProcessHttpQuery_upnphttp(struct upnphttp * h)
 		{
 			SendResp_resizedimg(h, HttpUrl+9);
 		}
-		else if(strncmp(HttpUrl, "/icons/", 7) == 0)
-		{
-			SendResp_icon(h, HttpUrl+7);
-		}
 		else if(strncmp(HttpUrl, "/Captions/", 10) == 0)
 		{
 			SendResp_caption(h, HttpUrl+10);
@@ -1301,63 +1294,6 @@ _open_file(const char *orig_path)
 		DPRINTF(E_ERROR, L_HTTP, "Error opening %s\n", path);
 
 	return fd;
-}
-
-static void
-SendResp_icon(struct upnphttp * h, char * icon)
-{
-	char header[512];
-	char mime[12] = "image/";
-	char *data;
-	int size;
-	struct string_s str;
-
-	if( strcmp(icon, "sm.png") == 0 )
-	{
-		DPRINTF(E_DEBUG, L_HTTP, "Sending small PNG icon\n");
-		data = (char *)png_sm;
-		size = sizeof(png_sm)-1;
-		strcpy(mime+6, "png");
-	}
-	else if( strcmp(icon, "lrg.png") == 0 )
-	{
-		DPRINTF(E_DEBUG, L_HTTP, "Sending large PNG icon\n");
-		data = (char *)png_lrg;
-		size = sizeof(png_lrg)-1;
-		strcpy(mime+6, "png");
-	}
-	else if( strcmp(icon, "sm.jpg") == 0 )
-	{
-		DPRINTF(E_DEBUG, L_HTTP, "Sending small JPEG icon\n");
-		data = (char *)jpeg_sm;
-		size = sizeof(jpeg_sm)-1;
-		strcpy(mime+6, "jpeg");
-	}
-	else if( strcmp(icon, "lrg.jpg") == 0 )
-	{
-		DPRINTF(E_DEBUG, L_HTTP, "Sending large JPEG icon\n");
-		data = (char *)jpeg_lrg;
-		size = sizeof(jpeg_lrg)-1;
-		strcpy(mime+6, "jpeg");
-	}
-	else
-	{
-		DPRINTF(E_WARN, L_HTTP, "Invalid icon request: %s\n", icon);
-		Send404(h);
-		return;
-	}
-
-	INIT_STR(str, header);
-
-	start_dlna_header(&str, 200, "Interactive", mime);
-	strcatf(&str, "Content-Length: %d\r\n\r\n", size);
-
-	if( send_data(h, str.data, str.off, MSG_MORE) == 0 )
-	{
-		if( h->req_command != EHead )
-			send_data(h, data, size, 0);
-	}
-	CloseSocket_upnphttp(h);
 }
 
 static void

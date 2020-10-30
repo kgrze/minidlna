@@ -433,7 +433,6 @@ init(int argc, char **argv)
 	media_dir->types = ALL_MEDIA;
 	media_dirs = media_dir;
 
-
 	strncpyt(log_path, DEFAULT_LOG_PATH, PATH_MAX);
 	strncpyt(db_path, DEFAULT_DB_PATH, PATH_MAX);
 
@@ -441,7 +440,6 @@ init(int argc, char **argv)
 	pid = getpid();
 	strcpy(log_str+60, "maxdebug");
 	log_level = log_str;
-
 	log_init(NULL, log_level);
 
 	set_startup_time();

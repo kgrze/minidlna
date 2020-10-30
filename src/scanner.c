@@ -39,7 +39,6 @@
 #include "scanner_sqlite.h"
 #include "upnpglobalvars.h"
 #include "metadata.h"
-#include "playlist.h"
 #include "utils.h"
 #include "sql.h"
 #include "scanner.h"
@@ -456,31 +455,14 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 	char *objname;
 	media_types mtype = get_media_type(name);
 
-	if( mtype == TYPE_IMAGE && (types & TYPE_IMAGE) )
-	{
-		strcpy(base, IMAGE_DIR_ID);
-		class = "item.imageItem.photo";
-		detailID = GetImageMetadata(path, name);
-	}
-	else if( mtype == TYPE_VIDEO && (types & TYPE_VIDEO) )
+	if( mtype == TYPE_VIDEO && (types & TYPE_VIDEO) )
 	{
 		strcpy(base, VIDEO_DIR_ID);
 		class = "item.videoItem";
 		detailID = GetVideoMetadata(path, name);
 	}
-	else if( mtype == TYPE_PLAYLIST && (types & TYPE_PLAYLIST) )
-	{
-		if( insert_playlist(path, name) == 0 )
-			return 1;
-	}
 	/* Some file extensions can be used for both audio and video.
 	** Fall back to audio on these files if video parsing fails. */
-	if (!detailID && (types & TYPE_AUDIO) && is_audio(name) )
-	{
-		strcpy(base, MUSIC_DIR_ID);
-		class = "item.audioItem.musicTrack";
-		detailID = GetAudioMetadata(path, name);
-	}
 	if( !detailID )
 	{
 		DPRINTF(E_WARN, L_SCANNER, "Unsuccessful getting details for %s\n", path);
@@ -637,8 +619,7 @@ filter_a(scan_filter *d)
 	return ( filter_hidden(d) &&
 		 (filter_type(d) ||
 		  (is_reg(d) &&
-		   (is_audio(d->d_name) ||
-		    is_playlist(d->d_name))))
+		   (is_audio(d->d_name) )))
 		);
 }
 
@@ -705,8 +686,7 @@ filter_avp(scan_filter *d)
 		  (is_reg(d) &&
 		   (is_audio(d->d_name) ||
 		    is_image(d->d_name) ||
-		    is_video(d->d_name) ||
-		    is_playlist(d->d_name))))
+		    is_video(d->d_name))))
 		);
 }
 
@@ -873,7 +853,6 @@ start_rescan(void)
 		monitor_insert_directory(0, esc_name, path);
 		free(esc_name);
 	}
-	fill_playlists();
 
 	if (sqlite3_total_changes(db) != changes)
 		summary = "changes found";
@@ -925,8 +904,6 @@ start_scanner(void)
 	 * This index is very useful for large libraries used with an XBox360 (or any
 	 * client that uses UPnPSearch on large containers). */
 	sql_exec(db, "create INDEX IDX_SEARCH_OPT ON OBJECTS(OBJECT_ID, CLASS, DETAIL_ID);");
-
-	fill_playlists();
 
 	DPRINTF(E_DEBUG, L_SCANNER, "Initial file scan completed\n");
 	//JM: Set up a db version number, so we know if we need to rebuild due to a new structure.

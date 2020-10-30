@@ -47,7 +47,6 @@
 #include "sql.h"
 #include "scanner.h"
 #include "metadata.h"
-#include "playlist.h"
 #include "log.h"
 
 static time_t next_pl_fill = 0;
@@ -645,7 +644,6 @@ start_inotify(void)
 		{
 			if( next_pl_fill && (time(NULL) >= next_pl_fill) )
 			{
-				fill_playlists();
 				next_pl_fill = 0;
 			}
 			continue;

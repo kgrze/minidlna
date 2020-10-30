@@ -95,9 +95,6 @@ int64_t
 GetAudioMetadata(const char *path, const char *name);
 
 int64_t
-GetImageMetadata(const char *path, const char *name);
-
-int64_t
 GetVideoMetadata(const char *path, const char *name);
 
 #endif
