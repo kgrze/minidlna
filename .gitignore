@@ -1,5 +1,6 @@
 bin/*
-obj/*
 .deps/*
 po/*.po
-
+src/*.gcna
+src/*.gcno
+src/*.o
