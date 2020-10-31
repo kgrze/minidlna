@@ -5,10 +5,10 @@
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
 
 /* DB path */
-#define DEFAULT_DB_PATH "/var/cache/minidlna"
+#define DEFAULT_DB_PATH "./cache/db"
 
 /* Log path */
-#define DEFAULT_LOG_PATH "/var/log"
+#define DEFAULT_LOG_PATH "./cache/log"
 
 /* Define to 1 if translation of program messages to the user's native
    language is requested. */
