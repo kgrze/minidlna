@@ -11,7 +11,7 @@ LD = $(CC)
 SOURCES  := $(wildcard $(SRCDIR)/*.c)
 INCLUDES := $(wildcard $(SRCDIR)/*.h)
 OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(SRCDIR)/%.o)
-rm       = rm -f
+rm       = rm -rf
 
 $(TARGET): $(OBJECTS)
 	@echo "Linking $@"
@@ -26,6 +26,7 @@ clean:
 	$(rm) $(SRCDIR)/*.gcda
 	$(rm) $(SRCDIR)/*.gcno
 	$(rm) $(TARGET)
+	$(rm) cache
 
 help:
 	@echo "Build following target:"
