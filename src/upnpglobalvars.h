@@ -65,7 +65,6 @@
 # define SERVER_NAME "MiniDLNA"
 #endif
 
-#define USE_FORK 1
 #define DB_VERSION 11
 
 #ifdef ENABLE_NLS
