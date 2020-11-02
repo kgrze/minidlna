@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">447</td>
+            <td class="headerCovTableEntry">451</td>
             <td class="headerCovTableEntry">1015</td>
-            <td class="headerCovTableEntryLo">44.0 %</td>
+            <td class="headerCovTableEntryLo">44.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-11-02 15:08:30</td>
+            <td class="headerValue">2020-11-02 23:20:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">14</td>
@@ -190,7 +190,7 @@
 <span class="lineNum">     128 </span><span class="lineNoCov">          0 : }</span>
 <a name="129"><span class="lineNum">     129 </span>            : </a>
 <span class="lineNum">     130 </span>            : static void
-<span class="lineNum">     131 </span><span class="lineCov">         26 : BuildSendAndCloseSoapResp(struct upnphttp * h,</span>
+<span class="lineNum">     131 </span><span class="lineCov">         39 : BuildSendAndCloseSoapResp(struct upnphttp * h,</span>
 <span class="lineNum">     132 </span>            :                           const char * body, int bodylen)
 <span class="lineNum">     133 </span>            : {
 <span class="lineNum">     134 </span>            :         static const char beforebody[] =
@@ -203,26 +203,26 @@
 <span class="lineNum">     141 </span>            :                 &quot;&lt;/s:Body&gt;&quot;
 <span class="lineNum">     142 </span>            :                 &quot;&lt;/s:Envelope&gt;\r\n&quot;;
 <span class="lineNum">     143 </span>            : 
-<span class="lineNum">     144 </span><span class="lineCov">         26 :         if (!body || bodylen &lt; 0)</span>
+<span class="lineNum">     144 </span><span class="lineCov">         39 :         if (!body || bodylen &lt; 0)</span>
 <span class="lineNum">     145 </span>            :         {
 <span class="lineNum">     146 </span><span class="lineNoCov">          0 :                 Send500(h);</span>
 <span class="lineNum">     147 </span><span class="lineNoCov">          0 :                 return;</span>
 <span class="lineNum">     148 </span>            :         }
 <span class="lineNum">     149 </span>            : 
-<span class="lineNum">     150 </span><span class="lineCov">         26 :         BuildHeader_upnphttp(h, 200, &quot;OK&quot;,  sizeof(beforebody) - 1</span>
-<span class="lineNum">     151 </span><span class="lineCov">         26 :                 + sizeof(afterbody) - 1 + bodylen );</span>
+<span class="lineNum">     150 </span><span class="lineCov">         39 :         BuildHeader_upnphttp(h, 200, &quot;OK&quot;,  sizeof(beforebody) - 1</span>
+<span class="lineNum">     151 </span><span class="lineCov">         39 :                 + sizeof(afterbody) - 1 + bodylen );</span>
 <span class="lineNum">     152 </span>            : 
-<span class="lineNum">     153 </span><span class="lineCov">         26 :         memcpy(h-&gt;res_buf + h-&gt;res_buflen, beforebody, sizeof(beforebody) - 1);</span>
-<span class="lineNum">     154 </span><span class="lineCov">         26 :         h-&gt;res_buflen += sizeof(beforebody) - 1;</span>
+<span class="lineNum">     153 </span><span class="lineCov">         39 :         memcpy(h-&gt;res_buf + h-&gt;res_buflen, beforebody, sizeof(beforebody) - 1);</span>
+<span class="lineNum">     154 </span><span class="lineCov">         39 :         h-&gt;res_buflen += sizeof(beforebody) - 1;</span>
 <span class="lineNum">     155 </span>            : 
-<span class="lineNum">     156 </span><span class="lineCov">         26 :         memcpy(h-&gt;res_buf + h-&gt;res_buflen, body, bodylen);</span>
-<span class="lineNum">     157 </span><span class="lineCov">         26 :         h-&gt;res_buflen += bodylen;</span>
+<span class="lineNum">     156 </span><span class="lineCov">         39 :         memcpy(h-&gt;res_buf + h-&gt;res_buflen, body, bodylen);</span>
+<span class="lineNum">     157 </span><span class="lineCov">         39 :         h-&gt;res_buflen += bodylen;</span>
 <span class="lineNum">     158 </span>            : 
-<span class="lineNum">     159 </span><span class="lineCov">         26 :         memcpy(h-&gt;res_buf + h-&gt;res_buflen, afterbody, sizeof(afterbody) - 1);</span>
-<span class="lineNum">     160 </span><span class="lineCov">         26 :         h-&gt;res_buflen += sizeof(afterbody) - 1;</span>
+<span class="lineNum">     159 </span><span class="lineCov">         39 :         memcpy(h-&gt;res_buf + h-&gt;res_buflen, afterbody, sizeof(afterbody) - 1);</span>
+<span class="lineNum">     160 </span><span class="lineCov">         39 :         h-&gt;res_buflen += sizeof(afterbody) - 1;</span>
 <span class="lineNum">     161 </span>            : 
-<span class="lineNum">     162 </span><span class="lineCov">         26 :         SendResp_upnphttp(h);</span>
-<span class="lineNum">     163 </span><span class="lineCov">         26 :         CloseSocket_upnphttp(h);</span>
+<span class="lineNum">     162 </span><span class="lineCov">         39 :         SendResp_upnphttp(h);</span>
+<span class="lineNum">     163 </span><span class="lineCov">         39 :         CloseSocket_upnphttp(h);</span>
 <span class="lineNum">     164 </span>            : }
 <a name="165"><span class="lineNum">     165 </span>            : </a>
 <span class="lineNum">     166 </span>            : static void
@@ -471,190 +471,190 @@
 <span class="lineNum">     409 </span>            :                                                  FILTER_SEC_DCM_INFO)
 <a name="410"><span class="lineNum">     410 </span>            : </a>
 <span class="lineNum">     411 </span>            : static uint32_t
-<span class="lineNum">     412 </span><span class="lineCov">         23 : set_filter_flags(char *filter, struct upnphttp *h)</span>
+<span class="lineNum">     412 </span><span class="lineCov">         36 : set_filter_flags(char *filter, struct upnphttp *h)</span>
 <span class="lineNum">     413 </span>            : {
-<span class="lineNum">     414 </span><span class="lineCov">         23 :         char *item, *saveptr = NULL;</span>
-<span class="lineNum">     415 </span><span class="lineCov">         23 :         uint32_t flags = 0;</span>
-<span class="lineNum">     416 </span><span class="lineCov">         23 :         int samsung = h-&gt;req_client &amp;&amp; (h-&gt;req_client-&gt;type-&gt;flags &amp; FLAG_SAMSUNG);</span>
+<span class="lineNum">     414 </span><span class="lineCov">         36 :         char *item, *saveptr = NULL;</span>
+<span class="lineNum">     415 </span><span class="lineCov">         36 :         uint32_t flags = 0;</span>
+<span class="lineNum">     416 </span><span class="lineCov">         36 :         int samsung = h-&gt;req_client &amp;&amp; (h-&gt;req_client-&gt;type-&gt;flags &amp; FLAG_SAMSUNG);</span>
 <span class="lineNum">     417 </span>            : 
-<span class="lineNum">     418 </span><span class="lineCov">         23 :         if( !filter || (strlen(filter) &lt;= 1) ) {</span>
+<span class="lineNum">     418 </span><span class="lineCov">         36 :         if( !filter || (strlen(filter) &lt;= 1) ) {</span>
 <span class="lineNum">     419 </span>            :                 /* Not the full 32 bits.  Skip vendor-specific stuff by default. */
-<span class="lineNum">     420 </span><span class="lineCov">          2 :                 flags = STANDARD_FILTER_MASK;</span>
-<span class="lineNum">     421 </span><span class="lineCov">          2 :                 if (samsung)</span>
+<span class="lineNum">     420 </span><span class="lineCov">         19 :                 flags = STANDARD_FILTER_MASK;</span>
+<span class="lineNum">     421 </span><span class="lineCov">         19 :                 if (samsung)</span>
 <span class="lineNum">     422 </span><span class="lineNoCov">          0 :                         flags |= FILTER_SEC_CAPTION_INFO_EX | FILTER_SEC_DCM_INFO;</span>
 <span class="lineNum">     423 </span>            :         }
-<span class="lineNum">     424 </span><span class="lineCov">         23 :         if (flags)</span>
-<span class="lineNum">     425 </span><span class="lineCov">          2 :                 return flags;</span>
+<span class="lineNum">     424 </span><span class="lineCov">         36 :         if (flags)</span>
+<span class="lineNum">     425 </span><span class="lineCov">         19 :                 return flags;</span>
 <span class="lineNum">     426 </span>            : 
-<span class="lineNum">     427 </span><span class="lineCov">         21 :         if( samsung )</span>
+<span class="lineNum">     427 </span><span class="lineCov">         17 :         if( samsung )</span>
 <span class="lineNum">     428 </span><span class="lineNoCov">          0 :                 flags |= FILTER_DLNA_NAMESPACE;</span>
-<span class="lineNum">     429 </span><span class="lineCov">         21 :         item = strtok_r(filter, &quot;,&quot;, &amp;saveptr);</span>
-<span class="lineNum">     430 </span><span class="lineCov">        525 :         while( item != NULL )</span>
+<span class="lineNum">     429 </span><span class="lineCov">         17 :         item = strtok_r(filter, &quot;,&quot;, &amp;saveptr);</span>
+<span class="lineNum">     430 </span><span class="lineCov">        425 :         while( item != NULL )</span>
 <span class="lineNum">     431 </span>            :         {
-<span class="lineNum">     432 </span><span class="lineCov">        483 :                 if( saveptr )</span>
-<span class="lineNum">     433 </span><span class="lineCov">        483 :                         *(item-1) = ',';</span>
-<span class="lineNum">     434 </span><span class="lineCov">        987 :                 while( isspace(*item) )</span>
-<span class="lineNum">     435 </span><span class="lineCov">         21 :                         item++;</span>
-<span class="lineNum">     436 </span><span class="lineCov">        483 :                 if( strcmp(item, &quot;@childCount&quot;) == 0 )</span>
+<span class="lineNum">     432 </span><span class="lineCov">        391 :                 if( saveptr )</span>
+<span class="lineNum">     433 </span><span class="lineCov">        391 :                         *(item-1) = ',';</span>
+<span class="lineNum">     434 </span><span class="lineCov">        799 :                 while( isspace(*item) )</span>
+<span class="lineNum">     435 </span><span class="lineCov">         17 :                         item++;</span>
+<span class="lineNum">     436 </span><span class="lineCov">        391 :                 if( strcmp(item, &quot;@childCount&quot;) == 0 )</span>
 <span class="lineNum">     437 </span>            :                 {
-<span class="lineNum">     438 </span><span class="lineCov">         21 :                         flags |= FILTER_CHILDCOUNT;</span>
+<span class="lineNum">     438 </span><span class="lineCov">         17 :                         flags |= FILTER_CHILDCOUNT;</span>
 <span class="lineNum">     439 </span>            :                 }
-<span class="lineNum">     440 </span><span class="lineCov">        462 :                 else if( strcmp(item, &quot;@searchable&quot;) == 0 )</span>
+<span class="lineNum">     440 </span><span class="lineCov">        374 :                 else if( strcmp(item, &quot;@searchable&quot;) == 0 )</span>
 <span class="lineNum">     441 </span>            :                 {
 <span class="lineNum">     442 </span><span class="lineNoCov">          0 :                         flags |= FILTER_SEARCHABLE;</span>
 <span class="lineNum">     443 </span>            :                 }
-<span class="lineNum">     444 </span><span class="lineCov">        462 :                 else if( strcmp(item, &quot;dc:creator&quot;) == 0 )</span>
+<span class="lineNum">     444 </span><span class="lineCov">        374 :                 else if( strcmp(item, &quot;dc:creator&quot;) == 0 )</span>
 <span class="lineNum">     445 </span>            :                 {
-<span class="lineNum">     446 </span><span class="lineCov">         21 :                         flags |= FILTER_DC_CREATOR;</span>
+<span class="lineNum">     446 </span><span class="lineCov">         17 :                         flags |= FILTER_DC_CREATOR;</span>
 <span class="lineNum">     447 </span>            :                 }
-<span class="lineNum">     448 </span><span class="lineCov">        441 :                 else if( strcmp(item, &quot;dc:date&quot;) == 0 )</span>
+<span class="lineNum">     448 </span><span class="lineCov">        357 :                 else if( strcmp(item, &quot;dc:date&quot;) == 0 )</span>
 <span class="lineNum">     449 </span>            :                 {
-<span class="lineNum">     450 </span><span class="lineCov">         21 :                         flags |= FILTER_DC_DATE;</span>
+<span class="lineNum">     450 </span><span class="lineCov">         17 :                         flags |= FILTER_DC_DATE;</span>
 <span class="lineNum">     451 </span>            :                 }
-<span class="lineNum">     452 </span><span class="lineCov">        420 :                 else if( strcmp(item, &quot;dc:description&quot;) == 0 )</span>
+<span class="lineNum">     452 </span><span class="lineCov">        340 :                 else if( strcmp(item, &quot;dc:description&quot;) == 0 )</span>
 <span class="lineNum">     453 </span>            :                 {
 <span class="lineNum">     454 </span><span class="lineNoCov">          0 :                         flags |= FILTER_DC_DESCRIPTION;</span>
 <span class="lineNum">     455 </span>            :                 }
-<span class="lineNum">     456 </span><span class="lineCov">        420 :                 else if( strcmp(item, &quot;dlna&quot;) == 0 )</span>
+<span class="lineNum">     456 </span><span class="lineCov">        340 :                 else if( strcmp(item, &quot;dlna&quot;) == 0 )</span>
 <span class="lineNum">     457 </span>            :                 {
 <span class="lineNum">     458 </span><span class="lineNoCov">          0 :                         flags |= FILTER_DLNA_NAMESPACE;</span>
 <span class="lineNum">     459 </span>            :                 }
-<span class="lineNum">     460 </span><span class="lineCov">        420 :                 else if( strcmp(item, &quot;@refID&quot;) == 0 )</span>
+<span class="lineNum">     460 </span><span class="lineCov">        340 :                 else if( strcmp(item, &quot;@refID&quot;) == 0 )</span>
 <span class="lineNum">     461 </span>            :                 {
 <span class="lineNum">     462 </span><span class="lineNoCov">          0 :                         flags |= FILTER_REFID;</span>
 <span class="lineNum">     463 </span>            :                 }
-<span class="lineNum">     464 </span><span class="lineCov">        420 :                 else if( strcmp(item, &quot;upnp:album&quot;) == 0 )</span>
+<span class="lineNum">     464 </span><span class="lineCov">        340 :                 else if( strcmp(item, &quot;upnp:album&quot;) == 0 )</span>
 <span class="lineNum">     465 </span>            :                 {
-<span class="lineNum">     466 </span><span class="lineCov">         21 :                         flags |= FILTER_UPNP_ALBUM;</span>
+<span class="lineNum">     466 </span><span class="lineCov">         17 :                         flags |= FILTER_UPNP_ALBUM;</span>
 <span class="lineNum">     467 </span>            :                 }
-<span class="lineNum">     468 </span><span class="lineCov">        399 :                 else if( strcmp(item, &quot;upnp:albumArtURI&quot;) == 0 )</span>
+<span class="lineNum">     468 </span><span class="lineCov">        323 :                 else if( strcmp(item, &quot;upnp:albumArtURI&quot;) == 0 )</span>
 <span class="lineNum">     469 </span>            :                 {
-<span class="lineNum">     470 </span><span class="lineCov">         21 :                         flags |= FILTER_UPNP_ALBUMARTURI;</span>
-<span class="lineNum">     471 </span><span class="lineCov">         21 :                         if( samsung )</span>
+<span class="lineNum">     470 </span><span class="lineCov">         17 :                         flags |= FILTER_UPNP_ALBUMARTURI;</span>
+<span class="lineNum">     471 </span><span class="lineCov">         17 :                         if( samsung )</span>
 <span class="lineNum">     472 </span><span class="lineNoCov">          0 :                                 flags |= FILTER_UPNP_ALBUMARTURI_DLNA_PROFILEID;</span>
 <span class="lineNum">     473 </span>            :                 }
-<span class="lineNum">     474 </span><span class="lineCov">        378 :                 else if( strcmp(item, &quot;upnp:albumArtURI@dlna:profileID&quot;) == 0 )</span>
+<span class="lineNum">     474 </span><span class="lineCov">        306 :                 else if( strcmp(item, &quot;upnp:albumArtURI@dlna:profileID&quot;) == 0 )</span>
 <span class="lineNum">     475 </span>            :                 {
-<span class="lineNum">     476 </span><span class="lineCov">         21 :                         flags |= FILTER_UPNP_ALBUMARTURI;</span>
-<span class="lineNum">     477 </span><span class="lineCov">         21 :                         flags |= FILTER_UPNP_ALBUMARTURI_DLNA_PROFILEID;</span>
+<span class="lineNum">     476 </span><span class="lineCov">         17 :                         flags |= FILTER_UPNP_ALBUMARTURI;</span>
+<span class="lineNum">     477 </span><span class="lineCov">         17 :                         flags |= FILTER_UPNP_ALBUMARTURI_DLNA_PROFILEID;</span>
 <span class="lineNum">     478 </span>            :                 }
-<span class="lineNum">     479 </span><span class="lineCov">        357 :                 else if( strcmp(item, &quot;upnp:artist&quot;) == 0 )</span>
+<span class="lineNum">     479 </span><span class="lineCov">        289 :                 else if( strcmp(item, &quot;upnp:artist&quot;) == 0 )</span>
 <span class="lineNum">     480 </span>            :                 {
-<span class="lineNum">     481 </span><span class="lineCov">         21 :                         flags |= FILTER_UPNP_ARTIST;</span>
+<span class="lineNum">     481 </span><span class="lineCov">         17 :                         flags |= FILTER_UPNP_ARTIST;</span>
 <span class="lineNum">     482 </span>            :                 }
-<span class="lineNum">     483 </span><span class="lineCov">        336 :                 else if( strcmp(item, &quot;upnp:actor&quot;) == 0 )</span>
+<span class="lineNum">     483 </span><span class="lineCov">        272 :                 else if( strcmp(item, &quot;upnp:actor&quot;) == 0 )</span>
 <span class="lineNum">     484 </span>            :                 {
 <span class="lineNum">     485 </span><span class="lineNoCov">          0 :                         flags |= FILTER_UPNP_ACTOR;</span>
 <span class="lineNum">     486 </span>            :                 }
-<span class="lineNum">     487 </span><span class="lineCov">        336 :                 else if( strcmp(item, &quot;upnp:genre&quot;) == 0 )</span>
+<span class="lineNum">     487 </span><span class="lineCov">        272 :                 else if( strcmp(item, &quot;upnp:genre&quot;) == 0 )</span>
 <span class="lineNum">     488 </span>            :                 {
-<span class="lineNum">     489 </span><span class="lineCov">         21 :                         flags |= FILTER_UPNP_GENRE;</span>
+<span class="lineNum">     489 </span><span class="lineCov">         17 :                         flags |= FILTER_UPNP_GENRE;</span>
 <span class="lineNum">     490 </span>            :                 }
-<span class="lineNum">     491 </span><span class="lineCov">        315 :                 else if( strcmp(item, &quot;upnp:originalTrackNumber&quot;) == 0 )</span>
+<span class="lineNum">     491 </span><span class="lineCov">        255 :                 else if( strcmp(item, &quot;upnp:originalTrackNumber&quot;) == 0 )</span>
 <span class="lineNum">     492 </span>            :                 {
 <span class="lineNum">     493 </span><span class="lineNoCov">          0 :                         flags |= FILTER_UPNP_ORIGINALTRACKNUMBER;</span>
 <span class="lineNum">     494 </span>            :                 }
-<span class="lineNum">     495 </span><span class="lineCov">        315 :                 else if( strcmp(item, &quot;upnp:searchClass&quot;) == 0 )</span>
+<span class="lineNum">     495 </span><span class="lineCov">        255 :                 else if( strcmp(item, &quot;upnp:searchClass&quot;) == 0 )</span>
 <span class="lineNum">     496 </span>            :                 {
 <span class="lineNum">     497 </span><span class="lineNoCov">          0 :                         flags |= FILTER_UPNP_SEARCHCLASS;</span>
 <span class="lineNum">     498 </span>            :                 }
-<span class="lineNum">     499 </span><span class="lineCov">        315 :                 else if( strcmp(item, &quot;upnp:storageUsed&quot;) == 0 )</span>
+<span class="lineNum">     499 </span><span class="lineCov">        255 :                 else if( strcmp(item, &quot;upnp:storageUsed&quot;) == 0 )</span>
 <span class="lineNum">     500 </span>            :                 {
 <span class="lineNum">     501 </span><span class="lineNoCov">          0 :                         flags |= FILTER_UPNP_STORAGEUSED;</span>
 <span class="lineNum">     502 </span>            :                 }
-<span class="lineNum">     503 </span><span class="lineCov">        315 :                 else if( strcmp(item, &quot;res&quot;) == 0 )</span>
+<span class="lineNum">     503 </span><span class="lineCov">        255 :                 else if( strcmp(item, &quot;res&quot;) == 0 )</span>
 <span class="lineNum">     504 </span>            :                 {
-<span class="lineNum">     505 </span><span class="lineCov">         21 :                         flags |= FILTER_RES;</span>
+<span class="lineNum">     505 </span><span class="lineCov">         17 :                         flags |= FILTER_RES;</span>
 <span class="lineNum">     506 </span>            :                 }
-<span class="lineNum">     507 </span><span class="lineCov">        567 :                 else if( (strcmp(item, &quot;res@bitrate&quot;) == 0) ||</span>
-<span class="lineNum">     508 </span><span class="lineCov">        546 :                          (strcmp(item, &quot;@bitrate&quot;) == 0) ||</span>
-<span class="lineNum">     509 </span><span class="lineCov">        273 :                          ((strcmp(item, &quot;bitrate&quot;) == 0) &amp;&amp; (flags &amp; FILTER_RES)) )</span>
+<span class="lineNum">     507 </span><span class="lineCov">        459 :                 else if( (strcmp(item, &quot;res@bitrate&quot;) == 0) ||</span>
+<span class="lineNum">     508 </span><span class="lineCov">        442 :                          (strcmp(item, &quot;@bitrate&quot;) == 0) ||</span>
+<span class="lineNum">     509 </span><span class="lineCov">        221 :                          ((strcmp(item, &quot;bitrate&quot;) == 0) &amp;&amp; (flags &amp; FILTER_RES)) )</span>
 <span class="lineNum">     510 </span>            :                 {
-<span class="lineNum">     511 </span><span class="lineCov">         21 :                         flags |= FILTER_RES;</span>
-<span class="lineNum">     512 </span><span class="lineCov">         21 :                         flags |= FILTER_RES_BITRATE;</span>
+<span class="lineNum">     511 </span><span class="lineCov">         17 :                         flags |= FILTER_RES;</span>
+<span class="lineNum">     512 </span><span class="lineCov">         17 :                         flags |= FILTER_RES_BITRATE;</span>
 <span class="lineNum">     513 </span>            :                 }
-<span class="lineNum">     514 </span><span class="lineCov">        525 :                 else if( (strcmp(item, &quot;res@duration&quot;) == 0) ||</span>
-<span class="lineNum">     515 </span><span class="lineCov">        504 :                          (strcmp(item, &quot;@duration&quot;) == 0) ||</span>
-<span class="lineNum">     516 </span><span class="lineCov">        252 :                          ((strcmp(item, &quot;duration&quot;) == 0) &amp;&amp; (flags &amp; FILTER_RES)) )</span>
+<span class="lineNum">     514 </span><span class="lineCov">        425 :                 else if( (strcmp(item, &quot;res@duration&quot;) == 0) ||</span>
+<span class="lineNum">     515 </span><span class="lineCov">        408 :                          (strcmp(item, &quot;@duration&quot;) == 0) ||</span>
+<span class="lineNum">     516 </span><span class="lineCov">        204 :                          ((strcmp(item, &quot;duration&quot;) == 0) &amp;&amp; (flags &amp; FILTER_RES)) )</span>
 <span class="lineNum">     517 </span>            :                 {
-<span class="lineNum">     518 </span><span class="lineCov">         21 :                         flags |= FILTER_RES;</span>
-<span class="lineNum">     519 </span><span class="lineCov">         21 :                         flags |= FILTER_RES_DURATION;</span>
+<span class="lineNum">     518 </span><span class="lineCov">         17 :                         flags |= FILTER_RES;</span>
+<span class="lineNum">     519 </span><span class="lineCov">         17 :                         flags |= FILTER_RES_DURATION;</span>
 <span class="lineNum">     520 </span>            :                 }
-<span class="lineNum">     521 </span><span class="lineCov">        483 :                 else if( (strcmp(item, &quot;res@nrAudioChannels&quot;) == 0) ||</span>
-<span class="lineNum">     522 </span><span class="lineCov">        462 :                          (strcmp(item, &quot;@nrAudioChannels&quot;) == 0) ||</span>
-<span class="lineNum">     523 </span><span class="lineCov">        231 :                          ((strcmp(item, &quot;nrAudioChannels&quot;) == 0) &amp;&amp; (flags &amp; FILTER_RES)) )</span>
+<span class="lineNum">     521 </span><span class="lineCov">        391 :                 else if( (strcmp(item, &quot;res@nrAudioChannels&quot;) == 0) ||</span>
+<span class="lineNum">     522 </span><span class="lineCov">        374 :                          (strcmp(item, &quot;@nrAudioChannels&quot;) == 0) ||</span>
+<span class="lineNum">     523 </span><span class="lineCov">        187 :                          ((strcmp(item, &quot;nrAudioChannels&quot;) == 0) &amp;&amp; (flags &amp; FILTER_RES)) )</span>
 <span class="lineNum">     524 </span>            :                 {
-<span class="lineNum">     525 </span><span class="lineCov">         21 :                         flags |= FILTER_RES;</span>
-<span class="lineNum">     526 </span><span class="lineCov">         21 :                         flags |= FILTER_RES_NRAUDIOCHANNELS;</span>
+<span class="lineNum">     525 </span><span class="lineCov">         17 :                         flags |= FILTER_RES;</span>
+<span class="lineNum">     526 </span><span class="lineCov">         17 :                         flags |= FILTER_RES_NRAUDIOCHANNELS;</span>
 <span class="lineNum">     527 </span>            :                 }
-<span class="lineNum">     528 </span><span class="lineCov">        441 :                 else if( (strcmp(item, &quot;res@resolution&quot;) == 0) ||</span>
-<span class="lineNum">     529 </span><span class="lineCov">        420 :                          (strcmp(item, &quot;@resolution&quot;) == 0) ||</span>
-<span class="lineNum">     530 </span><span class="lineCov">        210 :                          ((strcmp(item, &quot;resolution&quot;) == 0) &amp;&amp; (flags &amp; FILTER_RES)) )</span>
+<span class="lineNum">     528 </span><span class="lineCov">        357 :                 else if( (strcmp(item, &quot;res@resolution&quot;) == 0) ||</span>
+<span class="lineNum">     529 </span><span class="lineCov">        340 :                          (strcmp(item, &quot;@resolution&quot;) == 0) ||</span>
+<span class="lineNum">     530 </span><span class="lineCov">        170 :                          ((strcmp(item, &quot;resolution&quot;) == 0) &amp;&amp; (flags &amp; FILTER_RES)) )</span>
 <span class="lineNum">     531 </span>            :                 {
-<span class="lineNum">     532 </span><span class="lineCov">         21 :                         flags |= FILTER_RES;</span>
-<span class="lineNum">     533 </span><span class="lineCov">         21 :                         flags |= FILTER_RES_RESOLUTION;</span>
+<span class="lineNum">     532 </span><span class="lineCov">         17 :                         flags |= FILTER_RES;</span>
+<span class="lineNum">     533 </span><span class="lineCov">         17 :                         flags |= FILTER_RES_RESOLUTION;</span>
 <span class="lineNum">     534 </span>            :                 }
-<span class="lineNum">     535 </span><span class="lineCov">        399 :                 else if( (strcmp(item, &quot;res@sampleFrequency&quot;) == 0) ||</span>
-<span class="lineNum">     536 </span><span class="lineCov">        378 :                          (strcmp(item, &quot;@sampleFrequency&quot;) == 0) ||</span>
-<span class="lineNum">     537 </span><span class="lineCov">        189 :                          ((strcmp(item, &quot;sampleFrequency&quot;) == 0) &amp;&amp; (flags &amp; FILTER_RES)) )</span>
+<span class="lineNum">     535 </span><span class="lineCov">        323 :                 else if( (strcmp(item, &quot;res@sampleFrequency&quot;) == 0) ||</span>
+<span class="lineNum">     536 </span><span class="lineCov">        306 :                          (strcmp(item, &quot;@sampleFrequency&quot;) == 0) ||</span>
+<span class="lineNum">     537 </span><span class="lineCov">        153 :                          ((strcmp(item, &quot;sampleFrequency&quot;) == 0) &amp;&amp; (flags &amp; FILTER_RES)) )</span>
 <span class="lineNum">     538 </span>            :                 {
-<span class="lineNum">     539 </span><span class="lineCov">         21 :                         flags |= FILTER_RES;</span>
-<span class="lineNum">     540 </span><span class="lineCov">         21 :                         flags |= FILTER_RES_SAMPLEFREQUENCY;</span>
+<span class="lineNum">     539 </span><span class="lineCov">         17 :                         flags |= FILTER_RES;</span>
+<span class="lineNum">     540 </span><span class="lineCov">         17 :                         flags |= FILTER_RES_SAMPLEFREQUENCY;</span>
 <span class="lineNum">     541 </span>            :                 }
-<span class="lineNum">     542 </span><span class="lineCov">        357 :                 else if( (strcmp(item, &quot;res@size&quot;) == 0) ||</span>
-<span class="lineNum">     543 </span><span class="lineCov">        336 :                          (strcmp(item, &quot;@size&quot;) == 0) ||</span>
-<span class="lineNum">     544 </span><span class="lineCov">        168 :                          (strcmp(item, &quot;size&quot;) == 0) )</span>
+<span class="lineNum">     542 </span><span class="lineCov">        289 :                 else if( (strcmp(item, &quot;res@size&quot;) == 0) ||</span>
+<span class="lineNum">     543 </span><span class="lineCov">        272 :                          (strcmp(item, &quot;@size&quot;) == 0) ||</span>
+<span class="lineNum">     544 </span><span class="lineCov">        136 :                          (strcmp(item, &quot;size&quot;) == 0) )</span>
 <span class="lineNum">     545 </span>            :                 {
-<span class="lineNum">     546 </span><span class="lineCov">         21 :                         flags |= FILTER_RES;</span>
-<span class="lineNum">     547 </span><span class="lineCov">         21 :                         flags |= FILTER_RES_SIZE;</span>
+<span class="lineNum">     546 </span><span class="lineCov">         17 :                         flags |= FILTER_RES;</span>
+<span class="lineNum">     547 </span><span class="lineCov">         17 :                         flags |= FILTER_RES_SIZE;</span>
 <span class="lineNum">     548 </span>            :                 }
-<span class="lineNum">     549 </span><span class="lineCov">        168 :                 else if( strcmp(item, &quot;upnp:playbackCount&quot;) == 0 )</span>
+<span class="lineNum">     549 </span><span class="lineCov">        136 :                 else if( strcmp(item, &quot;upnp:playbackCount&quot;) == 0 )</span>
 <span class="lineNum">     550 </span>            :                 {
 <span class="lineNum">     551 </span><span class="lineNoCov">          0 :                         flags |= FILTER_UPNP_PLAYBACKCOUNT;</span>
 <span class="lineNum">     552 </span>            :                 }
-<span class="lineNum">     553 </span><span class="lineCov">        168 :                 else if( strcmp(item, &quot;upnp:lastPlaybackPosition&quot;) == 0 )</span>
+<span class="lineNum">     553 </span><span class="lineCov">        136 :                 else if( strcmp(item, &quot;upnp:lastPlaybackPosition&quot;) == 0 )</span>
 <span class="lineNum">     554 </span>            :                 {
 <span class="lineNum">     555 </span><span class="lineNoCov">          0 :                         flags |= FILTER_UPNP_LASTPLAYBACKPOSITION;</span>
 <span class="lineNum">     556 </span>            :                 }
-<span class="lineNum">     557 </span><span class="lineCov">        168 :                 else if( strcmp(item, &quot;sec:CaptionInfoEx&quot;) == 0 )</span>
+<span class="lineNum">     557 </span><span class="lineCov">        136 :                 else if( strcmp(item, &quot;sec:CaptionInfoEx&quot;) == 0 )</span>
 <span class="lineNum">     558 </span>            :                 {
 <span class="lineNum">     559 </span><span class="lineNoCov">          0 :                         flags |= FILTER_SEC_CAPTION_INFO_EX;</span>
 <span class="lineNum">     560 </span>            :                 }
-<span class="lineNum">     561 </span><span class="lineCov">        168 :                 else if( strcmp(item, &quot;sec:dcmInfo&quot;) == 0 )</span>
+<span class="lineNum">     561 </span><span class="lineCov">        136 :                 else if( strcmp(item, &quot;sec:dcmInfo&quot;) == 0 )</span>
 <span class="lineNum">     562 </span>            :                 {
 <span class="lineNum">     563 </span><span class="lineNoCov">          0 :                         flags |= FILTER_SEC_DCM_INFO;</span>
 <span class="lineNum">     564 </span>            :                 }
-<span class="lineNum">     565 </span><span class="lineCov">        168 :                 else if( strcmp(item, &quot;res@pv:subtitleFileType&quot;) == 0 )</span>
+<span class="lineNum">     565 </span><span class="lineCov">        136 :                 else if( strcmp(item, &quot;res@pv:subtitleFileType&quot;) == 0 )</span>
 <span class="lineNum">     566 </span>            :                 {
 <span class="lineNum">     567 </span><span class="lineNoCov">          0 :                         flags |= FILTER_PV_SUBTITLE_FILE_TYPE;</span>
 <span class="lineNum">     568 </span>            :                 }
-<span class="lineNum">     569 </span><span class="lineCov">        168 :                 else if( strcmp(item, &quot;res@pv:subtitleFileUri&quot;) == 0 )</span>
+<span class="lineNum">     569 </span><span class="lineCov">        136 :                 else if( strcmp(item, &quot;res@pv:subtitleFileUri&quot;) == 0 )</span>
 <span class="lineNum">     570 </span>            :                 {
 <span class="lineNum">     571 </span><span class="lineNoCov">          0 :                         flags |= FILTER_PV_SUBTITLE_FILE_URI;</span>
 <span class="lineNum">     572 </span>            :                 }
-<span class="lineNum">     573 </span><span class="lineCov">        168 :                 else if( strcmp(item, &quot;av:mediaClass&quot;) == 0 )</span>
+<span class="lineNum">     573 </span><span class="lineCov">        136 :                 else if( strcmp(item, &quot;av:mediaClass&quot;) == 0 )</span>
 <span class="lineNum">     574 </span>            :                 {
 <span class="lineNum">     575 </span><span class="lineNoCov">          0 :                         flags |= FILTER_AV_MEDIA_CLASS;</span>
 <span class="lineNum">     576 </span>            :                 }
-<span class="lineNum">     577 </span><span class="lineCov">        483 :                 item = strtok_r(NULL, &quot;,&quot;, &amp;saveptr);</span>
+<span class="lineNum">     577 </span><span class="lineCov">        391 :                 item = strtok_r(NULL, &quot;,&quot;, &amp;saveptr);</span>
 <span class="lineNum">     578 </span>            :         }
 <span class="lineNum">     579 </span>            : 
-<span class="lineNum">     580 </span><span class="lineCov">         21 :         return flags;</span>
+<span class="lineNum">     580 </span><span class="lineCov">         17 :         return flags;</span>
 <span class="lineNum">     581 </span>            : }
 <a name="582"><span class="lineNum">     582 </span>            : </a>
 <span class="lineNum">     583 </span>            : static char *
-<span class="lineNum">     584 </span><span class="lineCov">         12 : parse_sort_criteria(char *sortCriteria, int *error)</span>
+<span class="lineNum">     584 </span><span class="lineCov">         27 : parse_sort_criteria(char *sortCriteria, int *error)</span>
 <span class="lineNum">     585 </span>            : {
-<span class="lineNum">     586 </span><span class="lineCov">         12 :         char *order = NULL;</span>
+<span class="lineNum">     586 </span><span class="lineCov">         27 :         char *order = NULL;</span>
 <span class="lineNum">     587 </span>            :         char *item, *saveptr;
-<span class="lineNum">     588 </span><span class="lineCov">         12 :         int i, ret, reverse, title_sorted = 0;</span>
+<span class="lineNum">     588 </span><span class="lineCov">         27 :         int i, ret, reverse, title_sorted = 0;</span>
 <span class="lineNum">     589 </span>            :         struct string_s str;
-<span class="lineNum">     590 </span><span class="lineCov">         12 :         *error = 0;</span>
+<span class="lineNum">     590 </span><span class="lineCov">         27 :         *error = 0;</span>
 <span class="lineNum">     591 </span>            : 
-<span class="lineNum">     592 </span><span class="lineCov">         12 :         if( force_sort_criteria )</span>
+<span class="lineNum">     592 </span><span class="lineCov">         27 :         if( force_sort_criteria )</span>
 <span class="lineNum">     593 </span><span class="lineNoCov">          0 :                 sortCriteria = strdup(force_sort_criteria);</span>
-<span class="lineNum">     594 </span><span class="lineCov">         12 :         if( !sortCriteria )</span>
-<span class="lineNum">     595 </span><span class="lineCov">         12 :                 return NULL;</span>
+<span class="lineNum">     594 </span><span class="lineCov">         27 :         if( !sortCriteria )</span>
+<span class="lineNum">     595 </span><span class="lineCov">         27 :                 return NULL;</span>
 <span class="lineNum">     596 </span>            : 
 <span class="lineNum">     597 </span><span class="lineNoCov">          0 :         if( (item = strtok_r(sortCriteria, &quot;,&quot;, &amp;saveptr)) )</span>
 <span class="lineNum">     598 </span>            :         {
@@ -771,33 +771,33 @@
 <span class="lineNum">     709 </span>            : }
 <a name="710"><span class="lineNum">     710 </span>            : </a>
 <span class="lineNum">     711 </span>            : inline static void
-<span class="lineNum">     712 </span><span class="lineCov">          6 : add_res(char *size, char *duration, char *bitrate, char *sampleFrequency,</span>
+<span class="lineNum">     712 </span><span class="lineCov">         11 : add_res(char *size, char *duration, char *bitrate, char *sampleFrequency,</span>
 <span class="lineNum">     713 </span>            :         char *nrAudioChannels, char *resolution, char *dlna_pn, char *mime,
 <span class="lineNum">     714 </span>            :         char *detailID, const char *ext, struct Response *args)
 <span class="lineNum">     715 </span>            : {
-<span class="lineNum">     716 </span><span class="lineCov">          6 :         strcatf(args-&gt;str, &quot;&amp;lt;res &quot;);</span>
-<span class="lineNum">     717 </span><span class="lineCov">          6 :         if( size &amp;&amp; (args-&gt;filter &amp; FILTER_RES_SIZE) ) {</span>
-<span class="lineNum">     718 </span><span class="lineCov">          6 :                 strcatf(args-&gt;str, &quot;size=\&quot;%s\&quot; &quot;, size);</span>
+<span class="lineNum">     716 </span><span class="lineCov">         11 :         strcatf(args-&gt;str, &quot;&amp;lt;res &quot;);</span>
+<span class="lineNum">     717 </span><span class="lineCov">         11 :         if( size &amp;&amp; (args-&gt;filter &amp; FILTER_RES_SIZE) ) {</span>
+<span class="lineNum">     718 </span><span class="lineCov">         11 :                 strcatf(args-&gt;str, &quot;size=\&quot;%s\&quot; &quot;, size);</span>
 <span class="lineNum">     719 </span>            :         }
-<span class="lineNum">     720 </span><span class="lineCov">          6 :         if( duration &amp;&amp; (args-&gt;filter &amp; FILTER_RES_DURATION) ) {</span>
-<span class="lineNum">     721 </span><span class="lineCov">          6 :                 strcatf(args-&gt;str, &quot;duration=\&quot;%s\&quot; &quot;, duration);</span>
+<span class="lineNum">     720 </span><span class="lineCov">         11 :         if( duration &amp;&amp; (args-&gt;filter &amp; FILTER_RES_DURATION) ) {</span>
+<span class="lineNum">     721 </span><span class="lineCov">         11 :                 strcatf(args-&gt;str, &quot;duration=\&quot;%s\&quot; &quot;, duration);</span>
 <span class="lineNum">     722 </span>            :         }
-<span class="lineNum">     723 </span><span class="lineCov">          6 :         if( bitrate &amp;&amp; (args-&gt;filter &amp; FILTER_RES_BITRATE) ) {</span>
-<span class="lineNum">     724 </span><span class="lineCov">          6 :                 int br = atoi(bitrate);</span>
-<span class="lineNum">     725 </span><span class="lineCov">          6 :                 if(args-&gt;flags &amp; FLAG_MS_PFS)</span>
+<span class="lineNum">     723 </span><span class="lineCov">         11 :         if( bitrate &amp;&amp; (args-&gt;filter &amp; FILTER_RES_BITRATE) ) {</span>
+<span class="lineNum">     724 </span><span class="lineCov">         11 :                 int br = atoi(bitrate);</span>
+<span class="lineNum">     725 </span><span class="lineCov">         11 :                 if(args-&gt;flags &amp; FLAG_MS_PFS)</span>
 <span class="lineNum">     726 </span><span class="lineNoCov">          0 :                         br /= 8;</span>
-<span class="lineNum">     727 </span><span class="lineCov">          6 :                 strcatf(args-&gt;str, &quot;bitrate=\&quot;%d\&quot; &quot;, br);</span>
+<span class="lineNum">     727 </span><span class="lineCov">         11 :                 strcatf(args-&gt;str, &quot;bitrate=\&quot;%d\&quot; &quot;, br);</span>
 <span class="lineNum">     728 </span>            :         }
-<span class="lineNum">     729 </span><span class="lineCov">          6 :         if( sampleFrequency &amp;&amp; (args-&gt;filter &amp; FILTER_RES_SAMPLEFREQUENCY) ) {</span>
-<span class="lineNum">     730 </span><span class="lineCov">          6 :                 strcatf(args-&gt;str, &quot;sampleFrequency=\&quot;%s\&quot; &quot;, sampleFrequency);</span>
+<span class="lineNum">     729 </span><span class="lineCov">         11 :         if( sampleFrequency &amp;&amp; (args-&gt;filter &amp; FILTER_RES_SAMPLEFREQUENCY) ) {</span>
+<span class="lineNum">     730 </span><span class="lineCov">         11 :                 strcatf(args-&gt;str, &quot;sampleFrequency=\&quot;%s\&quot; &quot;, sampleFrequency);</span>
 <span class="lineNum">     731 </span>            :         }
-<span class="lineNum">     732 </span><span class="lineCov">          6 :         if( nrAudioChannels &amp;&amp; (args-&gt;filter &amp; FILTER_RES_NRAUDIOCHANNELS) ) {</span>
-<span class="lineNum">     733 </span><span class="lineCov">          6 :                 strcatf(args-&gt;str, &quot;nrAudioChannels=\&quot;%s\&quot; &quot;, nrAudioChannels);</span>
+<span class="lineNum">     732 </span><span class="lineCov">         11 :         if( nrAudioChannels &amp;&amp; (args-&gt;filter &amp; FILTER_RES_NRAUDIOCHANNELS) ) {</span>
+<span class="lineNum">     733 </span><span class="lineCov">         11 :                 strcatf(args-&gt;str, &quot;nrAudioChannels=\&quot;%s\&quot; &quot;, nrAudioChannels);</span>
 <span class="lineNum">     734 </span>            :         }
-<span class="lineNum">     735 </span><span class="lineCov">          6 :         if( resolution &amp;&amp; (args-&gt;filter &amp; FILTER_RES_RESOLUTION) ) {</span>
-<span class="lineNum">     736 </span><span class="lineCov">          6 :                 strcatf(args-&gt;str, &quot;resolution=\&quot;%s\&quot; &quot;, resolution);</span>
+<span class="lineNum">     735 </span><span class="lineCov">         11 :         if( resolution &amp;&amp; (args-&gt;filter &amp; FILTER_RES_RESOLUTION) ) {</span>
+<span class="lineNum">     736 </span><span class="lineCov">         11 :                 strcatf(args-&gt;str, &quot;resolution=\&quot;%s\&quot; &quot;, resolution);</span>
 <span class="lineNum">     737 </span>            :         }
-<span class="lineNum">     738 </span><span class="lineCov">          6 :         if( args-&gt;filter &amp; FILTER_PV_SUBTITLE )</span>
+<span class="lineNum">     738 </span><span class="lineCov">         11 :         if( args-&gt;filter &amp; FILTER_PV_SUBTITLE )</span>
 <span class="lineNum">     739 </span>            :         {
 <span class="lineNum">     740 </span><span class="lineNoCov">          0 :                 if( args-&gt;flags &amp; FLAG_HAS_CAPTIONS )</span>
 <span class="lineNum">     741 </span>            :                 {
@@ -808,26 +808,26 @@
 <span class="lineNum">     746 </span><span class="lineNoCov">          0 :                                         lan_addr[args-&gt;iface].str, runtime_vars.port, detailID);</span>
 <span class="lineNum">     747 </span>            :                 }
 <span class="lineNum">     748 </span>            :         }
-<span class="lineNum">     749 </span><span class="lineCov">         12 :         strcatf(args-&gt;str, &quot;protocolInfo=\&quot;http-get:*:%s:%s\&quot;&amp;gt;&quot;</span>
+<span class="lineNum">     749 </span><span class="lineCov">         22 :         strcatf(args-&gt;str, &quot;protocolInfo=\&quot;http-get:*:%s:%s\&quot;&amp;gt;&quot;</span>
 <span class="lineNum">     750 </span>            :                                   &quot;http://%s:%d/MediaItems/%s.%s&quot;
 <span class="lineNum">     751 </span>            :                                   &quot;&amp;lt;/res&amp;gt;&quot;,
-<span class="lineNum">     752 </span><span class="lineCov">          6 :                                   mime, dlna_pn, lan_addr[args-&gt;iface].str,</span>
+<span class="lineNum">     752 </span><span class="lineCov">         11 :                                   mime, dlna_pn, lan_addr[args-&gt;iface].str,</span>
 <span class="lineNum">     753 </span>            :                                   runtime_vars.port, detailID, ext);
-<span class="lineNum">     754 </span><span class="lineCov">          6 : }</span>
+<span class="lineNum">     754 </span><span class="lineCov">         11 : }</span>
 <a name="755"><span class="lineNum">     755 </span>            : </a>
 <span class="lineNum">     756 </span>            : static int
-<span class="lineNum">     757 </span><span class="lineCov">         38 : get_child_count(const char *object, struct magic_container_s *magic)</span>
+<span class="lineNum">     757 </span><span class="lineCov">         57 : get_child_count(const char *object, struct magic_container_s *magic)</span>
 <span class="lineNum">     758 </span>            : {
 <span class="lineNum">     759 </span>            :         int ret;
 <span class="lineNum">     760 </span>            : 
-<span class="lineNum">     761 </span><span class="lineCov">         38 :         if (magic &amp;&amp; magic-&gt;child_count)</span>
+<span class="lineNum">     761 </span><span class="lineCov">         57 :         if (magic &amp;&amp; magic-&gt;child_count)</span>
 <span class="lineNum">     762 </span><span class="lineNoCov">          0 :                 ret = sql_get_int_field(db, &quot;SELECT count(*) from %s&quot;, magic-&gt;child_count);</span>
-<span class="lineNum">     763 </span><span class="lineCov">         38 :         else if (magic &amp;&amp; magic-&gt;objectid &amp;&amp; *(magic-&gt;objectid))</span>
+<span class="lineNum">     763 </span><span class="lineCov">         57 :         else if (magic &amp;&amp; magic-&gt;objectid &amp;&amp; *(magic-&gt;objectid))</span>
 <span class="lineNum">     764 </span><span class="lineNoCov">          0 :                 ret = sql_get_int_field(db, &quot;SELECT count(*) from OBJECTS where PARENT_ID = '%s';&quot;, *(magic-&gt;objectid));</span>
 <span class="lineNum">     765 </span>            :         else
-<span class="lineNum">     766 </span><span class="lineCov">         38 :                 ret = sql_get_int_field(db, &quot;SELECT count(*) from OBJECTS where PARENT_ID = '%s';&quot;, object);</span>
+<span class="lineNum">     766 </span><span class="lineCov">         57 :                 ret = sql_get_int_field(db, &quot;SELECT count(*) from OBJECTS where PARENT_ID = '%s';&quot;, object);</span>
 <span class="lineNum">     767 </span>            : 
-<span class="lineNum">     768 </span><span class="lineCov">         38 :         return (ret &gt; 0) ? ret : 0;</span>
+<span class="lineNum">     768 </span><span class="lineCov">         57 :         return (ret &gt; 0) ? ret : 0;</span>
 <span class="lineNum">     769 </span>            : }
 <a name="770"><span class="lineNum">     770 </span>            : </a>
 <span class="lineNum">     771 </span>            : static int
@@ -849,20 +849,20 @@
 <span class="lineNum">     787 </span>            : #define IS_ZERO(x) (!x || !atoi(x))
 <a name="788"><span class="lineNum">     788 </span>            : </a>
 <span class="lineNum">     789 </span>            : static int
-<span class="lineNum">     790 </span><span class="lineCov">         35 : callback(void *args, int argc, char **argv, char **azColName)</span>
+<span class="lineNum">     790 </span><span class="lineCov">         44 : callback(void *args, int argc, char **argv, char **azColName)</span>
 <span class="lineNum">     791 </span>            : {
-<span class="lineNum">     792 </span><span class="lineCov">         35 :         struct Response *passed_args = (struct Response *)args;</span>
-<span class="lineNum">     793 </span><span class="lineCov">         35 :         char *id = argv[0], *parent = argv[1], *refID = argv[2], *detailID = argv[3], *class = argv[4], *size = argv[5], *title = argv[6],</span>
-<span class="lineNum">     794 </span><span class="lineCov">         35 :              *duration = argv[7], *bitrate = argv[8], *sampleFrequency = argv[9], *artist = argv[10], *album = argv[11],</span>
-<span class="lineNum">     795 </span><span class="lineCov">         35 :              *genre = argv[12], *comment = argv[13], *nrAudioChannels = argv[14], *track = argv[15], *date = argv[16], *resolution = argv[17],</span>
-<span class="lineNum">     796 </span><span class="lineCov">         35 :              *tn = argv[18], *creator = argv[19], *dlna_pn = argv[20], *mime = argv[21], *rotate = argv[23];</span>
+<span class="lineNum">     792 </span><span class="lineCov">         44 :         struct Response *passed_args = (struct Response *)args;</span>
+<span class="lineNum">     793 </span><span class="lineCov">         44 :         char *id = argv[0], *parent = argv[1], *refID = argv[2], *detailID = argv[3], *class = argv[4], *size = argv[5], *title = argv[6],</span>
+<span class="lineNum">     794 </span><span class="lineCov">         44 :              *duration = argv[7], *bitrate = argv[8], *sampleFrequency = argv[9], *artist = argv[10], *album = argv[11],</span>
+<span class="lineNum">     795 </span><span class="lineCov">         44 :              *genre = argv[12], *comment = argv[13], *nrAudioChannels = argv[14], *track = argv[15], *date = argv[16], *resolution = argv[17],</span>
+<span class="lineNum">     796 </span><span class="lineCov">         44 :              *tn = argv[18], *creator = argv[19], *dlna_pn = argv[20], *mime = argv[21], *rotate = argv[23];</span>
 <span class="lineNum">     797 </span>            :         char dlna_buf[128];
 <span class="lineNum">     798 </span>            :         const char *ext;
-<span class="lineNum">     799 </span><span class="lineCov">         35 :         struct string_s *str = passed_args-&gt;str;</span>
-<span class="lineNum">     800 </span><span class="lineCov">         35 :         int ret = 0;</span>
+<span class="lineNum">     799 </span><span class="lineCov">         44 :         struct string_s *str = passed_args-&gt;str;</span>
+<span class="lineNum">     800 </span><span class="lineCov">         44 :         int ret = 0;</span>
 <span class="lineNum">     801 </span>            : 
 <span class="lineNum">     802 </span>            :         /* Make sure we have at least 8KB left of allocated memory to finish the response. */
-<span class="lineNum">     803 </span><span class="lineCov">         35 :         if( str-&gt;off &gt; (str-&gt;size - 8192) )</span>
+<span class="lineNum">     803 </span><span class="lineCov">         44 :         if( str-&gt;off &gt; (str-&gt;size - 8192) )</span>
 <span class="lineNum">     804 </span>            :         {
 <span class="lineNum">     805 </span>            : #if MAX_RESPONSE_SIZE &gt; 0
 <span class="lineNum">     806 </span><span class="lineNoCov">          0 :                 if( (str-&gt;size+DEFAULT_RESP_SIZE) &lt;= MAX_RESPONSE_SIZE )</span>
@@ -889,18 +889,18 @@
 <span class="lineNum">     827 </span>            :                 }
 <span class="lineNum">     828 </span>            : #endif
 <span class="lineNum">     829 </span>            :         }
-<span class="lineNum">     830 </span><span class="lineCov">         35 :         passed_args-&gt;returned++;</span>
-<span class="lineNum">     831 </span><span class="lineCov">         35 :         passed_args-&gt;flags &amp;= ~RESPONSE_FLAGS;</span>
+<span class="lineNum">     830 </span><span class="lineCov">         44 :         passed_args-&gt;returned++;</span>
+<span class="lineNum">     831 </span><span class="lineCov">         44 :         passed_args-&gt;flags &amp;= ~RESPONSE_FLAGS;</span>
 <span class="lineNum">     832 </span>            : 
-<span class="lineNum">     833 </span><span class="lineCov">         35 :         if( strncmp(class, &quot;item&quot;, 4) == 0 )</span>
+<span class="lineNum">     833 </span><span class="lineCov">         44 :         if( strncmp(class, &quot;item&quot;, 4) == 0 )</span>
 <span class="lineNum">     834 </span>            :         {
-<span class="lineNum">     835 </span><span class="lineCov">          6 :                 uint32_t dlna_flags = DLNA_FLAG_DLNA_V1_5|DLNA_FLAG_HTTP_STALLING|DLNA_FLAG_TM_B;</span>
-<span class="lineNum">     836 </span><span class="lineCov">          6 :                 char *alt_title = NULL;</span>
+<span class="lineNum">     835 </span><span class="lineCov">         11 :                 uint32_t dlna_flags = DLNA_FLAG_DLNA_V1_5|DLNA_FLAG_HTTP_STALLING|DLNA_FLAG_TM_B;</span>
+<span class="lineNum">     836 </span><span class="lineCov">         11 :                 char *alt_title = NULL;</span>
 <span class="lineNum">     837 </span>            :                 /* We may need special handling for certain MIME types */
-<span class="lineNum">     838 </span><span class="lineCov">          6 :                 if( *mime == 'v' )</span>
+<span class="lineNum">     838 </span><span class="lineCov">         11 :                 if( *mime == 'v' )</span>
 <span class="lineNum">     839 </span>            :                 {
-<span class="lineNum">     840 </span><span class="lineCov">          6 :                         dlna_flags |= DLNA_FLAG_TM_S;</span>
-<span class="lineNum">     841 </span><span class="lineCov">          6 :                         if( passed_args-&gt;flags &amp; FLAG_MIME_AVI_DIVX )</span>
+<span class="lineNum">     840 </span><span class="lineCov">         11 :                         dlna_flags |= DLNA_FLAG_TM_S;</span>
+<span class="lineNum">     841 </span><span class="lineCov">         11 :                         if( passed_args-&gt;flags &amp; FLAG_MIME_AVI_DIVX )</span>
 <span class="lineNum">     842 </span>            :                         {
 <span class="lineNum">     843 </span><span class="lineNoCov">          0 :                                 if( strcmp(mime, &quot;video/x-msvideo&quot;) == 0 )</span>
 <span class="lineNum">     844 </span>            :                                 {
@@ -910,14 +910,14 @@
 <span class="lineNum">     848 </span><span class="lineNoCov">          0 :                                                 strcpy(mime+6, &quot;avi&quot;);</span>
 <span class="lineNum">     849 </span>            :                                 }
 <span class="lineNum">     850 </span>            :                         }
-<span class="lineNum">     851 </span><span class="lineCov">          6 :                         else if( passed_args-&gt;flags &amp; FLAG_MIME_AVI_AVI )</span>
+<span class="lineNum">     851 </span><span class="lineCov">         11 :                         else if( passed_args-&gt;flags &amp; FLAG_MIME_AVI_AVI )</span>
 <span class="lineNum">     852 </span>            :                         {
 <span class="lineNum">     853 </span><span class="lineNoCov">          0 :                                 if( strcmp(mime, &quot;video/x-msvideo&quot;) == 0 )</span>
 <span class="lineNum">     854 </span>            :                                 {
 <span class="lineNum">     855 </span><span class="lineNoCov">          0 :                                         strcpy(mime+6, &quot;avi&quot;);</span>
 <span class="lineNum">     856 </span>            :                                 }
 <span class="lineNum">     857 </span>            :                         }
-<span class="lineNum">     858 </span><span class="lineCov">          6 :                         else if( passed_args-&gt;client == EFreeBox &amp;&amp; dlna_pn )</span>
+<span class="lineNum">     858 </span><span class="lineCov">         11 :                         else if( passed_args-&gt;client == EFreeBox &amp;&amp; dlna_pn )</span>
 <span class="lineNum">     859 </span>            :                         {
 <span class="lineNum">     860 </span><span class="lineNoCov">          0 :                                 if( strncmp(dlna_pn, &quot;AVC_TS&quot;, 6) == 0 ||</span>
 <span class="lineNum">     861 </span><span class="lineNoCov">          0 :                                     strncmp(dlna_pn, &quot;MPEG_TS&quot;, 7) == 0 )</span>
@@ -925,21 +925,21 @@
 <span class="lineNum">     863 </span><span class="lineNoCov">          0 :                                         strcpy(mime+6, &quot;mp2t&quot;);</span>
 <span class="lineNum">     864 </span>            :                                 }
 <span class="lineNum">     865 </span>            :                         }
-<span class="lineNum">     866 </span><span class="lineCov">          6 :                         if( !(passed_args-&gt;flags &amp; FLAG_DLNA) )</span>
+<span class="lineNum">     866 </span><span class="lineCov">         11 :                         if( !(passed_args-&gt;flags &amp; FLAG_DLNA) )</span>
 <span class="lineNum">     867 </span>            :                         {
-<span class="lineNum">     868 </span><span class="lineNoCov">          0 :                                 if( strcmp(mime+6, &quot;vnd.dlna.mpeg-tts&quot;) == 0 )</span>
+<span class="lineNum">     868 </span><span class="lineCov">          5 :                                 if( strcmp(mime+6, &quot;vnd.dlna.mpeg-tts&quot;) == 0 )</span>
 <span class="lineNum">     869 </span>            :                                 {
 <span class="lineNum">     870 </span><span class="lineNoCov">          0 :                                         strcpy(mime+6, &quot;mpeg&quot;);</span>
 <span class="lineNum">     871 </span>            :                                 }
 <span class="lineNum">     872 </span>            :                         }
-<span class="lineNum">     873 </span><span class="lineCov">          6 :                         if( (passed_args-&gt;flags &amp; FLAG_CAPTION_RES) ||</span>
-<span class="lineNum">     874 </span><span class="lineNoCov">          0 :                             (passed_args-&gt;filter &amp; (FILTER_SEC_CAPTION_INFO_EX|FILTER_PV_SUBTITLE)) )</span>
+<span class="lineNum">     873 </span><span class="lineCov">         16 :                         if( (passed_args-&gt;flags &amp; FLAG_CAPTION_RES) ||</span>
+<span class="lineNum">     874 </span><span class="lineCov">          5 :                             (passed_args-&gt;filter &amp; (FILTER_SEC_CAPTION_INFO_EX|FILTER_PV_SUBTITLE)) )</span>
 <span class="lineNum">     875 </span>            :                         {
 <span class="lineNum">     876 </span><span class="lineCov">          6 :                                 if( sql_get_int_field(db, &quot;SELECT ID from CAPTIONS where ID = '%s'&quot;, detailID) &gt; 0 )</span>
 <span class="lineNum">     877 </span><span class="lineCov">          3 :                                         passed_args-&gt;flags |= FLAG_HAS_CAPTIONS;</span>
 <span class="lineNum">     878 </span>            :                         }
 <span class="lineNum">     879 </span>            :                         /* From what I read, Samsung TV's expect a [wrong] MIME type of x-mkv. */
-<span class="lineNum">     880 </span><span class="lineCov">          6 :                         if( passed_args-&gt;flags &amp; FLAG_SAMSUNG )</span>
+<span class="lineNum">     880 </span><span class="lineCov">         11 :                         if( passed_args-&gt;flags &amp; FLAG_SAMSUNG )</span>
 <span class="lineNum">     881 </span>            :                         {
 <span class="lineNum">     882 </span><span class="lineNoCov">          0 :                                 if( strcmp(mime+6, &quot;x-matroska&quot;) == 0 )</span>
 <span class="lineNum">     883 </span>            :                                 {
@@ -947,7 +947,7 @@
 <span class="lineNum">     885 </span>            :                                 }
 <span class="lineNum">     886 </span>            :                         }
 <span class="lineNum">     887 </span>            :                         /* LG hack: subtitles won't get used unless dc:title contains a dot. */
-<span class="lineNum">     888 </span><span class="lineCov">          6 :                         else if( passed_args-&gt;client == ELGDevice &amp;&amp; (passed_args-&gt;flags &amp; FLAG_HAS_CAPTIONS) )</span>
+<span class="lineNum">     888 </span><span class="lineCov">         11 :                         else if( passed_args-&gt;client == ELGDevice &amp;&amp; (passed_args-&gt;flags &amp; FLAG_HAS_CAPTIONS) )</span>
 <span class="lineNum">     889 </span>            :                         {
 <span class="lineNum">     890 </span><span class="lineNoCov">          0 :                                 ret = asprintf(&amp;alt_title, &quot;%s.&quot;, title);</span>
 <span class="lineNum">     891 </span><span class="lineNoCov">          0 :                                 if( ret &gt; 0 )</span>
@@ -956,13 +956,13 @@
 <span class="lineNum">     894 </span><span class="lineNoCov">          0 :                                         alt_title = NULL;</span>
 <span class="lineNum">     895 </span>            :                         }
 <span class="lineNum">     896 </span>            :                         /* Asus OPlay reboots with titles longer than 23 characters with some file types. */
-<span class="lineNum">     897 </span><span class="lineCov">          6 :                         else if( passed_args-&gt;client == EAsusOPlay &amp;&amp; (passed_args-&gt;flags &amp; FLAG_HAS_CAPTIONS) )</span>
+<span class="lineNum">     897 </span><span class="lineCov">         11 :                         else if( passed_args-&gt;client == EAsusOPlay &amp;&amp; (passed_args-&gt;flags &amp; FLAG_HAS_CAPTIONS) )</span>
 <span class="lineNum">     898 </span>            :                         {
 <span class="lineNum">     899 </span><span class="lineNoCov">          0 :                                 if( strlen(title) &gt; 23 )</span>
 <span class="lineNum">     900 </span><span class="lineNoCov">          0 :                                         title[23] = '\0';</span>
 <span class="lineNum">     901 </span>            :                         }
 <span class="lineNum">     902 </span>            :                         /* Hyundai hack: Only titles with a media extension get recognized. */
-<span class="lineNum">     903 </span><span class="lineCov">          6 :                         else if( passed_args-&gt;client == EHyundaiTV )</span>
+<span class="lineNum">     903 </span><span class="lineCov">         11 :                         else if( passed_args-&gt;client == EHyundaiTV )</span>
 <span class="lineNum">     904 </span>            :                         {
 <span class="lineNum">     905 </span><span class="lineNoCov">          0 :                                 ext = mime_to_ext(mime);</span>
 <span class="lineNum">     906 </span><span class="lineNoCov">          0 :                                 ret = asprintf(&amp;alt_title, &quot;%s.%s&quot;, title, ext);</span>
@@ -993,41 +993,41 @@
 <span class="lineNum">     931 </span>            :                 else
 <span class="lineNum">     932 </span><span class="lineNoCov">          0 :                         dlna_flags |= DLNA_FLAG_TM_I;</span>
 <span class="lineNum">     933 </span>            : 
-<span class="lineNum">     934 </span><span class="lineCov">          6 :                 if( passed_args-&gt;flags &amp; FLAG_SKIP_DLNA_PN )</span>
+<span class="lineNum">     934 </span><span class="lineCov">         11 :                 if( passed_args-&gt;flags &amp; FLAG_SKIP_DLNA_PN )</span>
 <span class="lineNum">     935 </span><span class="lineNoCov">          0 :                         dlna_pn = NULL;</span>
 <span class="lineNum">     936 </span>            : 
-<span class="lineNum">     937 </span><span class="lineCov">          6 :                 if( dlna_pn )</span>
-<span class="lineNum">     938 </span><span class="lineCov">          3 :                         snprintf(dlna_buf, sizeof(dlna_buf), &quot;DLNA.ORG_PN=%s;&quot;</span>
+<span class="lineNum">     937 </span><span class="lineCov">         11 :                 if( dlna_pn )</span>
+<span class="lineNum">     938 </span><span class="lineCov">          5 :                         snprintf(dlna_buf, sizeof(dlna_buf), &quot;DLNA.ORG_PN=%s;&quot;</span>
 <span class="lineNum">     939 </span>            :                                                              &quot;DLNA.ORG_OP=01;&quot;
 <span class="lineNum">     940 </span>            :                                                              &quot;DLNA.ORG_CI=0;&quot;
 <span class="lineNum">     941 </span>            :                                                              &quot;DLNA.ORG_FLAGS=%08X%024X&quot;,
 <span class="lineNum">     942 </span>            :                                                              dlna_pn, dlna_flags, 0);
-<span class="lineNum">     943 </span><span class="lineCov">          3 :                 else if( passed_args-&gt;flags &amp; FLAG_DLNA )</span>
+<span class="lineNum">     943 </span><span class="lineCov">          6 :                 else if( passed_args-&gt;flags &amp; FLAG_DLNA )</span>
 <span class="lineNum">     944 </span><span class="lineCov">          3 :                         snprintf(dlna_buf, sizeof(dlna_buf), &quot;DLNA.ORG_OP=01;&quot;</span>
 <span class="lineNum">     945 </span>            :                                                              &quot;DLNA.ORG_CI=0;&quot;
 <span class="lineNum">     946 </span>            :                                                              &quot;DLNA.ORG_FLAGS=%08X%024X&quot;,
 <span class="lineNum">     947 </span>            :                                                              dlna_flags, 0);
 <span class="lineNum">     948 </span>            :                 else
-<span class="lineNum">     949 </span><span class="lineNoCov">          0 :                         strcpy(dlna_buf, &quot;*&quot;);</span>
+<span class="lineNum">     949 </span><span class="lineCov">          3 :                         strcpy(dlna_buf, &quot;*&quot;);</span>
 <span class="lineNum">     950 </span>            : 
-<span class="lineNum">     951 </span><span class="lineCov">          6 :                 ret = strcatf(str, &quot;&amp;lt;item id=\&quot;%s\&quot; parentID=\&quot;%s\&quot; restricted=\&quot;1\&quot;&quot;, id, parent);</span>
-<span class="lineNum">     952 </span><span class="lineCov">          6 :                 if( refID &amp;&amp; (passed_args-&gt;filter &amp; FILTER_REFID) ) {</span>
+<span class="lineNum">     951 </span><span class="lineCov">         11 :                 ret = strcatf(str, &quot;&amp;lt;item id=\&quot;%s\&quot; parentID=\&quot;%s\&quot; restricted=\&quot;1\&quot;&quot;, id, parent);</span>
+<span class="lineNum">     952 </span><span class="lineCov">         11 :                 if( refID &amp;&amp; (passed_args-&gt;filter &amp; FILTER_REFID) ) {</span>
 <span class="lineNum">     953 </span><span class="lineNoCov">          0 :                         ret = strcatf(str, &quot; refID=\&quot;%s\&quot;&quot;, refID);</span>
 <span class="lineNum">     954 </span>            :                 }
-<span class="lineNum">     955 </span><span class="lineCov">          6 :                 ret = strcatf(str, &quot;&amp;gt;&quot;</span>
+<span class="lineNum">     955 </span><span class="lineCov">         11 :                 ret = strcatf(str, &quot;&amp;gt;&quot;</span>
 <span class="lineNum">     956 </span>            :                                    &quot;&amp;lt;dc:title&amp;gt;%s&amp;lt;/dc:title&amp;gt;&quot;
 <span class="lineNum">     957 </span>            :                                    &quot;&amp;lt;upnp:class&amp;gt;object.%s&amp;lt;/upnp:class&amp;gt;&quot;,
 <span class="lineNum">     958 </span>            :                                    title, class);
-<span class="lineNum">     959 </span><span class="lineCov">          6 :                 if( comment &amp;&amp; (passed_args-&gt;filter &amp; FILTER_DC_DESCRIPTION) ) {</span>
+<span class="lineNum">     959 </span><span class="lineCov">         11 :                 if( comment &amp;&amp; (passed_args-&gt;filter &amp; FILTER_DC_DESCRIPTION) ) {</span>
 <span class="lineNum">     960 </span><span class="lineNoCov">          0 :                         ret = strcatf(str, &quot;&amp;lt;dc:description&amp;gt;%.384s&amp;lt;/dc:description&amp;gt;&quot;, comment);</span>
 <span class="lineNum">     961 </span>            :                 }
-<span class="lineNum">     962 </span><span class="lineCov">          6 :                 if( creator &amp;&amp; (passed_args-&gt;filter &amp; FILTER_DC_CREATOR) ) {</span>
+<span class="lineNum">     962 </span><span class="lineCov">         11 :                 if( creator &amp;&amp; (passed_args-&gt;filter &amp; FILTER_DC_CREATOR) ) {</span>
 <span class="lineNum">     963 </span><span class="lineNoCov">          0 :                         ret = strcatf(str, &quot;&amp;lt;dc:creator&amp;gt;%s&amp;lt;/dc:creator&amp;gt;&quot;, creator);</span>
 <span class="lineNum">     964 </span>            :                 }
-<span class="lineNum">     965 </span><span class="lineCov">          6 :                 if( date &amp;&amp; (passed_args-&gt;filter &amp; FILTER_DC_DATE) ) {</span>
-<span class="lineNum">     966 </span><span class="lineCov">          6 :                         ret = strcatf(str, &quot;&amp;lt;dc:date&amp;gt;%s&amp;lt;/dc:date&amp;gt;&quot;, date);</span>
+<span class="lineNum">     965 </span><span class="lineCov">         11 :                 if( date &amp;&amp; (passed_args-&gt;filter &amp; FILTER_DC_DATE) ) {</span>
+<span class="lineNum">     966 </span><span class="lineCov">         11 :                         ret = strcatf(str, &quot;&amp;lt;dc:date&amp;gt;%s&amp;lt;/dc:date&amp;gt;&quot;, date);</span>
 <span class="lineNum">     967 </span>            :                 }
-<span class="lineNum">     968 </span><span class="lineCov">          6 :                 if( (passed_args-&gt;filter &amp; FILTER_BOOKMARK_MASK) ) {</span>
+<span class="lineNum">     968 </span><span class="lineCov">         11 :                 if( (passed_args-&gt;filter &amp; FILTER_BOOKMARK_MASK) ) {</span>
 <span class="lineNum">     969 </span>            :                         /* Get bookmark */
 <span class="lineNum">     970 </span><span class="lineNoCov">          0 :                         int sec = sql_get_int_field(db, &quot;SELECT SEC from BOOKMARKS where ID = '%s'&quot;, detailID);</span>
 <span class="lineNum">     971 </span><span class="lineNoCov">          0 :                         if( sec &gt; 0 &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_LASTPLAYBACKPOSITION) ) {</span>
@@ -1046,7 +1046,7 @@
 <span class="lineNum">     984 </span>            :                                               sql_get_int_field(db, &quot;SELECT WATCH_COUNT from BOOKMARKS where ID = '%s'&quot;, detailID));
 <span class="lineNum">     985 </span>            :                         }
 <span class="lineNum">     986 </span>            :                 }
-<span class="lineNum">     987 </span><span class="lineCov">          6 :                 if( artist ) {</span>
+<span class="lineNum">     987 </span><span class="lineCov">         11 :                 if( artist ) {</span>
 <span class="lineNum">     988 </span><span class="lineNoCov">          0 :                         if( (*mime == 'v') &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_ACTOR) ) {</span>
 <span class="lineNum">     989 </span><span class="lineNoCov">          0 :                                 ret = strcatf(str, &quot;&amp;lt;upnp:actor&amp;gt;%s&amp;lt;/upnp:actor&amp;gt;&quot;, artist);</span>
 <span class="lineNum">     990 </span>            :                         }
@@ -1054,23 +1054,23 @@
 <span class="lineNum">     992 </span><span class="lineNoCov">          0 :                                 ret = strcatf(str, &quot;&amp;lt;upnp:artist&amp;gt;%s&amp;lt;/upnp:artist&amp;gt;&quot;, artist);</span>
 <span class="lineNum">     993 </span>            :                         }
 <span class="lineNum">     994 </span>            :                 }
-<span class="lineNum">     995 </span><span class="lineCov">          6 :                 if( album &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_ALBUM) ) {</span>
+<span class="lineNum">     995 </span><span class="lineCov">         11 :                 if( album &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_ALBUM) ) {</span>
 <span class="lineNum">     996 </span><span class="lineNoCov">          0 :                         ret = strcatf(str, &quot;&amp;lt;upnp:album&amp;gt;%s&amp;lt;/upnp:album&amp;gt;&quot;, album);</span>
 <span class="lineNum">     997 </span>            :                 }
-<span class="lineNum">     998 </span><span class="lineCov">          6 :                 if( genre &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_GENRE) ) {</span>
+<span class="lineNum">     998 </span><span class="lineCov">         11 :                 if( genre &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_GENRE) ) {</span>
 <span class="lineNum">     999 </span><span class="lineNoCov">          0 :                         ret = strcatf(str, &quot;&amp;lt;upnp:genre&amp;gt;%s&amp;lt;/upnp:genre&amp;gt;&quot;, genre);</span>
 <span class="lineNum">    1000 </span>            :                 }
-<span class="lineNum">    1001 </span><span class="lineCov">          6 :                 if( strncmp(id, MUSIC_PLIST_ID, strlen(MUSIC_PLIST_ID)) == 0 ) {</span>
+<span class="lineNum">    1001 </span><span class="lineCov">         11 :                 if( strncmp(id, MUSIC_PLIST_ID, strlen(MUSIC_PLIST_ID)) == 0 ) {</span>
 <span class="lineNum">    1002 </span><span class="lineNoCov">          0 :                         track = strrchr(id, '$')+1;</span>
 <span class="lineNum">    1003 </span>            :                 }
-<span class="lineNum">    1004 </span><span class="lineCov">          6 :                 if( NON_ZERO(track) &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_ORIGINALTRACKNUMBER) ) {</span>
+<span class="lineNum">    1004 </span><span class="lineCov">         11 :                 if( NON_ZERO(track) &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_ORIGINALTRACKNUMBER) ) {</span>
 <span class="lineNum">    1005 </span><span class="lineNoCov">          0 :                         ret = strcatf(str, &quot;&amp;lt;upnp:originalTrackNumber&amp;gt;%s&amp;lt;/upnp:originalTrackNumber&amp;gt;&quot;, track);</span>
 <span class="lineNum">    1006 </span>            :                 }
-<span class="lineNum">    1007 </span><span class="lineCov">          6 :                 if( passed_args-&gt;filter &amp; FILTER_RES ) {</span>
-<span class="lineNum">    1008 </span><span class="lineCov">          6 :                         ext = mime_to_ext(mime);</span>
-<span class="lineNum">    1009 </span><span class="lineCov">          6 :                         add_res(size, duration, bitrate, sampleFrequency, nrAudioChannels,</span>
+<span class="lineNum">    1007 </span><span class="lineCov">         11 :                 if( passed_args-&gt;filter &amp; FILTER_RES ) {</span>
+<span class="lineNum">    1008 </span><span class="lineCov">         11 :                         ext = mime_to_ext(mime);</span>
+<span class="lineNum">    1009 </span><span class="lineCov">         11 :                         add_res(size, duration, bitrate, sampleFrequency, nrAudioChannels,</span>
 <span class="lineNum">    1010 </span>            :                                 resolution, dlna_buf, mime, detailID, ext, passed_args);
-<span class="lineNum">    1011 </span><span class="lineCov">          6 :                         if( *mime == 'i' ) {</span>
+<span class="lineNum">    1011 </span><span class="lineCov">         11 :                         if( *mime == 'i' ) {</span>
 <span class="lineNum">    1012 </span>            :                                 int srcw, srch;
 <span class="lineNum">    1013 </span><span class="lineNoCov">          0 :                                 if( resolution &amp;&amp; (sscanf(resolution, &quot;%6dx%6d&quot;, &amp;srcw, &amp;srch) == 2) )</span>
 <span class="lineNum">    1014 </span>            :                                 {
@@ -1091,8 +1091,8 @@
 <span class="lineNum">    1029 </span>            :                                 else
 <span class="lineNum">    1030 </span><span class="lineNoCov">          0 :                                         add_resized_res(srcw, srch, 160, 160, &quot;JPEG_TN&quot;, detailID, passed_args);</span>
 <span class="lineNum">    1031 </span>            :                         }
-<span class="lineNum">    1032 </span><span class="lineCov">          6 :                         else if( *mime == 'v' ) {</span>
-<span class="lineNum">    1033 </span><span class="lineCov">          6 :                                 switch( passed_args-&gt;client ) {</span>
+<span class="lineNum">    1032 </span><span class="lineCov">         11 :                         else if( *mime == 'v' ) {</span>
+<span class="lineNum">    1033 </span><span class="lineCov">         11 :                                 switch( passed_args-&gt;client ) {</span>
 <span class="lineNum">    1034 </span><span class="lineNoCov">          0 :                                 case EToshibaTV:</span>
 <span class="lineNum">    1035 </span><span class="lineNoCov">          0 :                                         if( dlna_pn &amp;&amp;</span>
 <span class="lineNum">    1036 </span><span class="lineNoCov">          0 :                                             (strncmp(dlna_pn, &quot;MPEG_TS_HD_NA&quot;, 13) == 0 ||</span>
@@ -1158,12 +1158,12 @@
 <span class="lineNum">    1096 </span>            :                                                         resolution, dlna_buf, mime, detailID, ext, passed_args);
 <span class="lineNum">    1097 </span>            :                                         }
 <span class="lineNum">    1098 </span><span class="lineNoCov">          0 :                                         break;</span>
-<span class="lineNum">    1099 </span><span class="lineCov">          6 :                                 case ESamsungSeriesCDE:</span>
+<span class="lineNum">    1099 </span><span class="lineCov">         11 :                                 case ESamsungSeriesCDE:</span>
 <span class="lineNum">    1100 </span>            :                                 case ELGDevice:
 <span class="lineNum">    1101 </span>            :                                 case ELGNetCastDevice:
 <span class="lineNum">    1102 </span>            :                                 case EAsusOPlay:
 <span class="lineNum">    1103 </span>            :                                 default:
-<span class="lineNum">    1104 </span><span class="lineCov">          6 :                                         if( passed_args-&gt;flags &amp; FLAG_HAS_CAPTIONS )</span>
+<span class="lineNum">    1104 </span><span class="lineCov">         11 :                                         if( passed_args-&gt;flags &amp; FLAG_HAS_CAPTIONS )</span>
 <span class="lineNum">    1105 </span>            :                                         {
 <span class="lineNum">    1106 </span><span class="lineCov">          3 :                                                 if( passed_args-&gt;flags &amp; FLAG_CAPTION_RES )</span>
 <span class="lineNum">    1107 </span><span class="lineCov">          6 :                                                         ret = strcatf(str, &quot;&amp;lt;res protocolInfo=\&quot;http-get:*:text/srt:*\&quot;&amp;gt;&quot;</span>
@@ -1176,12 +1176,12 @@
 <span class="lineNum">    1114 </span>            :                                                                            &quot;&amp;lt;/sec:CaptionInfoEx&amp;gt;&quot;,
 <span class="lineNum">    1115 </span><span class="lineNoCov">          0 :                                                                            lan_addr[passed_args-&gt;iface].str, runtime_vars.port, detailID);</span>
 <span class="lineNum">    1116 </span>            :                                         }
-<span class="lineNum">    1117 </span><span class="lineCov">          6 :                                         free(alt_title);</span>
-<span class="lineNum">    1118 </span><span class="lineCov">          6 :                                         break;</span>
+<span class="lineNum">    1117 </span><span class="lineCov">         11 :                                         free(alt_title);</span>
+<span class="lineNum">    1118 </span><span class="lineCov">         11 :                                         break;</span>
 <span class="lineNum">    1119 </span>            :                                 }
 <span class="lineNum">    1120 </span><span class="lineNoCov">          0 :                         }</span>
 <span class="lineNum">    1121 </span>            :                 }
-<span class="lineNum">    1122 </span><span class="lineCov">          6 :                 if( (passed_args-&gt;flags &amp; FLAG_MS_PFS) &amp;&amp; *mime == 'i' ) {</span>
+<span class="lineNum">    1122 </span><span class="lineCov">         11 :                 if( (passed_args-&gt;flags &amp; FLAG_MS_PFS) &amp;&amp; *mime == 'i' ) {</span>
 <span class="lineNum">    1123 </span><span class="lineNoCov">          0 :                         if( passed_args-&gt;client == EMediaRoom &amp;&amp; !album )</span>
 <span class="lineNum">    1124 </span><span class="lineNoCov">          0 :                                 ret = strcatf(str, &quot;&amp;lt;upnp:album&amp;gt;%s&amp;lt;/upnp:album&amp;gt;&quot;, &quot;[No Keywords]&quot;);</span>
 <span class="lineNum">    1125 </span>            : 
@@ -1198,42 +1198,42 @@
 <span class="lineNum">    1136 </span><span class="lineNoCov">          0 :                                                    lan_addr[passed_args-&gt;iface].str, runtime_vars.port, detailID);</span>
 <span class="lineNum">    1137 </span>            :                         }
 <span class="lineNum">    1138 </span>            :                 }
-<span class="lineNum">    1139 </span><span class="lineCov">          6 :                 ret = strcatf(str, &quot;&amp;lt;/item&amp;gt;&quot;);</span>
+<span class="lineNum">    1139 </span><span class="lineCov">         11 :                 ret = strcatf(str, &quot;&amp;lt;/item&amp;gt;&quot;);</span>
 <span class="lineNum">    1140 </span>            :         }
-<span class="lineNum">    1141 </span><span class="lineCov">         29 :         else if( strncmp(class, &quot;container&quot;, 9) == 0 )</span>
+<span class="lineNum">    1141 </span><span class="lineCov">         33 :         else if( strncmp(class, &quot;container&quot;, 9) == 0 )</span>
 <span class="lineNum">    1142 </span>            :         {
-<span class="lineNum">    1143 </span><span class="lineCov">         29 :                 ret = strcatf(str, &quot;&amp;lt;container id=\&quot;%s\&quot; parentID=\&quot;%s\&quot; restricted=\&quot;1\&quot; &quot;, id, parent);</span>
-<span class="lineNum">    1144 </span><span class="lineCov">         29 :                 if( passed_args-&gt;filter &amp; FILTER_SEARCHABLE ) {</span>
-<span class="lineNum">    1145 </span><span class="lineNoCov">          0 :                         ret = strcatf(str, &quot;searchable=\&quot;%d\&quot; &quot;, check_magic_container(id, passed_args-&gt;flags) ? 0 : 1);</span>
+<span class="lineNum">    1143 </span><span class="lineCov">         33 :                 ret = strcatf(str, &quot;&amp;lt;container id=\&quot;%s\&quot; parentID=\&quot;%s\&quot; restricted=\&quot;1\&quot; &quot;, id, parent);</span>
+<span class="lineNum">    1144 </span><span class="lineCov">         33 :                 if( passed_args-&gt;filter &amp; FILTER_SEARCHABLE ) {</span>
+<span class="lineNum">    1145 </span><span class="lineCov">         18 :                         ret = strcatf(str, &quot;searchable=\&quot;%d\&quot; &quot;, check_magic_container(id, passed_args-&gt;flags) ? 0 : 1);</span>
 <span class="lineNum">    1146 </span>            :                 }
-<span class="lineNum">    1147 </span><span class="lineCov">         29 :                 if( passed_args-&gt;filter &amp; FILTER_CHILDCOUNT ) {</span>
-<span class="lineNum">    1148 </span><span class="lineCov">         29 :                         ret = strcatf(str, &quot;childCount=\&quot;%d\&quot;&quot;, get_child_count(id, check_magic_container(id, passed_args-&gt;flags)));</span>
+<span class="lineNum">    1147 </span><span class="lineCov">         33 :                 if( passed_args-&gt;filter &amp; FILTER_CHILDCOUNT ) {</span>
+<span class="lineNum">    1148 </span><span class="lineCov">         33 :                         ret = strcatf(str, &quot;childCount=\&quot;%d\&quot;&quot;, get_child_count(id, check_magic_container(id, passed_args-&gt;flags)));</span>
 <span class="lineNum">    1149 </span>            :                 }
 <span class="lineNum">    1150 </span>            :                 /* If the client calls for BrowseMetadata on root, we have to include our &quot;upnp:searchClass&quot;'s, unless they're filtered out */
-<span class="lineNum">    1151 </span><span class="lineCov">         29 :                 if( passed_args-&gt;requested == 1 &amp;&amp; strcmp(id, &quot;0&quot;) == 0 &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_SEARCHCLASS) ) {</span>
+<span class="lineNum">    1151 </span><span class="lineCov">         33 :                 if( passed_args-&gt;requested == 1 &amp;&amp; strcmp(id, &quot;0&quot;) == 0 &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_SEARCHCLASS) ) {</span>
 <span class="lineNum">    1152 </span><span class="lineNoCov">          0 :                         ret = strcatf(str, &quot;&amp;gt;&quot;</span>
 <span class="lineNum">    1153 </span>            :                                            &quot;&amp;lt;upnp:searchClass includeDerived=\&quot;1\&quot;&amp;gt;object.item.audioItem&amp;lt;/upnp:searchClass&amp;gt;&quot;
 <span class="lineNum">    1154 </span>            :                                            &quot;&amp;lt;upnp:searchClass includeDerived=\&quot;1\&quot;&amp;gt;object.item.imageItem&amp;lt;/upnp:searchClass&amp;gt;&quot;
 <span class="lineNum">    1155 </span>            :                                            &quot;&amp;lt;upnp:searchClass includeDerived=\&quot;1\&quot;&amp;gt;object.item.videoItem&amp;lt;/upnp:searchClass&quot;);
 <span class="lineNum">    1156 </span>            :                 }
-<span class="lineNum">    1157 </span><span class="lineCov">         29 :                 ret = strcatf(str, &quot;&amp;gt;&quot;</span>
+<span class="lineNum">    1157 </span><span class="lineCov">         33 :                 ret = strcatf(str, &quot;&amp;gt;&quot;</span>
 <span class="lineNum">    1158 </span>            :                                    &quot;&amp;lt;dc:title&amp;gt;%s&amp;lt;/dc:title&amp;gt;&quot;
 <span class="lineNum">    1159 </span>            :                                    &quot;&amp;lt;upnp:class&amp;gt;object.%s&amp;lt;/upnp:class&amp;gt;&quot;,
 <span class="lineNum">    1160 </span>            :                                    title, class);
-<span class="lineNum">    1161 </span><span class="lineCov">         29 :                 if( (passed_args-&gt;filter &amp; FILTER_UPNP_STORAGEUSED) || strcmp(class+10, &quot;storageFolder&quot;) == 0 ) {</span>
+<span class="lineNum">    1161 </span><span class="lineCov">         33 :                 if( (passed_args-&gt;filter &amp; FILTER_UPNP_STORAGEUSED) || strcmp(class+10, &quot;storageFolder&quot;) == 0 ) {</span>
 <span class="lineNum">    1162 </span>            :                         /* TODO: Implement real folder size tracking */
-<span class="lineNum">    1163 </span><span class="lineCov">         29 :                         ret = strcatf(str, &quot;&amp;lt;upnp:storageUsed&amp;gt;%s&amp;lt;/upnp:storageUsed&amp;gt;&quot;, (size ? size : &quot;-1&quot;));</span>
+<span class="lineNum">    1163 </span><span class="lineCov">         33 :                         ret = strcatf(str, &quot;&amp;lt;upnp:storageUsed&amp;gt;%s&amp;lt;/upnp:storageUsed&amp;gt;&quot;, (size ? size : &quot;-1&quot;));</span>
 <span class="lineNum">    1164 </span>            :                 }
-<span class="lineNum">    1165 </span><span class="lineCov">         29 :                 if( creator &amp;&amp; (passed_args-&gt;filter &amp; FILTER_DC_CREATOR) ) {</span>
+<span class="lineNum">    1165 </span><span class="lineCov">         33 :                 if( creator &amp;&amp; (passed_args-&gt;filter &amp; FILTER_DC_CREATOR) ) {</span>
 <span class="lineNum">    1166 </span><span class="lineNoCov">          0 :                         ret = strcatf(str, &quot;&amp;lt;dc:creator&amp;gt;%s&amp;lt;/dc:creator&amp;gt;&quot;, creator);</span>
 <span class="lineNum">    1167 </span>            :                 }
-<span class="lineNum">    1168 </span><span class="lineCov">         29 :                 if( genre &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_GENRE) ) {</span>
+<span class="lineNum">    1168 </span><span class="lineCov">         33 :                 if( genre &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_GENRE) ) {</span>
 <span class="lineNum">    1169 </span><span class="lineNoCov">          0 :                         ret = strcatf(str, &quot;&amp;lt;upnp:genre&amp;gt;%s&amp;lt;/upnp:genre&amp;gt;&quot;, genre);</span>
 <span class="lineNum">    1170 </span>            :                 }
-<span class="lineNum">    1171 </span><span class="lineCov">         29 :                 if( artist &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_ARTIST) ) {</span>
+<span class="lineNum">    1171 </span><span class="lineCov">         33 :                 if( artist &amp;&amp; (passed_args-&gt;filter &amp; FILTER_UPNP_ARTIST) ) {</span>
 <span class="lineNum">    1172 </span><span class="lineNoCov">          0 :                         ret = strcatf(str, &quot;&amp;lt;upnp:artist&amp;gt;%s&amp;lt;/upnp:artist&amp;gt;&quot;, artist);</span>
 <span class="lineNum">    1173 </span>            :                 }
-<span class="lineNum">    1174 </span><span class="lineCov">         29 :                 if( passed_args-&gt;filter &amp; FILTER_AV_MEDIA_CLASS ) {</span>
+<span class="lineNum">    1174 </span><span class="lineCov">         33 :                 if( passed_args-&gt;filter &amp; FILTER_AV_MEDIA_CLASS ) {</span>
 <span class="lineNum">    1175 </span>            :                         char class;
 <span class="lineNum">    1176 </span><span class="lineNoCov">          0 :                         if( strncmp(id, MUSIC_ID, sizeof(MUSIC_ID)) == 0 )</span>
 <span class="lineNum">    1177 </span><span class="lineNoCov">          0 :                                 class = 'M';</span>
@@ -1247,14 +1247,14 @@
 <span class="lineNum">    1185 </span><span class="lineNoCov">          0 :                                 ret = strcatf(str, &quot;&amp;lt;av:mediaClass xmlns:av=\&quot;urn:schemas-sony-com:av\&quot;&amp;gt;&quot;</span>
 <span class="lineNum">    1186 </span>            :                                                     &quot;%c&amp;lt;/av:mediaClass&amp;gt;&quot;, class);
 <span class="lineNum">    1187 </span>            :                 }
-<span class="lineNum">    1188 </span><span class="lineCov">         29 :                 ret = strcatf(str, &quot;&amp;lt;/container&amp;gt;&quot;);</span>
+<span class="lineNum">    1188 </span><span class="lineCov">         33 :                 ret = strcatf(str, &quot;&amp;lt;/container&amp;gt;&quot;);</span>
 <span class="lineNum">    1189 </span>            :         }
 <span class="lineNum">    1190 </span>            : 
-<span class="lineNum">    1191 </span><span class="lineCov">         35 :         return 0;</span>
+<span class="lineNum">    1191 </span><span class="lineCov">         44 :         return 0;</span>
 <span class="lineNum">    1192 </span>            : }
 <a name="1193"><span class="lineNum">    1193 </span>            : </a>
 <span class="lineNum">    1194 </span>            : static void
-<span class="lineNum">    1195 </span><span class="lineCov">         20 : BrowseContentDirectory(struct upnphttp * h, const char * action)</span>
+<span class="lineNum">    1195 </span><span class="lineCov">         33 : BrowseContentDirectory(struct upnphttp * h, const char * action)</span>
 <span class="lineNum">    1196 </span>            : {
 <span class="lineNum">    1197 </span>            :         static const char resp0[] =
 <span class="lineNum">    1198 </span>            :                         &quot;&lt;u:BrowseResponse &quot;
@@ -1263,78 +1263,78 @@
 <span class="lineNum">    1201 </span>            :                         &quot;&amp;lt;DIDL-Lite&quot;
 <span class="lineNum">    1202 </span>            :                         CONTENT_DIRECTORY_SCHEMAS;
 <span class="lineNum">    1203 </span>            :         struct magic_container_s *magic;
-<span class="lineNum">    1204 </span><span class="lineCov">         20 :         char *zErrMsg = NULL;</span>
+<span class="lineNum">    1204 </span><span class="lineCov">         33 :         char *zErrMsg = NULL;</span>
 <span class="lineNum">    1205 </span>            :         char *sql, *ptr;
 <span class="lineNum">    1206 </span>            :         struct Response args;
 <span class="lineNum">    1207 </span>            :         struct string_s str;
-<span class="lineNum">    1208 </span><span class="lineCov">         20 :         int totalMatches = 0;</span>
+<span class="lineNum">    1208 </span><span class="lineCov">         33 :         int totalMatches = 0;</span>
 <span class="lineNum">    1209 </span>            :         int ret;
 <span class="lineNum">    1210 </span>            :         const char *ObjectID, *BrowseFlag;
 <span class="lineNum">    1211 </span>            :         char *Filter, *SortCriteria;
-<span class="lineNum">    1212 </span><span class="lineCov">         20 :         const char *objectid_sql = &quot;o.OBJECT_ID&quot;;</span>
-<span class="lineNum">    1213 </span><span class="lineCov">         20 :         const char *parentid_sql = &quot;o.PARENT_ID&quot;;</span>
-<span class="lineNum">    1214 </span><span class="lineCov">         20 :         const char *refid_sql = &quot;o.REF_ID&quot;;</span>
-<span class="lineNum">    1215 </span><span class="lineCov">         20 :         char where[256] = &quot;&quot;;</span>
-<span class="lineNum">    1216 </span><span class="lineCov">         20 :         char *orderBy = NULL;</span>
+<span class="lineNum">    1212 </span><span class="lineCov">         33 :         const char *objectid_sql = &quot;o.OBJECT_ID&quot;;</span>
+<span class="lineNum">    1213 </span><span class="lineCov">         33 :         const char *parentid_sql = &quot;o.PARENT_ID&quot;;</span>
+<span class="lineNum">    1214 </span><span class="lineCov">         33 :         const char *refid_sql = &quot;o.REF_ID&quot;;</span>
+<span class="lineNum">    1215 </span><span class="lineCov">         33 :         char where[256] = &quot;&quot;;</span>
+<span class="lineNum">    1216 </span><span class="lineCov">         33 :         char *orderBy = NULL;</span>
 <span class="lineNum">    1217 </span>            :         struct NameValueParserData data;
-<span class="lineNum">    1218 </span><span class="lineCov">         20 :         int RequestedCount = 0;</span>
-<span class="lineNum">    1219 </span><span class="lineCov">         20 :         int StartingIndex = 0;</span>
+<span class="lineNum">    1218 </span><span class="lineCov">         33 :         int RequestedCount = 0;</span>
+<span class="lineNum">    1219 </span><span class="lineCov">         33 :         int StartingIndex = 0;</span>
 <span class="lineNum">    1220 </span>            : 
-<span class="lineNum">    1221 </span><span class="lineCov">         20 :         memset(&amp;args, 0, sizeof(args));</span>
-<span class="lineNum">    1222 </span><span class="lineCov">         20 :         memset(&amp;str, 0, sizeof(str));</span>
+<span class="lineNum">    1221 </span><span class="lineCov">         33 :         memset(&amp;args, 0, sizeof(args));</span>
+<span class="lineNum">    1222 </span><span class="lineCov">         33 :         memset(&amp;str, 0, sizeof(str));</span>
 <span class="lineNum">    1223 </span>            : 
-<span class="lineNum">    1224 </span><span class="lineCov">         20 :         ParseNameValue(h-&gt;req_buf + h-&gt;req_contentoff, h-&gt;req_contentlen, &amp;data, 0);</span>
+<span class="lineNum">    1224 </span><span class="lineCov">         33 :         ParseNameValue(h-&gt;req_buf + h-&gt;req_contentoff, h-&gt;req_contentlen, &amp;data, 0);</span>
 <span class="lineNum">    1225 </span>            : 
-<span class="lineNum">    1226 </span><span class="lineCov">         20 :         ObjectID = GetValueFromNameValueList(&amp;data, &quot;ObjectID&quot;);</span>
-<span class="lineNum">    1227 </span><span class="lineCov">         20 :         Filter = GetValueFromNameValueList(&amp;data, &quot;Filter&quot;);</span>
-<span class="lineNum">    1228 </span><span class="lineCov">         20 :         BrowseFlag = GetValueFromNameValueList(&amp;data, &quot;BrowseFlag&quot;);</span>
-<span class="lineNum">    1229 </span><span class="lineCov">         20 :         SortCriteria = GetValueFromNameValueList(&amp;data, &quot;SortCriteria&quot;);</span>
+<span class="lineNum">    1226 </span><span class="lineCov">         33 :         ObjectID = GetValueFromNameValueList(&amp;data, &quot;ObjectID&quot;);</span>
+<span class="lineNum">    1227 </span><span class="lineCov">         33 :         Filter = GetValueFromNameValueList(&amp;data, &quot;Filter&quot;);</span>
+<span class="lineNum">    1228 </span><span class="lineCov">         33 :         BrowseFlag = GetValueFromNameValueList(&amp;data, &quot;BrowseFlag&quot;);</span>
+<span class="lineNum">    1229 </span><span class="lineCov">         33 :         SortCriteria = GetValueFromNameValueList(&amp;data, &quot;SortCriteria&quot;);</span>
 <span class="lineNum">    1230 </span>            : 
-<span class="lineNum">    1231 </span><span class="lineCov">         20 :         if( (ptr = GetValueFromNameValueList(&amp;data, &quot;RequestedCount&quot;)) )</span>
-<span class="lineNum">    1232 </span><span class="lineCov">         20 :                 RequestedCount = atoi(ptr);</span>
-<span class="lineNum">    1233 </span><span class="lineCov">         20 :         if( RequestedCount &lt; 0 )</span>
+<span class="lineNum">    1231 </span><span class="lineCov">         33 :         if( (ptr = GetValueFromNameValueList(&amp;data, &quot;RequestedCount&quot;)) )</span>
+<span class="lineNum">    1232 </span><span class="lineCov">         33 :                 RequestedCount = atoi(ptr);</span>
+<span class="lineNum">    1233 </span><span class="lineCov">         33 :         if( RequestedCount &lt; 0 )</span>
 <span class="lineNum">    1234 </span>            :         {
 <span class="lineNum">    1235 </span><span class="lineNoCov">          0 :                 SoapError(h, 402, &quot;Invalid Args&quot;);</span>
 <span class="lineNum">    1236 </span><span class="lineNoCov">          0 :                 goto browse_error;</span>
 <span class="lineNum">    1237 </span>            :         }
-<span class="lineNum">    1238 </span><span class="lineCov">         20 :         if( !RequestedCount )</span>
-<span class="lineNum">    1239 </span><span class="lineCov">         11 :                 RequestedCount = -1;</span>
-<span class="lineNum">    1240 </span><span class="lineCov">         20 :         if( (ptr = GetValueFromNameValueList(&amp;data, &quot;StartingIndex&quot;)) )</span>
-<span class="lineNum">    1241 </span><span class="lineCov">         20 :                 StartingIndex = atoi(ptr);</span>
-<span class="lineNum">    1242 </span><span class="lineCov">         20 :         if( StartingIndex &lt; 0 )</span>
+<span class="lineNum">    1238 </span><span class="lineCov">         33 :         if( !RequestedCount )</span>
+<span class="lineNum">    1239 </span><span class="lineCov">          9 :                 RequestedCount = -1;</span>
+<span class="lineNum">    1240 </span><span class="lineCov">         33 :         if( (ptr = GetValueFromNameValueList(&amp;data, &quot;StartingIndex&quot;)) )</span>
+<span class="lineNum">    1241 </span><span class="lineCov">         33 :                 StartingIndex = atoi(ptr);</span>
+<span class="lineNum">    1242 </span><span class="lineCov">         33 :         if( StartingIndex &lt; 0 )</span>
 <span class="lineNum">    1243 </span>            :         {
 <span class="lineNum">    1244 </span><span class="lineNoCov">          0 :                 SoapError(h, 402, &quot;Invalid Args&quot;);</span>
 <span class="lineNum">    1245 </span><span class="lineNoCov">          0 :                 goto browse_error;</span>
 <span class="lineNum">    1246 </span>            :         }
-<span class="lineNum">    1247 </span><span class="lineCov">         20 :         if( !BrowseFlag || (strcmp(BrowseFlag, &quot;BrowseDirectChildren&quot;) &amp;&amp; strcmp(BrowseFlag, &quot;BrowseMetadata&quot;)) )</span>
+<span class="lineNum">    1247 </span><span class="lineCov">         33 :         if( !BrowseFlag || (strcmp(BrowseFlag, &quot;BrowseDirectChildren&quot;) &amp;&amp; strcmp(BrowseFlag, &quot;BrowseMetadata&quot;)) )</span>
 <span class="lineNum">    1248 </span>            :         {
 <span class="lineNum">    1249 </span><span class="lineNoCov">          0 :                 SoapError(h, 402, &quot;Invalid Args&quot;);</span>
 <span class="lineNum">    1250 </span><span class="lineNoCov">          0 :                 goto browse_error;</span>
 <span class="lineNum">    1251 </span>            :         }
-<span class="lineNum">    1252 </span><span class="lineCov">         20 :         if( !ObjectID &amp;&amp; !(ObjectID = GetValueFromNameValueList(&amp;data, &quot;ContainerID&quot;)) )</span>
+<span class="lineNum">    1252 </span><span class="lineCov">         33 :         if( !ObjectID &amp;&amp; !(ObjectID = GetValueFromNameValueList(&amp;data, &quot;ContainerID&quot;)) )</span>
 <span class="lineNum">    1253 </span>            :         {
 <span class="lineNum">    1254 </span><span class="lineNoCov">          0 :                 SoapError(h, 402, &quot;Invalid Args&quot;);</span>
 <span class="lineNum">    1255 </span><span class="lineNoCov">          0 :                 goto browse_error;</span>
 <span class="lineNum">    1256 </span>            :         }
 <span class="lineNum">    1257 </span>            : 
-<span class="lineNum">    1258 </span><span class="lineCov">         20 :         str.data = malloc(DEFAULT_RESP_SIZE);</span>
-<span class="lineNum">    1259 </span><span class="lineCov">         20 :         str.size = DEFAULT_RESP_SIZE;</span>
-<span class="lineNum">    1260 </span><span class="lineCov">         20 :         str.off = sprintf(str.data, &quot;%s&quot;, resp0);</span>
+<span class="lineNum">    1258 </span><span class="lineCov">         33 :         str.data = malloc(DEFAULT_RESP_SIZE);</span>
+<span class="lineNum">    1259 </span><span class="lineCov">         33 :         str.size = DEFAULT_RESP_SIZE;</span>
+<span class="lineNum">    1260 </span><span class="lineCov">         33 :         str.off = sprintf(str.data, &quot;%s&quot;, resp0);</span>
 <span class="lineNum">    1261 </span>            :         /* See if we need to include DLNA namespace reference */
-<span class="lineNum">    1262 </span><span class="lineCov">         20 :         args.iface = h-&gt;iface;</span>
-<span class="lineNum">    1263 </span><span class="lineCov">         20 :         args.filter = set_filter_flags(Filter, h);</span>
-<span class="lineNum">    1264 </span><span class="lineCov">         20 :         if( args.filter &amp; FILTER_DLNA_NAMESPACE )</span>
-<span class="lineNum">    1265 </span><span class="lineCov">          2 :                 ret = strcatf(&amp;str, DLNA_NAMESPACE);</span>
-<span class="lineNum">    1266 </span><span class="lineCov">         20 :         if( args.filter &amp; FILTER_PV_SUBTITLE )</span>
+<span class="lineNum">    1262 </span><span class="lineCov">         33 :         args.iface = h-&gt;iface;</span>
+<span class="lineNum">    1263 </span><span class="lineCov">         33 :         args.filter = set_filter_flags(Filter, h);</span>
+<span class="lineNum">    1264 </span><span class="lineCov">         33 :         if( args.filter &amp; FILTER_DLNA_NAMESPACE )</span>
+<span class="lineNum">    1265 </span><span class="lineCov">         19 :                 ret = strcatf(&amp;str, DLNA_NAMESPACE);</span>
+<span class="lineNum">    1266 </span><span class="lineCov">         33 :         if( args.filter &amp; FILTER_PV_SUBTITLE )</span>
 <span class="lineNum">    1267 </span><span class="lineNoCov">          0 :                 ret = strcatf(&amp;str, PV_NAMESPACE);</span>
-<span class="lineNum">    1268 </span><span class="lineCov">         20 :         strcatf(&amp;str, &quot;&amp;gt;\n&quot;);</span>
+<span class="lineNum">    1268 </span><span class="lineCov">         33 :         strcatf(&amp;str, &quot;&amp;gt;\n&quot;);</span>
 <span class="lineNum">    1269 </span>            : 
-<span class="lineNum">    1270 </span><span class="lineCov">         20 :         args.returned = 0;</span>
-<span class="lineNum">    1271 </span><span class="lineCov">         20 :         args.requested = RequestedCount;</span>
-<span class="lineNum">    1272 </span><span class="lineCov">         20 :         args.client = h-&gt;req_client ? h-&gt;req_client-&gt;type-&gt;type : 0;</span>
-<span class="lineNum">    1273 </span><span class="lineCov">         20 :         args.flags = h-&gt;req_client ? h-&gt;req_client-&gt;type-&gt;flags : 0;</span>
-<span class="lineNum">    1274 </span><span class="lineCov">         20 :         args.str = &amp;str;</span>
-<span class="lineNum">    1275 </span><span class="lineCov">         20 :         DPRINTF(E_DEBUG, L_HTTP, &quot;Browsing ContentDirectory:\n&quot;</span>
+<span class="lineNum">    1270 </span><span class="lineCov">         33 :         args.returned = 0;</span>
+<span class="lineNum">    1271 </span><span class="lineCov">         33 :         args.requested = RequestedCount;</span>
+<span class="lineNum">    1272 </span><span class="lineCov">         33 :         args.client = h-&gt;req_client ? h-&gt;req_client-&gt;type-&gt;type : 0;</span>
+<span class="lineNum">    1273 </span><span class="lineCov">         33 :         args.flags = h-&gt;req_client ? h-&gt;req_client-&gt;type-&gt;flags : 0;</span>
+<span class="lineNum">    1274 </span><span class="lineCov">         33 :         args.str = &amp;str;</span>
+<span class="lineNum">    1275 </span><span class="lineCov">         33 :         DPRINTF(E_DEBUG, L_HTTP, &quot;Browsing ContentDirectory:\n&quot;</span>
 <span class="lineNum">    1276 </span>            :                                  &quot; * ObjectID: %s\n&quot;
 <span class="lineNum">    1277 </span>            :                                  &quot; * Count: %d\n&quot;
 <span class="lineNum">    1278 </span>            :                                  &quot; * StartingIndex: %d\n&quot;
@@ -1344,12 +1344,12 @@
 <span class="lineNum">    1282 </span>            :                                 ObjectID, RequestedCount, StartingIndex,
 <span class="lineNum">    1283 </span>            :                                 BrowseFlag, Filter, SortCriteria);
 <span class="lineNum">    1284 </span>            : 
-<span class="lineNum">    1285 </span><span class="lineCov">         20 :         if( strcmp(BrowseFlag+6, &quot;Metadata&quot;) == 0 )</span>
+<span class="lineNum">    1285 </span><span class="lineCov">         33 :         if( strcmp(BrowseFlag+6, &quot;Metadata&quot;) == 0 )</span>
 <span class="lineNum">    1286 </span>            :         {
-<span class="lineNum">    1287 </span><span class="lineCov">         11 :                 const char *id = ObjectID;</span>
-<span class="lineNum">    1288 </span><span class="lineCov">         11 :                 args.requested = 1;</span>
-<span class="lineNum">    1289 </span><span class="lineCov">         11 :                 magic = in_magic_container(ObjectID, args.flags, &amp;id);</span>
-<span class="lineNum">    1290 </span><span class="lineCov">         11 :                 if (magic)</span>
+<span class="lineNum">    1287 </span><span class="lineCov">          9 :                 const char *id = ObjectID;</span>
+<span class="lineNum">    1288 </span><span class="lineCov">          9 :                 args.requested = 1;</span>
+<span class="lineNum">    1289 </span><span class="lineCov">          9 :                 magic = in_magic_container(ObjectID, args.flags, &amp;id);</span>
+<span class="lineNum">    1290 </span><span class="lineCov">          9 :                 if (magic)</span>
 <span class="lineNum">    1291 </span>            :                 {
 <span class="lineNum">    1292 </span><span class="lineNoCov">          0 :                         if (magic-&gt;objectid_sql &amp;&amp; strcmp(id, ObjectID) != 0)</span>
 <span class="lineNum">    1293 </span><span class="lineNoCov">          0 :                                 objectid_sql = magic-&gt;objectid_sql;</span>
@@ -1358,17 +1358,17 @@
 <span class="lineNum">    1296 </span><span class="lineNoCov">          0 :                         if (magic-&gt;refid_sql)</span>
 <span class="lineNum">    1297 </span><span class="lineNoCov">          0 :                                 refid_sql = magic-&gt;refid_sql;</span>
 <span class="lineNum">    1298 </span>            :                 }
-<span class="lineNum">    1299 </span><span class="lineCov">         11 :                 sql = sqlite3_mprintf(&quot;SELECT %s, %s, %s, &quot; COLUMNS</span>
+<span class="lineNum">    1299 </span><span class="lineCov">          9 :                 sql = sqlite3_mprintf(&quot;SELECT %s, %s, %s, &quot; COLUMNS</span>
 <span class="lineNum">    1300 </span>            :                                       &quot;from OBJECTS o left join DETAILS d on (d.ID = o.DETAIL_ID)&quot;
 <span class="lineNum">    1301 </span>            :                                       &quot; where OBJECT_ID = '%q';&quot;,
 <span class="lineNum">    1302 </span>            :                                       objectid_sql, parentid_sql, refid_sql, id);
-<span class="lineNum">    1303 </span><span class="lineCov">         11 :                 ret = sqlite3_exec(db, sql, callback, (void *) &amp;args, &amp;zErrMsg);</span>
-<span class="lineNum">    1304 </span><span class="lineCov">         11 :                 totalMatches = args.returned;</span>
+<span class="lineNum">    1303 </span><span class="lineCov">          9 :                 ret = sqlite3_exec(db, sql, callback, (void *) &amp;args, &amp;zErrMsg);</span>
+<span class="lineNum">    1304 </span><span class="lineCov">          9 :                 totalMatches = args.returned;</span>
 <span class="lineNum">    1305 </span>            :         }
 <span class="lineNum">    1306 </span>            :         else
 <span class="lineNum">    1307 </span>            :         {
-<span class="lineNum">    1308 </span><span class="lineCov">          9 :                 magic = check_magic_container(ObjectID, args.flags);</span>
-<span class="lineNum">    1309 </span><span class="lineCov">          9 :                 if (magic)</span>
+<span class="lineNum">    1308 </span><span class="lineCov">         24 :                 magic = check_magic_container(ObjectID, args.flags);</span>
+<span class="lineNum">    1309 </span><span class="lineCov">         24 :                 if (magic)</span>
 <span class="lineNum">    1310 </span>            :                 {
 <span class="lineNum">    1311 </span><span class="lineNoCov">          0 :                         if (magic-&gt;objectid &amp;&amp; *(magic-&gt;objectid))</span>
 <span class="lineNum">    1312 </span><span class="lineNoCov">          0 :                                 ObjectID = *(magic-&gt;objectid);</span>
@@ -1391,37 +1391,37 @@
 <span class="lineNum">    1329 </span><span class="lineNoCov">          0 :                                         RequestedCount = limit;</span>
 <span class="lineNum">    1330 </span>            :                         }
 <span class="lineNum">    1331 </span>            :                 }
-<span class="lineNum">    1332 </span><span class="lineCov">          9 :                 if (!where[0])</span>
-<span class="lineNum">    1333 </span><span class="lineCov">          9 :                         sqlite3_snprintf(sizeof(where), where, &quot;PARENT_ID = '%q'&quot;, ObjectID);</span>
+<span class="lineNum">    1332 </span><span class="lineCov">         24 :                 if (!where[0])</span>
+<span class="lineNum">    1333 </span><span class="lineCov">         24 :                         sqlite3_snprintf(sizeof(where), where, &quot;PARENT_ID = '%q'&quot;, ObjectID);</span>
 <span class="lineNum">    1334 </span>            : 
-<span class="lineNum">    1335 </span><span class="lineCov">          9 :                 if (!totalMatches)</span>
-<span class="lineNum">    1336 </span><span class="lineCov">          9 :                         totalMatches = get_child_count(ObjectID, magic);</span>
-<span class="lineNum">    1337 </span><span class="lineCov">          9 :                 ret = 0;</span>
-<span class="lineNum">    1338 </span><span class="lineCov">          9 :                 if (SortCriteria &amp;&amp; !orderBy)</span>
+<span class="lineNum">    1335 </span><span class="lineCov">         24 :                 if (!totalMatches)</span>
+<span class="lineNum">    1336 </span><span class="lineCov">         24 :                         totalMatches = get_child_count(ObjectID, magic);</span>
+<span class="lineNum">    1337 </span><span class="lineCov">         24 :                 ret = 0;</span>
+<span class="lineNum">    1338 </span><span class="lineCov">         24 :                 if (SortCriteria &amp;&amp; !orderBy)</span>
 <span class="lineNum">    1339 </span>            :                 {
 <span class="lineNum">    1340 </span>            :                         __SORT_LIMIT
 <span class="lineNum">    1341 </span><span class="lineNoCov">          0 :                         orderBy = parse_sort_criteria(SortCriteria, &amp;ret);</span>
 <span class="lineNum">    1342 </span>            :                 }
-<span class="lineNum">    1343 </span><span class="lineCov">          9 :                 else if (!orderBy)</span>
+<span class="lineNum">    1343 </span><span class="lineCov">         24 :                 else if (!orderBy)</span>
 <span class="lineNum">    1344 </span>            :                 {
-<span class="lineNum">    1345 </span><span class="lineCov">          9 :                         if( strncmp(ObjectID, MUSIC_PLIST_ID, strlen(MUSIC_PLIST_ID)) == 0 )</span>
+<span class="lineNum">    1345 </span><span class="lineCov">         24 :                         if( strncmp(ObjectID, MUSIC_PLIST_ID, strlen(MUSIC_PLIST_ID)) == 0 )</span>
 <span class="lineNum">    1346 </span>            :                         {
 <span class="lineNum">    1347 </span><span class="lineNoCov">          0 :                                 if( strcmp(ObjectID, MUSIC_PLIST_ID) == 0 )</span>
 <span class="lineNum">    1348 </span><span class="lineNoCov">          0 :                                         ret = xasprintf(&amp;orderBy, &quot;order by d.TITLE&quot;);</span>
 <span class="lineNum">    1349 </span>            :                                 else
 <span class="lineNum">    1350 </span><span class="lineNoCov">          0 :                                         ret = xasprintf(&amp;orderBy, &quot;order by length(OBJECT_ID), OBJECT_ID&quot;);</span>
 <span class="lineNum">    1351 </span>            :                         }
-<span class="lineNum">    1352 </span><span class="lineCov">          9 :                         else if( args.flags &amp; FLAG_FORCE_SORT )</span>
+<span class="lineNum">    1352 </span><span class="lineCov">         24 :                         else if( args.flags &amp; FLAG_FORCE_SORT )</span>
 <span class="lineNum">    1353 </span>            :                         {
 <span class="lineNum">    1354 </span>            :                                 __SORT_LIMIT
 <span class="lineNum">    1355 </span><span class="lineNoCov">          0 :                                 ret = xasprintf(&amp;orderBy, &quot;order by o.CLASS, d.DISC, d.TRACK, d.TITLE&quot;);</span>
 <span class="lineNum">    1356 </span>            :                         }
 <span class="lineNum">    1357 </span>            :                         /* LG TV ordering bug */
-<span class="lineNum">    1358 </span><span class="lineCov">          9 :                         else if( args.client == ELGDevice )</span>
+<span class="lineNum">    1358 </span><span class="lineCov">         24 :                         else if( args.client == ELGDevice )</span>
 <span class="lineNum">    1359 </span><span class="lineNoCov">          0 :                                 ret = xasprintf(&amp;orderBy, &quot;order by o.CLASS, d.TITLE&quot;);</span>
 <span class="lineNum">    1360 </span>            :                         else
-<span class="lineNum">    1361 </span><span class="lineCov">          9 :                                 orderBy = parse_sort_criteria(SortCriteria, &amp;ret);</span>
-<span class="lineNum">    1362 </span><span class="lineCov">          9 :                         if( ret == -1 )</span>
+<span class="lineNum">    1361 </span><span class="lineCov">         24 :                                 orderBy = parse_sort_criteria(SortCriteria, &amp;ret);</span>
+<span class="lineNum">    1362 </span><span class="lineCov">         24 :                         if( ret == -1 )</span>
 <span class="lineNum">    1363 </span>            :                         {
 <span class="lineNum">    1364 </span><span class="lineNoCov">          0 :                                 free(orderBy);</span>
 <span class="lineNum">    1365 </span><span class="lineNoCov">          0 :                                 orderBy = NULL;</span>
@@ -1429,30 +1429,30 @@
 <span class="lineNum">    1367 </span>            :                         }
 <span class="lineNum">    1368 </span>            :                 }
 <span class="lineNum">    1369 </span>            :                 /* If it's a DLNA client, return an error for bad sort criteria */
-<span class="lineNum">    1370 </span><span class="lineCov">          9 :                 if( ret &lt; 0 &amp;&amp; ((args.flags &amp; FLAG_DLNA) || GETFLAG(DLNA_STRICT_MASK)) )</span>
+<span class="lineNum">    1370 </span><span class="lineCov">         24 :                 if( ret &lt; 0 &amp;&amp; ((args.flags &amp; FLAG_DLNA) || GETFLAG(DLNA_STRICT_MASK)) )</span>
 <span class="lineNum">    1371 </span>            :                 {
 <span class="lineNum">    1372 </span><span class="lineNoCov">          0 :                         SoapError(h, 709, &quot;Unsupported or invalid sort criteria&quot;);</span>
 <span class="lineNum">    1373 </span><span class="lineNoCov">          0 :                         goto browse_error;</span>
 <span class="lineNum">    1374 </span>            :                 }
 <span class="lineNum">    1375 </span>            : 
-<span class="lineNum">    1376 </span><span class="lineCov">          9 :                 sql = sqlite3_mprintf(&quot;SELECT %s, %s, %s, &quot; COLUMNS</span>
+<span class="lineNum">    1376 </span><span class="lineCov">         24 :                 sql = sqlite3_mprintf(&quot;SELECT %s, %s, %s, &quot; COLUMNS</span>
 <span class="lineNum">    1377 </span>            :                                       &quot;from OBJECTS o left join DETAILS d on (d.ID = o.DETAIL_ID)&quot;
 <span class="lineNum">    1378 </span>            :                                       &quot; where %s %s limit %d, %d;&quot;,
 <span class="lineNum">    1379 </span>            :                                       objectid_sql, parentid_sql, refid_sql,
-<span class="lineNum">    1380 </span><span class="lineCov">          9 :                                       where, THISORNUL(orderBy), StartingIndex, RequestedCount);</span>
-<span class="lineNum">    1381 </span><span class="lineCov">          9 :                 DPRINTF(E_DEBUG, L_HTTP, &quot;Browse SQL: %s\n&quot;, sql);</span>
-<span class="lineNum">    1382 </span><span class="lineCov">          9 :                 ret = sqlite3_exec(db, sql, callback, (void *) &amp;args, &amp;zErrMsg);</span>
+<span class="lineNum">    1380 </span><span class="lineCov">         24 :                                       where, THISORNUL(orderBy), StartingIndex, RequestedCount);</span>
+<span class="lineNum">    1381 </span><span class="lineCov">         24 :                 DPRINTF(E_DEBUG, L_HTTP, &quot;Browse SQL: %s\n&quot;, sql);</span>
+<span class="lineNum">    1382 </span><span class="lineCov">         24 :                 ret = sqlite3_exec(db, sql, callback, (void *) &amp;args, &amp;zErrMsg);</span>
 <span class="lineNum">    1383 </span>            :         }
-<span class="lineNum">    1384 </span><span class="lineCov">         20 :         if( (ret != SQLITE_OK) &amp;&amp; (zErrMsg != NULL) )</span>
+<span class="lineNum">    1384 </span><span class="lineCov">         33 :         if( (ret != SQLITE_OK) &amp;&amp; (zErrMsg != NULL) )</span>
 <span class="lineNum">    1385 </span>            :         {
 <span class="lineNum">    1386 </span><span class="lineNoCov">          0 :                 DPRINTF(E_WARN, L_HTTP, &quot;SQL error: %s\nBAD SQL: %s\n&quot;, zErrMsg, sql);</span>
 <span class="lineNum">    1387 </span><span class="lineNoCov">          0 :                 sqlite3_free(zErrMsg);</span>
 <span class="lineNum">    1388 </span><span class="lineNoCov">          0 :                 SoapError(h, 709, &quot;Unsupported or invalid sort criteria&quot;);</span>
 <span class="lineNum">    1389 </span><span class="lineNoCov">          0 :                 goto browse_error;</span>
 <span class="lineNum">    1390 </span>            :         }
-<span class="lineNum">    1391 </span><span class="lineCov">         20 :         sqlite3_free(sql);</span>
+<span class="lineNum">    1391 </span><span class="lineCov">         33 :         sqlite3_free(sql);</span>
 <span class="lineNum">    1392 </span>            :         /* Does the object even exist? */
-<span class="lineNum">    1393 </span><span class="lineCov">         20 :         if( !totalMatches )</span>
+<span class="lineNum">    1393 </span><span class="lineCov">         33 :         if( !totalMatches )</span>
 <span class="lineNum">    1394 </span>            :         {
 <span class="lineNum">    1395 </span><span class="lineNoCov">          0 :                 if( !object_exists(ObjectID) )</span>
 <span class="lineNum">    1396 </span>            :                 {
@@ -1460,18 +1460,18 @@
 <span class="lineNum">    1398 </span><span class="lineNoCov">          0 :                         goto browse_error;</span>
 <span class="lineNum">    1399 </span>            :                 }
 <span class="lineNum">    1400 </span>            :         }
-<span class="lineNum">    1401 </span><span class="lineCov">         20 :         ret = strcatf(&amp;str, &quot;&amp;lt;/DIDL-Lite&amp;gt;&lt;/Result&gt;\n&quot;</span>
+<span class="lineNum">    1401 </span><span class="lineCov">         33 :         ret = strcatf(&amp;str, &quot;&amp;lt;/DIDL-Lite&amp;gt;&lt;/Result&gt;\n&quot;</span>
 <span class="lineNum">    1402 </span>            :                             &quot;&lt;NumberReturned&gt;%u&lt;/NumberReturned&gt;\n&quot;
 <span class="lineNum">    1403 </span>            :                             &quot;&lt;TotalMatches&gt;%u&lt;/TotalMatches&gt;\n&quot;
 <span class="lineNum">    1404 </span>            :                             &quot;&lt;UpdateID&gt;%u&lt;/UpdateID&gt;&quot;
 <span class="lineNum">    1405 </span>            :                             &quot;&lt;/u:BrowseResponse&gt;&quot;,
 <span class="lineNum">    1406 </span>            :                             args.returned, totalMatches, updateID);
-<span class="lineNum">    1407 </span><span class="lineCov">         20 :         BuildSendAndCloseSoapResp(h, str.data, str.off);</span>
-<span class="lineNum">    1408 </span><span class="lineCov">         20 : browse_error:</span>
-<span class="lineNum">    1409 </span><span class="lineCov">         20 :         ClearNameValueList(&amp;data);</span>
-<span class="lineNum">    1410 </span><span class="lineCov">         20 :         free(orderBy);</span>
-<span class="lineNum">    1411 </span><span class="lineCov">         20 :         free(str.data);</span>
-<span class="lineNum">    1412 </span><span class="lineCov">         20 : }</span>
+<span class="lineNum">    1407 </span><span class="lineCov">         33 :         BuildSendAndCloseSoapResp(h, str.data, str.off);</span>
+<span class="lineNum">    1408 </span><span class="lineCov">         33 : browse_error:</span>
+<span class="lineNum">    1409 </span><span class="lineCov">         33 :         ClearNameValueList(&amp;data);</span>
+<span class="lineNum">    1410 </span><span class="lineCov">         33 :         free(orderBy);</span>
+<span class="lineNum">    1411 </span><span class="lineCov">         33 :         free(str.data);</span>
+<span class="lineNum">    1412 </span><span class="lineCov">         33 : }</span>
 <a name="1413"><span class="lineNum">    1413 </span>            : </a>
 <span class="lineNum">    1414 </span>            : static inline void
 <span class="lineNum">    1415 </span><span class="lineCov">         75 : charcat(struct string_s *str, char c)</span>
@@ -2189,33 +2189,33 @@
 <span class="lineNum">    2127 </span>            : };
 <a name="2128"><span class="lineNum">    2128 </span>            : </a>
 <span class="lineNum">    2129 </span>            : void
-<span class="lineNum">    2130 </span><span class="lineCov">         26 : ExecuteSoapAction(struct upnphttp * h, const char * action, int n)</span>
+<span class="lineNum">    2130 </span><span class="lineCov">         39 : ExecuteSoapAction(struct upnphttp * h, const char * action, int n)</span>
 <span class="lineNum">    2131 </span>            : {
 <span class="lineNum">    2132 </span>            :         char * p;
 <span class="lineNum">    2133 </span>            : 
-<span class="lineNum">    2134 </span><span class="lineCov">         26 :         p = strchr(action, '#');</span>
-<span class="lineNum">    2135 </span><span class="lineCov">         26 :         if(p)</span>
+<span class="lineNum">    2134 </span><span class="lineCov">         39 :         p = strchr(action, '#');</span>
+<span class="lineNum">    2135 </span><span class="lineCov">         39 :         if(p)</span>
 <span class="lineNum">    2136 </span>            :         {
-<span class="lineNum">    2137 </span><span class="lineCov">         26 :                 int i = 0;</span>
+<span class="lineNum">    2137 </span><span class="lineCov">         39 :                 int i = 0;</span>
 <span class="lineNum">    2138 </span>            :                 int len;
 <span class="lineNum">    2139 </span>            :                 int methodlen;
 <span class="lineNum">    2140 </span>            :                 char * p2;
-<span class="lineNum">    2141 </span><span class="lineCov">         26 :                 p++;</span>
-<span class="lineNum">    2142 </span><span class="lineCov">         26 :                 p2 = strchr(p, '&quot;');</span>
-<span class="lineNum">    2143 </span><span class="lineCov">         26 :                 if(p2)</span>
-<span class="lineNum">    2144 </span><span class="lineCov">         26 :                         methodlen = p2 - p;</span>
+<span class="lineNum">    2141 </span><span class="lineCov">         39 :                 p++;</span>
+<span class="lineNum">    2142 </span><span class="lineCov">         39 :                 p2 = strchr(p, '&quot;');</span>
+<span class="lineNum">    2143 </span><span class="lineCov">         39 :                 if(p2)</span>
+<span class="lineNum">    2144 </span><span class="lineCov">         39 :                         methodlen = p2 - p;</span>
 <span class="lineNum">    2145 </span>            :                 else
 <span class="lineNum">    2146 </span><span class="lineNoCov">          0 :                         methodlen = n - (p - action);</span>
-<span class="lineNum">    2147 </span><span class="lineCov">         26 :                 DPRINTF(E_DEBUG, L_HTTP, &quot;SoapMethod: %.*s\n&quot;, methodlen, p);</span>
-<span class="lineNum">    2148 </span><span class="lineCov">         89 :                 while(soapMethods[i].methodName)</span>
+<span class="lineNum">    2147 </span><span class="lineCov">         39 :                 DPRINTF(E_DEBUG, L_HTTP, &quot;SoapMethod: %.*s\n&quot;, methodlen, p);</span>
+<span class="lineNum">    2148 </span><span class="lineCov">        128 :                 while(soapMethods[i].methodName)</span>
 <span class="lineNum">    2149 </span>            :                 {
-<span class="lineNum">    2150 </span><span class="lineCov">         63 :                         len = strlen(soapMethods[i].methodName);</span>
-<span class="lineNum">    2151 </span><span class="lineCov">         63 :                         if(strncmp(p, soapMethods[i].methodName, len) == 0)</span>
+<span class="lineNum">    2150 </span><span class="lineCov">         89 :                         len = strlen(soapMethods[i].methodName);</span>
+<span class="lineNum">    2151 </span><span class="lineCov">         89 :                         if(strncmp(p, soapMethods[i].methodName, len) == 0)</span>
 <span class="lineNum">    2152 </span>            :                         {
-<span class="lineNum">    2153 </span><span class="lineCov">         26 :                                 soapMethods[i].methodImpl(h, soapMethods[i].methodName);</span>
-<span class="lineNum">    2154 </span><span class="lineCov">         26 :                                 return;</span>
+<span class="lineNum">    2153 </span><span class="lineCov">         39 :                                 soapMethods[i].methodImpl(h, soapMethods[i].methodName);</span>
+<span class="lineNum">    2154 </span><span class="lineCov">         39 :                                 return;</span>
 <span class="lineNum">    2155 </span>            :                         }
-<span class="lineNum">    2156 </span><span class="lineCov">         37 :                         i++;</span>
+<span class="lineNum">    2156 </span><span class="lineCov">         50 :                         i++;</span>
 <span class="lineNum">    2157 </span>            :                 }
 <span class="lineNum">    2158 </span>            : 
 <span class="lineNum">    2159 </span><span class="lineNoCov">          0 :                 DPRINTF(E_WARN, L_HTTP, &quot;SoapMethod: Unknown: %.*s\n&quot;, methodlen, p);</span>

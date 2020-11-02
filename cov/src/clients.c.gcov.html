@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">18</td>
             <td class="headerCovTableEntry">24</td>
-            <td class="headerCovTableEntryLo">70.8 %</td>
+            <td class="headerCovTableEntryMed">75.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-11-02 15:08:30</td>
+            <td class="headerValue">2020-11-02 23:20:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -357,16 +357,16 @@
 <span class="lineNum">     295 </span>            : struct client_cache_s clients[CLIENT_CACHE_SLOTS];
 <a name="296"><span class="lineNum">     296 </span>            : </a>
 <span class="lineNum">     297 </span>            : struct client_cache_s *
-<span class="lineNum">     298 </span><span class="lineCov">         40 : SearchClientCache(struct in_addr addr, int quiet)</span>
+<span class="lineNum">     298 </span><span class="lineCov">        137 : SearchClientCache(struct in_addr addr, int quiet)</span>
 <span class="lineNum">     299 </span>            : {
 <span class="lineNum">     300 </span>            :         int i;
 <span class="lineNum">     301 </span>            : 
-<span class="lineNum">     302 </span><span class="lineCov">         65 :         for (i = 0; i &lt; CLIENT_CACHE_SLOTS; i++)</span>
+<span class="lineNum">     302 </span><span class="lineCov">        329 :         for (i = 0; i &lt; CLIENT_CACHE_SLOTS; i++)</span>
 <span class="lineNum">     303 </span>            :         {
-<span class="lineNum">     304 </span><span class="lineCov">         64 :                 if (clients[i].addr.s_addr == addr.s_addr)</span>
+<span class="lineNum">     304 </span><span class="lineCov">        326 :                 if (clients[i].addr.s_addr == addr.s_addr)</span>
 <span class="lineNum">     305 </span>            :                 {
 <span class="lineNum">     306 </span>            :                         /* Invalidate this client cache if it's older than 1 hour */
-<span class="lineNum">     307 </span><span class="lineCov">         39 :                         if ((time(NULL) - clients[i].age) &gt; 3600)</span>
+<span class="lineNum">     307 </span><span class="lineCov">        134 :                         if ((time(NULL) - clients[i].age) &gt; 3600)</span>
 <span class="lineNum">     308 </span>            :                         {
 <span class="lineNum">     309 </span>            :                                 unsigned char mac[6];
 <span class="lineNum">     310 </span><span class="lineNoCov">          0 :                                 if (get_remote_mac(addr, mac) == 0 &amp;&amp;</span>
@@ -382,34 +382,34 @@
 <span class="lineNum">     320 </span><span class="lineNoCov">          0 :                                         return NULL;</span>
 <span class="lineNum">     321 </span>            :                                 }
 <span class="lineNum">     322 </span>            :                         }
-<span class="lineNum">     323 </span><span class="lineCov">         39 :                         if (!quiet)</span>
-<span class="lineNum">     324 </span><span class="lineCov">         39 :                                 DPRINTF(E_DEBUG, L_HTTP, &quot;Client found in cache. [%s/entry %d]\n&quot;,</span>
+<span class="lineNum">     323 </span><span class="lineCov">        134 :                         if (!quiet)</span>
+<span class="lineNum">     324 </span><span class="lineCov">        134 :                                 DPRINTF(E_DEBUG, L_HTTP, &quot;Client found in cache. [%s/entry %d]\n&quot;,</span>
 <span class="lineNum">     325 </span>            :                                         clients[i].type-&gt;name, i);
-<span class="lineNum">     326 </span><span class="lineCov">         39 :                         return &amp;clients[i];</span>
+<span class="lineNum">     326 </span><span class="lineCov">        134 :                         return &amp;clients[i];</span>
 <span class="lineNum">     327 </span>            :                 }
 <span class="lineNum">     328 </span>            :         }
 <span class="lineNum">     329 </span>            : 
-<span class="lineNum">     330 </span><span class="lineCov">          1 :         return NULL;</span>
+<span class="lineNum">     330 </span><span class="lineCov">          3 :         return NULL;</span>
 <span class="lineNum">     331 </span>            : }
 <a name="332"><span class="lineNum">     332 </span>            : </a>
 <span class="lineNum">     333 </span>            : struct client_cache_s *
-<span class="lineNum">     334 </span><span class="lineCov">          1 : AddClientCache(struct in_addr addr, int type)</span>
+<span class="lineNum">     334 </span><span class="lineCov">          3 : AddClientCache(struct in_addr addr, int type)</span>
 <span class="lineNum">     335 </span>            : {
 <span class="lineNum">     336 </span>            :         int i;
 <span class="lineNum">     337 </span>            : 
-<span class="lineNum">     338 </span><span class="lineCov">          2 :         for (i = 0; i &lt; CLIENT_CACHE_SLOTS; i++)</span>
+<span class="lineNum">     338 </span><span class="lineCov">         12 :         for (i = 0; i &lt; CLIENT_CACHE_SLOTS; i++)</span>
 <span class="lineNum">     339 </span>            :         {
-<span class="lineNum">     340 </span><span class="lineCov">          1 :                 if (clients[i].addr.s_addr)</span>
-<span class="lineNum">     341 </span><span class="lineNoCov">          0 :                         continue;</span>
-<span class="lineNum">     342 </span><span class="lineCov">          1 :                 get_remote_mac(addr, clients[i].mac);</span>
-<span class="lineNum">     343 </span><span class="lineCov">          1 :                 clients[i].addr = addr;</span>
-<span class="lineNum">     344 </span><span class="lineCov">          1 :                 clients[i].type = &amp;client_types[type];</span>
-<span class="lineNum">     345 </span><span class="lineCov">          1 :                 clients[i].age = time(NULL);</span>
-<span class="lineNum">     346 </span><span class="lineCov">          1 :                 DPRINTF(E_DEBUG, L_HTTP, &quot;Added client [%s/%s/%02X:%02X:%02X:%02X:%02X:%02X] to cache slot %d.\n&quot;,</span>
+<span class="lineNum">     340 </span><span class="lineCov">          6 :                 if (clients[i].addr.s_addr)</span>
+<span class="lineNum">     341 </span><span class="lineCov">          3 :                         continue;</span>
+<span class="lineNum">     342 </span><span class="lineCov">          3 :                 get_remote_mac(addr, clients[i].mac);</span>
+<span class="lineNum">     343 </span><span class="lineCov">          3 :                 clients[i].addr = addr;</span>
+<span class="lineNum">     344 </span><span class="lineCov">          3 :                 clients[i].type = &amp;client_types[type];</span>
+<span class="lineNum">     345 </span><span class="lineCov">          3 :                 clients[i].age = time(NULL);</span>
+<span class="lineNum">     346 </span><span class="lineCov">          3 :                 DPRINTF(E_DEBUG, L_HTTP, &quot;Added client [%s/%s/%02X:%02X:%02X:%02X:%02X:%02X] to cache slot %d.\n&quot;,</span>
 <span class="lineNum">     347 </span>            :                                         client_types[type].name, inet_ntoa(clients[i].addr),
 <span class="lineNum">     348 </span>            :                                         clients[i].mac[0], clients[i].mac[1], clients[i].mac[2],
 <span class="lineNum">     349 </span>            :                                         clients[i].mac[3], clients[i].mac[4], clients[i].mac[5], i);
-<span class="lineNum">     350 </span><span class="lineCov">          1 :                 return &amp;clients[i];</span>
+<span class="lineNum">     350 </span><span class="lineCov">          3 :                 return &amp;clients[i];</span>
 <span class="lineNum">     351 </span>            :         }
 <span class="lineNum">     352 </span>            : 
 <span class="lineNum">     353 </span><span class="lineNoCov">          0 :         return NULL;</span>

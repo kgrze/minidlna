@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-11-02 15:08:30</td>
+            <td class="headerValue">2020-11-02 23:20:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">10</td>
@@ -448,12 +448,12 @@
 <span class="lineNum">     386 </span>            :  * concatenate the string and use realloc to increase the
 <a name="387"><span class="lineNum">     387 </span>            :  * memory buffer if needed. */</a>
 <span class="lineNum">     388 </span>            : static char *
-<span class="lineNum">     389 </span><span class="lineCov">        726 : strcat_str(char * str, int * len, int * tmplen, const char * s2)</span>
+<span class="lineNum">     389 </span><span class="lineCov">       5655 : strcat_str(char * str, int * len, int * tmplen, const char * s2)</span>
 <span class="lineNum">     390 </span>            : {
 <span class="lineNum">     391 </span>            :         char *p;
 <span class="lineNum">     392 </span>            :         int s2len;
-<span class="lineNum">     393 </span><span class="lineCov">        726 :         s2len = (int)strlen(s2);</span>
-<span class="lineNum">     394 </span><span class="lineCov">        726 :         if(*tmplen &lt;= (*len + s2len))</span>
+<span class="lineNum">     393 </span><span class="lineCov">       5655 :         s2len = (int)strlen(s2);</span>
+<span class="lineNum">     394 </span><span class="lineCov">       5655 :         if(*tmplen &lt;= (*len + s2len))</span>
 <span class="lineNum">     395 </span>            :         {
 <span class="lineNum">     396 </span><span class="lineCov">         22 :                 if(s2len &lt; 256)</span>
 <span class="lineNum">     397 </span><span class="lineCov">         21 :                         *tmplen += 256;</span>
@@ -472,19 +472,19 @@
 <span class="lineNum">     410 </span><span class="lineCov">         22 :                         str = p;</span>
 <span class="lineNum">     411 </span>            :         }
 <span class="lineNum">     412 </span>            :         /*strcpy(str + *len, s2); */
-<span class="lineNum">     413 </span><span class="lineCov">        726 :         memcpy(str + *len, s2, s2len + 1);</span>
-<span class="lineNum">     414 </span><span class="lineCov">        726 :         *len += s2len;</span>
-<span class="lineNum">     415 </span><span class="lineCov">        726 :         return str;</span>
+<span class="lineNum">     413 </span><span class="lineCov">       5655 :         memcpy(str + *len, s2, s2len + 1);</span>
+<span class="lineNum">     414 </span><span class="lineCov">       5655 :         *len += s2len;</span>
+<span class="lineNum">     415 </span><span class="lineCov">       5655 :         return str;</span>
 <span class="lineNum">     416 </span>            : }
 <span class="lineNum">     417 </span>            : 
 <span class="lineNum">     418 </span>            : /* strcat_char() :
 <span class="lineNum">     419 </span>            :  * concatenate a character and use realloc to increase the
 <a name="420"><span class="lineNum">     420 </span>            :  * size of the memory buffer if needed */</a>
 <span class="lineNum">     421 </span>            : static char *
-<span class="lineNum">     422 </span><span class="lineCov">        337 : strcat_char(char * str, int * len, int * tmplen, char c)</span>
+<span class="lineNum">     422 </span><span class="lineCov">      10660 : strcat_char(char * str, int * len, int * tmplen, char c)</span>
 <span class="lineNum">     423 </span>            : {
 <span class="lineNum">     424 </span>            :         char *p;
-<span class="lineNum">     425 </span><span class="lineCov">        337 :         if(*tmplen &lt;= (*len + 1))</span>
+<span class="lineNum">     425 </span><span class="lineCov">      10660 :         if(*tmplen &lt;= (*len + 1))</span>
 <span class="lineNum">     426 </span>            :         {
 <span class="lineNum">     427 </span><span class="lineNoCov">          0 :                 *tmplen += 256;</span>
 <span class="lineNum">     428 </span><span class="lineNoCov">          0 :                 p = (char *)realloc(str, *tmplen);</span>
@@ -496,15 +496,15 @@
 <span class="lineNum">     434 </span>            :                 else
 <span class="lineNum">     435 </span><span class="lineNoCov">          0 :                         str = p;</span>
 <span class="lineNum">     436 </span>            :         }
-<span class="lineNum">     437 </span><span class="lineCov">        337 :         str[*len] = c;</span>
-<span class="lineNum">     438 </span><span class="lineCov">        337 :         (*len)++;</span>
-<span class="lineNum">     439 </span><span class="lineCov">        337 :         return str;</span>
+<span class="lineNum">     437 </span><span class="lineCov">      10660 :         str[*len] = c;</span>
+<span class="lineNum">     438 </span><span class="lineCov">      10660 :         (*len)++;</span>
+<span class="lineNum">     439 </span><span class="lineCov">      10660 :         return str;</span>
 <span class="lineNum">     440 </span>            : }
 <span class="lineNum">     441 </span>            : 
 <span class="lineNum">     442 </span>            : /* iterative subroutine using a small stack
 <a name="443"><span class="lineNum">     443 </span>            :  * This way, the progam stack usage is kept low */</a>
 <span class="lineNum">     444 </span>            : static char *
-<span class="lineNum">     445 </span><span class="lineCov">          1 : genXML(char * str, int * len, int * tmplen,</span>
+<span class="lineNum">     445 </span><span class="lineCov">         32 : genXML(char * str, int * len, int * tmplen,</span>
 <span class="lineNum">     446 </span>            :                    const struct XMLElt * p)
 <span class="lineNum">     447 </span>            : {
 <span class="lineNum">     448 </span>            :         uint16_t i, j, k;
@@ -517,51 +517,51 @@
 <span class="lineNum">     455 </span>            :                 unsigned short j;
 <span class="lineNum">     456 </span>            :                 const char * eltname;
 <span class="lineNum">     457 </span>            :         } pile[16]; /* stack */
-<span class="lineNum">     458 </span><span class="lineCov">          1 :         top = -1;</span>
-<span class="lineNum">     459 </span><span class="lineCov">          1 :         i = 0;  /* current node */</span>
-<span class="lineNum">     460 </span><span class="lineCov">          1 :         j = 1;  /* i + number of nodes*/</span>
+<span class="lineNum">     458 </span><span class="lineCov">         32 :         top = -1;</span>
+<span class="lineNum">     459 </span><span class="lineCov">         32 :         i = 0;  /* current node */</span>
+<span class="lineNum">     460 </span><span class="lineCov">         32 :         j = 1;  /* i + number of nodes*/</span>
 <span class="lineNum">     461 </span>            :         for(;;)
 <span class="lineNum">     462 </span>            :         {
-<span class="lineNum">     463 </span><span class="lineCov">        121 :                 eltname = p[i].eltname;</span>
-<span class="lineNum">     464 </span><span class="lineCov">         61 :                 if(!eltname)</span>
+<span class="lineNum">     463 </span><span class="lineCov">       3872 :                 eltname = p[i].eltname;</span>
+<span class="lineNum">     464 </span><span class="lineCov">       1952 :                 if(!eltname)</span>
 <span class="lineNum">     465 </span><span class="lineNoCov">          0 :                         return str;</span>
-<span class="lineNum">     466 </span><span class="lineCov">         61 :                 if(eltname[0] == '/')</span>
+<span class="lineNum">     466 </span><span class="lineCov">       1952 :                 if(eltname[0] == '/')</span>
 <span class="lineNum">     467 </span>            :                 {
 <span class="lineNum">     468 </span>            :                         #ifdef DESC_DEBUG
 <span class="lineNum">     469 </span>            :                         printf(&quot;DBG: &lt;%s&gt;%s&lt;%s&gt;\n&quot;, eltname+1, p[i].data, eltname);
 <span class="lineNum">     470 </span>            :                         #endif
-<span class="lineNum">     471 </span><span class="lineCov">         49 :                         str = strcat_char(str, len, tmplen, '&lt;');</span>
-<span class="lineNum">     472 </span><span class="lineCov">         49 :                         str = strcat_str(str, len, tmplen, eltname+1);</span>
-<span class="lineNum">     473 </span><span class="lineCov">         49 :                         str = strcat_char(str, len, tmplen, '&gt;');</span>
-<span class="lineNum">     474 </span><span class="lineCov">         49 :                         str = strcat_str(str, len, tmplen, p[i].data);</span>
-<span class="lineNum">     475 </span><span class="lineCov">         49 :                         str = strcat_char(str, len, tmplen, '&lt;');</span>
-<span class="lineNum">     476 </span><span class="lineCov">         49 :                         sscanf(eltname, &quot;%s&quot;, element);</span>
-<span class="lineNum">     477 </span><span class="lineCov">         49 :                         str = strcat_str(str, len, tmplen, element);</span>
-<span class="lineNum">     478 </span><span class="lineCov">         49 :                         str = strcat_char(str, len, tmplen, '&gt;');</span>
+<span class="lineNum">     471 </span><span class="lineCov">       1568 :                         str = strcat_char(str, len, tmplen, '&lt;');</span>
+<span class="lineNum">     472 </span><span class="lineCov">       1568 :                         str = strcat_str(str, len, tmplen, eltname+1);</span>
+<span class="lineNum">     473 </span><span class="lineCov">       1568 :                         str = strcat_char(str, len, tmplen, '&gt;');</span>
+<span class="lineNum">     474 </span><span class="lineCov">       1568 :                         str = strcat_str(str, len, tmplen, p[i].data);</span>
+<span class="lineNum">     475 </span><span class="lineCov">       1568 :                         str = strcat_char(str, len, tmplen, '&lt;');</span>
+<span class="lineNum">     476 </span><span class="lineCov">       1568 :                         sscanf(eltname, &quot;%s&quot;, element);</span>
+<span class="lineNum">     477 </span><span class="lineCov">       1568 :                         str = strcat_str(str, len, tmplen, element);</span>
+<span class="lineNum">     478 </span><span class="lineCov">       1568 :                         str = strcat_char(str, len, tmplen, '&gt;');</span>
 <span class="lineNum">     479 </span>            :                         for(;;)
 <span class="lineNum">     480 </span>            :                         {
-<span class="lineNum">     481 </span><span class="lineCov">         73 :                                 if(top &lt; 0)</span>
-<span class="lineNum">     482 </span><span class="lineCov">          1 :                                         return str;</span>
-<span class="lineNum">     483 </span><span class="lineCov">         60 :                                 i = ++(pile[top].i);</span>
-<span class="lineNum">     484 </span><span class="lineCov">         60 :                                 j = pile[top].j;</span>
+<span class="lineNum">     481 </span><span class="lineCov">       2336 :                                 if(top &lt; 0)</span>
+<span class="lineNum">     482 </span><span class="lineCov">         32 :                                         return str;</span>
+<span class="lineNum">     483 </span><span class="lineCov">       1920 :                                 i = ++(pile[top].i);</span>
+<span class="lineNum">     484 </span><span class="lineCov">       1920 :                                 j = pile[top].j;</span>
 <span class="lineNum">     485 </span>            :                                 #ifdef DESC_DEBUG
 <span class="lineNum">     486 </span>            :                                 printf(&quot;DBG:  pile[%d]\t%d %d\n&quot;, top, i, j); 
 <span class="lineNum">     487 </span>            :                                 #endif
-<span class="lineNum">     488 </span><span class="lineCov">         60 :                                 if(i==j)</span>
+<span class="lineNum">     488 </span><span class="lineCov">       1920 :                                 if(i==j)</span>
 <span class="lineNum">     489 </span>            :                                 {
 <span class="lineNum">     490 </span>            :                                         #ifdef DESC_DEBUG
 <span class="lineNum">     491 </span>            :                                         printf(&quot;DBG: i==j, &lt;/%s&gt;\n&quot;, pile[top].eltname); 
 <span class="lineNum">     492 </span>            :                                         #endif
-<span class="lineNum">     493 </span><span class="lineCov">         12 :                                         str = strcat_char(str, len, tmplen, '&lt;');</span>
-<span class="lineNum">     494 </span><span class="lineCov">         12 :                                         str = strcat_char(str, len, tmplen, '/');</span>
-<span class="lineNum">     495 </span><span class="lineCov">         12 :                                         s = pile[top].eltname;</span>
-<span class="lineNum">     496 </span><span class="lineCov">         89 :                                         for(c = *s; c &gt; ' '; c = *(++s))</span>
-<span class="lineNum">     497 </span><span class="lineCov">         77 :                                                 str = strcat_char(str, len, tmplen, c);</span>
-<span class="lineNum">     498 </span><span class="lineCov">         12 :                                         str = strcat_char(str, len, tmplen, '&gt;');</span>
-<span class="lineNum">     499 </span><span class="lineCov">         12 :                                         top--;</span>
+<span class="lineNum">     493 </span><span class="lineCov">        384 :                                         str = strcat_char(str, len, tmplen, '&lt;');</span>
+<span class="lineNum">     494 </span><span class="lineCov">        384 :                                         str = strcat_char(str, len, tmplen, '/');</span>
+<span class="lineNum">     495 </span><span class="lineCov">        384 :                                         s = pile[top].eltname;</span>
+<span class="lineNum">     496 </span><span class="lineCov">       2848 :                                         for(c = *s; c &gt; ' '; c = *(++s))</span>
+<span class="lineNum">     497 </span><span class="lineCov">       2464 :                                                 str = strcat_char(str, len, tmplen, c);</span>
+<span class="lineNum">     498 </span><span class="lineCov">        384 :                                         str = strcat_char(str, len, tmplen, '&gt;');</span>
+<span class="lineNum">     499 </span><span class="lineCov">        384 :                                         top--;</span>
 <span class="lineNum">     500 </span>            :                                 }
 <span class="lineNum">     501 </span>            :                                 else
-<span class="lineNum">     502 </span><span class="lineCov">         48 :                                         break;</span>
+<span class="lineNum">     502 </span><span class="lineCov">       1536 :                                         break;</span>
 <span class="lineNum">     503 </span>            :                         }
 <span class="lineNum">     504 </span>            :                 }
 <span class="lineNum">     505 </span>            :                 else
@@ -569,21 +569,21 @@
 <span class="lineNum">     507 </span>            :                         #ifdef DESC_DEBUG
 <span class="lineNum">     508 </span>            :                         printf(&quot;DBG: [%d] &lt;%s&gt;\n&quot;, i, eltname); 
 <span class="lineNum">     509 </span>            :                         #endif
-<span class="lineNum">     510 </span><span class="lineCov">         12 :                         str = strcat_char(str, len, tmplen, '&lt;');</span>
-<span class="lineNum">     511 </span><span class="lineCov">         12 :                         str = strcat_str(str, len, tmplen, eltname);</span>
-<span class="lineNum">     512 </span><span class="lineCov">         12 :                         str = strcat_char(str, len, tmplen, '&gt;');</span>
-<span class="lineNum">     513 </span><span class="lineCov">         12 :                         k = i;</span>
+<span class="lineNum">     510 </span><span class="lineCov">        384 :                         str = strcat_char(str, len, tmplen, '&lt;');</span>
+<span class="lineNum">     511 </span><span class="lineCov">        384 :                         str = strcat_str(str, len, tmplen, eltname);</span>
+<span class="lineNum">     512 </span><span class="lineCov">        384 :                         str = strcat_char(str, len, tmplen, '&gt;');</span>
+<span class="lineNum">     513 </span><span class="lineCov">        384 :                         k = i;</span>
 <span class="lineNum">     514 </span>            :                         /*i = p[k].index; */
 <span class="lineNum">     515 </span>            :                         /*j = i + p[k].nchild; */
-<span class="lineNum">     516 </span><span class="lineCov">         12 :                         i = (unsigned long)p[k].data &amp; 0xffff;</span>
-<span class="lineNum">     517 </span><span class="lineCov">         12 :                         j = i + ((unsigned long)p[k].data &gt;&gt; 16);</span>
-<span class="lineNum">     518 </span><span class="lineCov">         12 :                         top++;</span>
+<span class="lineNum">     516 </span><span class="lineCov">        384 :                         i = (unsigned long)p[k].data &amp; 0xffff;</span>
+<span class="lineNum">     517 </span><span class="lineCov">        384 :                         j = i + ((unsigned long)p[k].data &gt;&gt; 16);</span>
+<span class="lineNum">     518 </span><span class="lineCov">        384 :                         top++;</span>
 <span class="lineNum">     519 </span>            :                         #ifdef DESC_DEBUG
 <span class="lineNum">     520 </span>            :                         printf(&quot;DBG: +pile[%d]\t%d %d\n&quot;, top, i, j); 
 <span class="lineNum">     521 </span>            :                         #endif
-<span class="lineNum">     522 </span><span class="lineCov">         12 :                         pile[top].i = i;</span>
-<span class="lineNum">     523 </span><span class="lineCov">         12 :                         pile[top].j = j;</span>
-<span class="lineNum">     524 </span><span class="lineCov">         12 :                         pile[top].eltname = eltname;</span>
+<span class="lineNum">     522 </span><span class="lineCov">        384 :                         pile[top].i = i;</span>
+<span class="lineNum">     523 </span><span class="lineCov">        384 :                         pile[top].j = j;</span>
+<span class="lineNum">     524 </span><span class="lineCov">        384 :                         pile[top].eltname = eltname;</span>
 <span class="lineNum">     525 </span>            :                 }
 <span class="lineNum">     526 </span>            :         }
 <span class="lineNum">     527 </span>            : }
@@ -594,19 +594,19 @@
 <span class="lineNum">     532 </span>            :  *   the returned string. 
 <a name="533"><span class="lineNum">     533 </span>            :  * - tmp_uuid argument is used to build the uuid string */</a>
 <span class="lineNum">     534 </span>            : char *
-<span class="lineNum">     535 </span><span class="lineCov">          1 : genRootDesc(int * len)</span>
+<span class="lineNum">     535 </span><span class="lineCov">         32 : genRootDesc(int * len)</span>
 <span class="lineNum">     536 </span>            : {
 <span class="lineNum">     537 </span>            :         char * str;
 <span class="lineNum">     538 </span>            :         int tmplen;
-<span class="lineNum">     539 </span><span class="lineCov">          1 :         tmplen = 2560;</span>
-<span class="lineNum">     540 </span><span class="lineCov">          1 :         str = (char *)malloc(tmplen);</span>
-<span class="lineNum">     541 </span><span class="lineCov">          1 :         if(str == NULL)</span>
+<span class="lineNum">     539 </span><span class="lineCov">         32 :         tmplen = 2560;</span>
+<span class="lineNum">     540 </span><span class="lineCov">         32 :         str = (char *)malloc(tmplen);</span>
+<span class="lineNum">     541 </span><span class="lineCov">         32 :         if(str == NULL)</span>
 <span class="lineNum">     542 </span><span class="lineNoCov">          0 :                 return NULL;</span>
-<span class="lineNum">     543 </span><span class="lineCov">          1 :         * len = strlen(xmlver);</span>
-<span class="lineNum">     544 </span><span class="lineCov">          1 :         memcpy(str, xmlver, *len + 1);</span>
-<span class="lineNum">     545 </span><span class="lineCov">          1 :         str = genXML(str, len, &amp;tmplen, rootDesc);</span>
-<span class="lineNum">     546 </span><span class="lineCov">          1 :         str[*len] = '\0';</span>
-<span class="lineNum">     547 </span><span class="lineCov">          1 :         return str;</span>
+<span class="lineNum">     543 </span><span class="lineCov">         32 :         * len = strlen(xmlver);</span>
+<span class="lineNum">     544 </span><span class="lineCov">         32 :         memcpy(str, xmlver, *len + 1);</span>
+<span class="lineNum">     545 </span><span class="lineCov">         32 :         str = genXML(str, len, &amp;tmplen, rootDesc);</span>
+<span class="lineNum">     546 </span><span class="lineCov">         32 :         str[*len] = '\0';</span>
+<span class="lineNum">     547 </span><span class="lineCov">         32 :         return str;</span>
 <span class="lineNum">     548 </span>            : }
 <a name="549"><span class="lineNum">     549 </span>            : </a>
 <span class="lineNum">     550 </span>            : char *

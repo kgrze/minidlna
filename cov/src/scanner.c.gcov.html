@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">199</td>
-            <td class="headerCovTableEntry">428</td>
-            <td class="headerCovTableEntryLo">46.5 %</td>
+            <td class="headerCovTableEntry">184</td>
+            <td class="headerCovTableEntry">379</td>
+            <td class="headerCovTableEntryLo">48.5 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-11-02 15:08:30</td>
+            <td class="headerValue">2020-11-02 23:20:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">10</td>
-            <td class="headerCovTableEntry">19</td>
-            <td class="headerCovTableEntryLo">52.6 %</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntryLo">58.8 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -462,34 +462,34 @@
 <span class="lineNum">     400 </span><span class="lineCov">          2 :                 snprintf(refID, sizeof(refID), &quot;%s%s$%X&quot;, BROWSEDIR_ID, parentID, objectID);</span>
 <span class="lineNum">     401 </span><span class="lineCov">          2 :                 snprintf(id_buf, sizeof(id_buf), &quot;%s%s$%X&quot;, base, parentID, objectID);</span>
 <span class="lineNum">     402 </span><span class="lineCov">          2 :                 snprintf(parent_buf, sizeof(parent_buf), &quot;%s%s&quot;, base, parentID);</span>
-<span class="lineNum">     403 </span><span class="lineCov">          6 :                 while( !found )</span>
+<span class="lineNum">     403 </span><span class="lineCov">          8 :                 while( !found )</span>
 <span class="lineNum">     404 </span>            :                 {
-<span class="lineNum">     405 </span><span class="lineCov">          4 :                         if( valid_cache &amp;&amp; strcmp(id_buf, last_found) == 0 )</span>
+<span class="lineNum">     405 </span><span class="lineCov">          6 :                         if( valid_cache &amp;&amp; strcmp(id_buf, last_found) == 0 )</span>
 <span class="lineNum">     406 </span><span class="lineNoCov">          0 :                                 break;</span>
-<span class="lineNum">     407 </span><span class="lineCov">          4 :                         if( sql_get_int_field(db, &quot;SELECT count(*) from OBJECTS where OBJECT_ID = '%s'&quot;, id_buf) &gt; 0 )</span>
+<span class="lineNum">     407 </span><span class="lineCov">          6 :                         if( sql_get_int_field(db, &quot;SELECT count(*) from OBJECTS where OBJECT_ID = '%s'&quot;, id_buf) &gt; 0 )</span>
 <span class="lineNum">     408 </span>            :                         {
 <span class="lineNum">     409 </span><span class="lineCov">          2 :                                 strcpy(last_found, id_buf);</span>
 <span class="lineNum">     410 </span><span class="lineCov">          2 :                                 break;</span>
 <span class="lineNum">     411 </span>            :                         }
 <span class="lineNum">     412 </span>            :                         /* Does not exist.  Need to create, and may need to create parents also */
-<span class="lineNum">     413 </span><span class="lineCov">          2 :                         result = sql_get_text_field(db, &quot;SELECT DETAIL_ID from OBJECTS where OBJECT_ID = '%s'&quot;, refID);</span>
-<span class="lineNum">     414 </span><span class="lineCov">          2 :                         if( result )</span>
+<span class="lineNum">     413 </span><span class="lineCov">          4 :                         result = sql_get_text_field(db, &quot;SELECT DETAIL_ID from OBJECTS where OBJECT_ID = '%s'&quot;, refID);</span>
+<span class="lineNum">     414 </span><span class="lineCov">          4 :                         if( result )</span>
 <span class="lineNum">     415 </span>            :                         {
-<span class="lineNum">     416 </span><span class="lineCov">          2 :                                 detailID = strtoll(result, NULL, 10);</span>
-<span class="lineNum">     417 </span><span class="lineCov">          2 :                                 sqlite3_free(result);</span>
+<span class="lineNum">     416 </span><span class="lineCov">          4 :                                 detailID = strtoll(result, NULL, 10);</span>
+<span class="lineNum">     417 </span><span class="lineCov">          4 :                                 sqlite3_free(result);</span>
 <span class="lineNum">     418 </span>            :                         }
-<span class="lineNum">     419 </span><span class="lineCov">          2 :                         sql_exec(db, &quot;INSERT into OBJECTS&quot;</span>
+<span class="lineNum">     419 </span><span class="lineCov">          4 :                         sql_exec(db, &quot;INSERT into OBJECTS&quot;</span>
 <span class="lineNum">     420 </span>            :                                      &quot; (OBJECT_ID, PARENT_ID, REF_ID, DETAIL_ID, CLASS, NAME) &quot;
 <span class="lineNum">     421 </span>            :                                      &quot;VALUES&quot;
 <span class="lineNum">     422 </span>            :                                      &quot; ('%s', '%s', %Q, %lld, '%s', '%q')&quot;,
-<span class="lineNum">     423 </span><span class="lineCov">          2 :                                      id_buf, parent_buf, refID, detailID, class, strrchr(dir, '/')+1);</span>
-<span class="lineNum">     424 </span><span class="lineCov">          2 :                         if( (p = strrchr(id_buf, '$')) )</span>
-<span class="lineNum">     425 </span><span class="lineCov">          2 :                                 *p = '\0';</span>
-<span class="lineNum">     426 </span><span class="lineCov">          2 :                         if( (p = strrchr(parent_buf, '$')) )</span>
+<span class="lineNum">     423 </span><span class="lineCov">          4 :                                      id_buf, parent_buf, refID, detailID, class, strrchr(dir, '/')+1);</span>
+<span class="lineNum">     424 </span><span class="lineCov">          4 :                         if( (p = strrchr(id_buf, '$')) )</span>
+<span class="lineNum">     425 </span><span class="lineCov">          3 :                                 *p = '\0';</span>
+<span class="lineNum">     426 </span><span class="lineCov">          4 :                         if( (p = strrchr(parent_buf, '$')) )</span>
 <span class="lineNum">     427 </span><span class="lineCov">          2 :                                 *p = '\0';</span>
-<span class="lineNum">     428 </span><span class="lineCov">          2 :                         if( (p = strrchr(refID, '$')) )</span>
+<span class="lineNum">     428 </span><span class="lineCov">          4 :                         if( (p = strrchr(refID, '$')) )</span>
 <span class="lineNum">     429 </span><span class="lineCov">          2 :                                 *p = '\0';</span>
-<span class="lineNum">     430 </span><span class="lineCov">          2 :                         dir = dirname(dir);</span>
+<span class="lineNum">     430 </span><span class="lineCov">          4 :                         dir = dirname(dir);</span>
 <span class="lineNum">     431 </span>            :                 }
 <span class="lineNum">     432 </span><span class="lineCov">          2 :                 free(dir_buf);</span>
 <span class="lineNum">     433 </span><span class="lineCov">          2 :                 return 0;</span>
@@ -570,407 +570,316 @@
 <span class="lineNum">     508 </span><span class="lineCov">          1 : CreateDatabase(void)</span>
 <span class="lineNum">     509 </span>            : {
 <span class="lineNum">     510 </span>            :         int ret, i;
-<span class="lineNum">     511 </span><span class="lineCov">         17 :         const char *containers[] = { &quot;0&quot;,&quot;-1&quot;,   &quot;root&quot;,</span>
-<span class="lineNum">     512 </span><span class="lineCov">          1 :                                 MUSIC_ID, &quot;0&quot;, _(&quot;Music&quot;),</span>
-<span class="lineNum">     513 </span><span class="lineCov">          1 :                             MUSIC_ALL_ID, MUSIC_ID, _(&quot;All Music&quot;),</span>
-<span class="lineNum">     514 </span><span class="lineCov">          1 :                           MUSIC_GENRE_ID, MUSIC_ID, _(&quot;Genre&quot;),</span>
-<span class="lineNum">     515 </span><span class="lineCov">          1 :                          MUSIC_ARTIST_ID, MUSIC_ID, _(&quot;Artist&quot;),</span>
-<span class="lineNum">     516 </span><span class="lineCov">          1 :                           MUSIC_ALBUM_ID, MUSIC_ID, _(&quot;Album&quot;),</span>
-<span class="lineNum">     517 </span><span class="lineCov">          1 :                             MUSIC_DIR_ID, MUSIC_ID, _(&quot;Folders&quot;),</span>
-<span class="lineNum">     518 </span><span class="lineCov">          1 :                           MUSIC_PLIST_ID, MUSIC_ID, _(&quot;Playlists&quot;),</span>
-<span class="lineNum">     519 </span>            : 
-<span class="lineNum">     520 </span><span class="lineCov">          1 :                                 VIDEO_ID, &quot;0&quot;, _(&quot;Video&quot;),</span>
-<span class="lineNum">     521 </span><span class="lineCov">          1 :                             VIDEO_ALL_ID, VIDEO_ID, _(&quot;All Video&quot;),</span>
-<span class="lineNum">     522 </span><span class="lineCov">          1 :                             VIDEO_DIR_ID, VIDEO_ID, _(&quot;Folders&quot;),</span>
-<span class="lineNum">     523 </span>            : 
-<span class="lineNum">     524 </span><span class="lineCov">          1 :                                 IMAGE_ID, &quot;0&quot;, _(&quot;Pictures&quot;),</span>
-<span class="lineNum">     525 </span><span class="lineCov">          1 :                             IMAGE_ALL_ID, IMAGE_ID, _(&quot;All Pictures&quot;),</span>
-<span class="lineNum">     526 </span><span class="lineCov">          1 :                            IMAGE_DATE_ID, IMAGE_ID, _(&quot;Date Taken&quot;),</span>
-<span class="lineNum">     527 </span><span class="lineCov">          1 :                          IMAGE_CAMERA_ID, IMAGE_ID, _(&quot;Camera&quot;),</span>
-<span class="lineNum">     528 </span><span class="lineCov">          1 :                             IMAGE_DIR_ID, IMAGE_ID, _(&quot;Folders&quot;),</span>
-<span class="lineNum">     529 </span>            : 
-<span class="lineNum">     530 </span><span class="lineCov">          1 :                             BROWSEDIR_ID, &quot;0&quot;, _(&quot;Browse Folders&quot;),</span>
-<span class="lineNum">     531 </span>            :                         0 };
-<span class="lineNum">     532 </span>            : 
-<span class="lineNum">     533 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_objectTable_sqlite);</span>
+<span class="lineNum">     511 </span><span class="lineCov">          2 :         const char *containers[] = { &quot;0&quot;,&quot;-1&quot;,   &quot;root&quot;,</span>
+<span class="lineNum">     512 </span><span class="lineCov">          1 :                                         BROWSEDIR_ID, &quot;0&quot;, _(&quot;VIDEO&quot;),</span>
+<span class="lineNum">     513 </span>            :                                                        0};
+<span class="lineNum">     514 </span>            : 
+<span class="lineNum">     515 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_objectTable_sqlite);</span>
+<span class="lineNum">     516 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
+<span class="lineNum">     517 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
+<span class="lineNum">     518 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_detailTable_sqlite);</span>
+<span class="lineNum">     519 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
+<span class="lineNum">     520 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
+<span class="lineNum">     521 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_captionTable_sqlite);</span>
+<span class="lineNum">     522 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
+<span class="lineNum">     523 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
+<span class="lineNum">     524 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_bookmarkTable_sqlite);</span>
+<span class="lineNum">     525 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
+<span class="lineNum">     526 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
+<span class="lineNum">     527 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_playlistTable_sqlite);</span>
+<span class="lineNum">     528 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
+<span class="lineNum">     529 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
+<span class="lineNum">     530 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_settingsTable_sqlite);</span>
+<span class="lineNum">     531 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
+<span class="lineNum">     532 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
+<span class="lineNum">     533 </span><span class="lineCov">          1 :         ret = sql_exec(db, &quot;INSERT into SETTINGS values ('UPDATE_ID', '0')&quot;);</span>
 <span class="lineNum">     534 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
 <span class="lineNum">     535 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
-<span class="lineNum">     536 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_detailTable_sqlite);</span>
-<span class="lineNum">     537 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
-<span class="lineNum">     538 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
-<span class="lineNum">     539 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_captionTable_sqlite);</span>
-<span class="lineNum">     540 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
-<span class="lineNum">     541 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
-<span class="lineNum">     542 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_bookmarkTable_sqlite);</span>
-<span class="lineNum">     543 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
-<span class="lineNum">     544 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
-<span class="lineNum">     545 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_playlistTable_sqlite);</span>
-<span class="lineNum">     546 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
-<span class="lineNum">     547 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
-<span class="lineNum">     548 </span><span class="lineCov">          1 :         ret = sql_exec(db, create_settingsTable_sqlite);</span>
-<span class="lineNum">     549 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
-<span class="lineNum">     550 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
-<span class="lineNum">     551 </span><span class="lineCov">          1 :         ret = sql_exec(db, &quot;INSERT into SETTINGS values ('UPDATE_ID', '0')&quot;);</span>
-<span class="lineNum">     552 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
-<span class="lineNum">     553 </span><span class="lineNoCov">          0 :                 goto sql_failed;</span>
-<span class="lineNum">     554 </span><span class="lineCov">         18 :         for( i=0; containers[i]; i=i+3 )</span>
-<span class="lineNum">     555 </span>            :         {
-<span class="lineNum">     556 </span><span class="lineCov">         51 :                 ret = sql_exec(db, &quot;INSERT into OBJECTS (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME)&quot;</span>
-<span class="lineNum">     557 </span>            :                                    &quot; values &quot;
-<span class="lineNum">     558 </span>            :                                    &quot;('%s', '%s', %lld, 'container.storageFolder', '%q')&quot;,
-<span class="lineNum">     559 </span><span class="lineCov">         51 :                                    containers[i], containers[i+1], GetFolderMetadata(containers[i+2], NULL, NULL, NULL), containers[i+2]);</span>
-<span class="lineNum">     560 </span><span class="lineCov">         17 :                 if( ret != SQLITE_OK )</span>
-<span class="lineNum">     561 </span><span class="lineNoCov">          0 :                         goto sql_failed;</span>
-<span class="lineNum">     562 </span>            :         }
-<span class="lineNum">     563 </span><span class="lineCov">         21 :         for( i=0; magic_containers[i].objectid_match; i++ )</span>
-<span class="lineNum">     564 </span>            :         {
-<span class="lineNum">     565 </span><span class="lineCov">         20 :                 struct magic_container_s *magic = &amp;magic_containers[i];</span>
-<span class="lineNum">     566 </span><span class="lineCov">         20 :                 if (!magic-&gt;name)</span>
-<span class="lineNum">     567 </span><span class="lineCov">         17 :                         continue;</span>
-<span class="lineNum">     568 </span><span class="lineCov">          3 :                 if( sql_get_int_field(db, &quot;SELECT 1 from OBJECTS where OBJECT_ID = '%s'&quot;, magic-&gt;objectid_match) == 0 )</span>
-<span class="lineNum">     569 </span>            :                 {
-<span class="lineNum">     570 </span><span class="lineCov">          3 :                         char *parent = strdup(magic-&gt;objectid_match);</span>
-<span class="lineNum">     571 </span><span class="lineCov">          3 :                         if (strrchr(parent, '$'))</span>
-<span class="lineNum">     572 </span><span class="lineCov">          3 :                                 *strrchr(parent, '$') = '\0';</span>
-<span class="lineNum">     573 </span><span class="lineCov">          6 :                         ret = sql_exec(db, &quot;INSERT into OBJECTS (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME)&quot;</span>
-<span class="lineNum">     574 </span>            :                                            &quot; values &quot;
-<span class="lineNum">     575 </span>            :                                            &quot;('%s', '%s', %lld, 'container.storageFolder', '%q')&quot;,
-<span class="lineNum">     576 </span>            :                                            magic-&gt;objectid_match, parent,
-<span class="lineNum">     577 </span><span class="lineCov">          3 :                                            GetFolderMetadata(_(magic-&gt;name), NULL, NULL, NULL), _(magic-&gt;name));</span>
-<span class="lineNum">     578 </span><span class="lineCov">          3 :                         free(parent);</span>
-<span class="lineNum">     579 </span><span class="lineCov">          3 :                         if( ret != SQLITE_OK )</span>
-<span class="lineNum">     580 </span><span class="lineNoCov">          0 :                                 goto sql_failed;</span>
-<span class="lineNum">     581 </span>            :                 }
-<span class="lineNum">     582 </span>            :         }
-<span class="lineNum">     583 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_OBJECTS_OBJECT_ID ON OBJECTS(OBJECT_ID);&quot;);</span>
-<span class="lineNum">     584 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_OBJECTS_PARENT_ID ON OBJECTS(PARENT_ID);&quot;);</span>
-<span class="lineNum">     585 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_OBJECTS_DETAIL_ID ON OBJECTS(DETAIL_ID);&quot;);</span>
-<span class="lineNum">     586 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_OBJECTS_CLASS ON OBJECTS(CLASS);&quot;);</span>
-<span class="lineNum">     587 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_DETAILS_PATH ON DETAILS(PATH);&quot;);</span>
-<span class="lineNum">     588 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_DETAILS_ID ON DETAILS(ID);&quot;);</span>
-<span class="lineNum">     589 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_SCANNER_OPT ON OBJECTS(PARENT_ID, NAME, OBJECT_ID);&quot;);</span>
-<span class="lineNum">     590 </span>            : 
-<span class="lineNum">     591 </span><span class="lineCov">          1 : sql_failed:</span>
-<span class="lineNum">     592 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
-<span class="lineNum">     593 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_DB_SQL, &quot;Error creating SQLite3 database!\n&quot;);</span>
-<span class="lineNum">     594 </span><span class="lineCov">          1 :         return (ret != SQLITE_OK);</span>
-<span class="lineNum">     595 </span>            : }
-<a name="596"><span class="lineNum">     596 </span>            : </a>
-<span class="lineNum">     597 </span>            : static inline int
-<span class="lineNum">     598 </span><span class="lineCov">         16 : filter_hidden(scan_filter *d)</span>
-<span class="lineNum">     599 </span>            : {
-<span class="lineNum">     600 </span><span class="lineCov">         16 :         return (d-&gt;d_name[0] != '.');</span>
-<span class="lineNum">     601 </span>            : }
-<a name="602"><span class="lineNum">     602 </span>            : </a>
-<span class="lineNum">     603 </span>            : static int
-<span class="lineNum">     604 </span><span class="lineCov">         10 : filter_type(scan_filter *d)</span>
-<span class="lineNum">     605 </span>            : {
-<span class="lineNum">     606 </span>            : #if HAVE_STRUCT_DIRENT_D_TYPE
-<span class="lineNum">     607 </span><span class="lineCov">         18 :         return ( (d-&gt;d_type == DT_DIR) ||</span>
-<span class="lineNum">     608 </span><span class="lineCov">         18 :                  (d-&gt;d_type == DT_LNK) ||</span>
-<span class="lineNum">     609 </span><span class="lineCov">          8 :                  (d-&gt;d_type == DT_UNKNOWN)</span>
-<span class="lineNum">     610 </span>            :                 );
-<span class="lineNum">     611 </span>            : #else
-<span class="lineNum">     612 </span>            :         return 1;
-<span class="lineNum">     613 </span>            : #endif
-<span class="lineNum">     614 </span>            : }
-<a name="615"><span class="lineNum">     615 </span>            : </a>
-<span class="lineNum">     616 </span>            : static int
-<span class="lineNum">     617 </span><span class="lineNoCov">          0 : filter_a(scan_filter *d)</span>
-<span class="lineNum">     618 </span>            : {
-<span class="lineNum">     619 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
-<span class="lineNum">     620 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
-<span class="lineNum">     621 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
-<span class="lineNum">     622 </span><span class="lineNoCov">          0 :                    (is_audio(d-&gt;d_name) )))</span>
-<span class="lineNum">     623 </span>            :                 );
-<span class="lineNum">     624 </span>            : }
-<a name="625"><span class="lineNum">     625 </span>            : </a>
-<span class="lineNum">     626 </span>            : static int
-<span class="lineNum">     627 </span><span class="lineNoCov">          0 : filter_av(scan_filter *d)</span>
-<span class="lineNum">     628 </span>            : {
-<span class="lineNum">     629 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
-<span class="lineNum">     630 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
-<span class="lineNum">     631 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
-<span class="lineNum">     632 </span><span class="lineNoCov">          0 :                    (is_audio(d-&gt;d_name) ||</span>
-<span class="lineNum">     633 </span><span class="lineNoCov">          0 :                     is_video(d-&gt;d_name) ||</span>
-<span class="lineNum">     634 </span><span class="lineNoCov">          0 :                     is_playlist(d-&gt;d_name))))</span>
-<span class="lineNum">     635 </span>            :                 );
-<span class="lineNum">     636 </span>            : }
-<a name="637"><span class="lineNum">     637 </span>            : </a>
-<span class="lineNum">     638 </span>            : static int
-<span class="lineNum">     639 </span><span class="lineNoCov">          0 : filter_ap(scan_filter *d)</span>
-<span class="lineNum">     640 </span>            : {
-<span class="lineNum">     641 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
-<span class="lineNum">     642 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
-<span class="lineNum">     643 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
-<span class="lineNum">     644 </span><span class="lineNoCov">          0 :                    (is_audio(d-&gt;d_name) ||</span>
-<span class="lineNum">     645 </span><span class="lineNoCov">          0 :                     is_image(d-&gt;d_name) ||</span>
-<span class="lineNum">     646 </span><span class="lineNoCov">          0 :                     is_playlist(d-&gt;d_name))))</span>
-<span class="lineNum">     647 </span>            :                 );
-<span class="lineNum">     648 </span>            : }
-<a name="649"><span class="lineNum">     649 </span>            : </a>
-<span class="lineNum">     650 </span>            : static int
-<span class="lineNum">     651 </span><span class="lineNoCov">          0 : filter_v(scan_filter *d)</span>
-<span class="lineNum">     652 </span>            : {
-<span class="lineNum">     653 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
-<span class="lineNum">     654 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
-<span class="lineNum">     655 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
-<span class="lineNum">     656 </span><span class="lineNoCov">          0 :                    is_video(d-&gt;d_name)))</span>
-<span class="lineNum">     657 </span>            :                 );
-<span class="lineNum">     658 </span>            : }
-<a name="659"><span class="lineNum">     659 </span>            : </a>
-<span class="lineNum">     660 </span>            : static int
-<span class="lineNum">     661 </span><span class="lineNoCov">          0 : filter_vp(scan_filter *d)</span>
-<span class="lineNum">     662 </span>            : {
-<span class="lineNum">     663 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
-<span class="lineNum">     664 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
-<span class="lineNum">     665 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
-<span class="lineNum">     666 </span><span class="lineNoCov">          0 :                    (is_video(d-&gt;d_name) ||</span>
-<span class="lineNum">     667 </span><span class="lineNoCov">          0 :                     is_image(d-&gt;d_name))))</span>
-<span class="lineNum">     668 </span>            :                 );
-<span class="lineNum">     669 </span>            : }
-<a name="670"><span class="lineNum">     670 </span>            : </a>
-<span class="lineNum">     671 </span>            : static int
-<span class="lineNum">     672 </span><span class="lineNoCov">          0 : filter_p(scan_filter *d)</span>
-<span class="lineNum">     673 </span>            : {
-<span class="lineNum">     674 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
-<span class="lineNum">     675 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
-<span class="lineNum">     676 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
-<span class="lineNum">     677 </span><span class="lineNoCov">          0 :                    is_image(d-&gt;d_name)))</span>
-<span class="lineNum">     678 </span>            :                 );
-<span class="lineNum">     679 </span>            : }
-<a name="680"><span class="lineNum">     680 </span>            : </a>
-<span class="lineNum">     681 </span>            : static int
-<span class="lineNum">     682 </span><span class="lineCov">         16 : filter_avp(scan_filter *d)</span>
-<span class="lineNum">     683 </span>            : {
-<span class="lineNum">     684 </span><span class="lineCov">         34 :         return ( filter_hidden(d) &amp;&amp;</span>
-<span class="lineNum">     685 </span><span class="lineCov">         18 :                  (filter_type(d) ||</span>
-<span class="lineNum">     686 </span><span class="lineCov">         16 :                   (is_reg(d) &amp;&amp;</span>
-<span class="lineNum">     687 </span><span class="lineCov">         13 :                    (is_audio(d-&gt;d_name) ||</span>
-<span class="lineNum">     688 </span><span class="lineCov">          8 :                     is_image(d-&gt;d_name) ||</span>
-<span class="lineNum">     689 </span><span class="lineCov">          3 :                     is_video(d-&gt;d_name))))</span>
-<span class="lineNum">     690 </span>            :                 );
-<span class="lineNum">     691 </span>            : }
-<a name="692"><span class="lineNum">     692 </span>            : </a>
-<span class="lineNum">     693 </span>            : static void
-<span class="lineNum">     694 </span><span class="lineCov">          3 : ScanDirectory(const char *dir, const char *parent, media_types dir_types)</span>
-<span class="lineNum">     695 </span>            : {
-<span class="lineNum">     696 </span>            :         struct dirent **namelist;
-<span class="lineNum">     697 </span><span class="lineCov">          3 :         int i, n, startID = 0;</span>
-<span class="lineNum">     698 </span>            :         char *full_path;
-<span class="lineNum">     699 </span><span class="lineCov">          3 :         char *name = NULL;</span>
-<span class="lineNum">     700 </span>            :         static long long unsigned int fileno = 0;
-<span class="lineNum">     701 </span>            :         enum file_types type;
-<span class="lineNum">     702 </span>            : 
-<span class="lineNum">     703 </span><span class="lineCov">          3 :         DPRINTF(parent?E_INFO:E_WARN, L_SCANNER, _(&quot;Scanning %s\n&quot;), dir);</span>
-<span class="lineNum">     704 </span><span class="lineCov">          3 :         switch( dir_types )</span>
-<span class="lineNum">     705 </span>            :         {
-<span class="lineNum">     706 </span><span class="lineCov">          3 :                 case ALL_MEDIA:</span>
-<span class="lineNum">     707 </span><span class="lineCov">          3 :                         n = scandir(dir, &amp;namelist, filter_avp, alphasort);</span>
-<span class="lineNum">     708 </span><span class="lineCov">          3 :                         break;</span>
-<span class="lineNum">     709 </span><span class="lineNoCov">          0 :                 case TYPE_AUDIO:</span>
-<span class="lineNum">     710 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_a, alphasort);</span>
-<span class="lineNum">     711 </span><span class="lineNoCov">          0 :                         break;</span>
-<span class="lineNum">     712 </span><span class="lineNoCov">          0 :                 case TYPE_AUDIO|TYPE_VIDEO:</span>
-<span class="lineNum">     713 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_av, alphasort);</span>
-<span class="lineNum">     714 </span><span class="lineNoCov">          0 :                         break;</span>
-<span class="lineNum">     715 </span><span class="lineNoCov">          0 :                 case TYPE_AUDIO|TYPE_IMAGE:</span>
-<span class="lineNum">     716 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_ap, alphasort);</span>
-<span class="lineNum">     717 </span><span class="lineNoCov">          0 :                         break;</span>
-<span class="lineNum">     718 </span><span class="lineNoCov">          0 :                 case TYPE_VIDEO:</span>
-<span class="lineNum">     719 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_v, alphasort);</span>
-<span class="lineNum">     720 </span><span class="lineNoCov">          0 :                         break;</span>
-<span class="lineNum">     721 </span><span class="lineNoCov">          0 :                 case TYPE_VIDEO|TYPE_IMAGE:</span>
-<span class="lineNum">     722 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_vp, alphasort);</span>
-<span class="lineNum">     723 </span><span class="lineNoCov">          0 :                         break;</span>
-<span class="lineNum">     724 </span><span class="lineNoCov">          0 :                 case TYPE_IMAGE:</span>
-<span class="lineNum">     725 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_p, alphasort);</span>
-<span class="lineNum">     726 </span><span class="lineNoCov">          0 :                         break;</span>
-<span class="lineNum">     727 </span><span class="lineNoCov">          0 :                 default:</span>
-<span class="lineNum">     728 </span><span class="lineNoCov">          0 :                         n = -1;</span>
-<span class="lineNum">     729 </span><span class="lineNoCov">          0 :                         errno = EINVAL;</span>
-<span class="lineNum">     730 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     536 </span><span class="lineCov">          3 :         for( i=0; containers[i]; i=i+3 )</span>
+<span class="lineNum">     537 </span>            :         {
+<span class="lineNum">     538 </span><span class="lineCov">          6 :                 ret = sql_exec(db, &quot;INSERT into OBJECTS (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME)&quot;</span>
+<span class="lineNum">     539 </span>            :                                    &quot; values &quot;
+<span class="lineNum">     540 </span>            :                                    &quot;('%s', '%s', %lld, 'container.storageFolder', '%q')&quot;,
+<span class="lineNum">     541 </span><span class="lineCov">          6 :                                    containers[i], containers[i+1], GetFolderMetadata(containers[i+2], NULL, NULL, NULL), containers[i+2]);</span>
+<span class="lineNum">     542 </span><span class="lineCov">          2 :                 if( ret != SQLITE_OK )</span>
+<span class="lineNum">     543 </span><span class="lineNoCov">          0 :                         goto sql_failed;</span>
+<span class="lineNum">     544 </span>            :         }
+<span class="lineNum">     545 </span><span class="lineCov">         21 :         for( i=0; magic_containers[i].objectid_match; i++ )</span>
+<span class="lineNum">     546 </span>            :         {
+<span class="lineNum">     547 </span><span class="lineCov">         20 :                 struct magic_container_s *magic = &amp;magic_containers[i];</span>
+<span class="lineNum">     548 </span><span class="lineCov">         20 :                 if (!magic-&gt;name)</span>
+<span class="lineNum">     549 </span><span class="lineCov">         17 :                         continue;</span>
+<span class="lineNum">     550 </span><span class="lineCov">          3 :                 if( sql_get_int_field(db, &quot;SELECT 1 from OBJECTS where OBJECT_ID = '%s'&quot;, magic-&gt;objectid_match) == 0 )</span>
+<span class="lineNum">     551 </span>            :                 {
+<span class="lineNum">     552 </span><span class="lineCov">          3 :                         char *parent = strdup(magic-&gt;objectid_match);</span>
+<span class="lineNum">     553 </span><span class="lineCov">          3 :                         if (strrchr(parent, '$'))</span>
+<span class="lineNum">     554 </span><span class="lineCov">          3 :                                 *strrchr(parent, '$') = '\0';</span>
+<span class="lineNum">     555 </span><span class="lineCov">          6 :                         ret = sql_exec(db, &quot;INSERT into OBJECTS (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME)&quot;</span>
+<span class="lineNum">     556 </span>            :                                            &quot; values &quot;
+<span class="lineNum">     557 </span>            :                                            &quot;('%s', '%s', %lld, 'container.storageFolder', '%q')&quot;,
+<span class="lineNum">     558 </span>            :                                            magic-&gt;objectid_match, parent,
+<span class="lineNum">     559 </span><span class="lineCov">          3 :                                            GetFolderMetadata(_(magic-&gt;name), NULL, NULL, NULL), _(magic-&gt;name));</span>
+<span class="lineNum">     560 </span><span class="lineCov">          3 :                         free(parent);</span>
+<span class="lineNum">     561 </span><span class="lineCov">          3 :                         if( ret != SQLITE_OK )</span>
+<span class="lineNum">     562 </span><span class="lineNoCov">          0 :                                 goto sql_failed;</span>
+<span class="lineNum">     563 </span>            :                 }
+<span class="lineNum">     564 </span>            :         }
+<span class="lineNum">     565 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_OBJECTS_OBJECT_ID ON OBJECTS(OBJECT_ID);&quot;);</span>
+<span class="lineNum">     566 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_OBJECTS_PARENT_ID ON OBJECTS(PARENT_ID);&quot;);</span>
+<span class="lineNum">     567 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_OBJECTS_DETAIL_ID ON OBJECTS(DETAIL_ID);&quot;);</span>
+<span class="lineNum">     568 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_OBJECTS_CLASS ON OBJECTS(CLASS);&quot;);</span>
+<span class="lineNum">     569 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_DETAILS_PATH ON DETAILS(PATH);&quot;);</span>
+<span class="lineNum">     570 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_DETAILS_ID ON DETAILS(ID);&quot;);</span>
+<span class="lineNum">     571 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_SCANNER_OPT ON OBJECTS(PARENT_ID, NAME, OBJECT_ID);&quot;);</span>
+<span class="lineNum">     572 </span>            : 
+<span class="lineNum">     573 </span><span class="lineCov">          1 : sql_failed:</span>
+<span class="lineNum">     574 </span><span class="lineCov">          1 :         if( ret != SQLITE_OK )</span>
+<span class="lineNum">     575 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_DB_SQL, &quot;Error creating SQLite3 database!\n&quot;);</span>
+<span class="lineNum">     576 </span><span class="lineCov">          1 :         return (ret != SQLITE_OK);</span>
+<span class="lineNum">     577 </span>            : }
+<a name="578"><span class="lineNum">     578 </span>            : </a>
+<span class="lineNum">     579 </span>            : static inline int
+<span class="lineNum">     580 </span><span class="lineCov">         16 : filter_hidden(scan_filter *d)</span>
+<span class="lineNum">     581 </span>            : {
+<span class="lineNum">     582 </span><span class="lineCov">         16 :         return (d-&gt;d_name[0] != '.');</span>
+<span class="lineNum">     583 </span>            : }
+<a name="584"><span class="lineNum">     584 </span>            : </a>
+<span class="lineNum">     585 </span>            : static int
+<span class="lineNum">     586 </span><span class="lineCov">         10 : filter_type(scan_filter *d)</span>
+<span class="lineNum">     587 </span>            : {
+<span class="lineNum">     588 </span>            : #if HAVE_STRUCT_DIRENT_D_TYPE
+<span class="lineNum">     589 </span><span class="lineCov">         18 :         return ( (d-&gt;d_type == DT_DIR) ||</span>
+<span class="lineNum">     590 </span><span class="lineCov">         18 :                  (d-&gt;d_type == DT_LNK) ||</span>
+<span class="lineNum">     591 </span><span class="lineCov">          8 :                  (d-&gt;d_type == DT_UNKNOWN)</span>
+<span class="lineNum">     592 </span>            :                 );
+<span class="lineNum">     593 </span>            : #else
+<span class="lineNum">     594 </span>            :         return 1;
+<span class="lineNum">     595 </span>            : #endif
+<span class="lineNum">     596 </span>            : }
+<a name="597"><span class="lineNum">     597 </span>            : </a>
+<span class="lineNum">     598 </span>            : static int
+<span class="lineNum">     599 </span><span class="lineNoCov">          0 : filter_a(scan_filter *d)</span>
+<span class="lineNum">     600 </span>            : {
+<span class="lineNum">     601 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
+<span class="lineNum">     602 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
+<span class="lineNum">     603 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
+<span class="lineNum">     604 </span><span class="lineNoCov">          0 :                    (is_audio(d-&gt;d_name) )))</span>
+<span class="lineNum">     605 </span>            :                 );
+<span class="lineNum">     606 </span>            : }
+<a name="607"><span class="lineNum">     607 </span>            : </a>
+<span class="lineNum">     608 </span>            : static int
+<span class="lineNum">     609 </span><span class="lineNoCov">          0 : filter_av(scan_filter *d)</span>
+<span class="lineNum">     610 </span>            : {
+<span class="lineNum">     611 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
+<span class="lineNum">     612 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
+<span class="lineNum">     613 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
+<span class="lineNum">     614 </span><span class="lineNoCov">          0 :                    (is_audio(d-&gt;d_name) ||</span>
+<span class="lineNum">     615 </span><span class="lineNoCov">          0 :                     is_video(d-&gt;d_name) ||</span>
+<span class="lineNum">     616 </span><span class="lineNoCov">          0 :                     is_playlist(d-&gt;d_name))))</span>
+<span class="lineNum">     617 </span>            :                 );
+<span class="lineNum">     618 </span>            : }
+<a name="619"><span class="lineNum">     619 </span>            : </a>
+<span class="lineNum">     620 </span>            : static int
+<span class="lineNum">     621 </span><span class="lineNoCov">          0 : filter_ap(scan_filter *d)</span>
+<span class="lineNum">     622 </span>            : {
+<span class="lineNum">     623 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
+<span class="lineNum">     624 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
+<span class="lineNum">     625 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
+<span class="lineNum">     626 </span><span class="lineNoCov">          0 :                    (is_audio(d-&gt;d_name) ||</span>
+<span class="lineNum">     627 </span><span class="lineNoCov">          0 :                     is_image(d-&gt;d_name) ||</span>
+<span class="lineNum">     628 </span><span class="lineNoCov">          0 :                     is_playlist(d-&gt;d_name))))</span>
+<span class="lineNum">     629 </span>            :                 );
+<span class="lineNum">     630 </span>            : }
+<a name="631"><span class="lineNum">     631 </span>            : </a>
+<span class="lineNum">     632 </span>            : static int
+<span class="lineNum">     633 </span><span class="lineNoCov">          0 : filter_v(scan_filter *d)</span>
+<span class="lineNum">     634 </span>            : {
+<span class="lineNum">     635 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
+<span class="lineNum">     636 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
+<span class="lineNum">     637 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
+<span class="lineNum">     638 </span><span class="lineNoCov">          0 :                    is_video(d-&gt;d_name)))</span>
+<span class="lineNum">     639 </span>            :                 );
+<span class="lineNum">     640 </span>            : }
+<a name="641"><span class="lineNum">     641 </span>            : </a>
+<span class="lineNum">     642 </span>            : static int
+<span class="lineNum">     643 </span><span class="lineNoCov">          0 : filter_vp(scan_filter *d)</span>
+<span class="lineNum">     644 </span>            : {
+<span class="lineNum">     645 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
+<span class="lineNum">     646 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
+<span class="lineNum">     647 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
+<span class="lineNum">     648 </span><span class="lineNoCov">          0 :                    (is_video(d-&gt;d_name) ||</span>
+<span class="lineNum">     649 </span><span class="lineNoCov">          0 :                     is_image(d-&gt;d_name))))</span>
+<span class="lineNum">     650 </span>            :                 );
+<span class="lineNum">     651 </span>            : }
+<a name="652"><span class="lineNum">     652 </span>            : </a>
+<span class="lineNum">     653 </span>            : static int
+<span class="lineNum">     654 </span><span class="lineNoCov">          0 : filter_p(scan_filter *d)</span>
+<span class="lineNum">     655 </span>            : {
+<span class="lineNum">     656 </span><span class="lineNoCov">          0 :         return ( filter_hidden(d) &amp;&amp;</span>
+<span class="lineNum">     657 </span><span class="lineNoCov">          0 :                  (filter_type(d) ||</span>
+<span class="lineNum">     658 </span><span class="lineNoCov">          0 :                   (is_reg(d) &amp;&amp;</span>
+<span class="lineNum">     659 </span><span class="lineNoCov">          0 :                    is_image(d-&gt;d_name)))</span>
+<span class="lineNum">     660 </span>            :                 );
+<span class="lineNum">     661 </span>            : }
+<a name="662"><span class="lineNum">     662 </span>            : </a>
+<span class="lineNum">     663 </span>            : static int
+<span class="lineNum">     664 </span><span class="lineCov">         16 : filter_avp(scan_filter *d)</span>
+<span class="lineNum">     665 </span>            : {
+<span class="lineNum">     666 </span><span class="lineCov">         34 :         return ( filter_hidden(d) &amp;&amp;</span>
+<span class="lineNum">     667 </span><span class="lineCov">         18 :                  (filter_type(d) ||</span>
+<span class="lineNum">     668 </span><span class="lineCov">         16 :                   (is_reg(d) &amp;&amp;</span>
+<span class="lineNum">     669 </span><span class="lineCov">         13 :                    (is_audio(d-&gt;d_name) ||</span>
+<span class="lineNum">     670 </span><span class="lineCov">          8 :                     is_image(d-&gt;d_name) ||</span>
+<span class="lineNum">     671 </span><span class="lineCov">          3 :                     is_video(d-&gt;d_name))))</span>
+<span class="lineNum">     672 </span>            :                 );
+<span class="lineNum">     673 </span>            : }
+<a name="674"><span class="lineNum">     674 </span>            : </a>
+<span class="lineNum">     675 </span>            : static void
+<span class="lineNum">     676 </span><span class="lineCov">          3 : ScanDirectory(const char *dir, const char *parent, media_types dir_types)</span>
+<span class="lineNum">     677 </span>            : {
+<span class="lineNum">     678 </span>            :         struct dirent **namelist;
+<span class="lineNum">     679 </span><span class="lineCov">          3 :         int i, n, startID = 0;</span>
+<span class="lineNum">     680 </span>            :         char *full_path;
+<span class="lineNum">     681 </span><span class="lineCov">          3 :         char *name = NULL;</span>
+<span class="lineNum">     682 </span>            :         static long long unsigned int fileno = 0;
+<span class="lineNum">     683 </span>            :         enum file_types type;
+<span class="lineNum">     684 </span>            : 
+<span class="lineNum">     685 </span><span class="lineCov">          3 :         DPRINTF(parent?E_INFO:E_WARN, L_SCANNER, _(&quot;Scanning %s\n&quot;), dir);</span>
+<span class="lineNum">     686 </span><span class="lineCov">          3 :         switch( dir_types )</span>
+<span class="lineNum">     687 </span>            :         {
+<span class="lineNum">     688 </span><span class="lineCov">          3 :                 case ALL_MEDIA:</span>
+<span class="lineNum">     689 </span><span class="lineCov">          3 :                         n = scandir(dir, &amp;namelist, filter_avp, alphasort);</span>
+<span class="lineNum">     690 </span><span class="lineCov">          3 :                         break;</span>
+<span class="lineNum">     691 </span><span class="lineNoCov">          0 :                 case TYPE_AUDIO:</span>
+<span class="lineNum">     692 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_a, alphasort);</span>
+<span class="lineNum">     693 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     694 </span><span class="lineNoCov">          0 :                 case TYPE_AUDIO|TYPE_VIDEO:</span>
+<span class="lineNum">     695 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_av, alphasort);</span>
+<span class="lineNum">     696 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     697 </span><span class="lineNoCov">          0 :                 case TYPE_AUDIO|TYPE_IMAGE:</span>
+<span class="lineNum">     698 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_ap, alphasort);</span>
+<span class="lineNum">     699 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     700 </span><span class="lineNoCov">          0 :                 case TYPE_VIDEO:</span>
+<span class="lineNum">     701 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_v, alphasort);</span>
+<span class="lineNum">     702 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     703 </span><span class="lineNoCov">          0 :                 case TYPE_VIDEO|TYPE_IMAGE:</span>
+<span class="lineNum">     704 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_vp, alphasort);</span>
+<span class="lineNum">     705 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     706 </span><span class="lineNoCov">          0 :                 case TYPE_IMAGE:</span>
+<span class="lineNum">     707 </span><span class="lineNoCov">          0 :                         n = scandir(dir, &amp;namelist, filter_p, alphasort);</span>
+<span class="lineNum">     708 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     709 </span><span class="lineNoCov">          0 :                 default:</span>
+<span class="lineNum">     710 </span><span class="lineNoCov">          0 :                         n = -1;</span>
+<span class="lineNum">     711 </span><span class="lineNoCov">          0 :                         errno = EINVAL;</span>
+<span class="lineNum">     712 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     713 </span>            :         }
+<span class="lineNum">     714 </span><span class="lineCov">          3 :         if( n &lt; 0 )</span>
+<span class="lineNum">     715 </span>            :         {
+<span class="lineNum">     716 </span><span class="lineNoCov">          0 :                 DPRINTF(E_WARN, L_SCANNER, &quot;Error scanning %s [%s]\n&quot;,</span>
+<span class="lineNum">     717 </span>            :                         dir, strerror(errno));
+<span class="lineNum">     718 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">     719 </span>            :         }
+<span class="lineNum">     720 </span>            : 
+<span class="lineNum">     721 </span><span class="lineCov">          3 :         full_path = malloc(PATH_MAX);</span>
+<span class="lineNum">     722 </span><span class="lineCov">          3 :         if (!full_path)</span>
+<span class="lineNum">     723 </span>            :         {
+<span class="lineNum">     724 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_SCANNER, &quot;Memory allocation failed scanning %s\n&quot;, dir);</span>
+<span class="lineNum">     725 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">     726 </span>            :         }
+<span class="lineNum">     727 </span>            : 
+<span class="lineNum">     728 </span><span class="lineCov">          3 :         if( !parent )</span>
+<span class="lineNum">     729 </span>            :         {
+<span class="lineNum">     730 </span><span class="lineCov">          1 :                 startID = get_next_available_id(&quot;OBJECTS&quot;, BROWSEDIR_ID);</span>
 <span class="lineNum">     731 </span>            :         }
-<span class="lineNum">     732 </span><span class="lineCov">          3 :         if( n &lt; 0 )</span>
-<span class="lineNum">     733 </span>            :         {
-<span class="lineNum">     734 </span><span class="lineNoCov">          0 :                 DPRINTF(E_WARN, L_SCANNER, &quot;Error scanning %s [%s]\n&quot;,</span>
-<span class="lineNum">     735 </span>            :                         dir, strerror(errno));
-<span class="lineNum">     736 </span><span class="lineNoCov">          0 :                 return;</span>
-<span class="lineNum">     737 </span>            :         }
-<span class="lineNum">     738 </span>            : 
-<span class="lineNum">     739 </span><span class="lineCov">          3 :         full_path = malloc(PATH_MAX);</span>
-<span class="lineNum">     740 </span><span class="lineCov">          3 :         if (!full_path)</span>
-<span class="lineNum">     741 </span>            :         {
-<span class="lineNum">     742 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_SCANNER, &quot;Memory allocation failed scanning %s\n&quot;, dir);</span>
-<span class="lineNum">     743 </span><span class="lineNoCov">          0 :                 return;</span>
-<span class="lineNum">     744 </span>            :         }
-<span class="lineNum">     745 </span>            : 
-<span class="lineNum">     746 </span><span class="lineCov">          3 :         if( !parent )</span>
-<span class="lineNum">     747 </span>            :         {
-<span class="lineNum">     748 </span><span class="lineCov">          1 :                 startID = get_next_available_id(&quot;OBJECTS&quot;, BROWSEDIR_ID);</span>
-<span class="lineNum">     749 </span>            :         }
-<span class="lineNum">     750 </span>            : 
-<span class="lineNum">     751 </span><span class="lineCov">         11 :         for (i=0; i &lt; n; i++)</span>
-<span class="lineNum">     752 </span>            :         {
-<span class="lineNum">     753 </span>            : #if !USE_FORK
-<span class="lineNum">     754 </span>            :                 if( quitting )
-<span class="lineNum">     755 </span>            :                         break;
-<span class="lineNum">     756 </span>            : #endif
-<span class="lineNum">     757 </span><span class="lineCov">          8 :                 type = TYPE_UNKNOWN;</span>
-<span class="lineNum">     758 </span><span class="lineCov">          8 :                 snprintf(full_path, PATH_MAX, &quot;%s/%s&quot;, dir, namelist[i]-&gt;d_name);</span>
-<span class="lineNum">     759 </span><span class="lineCov">          8 :                 name = escape_tag(namelist[i]-&gt;d_name, 1);</span>
-<span class="lineNum">     760 </span><span class="lineCov">          8 :                 if( is_dir(namelist[i]) == 1 )</span>
-<span class="lineNum">     761 </span>            :                 {
-<span class="lineNum">     762 </span><span class="lineCov">          2 :                         type = TYPE_DIR;</span>
-<span class="lineNum">     763 </span>            :                 }
-<span class="lineNum">     764 </span><span class="lineCov">          6 :                 else if( is_reg(namelist[i]) == 1 )</span>
-<span class="lineNum">     765 </span>            :                 {
-<span class="lineNum">     766 </span><span class="lineCov">          6 :                         type = TYPE_FILE;</span>
-<span class="lineNum">     767 </span>            :                 }
-<span class="lineNum">     768 </span>            :                 else
-<span class="lineNum">     769 </span>            :                 {
-<span class="lineNum">     770 </span><span class="lineNoCov">          0 :                         type = resolve_unknown_type(full_path, dir_types);</span>
-<span class="lineNum">     771 </span>            :                 }
-<span class="lineNum">     772 </span><span class="lineCov">          8 :                 if( (type == TYPE_DIR) &amp;&amp; (access(full_path, R_OK|X_OK) == 0) )</span>
-<span class="lineNum">     773 </span><span class="lineCov">          2 :                 {</span>
-<span class="lineNum">     774 </span>            :                         char *parent_id;
-<span class="lineNum">     775 </span><span class="lineCov">          2 :                         insert_directory(name, full_path, BROWSEDIR_ID, THISORNUL(parent), i+startID);</span>
-<span class="lineNum">     776 </span><span class="lineCov">          2 :                         xasprintf(&amp;parent_id, &quot;%s$%X&quot;, THISORNUL(parent), i+startID);</span>
-<span class="lineNum">     777 </span><span class="lineCov">          2 :                         ScanDirectory(full_path, parent_id, dir_types);</span>
-<span class="lineNum">     778 </span><span class="lineCov">          2 :                         free(parent_id);</span>
-<span class="lineNum">     779 </span>            :                 }
-<span class="lineNum">     780 </span><span class="lineCov">          6 :                 else if( type == TYPE_FILE &amp;&amp; (access(full_path, R_OK) == 0) )</span>
-<span class="lineNum">     781 </span>            :                 {
-<span class="lineNum">     782 </span><span class="lineCov">          6 :                         if( insert_file(name, full_path, THISORNUL(parent), i+startID, dir_types) == 0 )</span>
-<span class="lineNum">     783 </span><span class="lineCov">          2 :                                 fileno++;</span>
-<span class="lineNum">     784 </span>            :                 }
-<span class="lineNum">     785 </span><span class="lineCov">          8 :                 free(name);</span>
-<span class="lineNum">     786 </span><span class="lineCov">          8 :                 free(namelist[i]);</span>
-<span class="lineNum">     787 </span>            :         }
-<span class="lineNum">     788 </span><span class="lineCov">          3 :         free(namelist);</span>
-<span class="lineNum">     789 </span><span class="lineCov">          3 :         free(full_path);</span>
-<span class="lineNum">     790 </span><span class="lineCov">          3 :         if( !parent )</span>
+<span class="lineNum">     732 </span>            : 
+<span class="lineNum">     733 </span><span class="lineCov">         11 :         for (i=0; i &lt; n; i++)</span>
+<span class="lineNum">     734 </span>            :         {
+<span class="lineNum">     735 </span>            : #if !USE_FORK
+<span class="lineNum">     736 </span><span class="lineCov">          8 :                 if( quitting )</span>
+<span class="lineNum">     737 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     738 </span>            : #endif
+<span class="lineNum">     739 </span><span class="lineCov">          8 :                 type = TYPE_UNKNOWN;</span>
+<span class="lineNum">     740 </span><span class="lineCov">          8 :                 snprintf(full_path, PATH_MAX, &quot;%s/%s&quot;, dir, namelist[i]-&gt;d_name);</span>
+<span class="lineNum">     741 </span><span class="lineCov">          8 :                 name = escape_tag(namelist[i]-&gt;d_name, 1);</span>
+<span class="lineNum">     742 </span><span class="lineCov">          8 :                 if( is_dir(namelist[i]) == 1 )</span>
+<span class="lineNum">     743 </span>            :                 {
+<span class="lineNum">     744 </span><span class="lineCov">          2 :                         type = TYPE_DIR;</span>
+<span class="lineNum">     745 </span>            :                 }
+<span class="lineNum">     746 </span><span class="lineCov">          6 :                 else if( is_reg(namelist[i]) == 1 )</span>
+<span class="lineNum">     747 </span>            :                 {
+<span class="lineNum">     748 </span><span class="lineCov">          6 :                         type = TYPE_FILE;</span>
+<span class="lineNum">     749 </span>            :                 }
+<span class="lineNum">     750 </span>            :                 else
+<span class="lineNum">     751 </span>            :                 {
+<span class="lineNum">     752 </span><span class="lineNoCov">          0 :                         type = resolve_unknown_type(full_path, dir_types);</span>
+<span class="lineNum">     753 </span>            :                 }
+<span class="lineNum">     754 </span><span class="lineCov">          8 :                 if( (type == TYPE_DIR) &amp;&amp; (access(full_path, R_OK|X_OK) == 0) )</span>
+<span class="lineNum">     755 </span><span class="lineCov">          2 :                 {</span>
+<span class="lineNum">     756 </span>            :                         char *parent_id;
+<span class="lineNum">     757 </span><span class="lineCov">          2 :                         insert_directory(name, full_path, BROWSEDIR_ID, THISORNUL(parent), i+startID);</span>
+<span class="lineNum">     758 </span><span class="lineCov">          2 :                         xasprintf(&amp;parent_id, &quot;%s$%X&quot;, THISORNUL(parent), i+startID);</span>
+<span class="lineNum">     759 </span><span class="lineCov">          2 :                         ScanDirectory(full_path, parent_id, dir_types);</span>
+<span class="lineNum">     760 </span><span class="lineCov">          2 :                         free(parent_id);</span>
+<span class="lineNum">     761 </span>            :                 }
+<span class="lineNum">     762 </span><span class="lineCov">          6 :                 else if( type == TYPE_FILE &amp;&amp; (access(full_path, R_OK) == 0) )</span>
+<span class="lineNum">     763 </span>            :                 {
+<span class="lineNum">     764 </span><span class="lineCov">          6 :                         if( insert_file(name, full_path, THISORNUL(parent), i+startID, dir_types) == 0 )</span>
+<span class="lineNum">     765 </span><span class="lineCov">          2 :                                 fileno++;</span>
+<span class="lineNum">     766 </span>            :                 }
+<span class="lineNum">     767 </span><span class="lineCov">          8 :                 free(name);</span>
+<span class="lineNum">     768 </span><span class="lineCov">          8 :                 free(namelist[i]);</span>
+<span class="lineNum">     769 </span>            :         }
+<span class="lineNum">     770 </span><span class="lineCov">          3 :         free(namelist);</span>
+<span class="lineNum">     771 </span><span class="lineCov">          3 :         free(full_path);</span>
+<span class="lineNum">     772 </span><span class="lineCov">          3 :         if( !parent )</span>
+<span class="lineNum">     773 </span>            :         {
+<span class="lineNum">     774 </span><span class="lineCov">          1 :                 DPRINTF(E_WARN, L_SCANNER, _(&quot;Scanning %s finished (%llu files)!\n&quot;), dir, fileno);</span>
+<span class="lineNum">     775 </span>            :         }
+<span class="lineNum">     776 </span>            : }
+<a name="777"><span class="lineNum">     777 </span>            : </a>
+<span class="lineNum">     778 </span>            : void
+<span class="lineNum">     779 </span><span class="lineCov">          1 : start_scanner(void)</span>
+<span class="lineNum">     780 </span>            : {
+<span class="lineNum">     781 </span>            :         struct media_dir_s *media_path;
+<span class="lineNum">     782 </span>            :         char path[MAXPATHLEN];
+<span class="lineNum">     783 </span>            : 
+<span class="lineNum">     784 </span><span class="lineCov">          1 :         if (setpriority(PRIO_PROCESS, 0, 15) == -1)</span>
+<span class="lineNum">     785 </span><span class="lineNoCov">          0 :                 DPRINTF(E_WARN, L_INOTIFY,  &quot;Failed to reduce scanner thread priority\n&quot;);</span>
+<span class="lineNum">     786 </span>            : 
+<span class="lineNum">     787 </span><span class="lineCov">          1 :         setlocale(LC_COLLATE, &quot;&quot;);</span>
+<span class="lineNum">     788 </span><span class="lineCov">          1 :         av_log_set_level(AV_LOG_PANIC);</span>
+<span class="lineNum">     789 </span>            : 
+<span class="lineNum">     790 </span><span class="lineCov">          2 :         for( media_path = media_dirs; media_path != NULL; media_path = media_path-&gt;next )</span>
 <span class="lineNum">     791 </span>            :         {
-<span class="lineNum">     792 </span><span class="lineCov">          1 :                 DPRINTF(E_WARN, L_SCANNER, _(&quot;Scanning %s finished (%llu files)!\n&quot;), dir, fileno);</span>
-<span class="lineNum">     793 </span>            :         }
-<span class="lineNum">     794 </span>            : }
-<span class="lineNum">     795 </span>            : 
-<a name="796"><span class="lineNum">     796 </span>            : /* rescan functions added by shrimpkin@sourceforge.net */</a>
-<span class="lineNum">     797 </span>            : static int
-<span class="lineNum">     798 </span><span class="lineNoCov">          0 : cb_orphans(void *args, int argc, char **argv, char **azColName)</span>
-<span class="lineNum">     799 </span>            : {
-<span class="lineNum">     800 </span><span class="lineNoCov">          0 :         const char *path = argv[0];</span>
-<span class="lineNum">     801 </span><span class="lineNoCov">          0 :         const char *mime = argv[1];</span>
-<span class="lineNum">     802 </span>            : 
-<span class="lineNum">     803 </span>            :         /* If we can't access the path, remove it */
-<span class="lineNum">     804 </span><span class="lineNoCov">          0 :         if (access(path, R_OK) != 0)</span>
-<span class="lineNum">     805 </span>            :         {
-<span class="lineNum">     806 </span><span class="lineNoCov">          0 :                 DPRINTF(E_DEBUG, L_SCANNER, &quot;Removing %s [%s]\n&quot;, path, mime ? &quot;file&quot; : &quot;dir&quot;);</span>
-<span class="lineNum">     807 </span><span class="lineNoCov">          0 :                 if (mime)</span>
-<span class="lineNum">     808 </span><span class="lineNoCov">          0 :                         monitor_remove_file(path);</span>
-<span class="lineNum">     809 </span>            :                 else
-<span class="lineNum">     810 </span><span class="lineNoCov">          0 :                         monitor_remove_directory(0, path);</span>
+<span class="lineNum">     792 </span>            :                 int64_t id;
+<span class="lineNum">     793 </span><span class="lineCov">          1 :                 char *bname, *parent = NULL;</span>
+<span class="lineNum">     794 </span>            :                 char buf[8];
+<span class="lineNum">     795 </span><span class="lineCov">          1 :                 strncpyt(path, media_path-&gt;path, sizeof(path));</span>
+<span class="lineNum">     796 </span><span class="lineCov">          1 :                 bname = basename(path);</span>
+<span class="lineNum">     797 </span>            :                 /* If there are multiple media locations, add a level to the ContentDirectory */
+<span class="lineNum">     798 </span><span class="lineCov">          1 :                 if( !GETFLAG(MERGE_MEDIA_DIRS_MASK) &amp;&amp; media_dirs-&gt;next )</span>
+<span class="lineNum">     799 </span><span class="lineNoCov">          0 :                 {</span>
+<span class="lineNum">     800 </span><span class="lineNoCov">          0 :                         int startID = get_next_available_id(&quot;OBJECTS&quot;, BROWSEDIR_ID);</span>
+<span class="lineNum">     801 </span><span class="lineNoCov">          0 :                         id = insert_directory(bname, path, BROWSEDIR_ID, &quot;&quot;, startID);</span>
+<span class="lineNum">     802 </span><span class="lineNoCov">          0 :                         sprintf(buf, &quot;$%X&quot;, startID);</span>
+<span class="lineNum">     803 </span><span class="lineNoCov">          0 :                         parent = buf;</span>
+<span class="lineNum">     804 </span>            :                 }
+<span class="lineNum">     805 </span>            :                 else
+<span class="lineNum">     806 </span><span class="lineCov">          1 :                         id = GetFolderMetadata(bname, media_path-&gt;path, NULL, NULL);</span>
+<span class="lineNum">     807 </span>            :                 /* Use TIMESTAMP to store the media type */
+<span class="lineNum">     808 </span><span class="lineCov">          1 :                 sql_exec(db, &quot;UPDATE DETAILS set TIMESTAMP = %d where ID = %lld&quot;, media_path-&gt;types, (long long)id);</span>
+<span class="lineNum">     809 </span><span class="lineCov">          1 :                 ScanDirectory(media_path-&gt;path, parent, media_path-&gt;types);</span>
+<span class="lineNum">     810 </span><span class="lineCov">          1 :                 sql_exec(db, &quot;INSERT into SETTINGS values (%Q, %Q)&quot;, &quot;media_dir&quot;, media_path-&gt;path);</span>
 <span class="lineNum">     811 </span>            :         }
-<span class="lineNum">     812 </span>            : 
-<span class="lineNum">     813 </span><span class="lineNoCov">          0 :         return 0;</span>
-<span class="lineNum">     814 </span>            : }
-<a name="815"><span class="lineNum">     815 </span>            : </a>
-<span class="lineNum">     816 </span>            : void
-<span class="lineNum">     817 </span><span class="lineNoCov">          0 : start_rescan(void)</span>
-<span class="lineNum">     818 </span>            : {
-<span class="lineNum">     819 </span>            :         struct media_dir_s *media_path;
-<span class="lineNum">     820 </span><span class="lineNoCov">          0 :         char *esc_name = NULL;</span>
-<span class="lineNum">     821 </span>            :         char *zErrMsg;
-<span class="lineNum">     822 </span><span class="lineNoCov">          0 :         const char *sql_files = &quot;SELECT path, mime FROM details WHERE path NOT NULL AND mime IS NOT NULL;&quot;;</span>
-<span class="lineNum">     823 </span><span class="lineNoCov">          0 :         const char *sql_dir = &quot;SELECT path, mime FROM details WHERE path NOT NULL AND mime IS NULL;&quot;;</span>
-<span class="lineNum">     824 </span><span class="lineNoCov">          0 :         int changes = sqlite3_total_changes(db);</span>
-<span class="lineNum">     825 </span>            :         const char *summary;
-<span class="lineNum">     826 </span>            :         int ret;
-<span class="lineNum">     827 </span>            : 
-<span class="lineNum">     828 </span><span class="lineNoCov">          0 :         DPRINTF(E_INFO, L_SCANNER, &quot;Starting rescan\n&quot;);</span>
-<span class="lineNum">     829 </span>            : 
-<span class="lineNum">     830 </span>            :         /* Find and remove any dead directory links */
-<span class="lineNum">     831 </span><span class="lineNoCov">          0 :         ret = sqlite3_exec(db, sql_dir, cb_orphans, NULL, &amp;zErrMsg);</span>
-<span class="lineNum">     832 </span><span class="lineNoCov">          0 :         if (ret != SQLITE_OK)</span>
-<span class="lineNum">     833 </span>            :         {
-<span class="lineNum">     834 </span><span class="lineNoCov">          0 :                 DPRINTF(E_MAXDEBUG, L_SCANNER, &quot;SQL error: %s\nBAD SQL: %s\n&quot;, zErrMsg, sql_dir);</span>
-<span class="lineNum">     835 </span><span class="lineNoCov">          0 :                 sqlite3_free(zErrMsg);</span>
-<span class="lineNum">     836 </span>            :         }
-<span class="lineNum">     837 </span>            : 
-<span class="lineNum">     838 </span>            :         /* Find and remove any dead file links */
-<span class="lineNum">     839 </span><span class="lineNoCov">          0 :         ret = sqlite3_exec(db, sql_files, cb_orphans, NULL, &amp;zErrMsg);</span>
-<span class="lineNum">     840 </span><span class="lineNoCov">          0 :         if (ret != SQLITE_OK)</span>
-<span class="lineNum">     841 </span>            :         {
-<span class="lineNum">     842 </span><span class="lineNoCov">          0 :                 DPRINTF(E_MAXDEBUG, L_SCANNER, &quot;SQL error: %s\nBAD SQL: %s\n&quot;, zErrMsg, sql_files);</span>
-<span class="lineNum">     843 </span><span class="lineNoCov">          0 :                 sqlite3_free(zErrMsg);</span>
-<span class="lineNum">     844 </span>            :         }
-<span class="lineNum">     845 </span>            : 
-<span class="lineNum">     846 </span>            :         /* Rescan media_paths for new and/or modified files */
-<span class="lineNum">     847 </span><span class="lineNoCov">          0 :         for (media_path = media_dirs; media_path != NULL; media_path = media_path-&gt;next)</span>
-<span class="lineNum">     848 </span>            :         {
-<span class="lineNum">     849 </span>            :                 char path[MAXPATHLEN], buf[MAXPATHLEN];
-<span class="lineNum">     850 </span><span class="lineNoCov">          0 :                 strncpyt(path, media_path-&gt;path, sizeof(path));</span>
-<span class="lineNum">     851 </span><span class="lineNoCov">          0 :                 strncpyt(buf, media_path-&gt;path, sizeof(buf));</span>
-<span class="lineNum">     852 </span><span class="lineNoCov">          0 :                 esc_name = escape_tag(basename(buf), 1);</span>
-<span class="lineNum">     853 </span><span class="lineNoCov">          0 :                 monitor_insert_directory(0, esc_name, path);</span>
-<span class="lineNum">     854 </span><span class="lineNoCov">          0 :                 free(esc_name);</span>
-<span class="lineNum">     855 </span>            :         }
-<span class="lineNum">     856 </span>            : 
-<span class="lineNum">     857 </span><span class="lineNoCov">          0 :         if (sqlite3_total_changes(db) != changes)</span>
-<span class="lineNum">     858 </span><span class="lineNoCov">          0 :                 summary = &quot;changes found&quot;;</span>
-<span class="lineNum">     859 </span>            :         else
-<span class="lineNum">     860 </span><span class="lineNoCov">          0 :                 summary = &quot;no changes&quot;;</span>
-<span class="lineNum">     861 </span><span class="lineNoCov">          0 :         DPRINTF(E_INFO, L_SCANNER, &quot;Rescan completed. (%s)\n&quot;, summary);</span>
-<span class="lineNum">     862 </span><span class="lineNoCov">          0 : }</span>
-<span class="lineNum">     863 </span>            : /* end rescan functions */
-<a name="864"><span class="lineNum">     864 </span>            : </a>
-<span class="lineNum">     865 </span>            : void
-<span class="lineNum">     866 </span><span class="lineCov">          1 : start_scanner(void)</span>
-<span class="lineNum">     867 </span>            : {
-<span class="lineNum">     868 </span>            :         struct media_dir_s *media_path;
-<span class="lineNum">     869 </span>            :         char path[MAXPATHLEN];
-<span class="lineNum">     870 </span>            : 
-<span class="lineNum">     871 </span><span class="lineCov">          1 :         if (setpriority(PRIO_PROCESS, 0, 15) == -1)</span>
-<span class="lineNum">     872 </span><span class="lineNoCov">          0 :                 DPRINTF(E_WARN, L_INOTIFY,  &quot;Failed to reduce scanner thread priority\n&quot;);</span>
-<span class="lineNum">     873 </span>            : 
-<span class="lineNum">     874 </span><span class="lineCov">          1 :         setlocale(LC_COLLATE, &quot;&quot;);</span>
-<span class="lineNum">     875 </span><span class="lineCov">          1 :         av_register_all();</span>
-<span class="lineNum">     876 </span><span class="lineCov">          1 :         av_log_set_level(AV_LOG_PANIC);</span>
-<span class="lineNum">     877 </span>            : 
-<span class="lineNum">     878 </span><span class="lineCov">          1 :         if( GETFLAG(RESCAN_MASK) )</span>
-<span class="lineNum">     879 </span><span class="lineNoCov">          0 :                 return start_rescan();</span>
-<span class="lineNum">     880 </span>            : 
-<span class="lineNum">     881 </span><span class="lineCov">          2 :         for( media_path = media_dirs; media_path != NULL; media_path = media_path-&gt;next )</span>
-<span class="lineNum">     882 </span>            :         {
-<span class="lineNum">     883 </span>            :                 int64_t id;
-<span class="lineNum">     884 </span><span class="lineCov">          1 :                 char *bname, *parent = NULL;</span>
-<span class="lineNum">     885 </span>            :                 char buf[8];
-<span class="lineNum">     886 </span><span class="lineCov">          1 :                 strncpyt(path, media_path-&gt;path, sizeof(path));</span>
-<span class="lineNum">     887 </span><span class="lineCov">          1 :                 bname = basename(path);</span>
-<span class="lineNum">     888 </span>            :                 /* If there are multiple media locations, add a level to the ContentDirectory */
-<span class="lineNum">     889 </span><span class="lineCov">          1 :                 if( !GETFLAG(MERGE_MEDIA_DIRS_MASK) &amp;&amp; media_dirs-&gt;next )</span>
-<span class="lineNum">     890 </span><span class="lineNoCov">          0 :                 {</span>
-<span class="lineNum">     891 </span><span class="lineNoCov">          0 :                         int startID = get_next_available_id(&quot;OBJECTS&quot;, BROWSEDIR_ID);</span>
-<span class="lineNum">     892 </span><span class="lineNoCov">          0 :                         id = insert_directory(bname, path, BROWSEDIR_ID, &quot;&quot;, startID);</span>
-<span class="lineNum">     893 </span><span class="lineNoCov">          0 :                         sprintf(buf, &quot;$%X&quot;, startID);</span>
-<span class="lineNum">     894 </span><span class="lineNoCov">          0 :                         parent = buf;</span>
-<span class="lineNum">     895 </span>            :                 }
-<span class="lineNum">     896 </span>            :                 else
-<span class="lineNum">     897 </span><span class="lineCov">          1 :                         id = GetFolderMetadata(bname, media_path-&gt;path, NULL, NULL);</span>
-<span class="lineNum">     898 </span>            :                 /* Use TIMESTAMP to store the media type */
-<span class="lineNum">     899 </span><span class="lineCov">          1 :                 sql_exec(db, &quot;UPDATE DETAILS set TIMESTAMP = %d where ID = %lld&quot;, media_path-&gt;types, (long long)id);</span>
-<span class="lineNum">     900 </span><span class="lineCov">          1 :                 ScanDirectory(media_path-&gt;path, parent, media_path-&gt;types);</span>
-<span class="lineNum">     901 </span><span class="lineCov">          1 :                 sql_exec(db, &quot;INSERT into SETTINGS values (%Q, %Q)&quot;, &quot;media_dir&quot;, media_path-&gt;path);</span>
-<span class="lineNum">     902 </span>            :         }
-<span class="lineNum">     903 </span>            :         /* Create this index after scanning, so it doesn't slow down the scanning process.
-<span class="lineNum">     904 </span>            :          * This index is very useful for large libraries used with an XBox360 (or any
-<span class="lineNum">     905 </span>            :          * client that uses UPnPSearch on large containers). */
-<span class="lineNum">     906 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_SEARCH_OPT ON OBJECTS(OBJECT_ID, CLASS, DETAIL_ID);&quot;);</span>
-<span class="lineNum">     907 </span>            : 
-<span class="lineNum">     908 </span><span class="lineCov">          1 :         DPRINTF(E_DEBUG, L_SCANNER, &quot;Initial file scan completed\n&quot;);</span>
-<span class="lineNum">     909 </span>            :         //JM: Set up a db version number, so we know if we need to rebuild due to a new structure.
-<span class="lineNum">     910 </span><span class="lineCov">          1 :         sql_exec(db, &quot;pragma user_version = %d;&quot;, DB_VERSION);</span>
-<span class="lineNum">     911 </span>            : }
+<span class="lineNum">     812 </span>            :         /* Create this index after scanning, so it doesn't slow down the scanning process.
+<span class="lineNum">     813 </span>            :          * This index is very useful for large libraries used with an XBox360 (or any
+<span class="lineNum">     814 </span>            :          * client that uses UPnPSearch on large containers). */
+<span class="lineNum">     815 </span><span class="lineCov">          1 :         sql_exec(db, &quot;create INDEX IDX_SEARCH_OPT ON OBJECTS(OBJECT_ID, CLASS, DETAIL_ID);&quot;);</span>
+<span class="lineNum">     816 </span>            : 
+<span class="lineNum">     817 </span><span class="lineCov">          1 :         DPRINTF(E_DEBUG, L_SCANNER, &quot;Initial file scan completed\n&quot;);</span>
+<span class="lineNum">     818 </span>            :         //JM: Set up a db version number, so we know if we need to rebuild due to a new structure.
+<span class="lineNum">     819 </span><span class="lineCov">          1 :         sql_exec(db, &quot;pragma user_version = %d;&quot;, DB_VERSION);</span>
+<span class="lineNum">     820 </span><span class="lineCov">          1 : }</span>
 </pre>
       </td>
     </tr>

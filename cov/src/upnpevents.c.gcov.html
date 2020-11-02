@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-11-02 15:08:30</td>
+            <td class="headerValue">2020-11-02 23:20:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">12</td>
@@ -482,10 +482,10 @@
 <span class="lineNum">     420 </span>            :         }
 <a name="421"><span class="lineNum">     421 </span><span class="lineCov">          4 : }</span></a>
 <span class="lineNum">     422 </span>            : 
-<span class="lineNum">     423 </span><span class="lineCov">        129 : void upnpevents_selectfds(fd_set *readset, fd_set *writeset, int * max_fd)</span>
+<span class="lineNum">     423 </span><span class="lineCov">        372 : void upnpevents_selectfds(fd_set *readset, fd_set *writeset, int * max_fd)</span>
 <span class="lineNum">     424 </span>            : {
 <span class="lineNum">     425 </span>            :         struct upnp_event_notify * obj;
-<span class="lineNum">     426 </span><span class="lineCov">        137 :         for(obj = notifylist.lh_first; obj != NULL; obj = obj-&gt;entries.le_next) {</span>
+<span class="lineNum">     426 </span><span class="lineCov">        380 :         for(obj = notifylist.lh_first; obj != NULL; obj = obj-&gt;entries.le_next) {</span>
 <span class="lineNum">     427 </span><span class="lineCov">          8 :                 DPRINTF(E_DEBUG, L_HTTP, &quot;upnpevents_selectfds: %p %d %d\n&quot;,</span>
 <span class="lineNum">     428 </span>            :                        obj, obj-&gt;state, obj-&gt;s);
 <span class="lineNum">     429 </span><span class="lineCov">          8 :                 if(obj-&gt;s &gt;= 0) {</span>
@@ -510,16 +510,16 @@
 <span class="lineNum">     448 </span>            :                         }
 <span class="lineNum">     449 </span><span class="lineNoCov">          0 :                 }</span>
 <span class="lineNum">     450 </span>            :         }
-<a name="451"><span class="lineNum">     451 </span><span class="lineCov">        129 : }</span></a>
+<a name="451"><span class="lineNum">     451 </span><span class="lineCov">        372 : }</span></a>
 <span class="lineNum">     452 </span>            : 
-<span class="lineNum">     453 </span><span class="lineCov">        123 : void upnpevents_processfds(fd_set *readset, fd_set *writeset)</span>
+<span class="lineNum">     453 </span><span class="lineCov">        355 : void upnpevents_processfds(fd_set *readset, fd_set *writeset)</span>
 <span class="lineNum">     454 </span>            : {
 <span class="lineNum">     455 </span>            :         struct upnp_event_notify * obj;
 <span class="lineNum">     456 </span>            :         struct upnp_event_notify * next;
 <span class="lineNum">     457 </span>            :         struct subscriber * sub;
 <span class="lineNum">     458 </span>            :         struct subscriber * subnext;
 <span class="lineNum">     459 </span>            :         time_t curtime;
-<span class="lineNum">     460 </span><span class="lineCov">        131 :         for(obj = notifylist.lh_first; obj != NULL; obj = obj-&gt;entries.le_next) {</span>
+<span class="lineNum">     460 </span><span class="lineCov">        363 :         for(obj = notifylist.lh_first; obj != NULL; obj = obj-&gt;entries.le_next) {</span>
 <span class="lineNum">     461 </span><span class="lineCov">          8 :                 DPRINTF(E_DEBUG, L_HTTP, &quot;%s: %p %d %d %d %d\n&quot;,</span>
 <span class="lineNum">     462 </span>            :                        &quot;upnpevents_processfds&quot;, obj, obj-&gt;state, obj-&gt;s,
 <span class="lineNum">     463 </span>            :                        FD_ISSET(obj-&gt;s, readset), FD_ISSET(obj-&gt;s, writeset));
@@ -528,8 +528,8 @@
 <span class="lineNum">     466 </span><span class="lineCov">          4 :                                 upnp_event_process_notify(obj);</span>
 <span class="lineNum">     467 </span>            :                 }
 <span class="lineNum">     468 </span>            :         }
-<span class="lineNum">     469 </span><span class="lineCov">        123 :         obj = notifylist.lh_first;</span>
-<span class="lineNum">     470 </span><span class="lineCov">        254 :         while(obj != NULL) {</span>
+<span class="lineNum">     469 </span><span class="lineCov">        355 :         obj = notifylist.lh_first;</span>
+<span class="lineNum">     470 </span><span class="lineCov">        718 :         while(obj != NULL) {</span>
 <span class="lineNum">     471 </span><span class="lineCov">          8 :                 next = obj-&gt;entries.le_next;</span>
 <span class="lineNum">     472 </span><span class="lineCov">          8 :                 if(obj-&gt;state == EError || obj-&gt;state == EFinished) {</span>
 <span class="lineNum">     473 </span><span class="lineCov">          2 :                         if(obj-&gt;s &gt;= 0) {</span>
@@ -550,17 +550,17 @@
 <span class="lineNum">     488 </span><span class="lineCov">          8 :                 obj = next;</span>
 <span class="lineNum">     489 </span>            :         }
 <span class="lineNum">     490 </span>            :         /* remove timed-out subscribers */
-<span class="lineNum">     491 </span><span class="lineCov">        123 :         curtime = time(NULL);</span>
-<span class="lineNum">     492 </span><span class="lineCov">        445 :         for(sub = subscriberlist.lh_first; sub != NULL; ) {</span>
-<span class="lineNum">     493 </span><span class="lineCov">        199 :                 subnext = sub-&gt;entries.le_next;</span>
-<span class="lineNum">     494 </span><span class="lineCov">        199 :                 if(sub-&gt;timeout &amp;&amp; curtime &gt; sub-&gt;timeout &amp;&amp; sub-&gt;notify == NULL) {</span>
+<span class="lineNum">     491 </span><span class="lineCov">        355 :         curtime = time(NULL);</span>
+<span class="lineNum">     492 </span><span class="lineCov">       1369 :         for(sub = subscriberlist.lh_first; sub != NULL; ) {</span>
+<span class="lineNum">     493 </span><span class="lineCov">        659 :                 subnext = sub-&gt;entries.le_next;</span>
+<span class="lineNum">     494 </span><span class="lineCov">        659 :                 if(sub-&gt;timeout &amp;&amp; curtime &gt; sub-&gt;timeout &amp;&amp; sub-&gt;notify == NULL) {</span>
 <span class="lineNum">     495 </span><span class="lineNoCov">          0 :                         LIST_REMOVE(sub, entries);</span>
 <span class="lineNum">     496 </span><span class="lineNoCov">          0 :                         nsubscribers--;</span>
 <span class="lineNum">     497 </span><span class="lineNoCov">          0 :                         free(sub);</span>
 <span class="lineNum">     498 </span>            :                 }
-<span class="lineNum">     499 </span><span class="lineCov">        199 :                 sub = subnext;</span>
+<span class="lineNum">     499 </span><span class="lineCov">        659 :                 sub = subnext;</span>
 <span class="lineNum">     500 </span>            :         }
-<span class="lineNum">     501 </span><span class="lineCov">        123 : }</span>
+<span class="lineNum">     501 </span><span class="lineCov">        355 : }</span>
 </pre>
       </td>
     </tr>
