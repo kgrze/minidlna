@@ -509,26 +509,8 @@ CreateDatabase(void)
 {
 	int ret, i;
 	const char *containers[] = { "0","-1",   "root",
-	                        MUSIC_ID, "0", _("Music"),
-	                    MUSIC_ALL_ID, MUSIC_ID, _("All Music"),
-	                  MUSIC_GENRE_ID, MUSIC_ID, _("Genre"),
-	                 MUSIC_ARTIST_ID, MUSIC_ID, _("Artist"),
-	                  MUSIC_ALBUM_ID, MUSIC_ID, _("Album"),
-	                    MUSIC_DIR_ID, MUSIC_ID, _("Folders"),
-	                  MUSIC_PLIST_ID, MUSIC_ID, _("Playlists"),
-
-	                        VIDEO_ID, "0", _("Video"),
-	                    VIDEO_ALL_ID, VIDEO_ID, _("All Video"),
-	                    VIDEO_DIR_ID, VIDEO_ID, _("Folders"),
-
-	                        IMAGE_ID, "0", _("Pictures"),
-	                    IMAGE_ALL_ID, IMAGE_ID, _("All Pictures"),
-	                   IMAGE_DATE_ID, IMAGE_ID, _("Date Taken"),
-	                 IMAGE_CAMERA_ID, IMAGE_ID, _("Camera"),
-	                    IMAGE_DIR_ID, IMAGE_ID, _("Folders"),
-
-	                    BROWSEDIR_ID, "0", _("Browse Folders"),
-			0 };
+	                    		BROWSEDIR_ID, "0", _("VIDEOS"),
+						       0};
 
 	ret = sql_exec(db, create_objectTable_sqlite);
 	if( ret != SQLITE_OK )
@@ -872,7 +854,6 @@ start_scanner(void)
 		DPRINTF(E_WARN, L_INOTIFY,  "Failed to reduce scanner thread priority\n");
 
 	setlocale(LC_COLLATE, "");
-	av_register_all();
 	av_log_set_level(AV_LOG_PANIC);
 
 	if( GETFLAG(RESCAN_MASK) )
