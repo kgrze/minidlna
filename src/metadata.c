@@ -34,7 +34,6 @@
 #include "libav.h"
 
 #include "upnpglobalvars.h"
-#include "image_utils.h"
 #include "upnpreplyparse.h"
 #include "metadata.h"
 #include "utils.h"
