@@ -264,7 +264,6 @@ check_db(sqlite3 *db, int new_db, pid_t *scanner_pid)
 	if (ret != 0)
 	{
 rescan:
-		CLEARFLAG(RESCAN_MASK);
 		if (ret < 0)
 			DPRINTF(E_WARN, L_GENERAL, "Creating new database at %s/files.db\n", db_path);
 		else if (ret == 1)
@@ -284,7 +283,7 @@ rescan:
 		if (CreateDatabase() != 0)
 			DPRINTF(E_FATAL, L_GENERAL, "ERROR: Failed to create sqlite database!  Exiting...\n");
 	}
-	if (ret || GETFLAG(RESCAN_MASK))
+	if (ret)
 	{
 #if USE_FORK
 		SETFLAG(SCANNING_MASK);

@@ -509,7 +509,7 @@ CreateDatabase(void)
 {
 	int ret, i;
 	const char *containers[] = { "0","-1",   "root",
-	                    		BROWSEDIR_ID, "0", _("VIDEOS"),
+	                    		BROWSEDIR_ID, "0", _("VIDEO"),
 						       0};
 
 	ret = sql_exec(db, create_objectTable_sqlite);
@@ -775,75 +775,6 @@ ScanDirectory(const char *dir, const char *parent, media_types dir_types)
 	}
 }
 
-/* rescan functions added by shrimpkin@sourceforge.net */
-static int
-cb_orphans(void *args, int argc, char **argv, char **azColName)
-{
-	const char *path = argv[0];
-	const char *mime = argv[1];
-
-	/* If we can't access the path, remove it */
-	if (access(path, R_OK) != 0)
-	{
-		DPRINTF(E_DEBUG, L_SCANNER, "Removing %s [%s]\n", path, mime ? "file" : "dir");
-		if (mime)
-			monitor_remove_file(path);
-		else
-			monitor_remove_directory(0, path);
-	}
-
-	return 0;
-}
-
-void
-start_rescan(void)
-{
-	struct media_dir_s *media_path;
-	char *esc_name = NULL;
-	char *zErrMsg;
-	const char *sql_files = "SELECT path, mime FROM details WHERE path NOT NULL AND mime IS NOT NULL;";
-	const char *sql_dir = "SELECT path, mime FROM details WHERE path NOT NULL AND mime IS NULL;";
-	int changes = sqlite3_total_changes(db);
-	const char *summary;
-	int ret;
-
-	DPRINTF(E_INFO, L_SCANNER, "Starting rescan\n");
-
-	/* Find and remove any dead directory links */
-	ret = sqlite3_exec(db, sql_dir, cb_orphans, NULL, &zErrMsg);
-	if (ret != SQLITE_OK)
-	{
-		DPRINTF(E_MAXDEBUG, L_SCANNER, "SQL error: %s\nBAD SQL: %s\n", zErrMsg, sql_dir);
-		sqlite3_free(zErrMsg);
-	}
-
-	/* Find and remove any dead file links */
-	ret = sqlite3_exec(db, sql_files, cb_orphans, NULL, &zErrMsg);
-	if (ret != SQLITE_OK)
-	{
-		DPRINTF(E_MAXDEBUG, L_SCANNER, "SQL error: %s\nBAD SQL: %s\n", zErrMsg, sql_files);
-		sqlite3_free(zErrMsg);
-	}
-
-	/* Rescan media_paths for new and/or modified files */
-	for (media_path = media_dirs; media_path != NULL; media_path = media_path->next)
-	{
-		char path[MAXPATHLEN], buf[MAXPATHLEN];
-		strncpyt(path, media_path->path, sizeof(path));
-		strncpyt(buf, media_path->path, sizeof(buf));
-		esc_name = escape_tag(basename(buf), 1);
-		monitor_insert_directory(0, esc_name, path);
-		free(esc_name);
-	}
-
-	if (sqlite3_total_changes(db) != changes)
-		summary = "changes found";
-	else
-		summary = "no changes";
-	DPRINTF(E_INFO, L_SCANNER, "Rescan completed. (%s)\n", summary);
-}
-/* end rescan functions */
-
 void
 start_scanner(void)
 {
@@ -855,9 +786,6 @@ start_scanner(void)
 
 	setlocale(LC_COLLATE, "");
 	av_log_set_level(AV_LOG_PANIC);
-
-	if( GETFLAG(RESCAN_MASK) )
-		return start_rescan();
 
 	for( media_path = media_dirs; media_path != NULL; media_path = media_path->next )
 	{

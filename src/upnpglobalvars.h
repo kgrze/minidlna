@@ -187,7 +187,6 @@ extern uint32_t runtime_flags;
 #define MERGE_MEDIA_DIRS_MASK 0x0020
 #define WIDE_LINKS_MASK       0x0040
 #define SCANNING_MASK         0x0100
-#define RESCAN_MASK           0x0200
 
 #define SETFLAG(mask)	runtime_flags |= mask
 #define GETFLAG(mask)	(runtime_flags & mask)
