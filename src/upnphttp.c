@@ -1354,9 +1354,7 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 	                char mime[32];
 	                char dlna[96];
 	              } last_file = { 0, 0 };
-#if USE_FORK
 	pid_t newpid = 0;
-#endif
 
 	id = strtoll(object, NULL, 10);
 	if( id != last_file.id || ctype != last_file.client )
@@ -1408,14 +1406,12 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 			last_file.dlna[0] = '\0';
 		sqlite3_free_table(result);
 	}
-#if USE_FORK
 	newpid = process_fork(h->req_client);
 	if( newpid > 0 )
 	{
 		CloseSocket_upnphttp(h);
 		return;
 	}
-#endif
 
 	DPRINTF(E_INFO, L_HTTP, "Serving DetailID: %lld [%s]\n", (long long)id, last_file.path);
 
@@ -1463,12 +1459,9 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 
 	INIT_STR(str, header);
 
-#if USE_FORK
 	if( (h->reqflags & FLAG_XFERBACKGROUND) && (setpriority(PRIO_PROCESS, 0, 19) == 0) )
 		tmode = "Background";
-	else
-#endif
-	if( strncmp(last_file.mime, "image", 5) == 0 )
+	else if( strncmp(last_file.mime, "image", 5) == 0 )
 		tmode = "Interactive";
 	else
 		tmode = "Streaming";
@@ -1542,9 +1535,7 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 
 	CloseSocket_upnphttp(h);
 error:
-#if USE_FORK
 	if( newpid == 0 )
 		_exit(0);
-#endif
 	return;
 }

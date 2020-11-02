@@ -218,52 +218,12 @@ open_db(sqlite3 **sq3)
 static void
 check_db(sqlite3 *db, int new_db, pid_t *scanner_pid)
 {
-	struct media_dir_s *media_path = NULL;
 	char cmd[PATH_MAX*2];
-	char **result;
-	int i, rows = 0;
 	int ret;
-
-	if (!new_db)
-	{
-		/* Check if any new media dirs appeared */
-		media_path = media_dirs;
-		while (media_path)
-		{
-			ret = sql_get_int_field(db, "SELECT TIMESTAMP as TYPE from DETAILS where PATH = %Q",
-						media_path->path);
-			if (ret != media_path->types)
-			{
-				ret = 1;
-				goto rescan;
-			}
-			media_path = media_path->next;
-		}
-		/* Check if any media dirs disappeared */
-		sql_get_table(db, "SELECT VALUE from SETTINGS where KEY = 'media_dir'", &result, &rows, NULL);
-		for (i=1; i <= rows; i++)
-		{
-			media_path = media_dirs;
-			while (media_path)
-			{
-				if (strcmp(result[i], media_path->path) == 0)
-					break;
-				media_path = media_path->next;
-			}
-			if (!media_path)
-			{
-				ret = 2;
-				sqlite3_free_table(result);
-				goto rescan;
-			}
-		}
-		sqlite3_free_table(result);
-	}
 
 	ret = db_upgrade(db);
 	if (ret != 0)
 	{
-rescan:
 		if (ret < 0)
 			DPRINTF(E_WARN, L_GENERAL, "Creating new database at %s/files.db\n", db_path);
 		else if (ret == 1)
@@ -285,7 +245,6 @@ rescan:
 	}
 	if (ret)
 	{
-#if USE_FORK
 		SETFLAG(SCANNING_MASK);
 		sqlite3_close(db);
 		*scanner_pid = fork();
@@ -302,9 +261,6 @@ rescan:
 		{
 			start_scanner();
 		}
-#else
-		start_scanner();
-#endif
 	}
 }
 
