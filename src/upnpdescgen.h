@@ -86,16 +86,10 @@ char *
 genConnectionManager(int * len);
 
 char *
-genX_MS_MediaReceiverRegistrar(int * len);
-
-char *
 getVarsContentDirectory(int * len);
 
 char *
 getVarsConnectionManager(int * len);
-
-char *
-getVarsX_MS_MediaReceiverRegistrar(int * len);
 
 #endif
 

@@ -199,7 +199,6 @@ static const char * const known_service_types[] =
 	"urn:schemas-upnp-org:device:MediaServer:",
 	"urn:schemas-upnp-org:service:ContentDirectory:",
 	"urn:schemas-upnp-org:service:ConnectionManager:",
-	"urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:",
 	0
 };
 
@@ -254,6 +253,7 @@ SendSSDPResponse(int s, struct sockaddr_in sockname, int st_no,
 	DPRINTF(E_DEBUG, L_SSDP, "Sending M-SEARCH response to %s:%d ST: %s\n",
 		inet_ntoa(sockname.sin_addr), ntohs(sockname.sin_port),
 		known_service_types[st_no]);
+	DPRINTF(E_DEBUG, L_SSDP, buf);
 	n = sendto(s, buf, l, 0,
 	           (struct sockaddr *)&sockname, len_r);
 	if (n < 0)
@@ -307,6 +307,7 @@ SendSSDPNotifies(int s, const char *host, unsigned short port,
 				l = sizeof(bufr);
 			}
 			DPRINTF(E_MAXDEBUG, L_SSDP, "Sending ssdp:alive [%d]\n", s);
+			DPRINTF(E_MAXDEBUG, L_SSDP, bufr);
 			n = sendto(s, bufr, l, 0,
 				(struct sockaddr *)&sockname, sizeof(struct sockaddr_in));
 			if (n < 0)

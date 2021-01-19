@@ -50,7 +50,6 @@
 enum subscriber_service_enum {
  EContentDirectory = 1,
  EConnectionManager,
- EMSMediaReceiverRegistrar
 };
 
 void

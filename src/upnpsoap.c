@@ -182,75 +182,6 @@ GetSystemUpdateID(struct upnphttp * h, const char * action)
 }
 
 static void
-IsAuthorizedValidated(struct upnphttp * h, const char * action)
-{
-	static const char resp[] =
-		"<u:%sResponse "
-		"xmlns:u=\"%s\">"
-		"<Result>%d</Result>"
-		"</u:%sResponse>";
-
-	char body[512];
-	struct NameValueParserData data;
-	const char * id;
-
-	ParseNameValue(h->req_buf + h->req_contentoff, h->req_contentlen, &data, XML_STORE_EMPTY_FL);
-	id = GetValueFromNameValueList(&data, "DeviceID");
-	if(id)
-	{
-		int bodylen;
-		bodylen = snprintf(body, sizeof(body), resp,
-			action, "urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1",
-			1, action);
-		BuildSendAndCloseSoapResp(h, body, bodylen);
-	}
-	else
-		SoapError(h, 402, "Invalid Args");
-
-	ClearNameValueList(&data);
-}
-
-static void
-RegisterDevice(struct upnphttp * h, const char * action)
-{
-	static const char resp[] =
-		"<u:%sResponse "
-		"xmlns:u=\"%s\">"
-		"<RegistrationRespMsg>%s</RegistrationRespMsg>"
-		"</u:%sResponse>";
-
-	char body[512];
-	int bodylen;
-
-	bodylen = snprintf(body, sizeof(body), resp,
-		action, "urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1",
-		uuidvalue, action);
-	BuildSendAndCloseSoapResp(h, body, bodylen);
-}
-
-static void
-GetProtocolInfo(struct upnphttp * h, const char * action)
-{
-	static const char resp[] =
-		"<u:%sResponse "
-		"xmlns:u=\"%s\">"
-		"<Source>"
-		RESOURCE_PROTOCOL_INFO_VALUES
-		"</Source>"
-		"<Sink></Sink>"
-		"</u:%sResponse>";
-
-	char * body;
-	int bodylen;
-
-	bodylen = asprintf(&body, resp,
-		action, "urn:schemas-upnp-org:service:ConnectionManager:1",
-		action);
-	BuildSendAndCloseSoapResp(h, body, bodylen);
-	free(body);
-}
-
-static void
 GetSortCapabilities(struct upnphttp * h, const char * action)
 {
 	static const char resp[] =
@@ -301,71 +232,6 @@ GetSearchCapabilities(struct upnphttp * h, const char * action)
 		action, "urn:schemas-upnp-org:service:ContentDirectory:1",
 		action);
 	BuildSendAndCloseSoapResp(h, body, bodylen);
-}
-
-static void
-GetCurrentConnectionIDs(struct upnphttp * h, const char * action)
-{
-	/* TODO: Use real data. - JM */
-	static const char resp[] =
-		"<u:%sResponse "
-		"xmlns:u=\"%s\">"
-		"<ConnectionIDs>0</ConnectionIDs>"
-		"</u:%sResponse>";
-
-	char body[512];
-	int bodylen;
-
-	bodylen = snprintf(body, sizeof(body), resp,
-		action, "urn:schemas-upnp-org:service:ConnectionManager:1",
-		action);
-	BuildSendAndCloseSoapResp(h, body, bodylen);
-}
-
-static void
-GetCurrentConnectionInfo(struct upnphttp * h, const char * action)
-{
-	/* TODO: Use real data. - JM */
-	static const char resp[] =
-		"<u:%sResponse "
-		"xmlns:u=\"%s\">"
-		"<RcsID>-1</RcsID>"
-		"<AVTransportID>-1</AVTransportID>"
-		"<ProtocolInfo></ProtocolInfo>"
-		"<PeerConnectionManager></PeerConnectionManager>"
-		"<PeerConnectionID>-1</PeerConnectionID>"
-		"<Direction>Output</Direction>"
-		"<Status>Unknown</Status>"
-		"</u:%sResponse>";
-
-	char body[sizeof(resp)+128];
-	struct NameValueParserData data;
-	const char *id_str;
-	int id;
-	char *endptr = NULL;
-
-	ParseNameValue(h->req_buf + h->req_contentoff, h->req_contentlen, &data, XML_STORE_EMPTY_FL);
-	id_str = GetValueFromNameValueList(&data, "ConnectionID");
-	DPRINTF(E_INFO, L_HTTP, "GetCurrentConnectionInfo(%s)\n", id_str);
-	if(id_str)
-		id = strtol(id_str, &endptr, 10);
-	if (!id_str || endptr == id_str)
-	{
-		SoapError(h, 402, "Invalid Args");
-	}
-	else if(id != 0)
-	{
-		SoapError(h, 701, "No such object error");
-	}
-	else
-	{
-		int bodylen;
-		bodylen = snprintf(body, sizeof(body), resp,
-			action, "urn:schemas-upnp-org:service:ConnectionManager:1",
-			action);
-		BuildSendAndCloseSoapResp(h, body, bodylen);
-	}
-	ClearNameValueList(&data);
 }
 
 /* Standard DLNA/UPnP filter flags */
@@ -2010,97 +1876,6 @@ static void UpdateObject(struct upnphttp * h, const char * action)
 	ClearNameValueList(&data);
 }
 
-static void
-SamsungGetFeatureList(struct upnphttp * h, const char * action)
-{
-	static const char resp[] =
-		"<u:X_GetFeatureListResponse xmlns:u=\"urn:schemas-upnp-org:service:ContentDirectory:1\">"
-		"<FeatureList>"
-		"&lt;Features xmlns=\"urn:schemas-upnp-org:av:avs\""
-		" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
-		" xsi:schemaLocation=\"urn:schemas-upnp-org:av:avs http://www.upnp.org/schemas/av/avs.xsd\"&gt;"
-		"&lt;Feature name=\"samsung.com_BASICVIEW\" version=\"1\"&gt;"
-		 "&lt;container id=\"%s\" type=\"object.item.audioItem\"/&gt;"
-		 "&lt;container id=\"%s\" type=\"object.item.videoItem\"/&gt;"
-		 "&lt;container id=\"%s\" type=\"object.item.imageItem\"/&gt;"
-		"&lt;/Feature&gt;"
-		"&lt;/Features&gt;"
-		"</FeatureList></u:X_GetFeatureListResponse>";
-	const char *audio = MUSIC_ID;
-	const char *video = VIDEO_ID;
-	const char *image = IMAGE_ID;
-	char body[1024];
-	int len;
-
-	if (runtime_vars.root_container)
-	{
-		if (strcmp(runtime_vars.root_container, BROWSEDIR_ID) == 0)
-		{
-			audio = MUSIC_DIR_ID;
-			video = VIDEO_DIR_ID;
-			image = IMAGE_DIR_ID;
-		}
-		else
-		{
-			audio = runtime_vars.root_container;
-			video = runtime_vars.root_container;
-			image = runtime_vars.root_container;
-		}
-	}
-	else if (h->req_client && (h->req_client->type->flags & FLAG_SAMSUNG_DCM10))
-	{
-		audio = "A";
-		video = "V";
-		image = "I";
-	}
-
-	len = snprintf(body, sizeof(body), resp, audio, video, image);
-
-	BuildSendAndCloseSoapResp(h, body, len);
-}
-
-static void
-SamsungSetBookmark(struct upnphttp * h, const char * action)
-{
-	static const char resp[] =
-	    "<u:X_SetBookmarkResponse"
-	    " xmlns:u=\"urn:schemas-upnp-org:service:ContentDirectory:1\">"
-	    "</u:X_SetBookmarkResponse>";
-
-	struct NameValueParserData data;
-	char *ObjectID, *PosSecond;
-
-	ParseNameValue(h->req_buf + h->req_contentoff, h->req_contentlen, &data, 0);
-	ObjectID = GetValueFromNameValueList(&data, "ObjectID");
-	PosSecond = GetValueFromNameValueList(&data, "PosSecond");
-
-	if( ObjectID && PosSecond )
-	{
-		const char *rid = ObjectID;
-		int64_t detailID;
-		int sec = atoi(PosSecond);
-		int ret;
-
-		in_magic_container(ObjectID, 0, &rid);
-		detailID = sql_get_int64_field(db, "SELECT DETAIL_ID from OBJECTS where OBJECT_ID = '%q'", rid);
-
-		if ( sec < 30 )
-			sec = 0;
-		ret = sql_exec(db, "INSERT OR IGNORE into BOOKMARKS (ID, SEC)"
-				   " VALUES (%lld, %d)", (long long)detailID, sec);
-		ret = sql_exec(db, "UPDATE BOOKMARKS set SEC = %d"
-				   " where ID = %lld",
-				   sec, (long long)detailID);
-		if( ret != SQLITE_OK )
-			DPRINTF(E_WARN, L_METADATA, "Error setting bookmark %s on ObjectID='%s'\n", PosSecond, rid);
-		BuildSendAndCloseSoapResp(h, resp, sizeof(resp)-1);
-	}
-	else
-		SoapError(h, 402, "Invalid Args");
-
-	ClearNameValueList(&data);
-}
-
 static const struct
 {
 	const char * methodName;
@@ -2114,15 +1889,7 @@ soapMethods[] =
 	{ "GetSearchCapabilities", GetSearchCapabilities},
 	{ "GetSortCapabilities", GetSortCapabilities},
 	{ "GetSystemUpdateID", GetSystemUpdateID},
-	{ "GetProtocolInfo", GetProtocolInfo},
-	{ "GetCurrentConnectionIDs", GetCurrentConnectionIDs},
-	{ "GetCurrentConnectionInfo", GetCurrentConnectionInfo},
-	{ "IsAuthorized", IsAuthorizedValidated},
-	{ "IsValidated", IsAuthorizedValidated},
-	{ "RegisterDevice", RegisterDevice},
 	{ "UpdateObject", UpdateObject},
-	{ "X_GetFeatureList", SamsungGetFeatureList},
-	{ "X_SetBookmark", SamsungSetBookmark},
 	{ 0, 0 }
 };
 

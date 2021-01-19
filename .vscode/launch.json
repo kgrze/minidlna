@@ -8,7 +8,7 @@
             "name": "minidlna-Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/minidlnad",
+            "program": "${workspaceFolder}/minidlna",
             "args": ["-d"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

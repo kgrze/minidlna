@@ -384,7 +384,7 @@ init(int argc, char **argv)
 	runtime_vars.ifaces[0] = NULL;
 
 	media_dir = calloc(1, sizeof(struct media_dir_s));
-	media_dir->path = strdup(realpath("./media", buf));
+	media_dir->path = strdup(realpath("../content", buf));
 	media_dir->types = ALL_MEDIA;
 	media_dirs = media_dir;
 

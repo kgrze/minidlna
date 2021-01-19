@@ -122,7 +122,7 @@ static const struct XMLElt rootDesc[] =
 {
 	{root_device, INITHELPER(1,2)},
 	{"specVersion", INITHELPER(3,2)},
-	{"device", INITHELPER(5,(14))},
+	{"device", INITHELPER(5,(13))},
 	{"/major", "1"},
 	{"/minor", "0"},
 	{"/deviceType", "urn:schemas-upnp-org:device:MediaServer:1"},
@@ -137,35 +137,9 @@ static const struct XMLElt rootDesc[] =
 	{"/UDN", uuidvalue},	/* required */
 	{"/dlna:X_DLNADOC xmlns:dlna=\"urn:schemas-dlna-org:device-1-0\"", "DMS-1.50"},
 	{"/presentationURL", presentationurl},	/* recommended */
-	{"iconList", INITHELPER((19),4)},
-	{"serviceList", INITHELPER((43),3)},
-	{"icon", INITHELPER((23),5)},
-	{"icon", INITHELPER((28),5)},
-	{"icon", INITHELPER((33),5)},
-	{"icon", INITHELPER((38),5)},
-	{"/mimetype", "image/png"},
-	{"/width", "48"},
-	{"/height", "48"},
-	{"/depth", "24"},
-	{"/url", "/icons/sm.png"},
-	{"/mimetype", "image/png"},
-	{"/width", "120"},
-	{"/height", "120"},
-	{"/depth", "24"},
-	{"/url", "/icons/lrg.png"},
-	{"/mimetype", "image/jpeg"},
-	{"/width", "48"},
-	{"/height", "48"},
-	{"/depth", "24"},
-	{"/url", "/icons/sm.jpg"},
-	{"/mimetype", "image/jpeg"},
-	{"/width", "120"},
-	{"/height", "120"},
-	{"/depth", "24"},
-	{"/url", "/icons/lrg.jpg"},
-	{"service", INITHELPER((46),5)},
-	{"service", INITHELPER((51),5)},
-	{"service", INITHELPER((56),5)},
+	{"serviceList", INITHELPER(18,2)},
+	{"service", INITHELPER(20,5)},
+	{"service", INITHELPER(25,5)},
 	{"/serviceType", "urn:schemas-upnp-org:service:ContentDirectory:1"},
 	{"/serviceId", "urn:upnp-org:serviceId:ContentDirectory"},
 	{"/controlURL", CONTENTDIRECTORY_CONTROLURL},
@@ -176,11 +150,6 @@ static const struct XMLElt rootDesc[] =
 	{"/controlURL", CONNECTIONMGR_CONTROLURL},
 	{"/eventSubURL", CONNECTIONMGR_EVENTURL},
 	{"/SCPDURL", CONNECTIONMGR_PATH},
-	{"/serviceType", "urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1"},
-	{"/serviceId", "urn:microsoft.com:serviceId:X_MS_MediaReceiverRegistrar"},
-	{"/controlURL", X_MS_MEDIARECEIVERREGISTRAR_CONTROLURL},
-	{"/eventSubURL", X_MS_MEDIARECEIVERREGISTRAR_EVENTURL},
-	{"/SCPDURL", X_MS_MEDIARECEIVERREGISTRAR_PATH},
 	{0, 0}
 };
 
@@ -331,56 +300,11 @@ static const struct stateVar ContentDirectoryVars[] =
 	{0, 0}
 };
 
-static const struct argument GetIsAuthorizedArgs[] =
-{
-	{"DeviceID", 1, 0},
-	{"Result", 2, 3},
-	{NULL, 0, 0}
-};
-
-static const struct argument GetIsValidatedArgs[] =
-{
-	{"DeviceID", 1, 0},
-	{"Result", 2, 3},
-	{NULL, 0, 0}
-};
-
-static const struct argument GetRegisterDeviceArgs[] =
-{
-	{"RegistrationReqMsg", 1, 1},
-	{"RegistrationRespMsg", 2, 2},
-	{NULL, 0, 0}
-};
-
-static const struct action X_MS_MediaReceiverRegistrarActions[] =
-{
-	{"IsAuthorized", GetIsAuthorizedArgs}, /* R */
-	{"IsValidated", GetIsValidatedArgs}, /* R */
-	{"RegisterDevice", GetRegisterDeviceArgs},
-	{0, 0}
-};
-
-static const struct stateVar X_MS_MediaReceiverRegistrarVars[] =
-{
-	{"A_ARG_TYPE_DeviceID", 0, 0},
-	{"A_ARG_TYPE_RegistrationReqMsg", 7, 0},
-	{"A_ARG_TYPE_RegistrationRespMsg", 7, 0},
-	{"A_ARG_TYPE_Result", 6, 0},
-	{"AuthorizationDeniedUpdateID", 3|EVENTED, 0},
-	{"AuthorizationGrantedUpdateID", 3|EVENTED, 0},
-	{"ValidationRevokedUpdateID", 3|EVENTED, 0},
-	{"ValidationSucceededUpdateID", 3|EVENTED, 0},
-	{0, 0}
-};
-
 static const struct serviceDesc scpdContentDirectory =
 { ContentDirectoryActions, ContentDirectoryVars };
 
 static const struct serviceDesc scpdConnectionManager =
 { ConnectionManagerActions, ConnectionManagerVars };
-
-static const struct serviceDesc scpdX_MS_MediaReceiverRegistrar =
-{ X_MS_MediaReceiverRegistrarActions, X_MS_MediaReceiverRegistrarVars };
 
 /* strcat_str()
  * concatenate the string and use realloc to increase the
@@ -690,14 +614,6 @@ genConnectionManager(int * len)
 	return genServiceDesc(len, &scpdConnectionManager);
 }
 
-/* genX_MS_MediaReceiverRegistrar() :
- * Generate the X_MS_MediaReceiverRegistrar xml description */
-char *
-genX_MS_MediaReceiverRegistrar(int * len)
-{
-	return genServiceDesc(len, &scpdX_MS_MediaReceiverRegistrar);
-}
-
 static char *
 genEventVars(int * len, const struct serviceDesc * s, const char * servns)
 {
@@ -760,13 +676,5 @@ getVarsConnectionManager(int * l)
 	return genEventVars(l,
                         &scpdConnectionManager,
 	                    "urn:schemas-upnp-org:service:ConnectionManager:1");
-}
-
-char *
-getVarsX_MS_MediaReceiverRegistrar(int * l)
-{
-	return genEventVars(l,
-                        &scpdX_MS_MediaReceiverRegistrar,
-	                    "urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1");
 }
 

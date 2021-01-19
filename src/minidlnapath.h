@@ -43,9 +43,5 @@
 #define CONNECTIONMGR_CONTROLURL		"/ctl/ConnectionMgr"
 #define CONNECTIONMGR_EVENTURL			"/evt/ConnectionMgr"
 
-#define X_MS_MEDIARECEIVERREGISTRAR_PATH	"/X_MS_MediaReceiverRegistrar.xml"
-#define X_MS_MEDIARECEIVERREGISTRAR_CONTROLURL	"/ctl/X_MS_MediaReceiverRegistrar"
-#define X_MS_MEDIARECEIVERREGISTRAR_EVENTURL	"/evt/X_MS_MediaReceiverRegistrar"
-
 #endif
 

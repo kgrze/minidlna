@@ -90,7 +90,6 @@ enum event_type {
 	E_RENEW
 };
 
-static void SendResp_caption(struct upnphttp *, char * url);
 static void SendResp_dlnafile(struct upnphttp *, char * url);
 
 struct upnphttp * 
@@ -577,60 +576,6 @@ sendXMLdesc(struct upnphttp * h, char * (f)(int *))
 	free(desc);
 }
 
-static void
-SendResp_presentation(struct upnphttp * h)
-{
-	struct string_s str;
-	char body[4096];
-	int a, v, p, i;
-
-	INIT_STR(str, body);
-
-	h->respflags = FLAG_HTML;
-
-	a = sql_get_int_field(db, "SELECT count(*) from DETAILS where MIME glob 'a*'");
-	v = sql_get_int_field(db, "SELECT count(*) from DETAILS where MIME glob 'v*'");
-	p = sql_get_int_field(db, "SELECT count(*) from DETAILS where MIME glob 'i*'");
-	strcatf(&str,
-		"<HTML><HEAD><TITLE>" SERVER_NAME " " MINIDLNA_VERSION "</TITLE></HEAD>"
-		"<BODY><div style=\"text-align: center\">"
-		"<h2>" SERVER_NAME " status</h2></div>");
-
-	strcatf(&str,
-		"<h3>Media library</h3>"
-		"<table border=1 cellpadding=10>"
-		"<tr><td>Audio files</td><td>%d</td></tr>"
-		"<tr><td>Video files</td><td>%d</td></tr>"
-		"<tr><td>Image files</td><td>%d</td></tr>"
-		"</table>", a, v, p);
-
-	if (GETFLAG(SCANNING_MASK))
-		strcatf(&str,
-			"<br><i>* Media scan in progress</i><br>");
-
-	strcatf(&str,
-		"<h3>Connected clients</h3>"
-		"<table border=1 cellpadding=10>"
-		"<tr><td>ID</td><td>Type</td><td>IP Address</td><td>HW Address</td><td>Connections</td></tr>");
-	for (i = 0; i < CLIENT_CACHE_SLOTS; i++)
-	{
-		if (!clients[i].addr.s_addr)
-			continue;
-		strcatf(&str, "<tr><td>%d</td><td>%s</td><td>%s</td><td>%02X:%02X:%02X:%02X:%02X:%02X</td><td>%d</td></tr>",
-				i, clients[i].type->name, inet_ntoa(clients[i].addr),
-				clients[i].mac[0], clients[i].mac[1], clients[i].mac[2],
-				clients[i].mac[3], clients[i].mac[4], clients[i].mac[5], clients[i].connections);
-	}
-	strcatf(&str, "</table>");
-
-	strcatf(&str, "<br>%d connection%s currently open<br>", number_of_children, (number_of_children == 1 ? "" : "s"));
-	strcatf(&str, "</BODY></HTML>\r\n");
-
-	BuildResp_upnphttp(h, str.data, str.off);
-	SendResp_upnphttp(h);
-	CloseSocket_upnphttp(h);
-}
-
 /* ProcessHTTPPOST_upnphttp()
  * executes the SOAP query if it is possible */
 static void
@@ -663,124 +608,6 @@ ProcessHTTPPOST_upnphttp(struct upnphttp * h)
 		/* waiting for remaining data */
 		h->state = 1;
 	}
-}
-
-static int
-check_event(struct upnphttp *h)
-{
-	enum event_type type;
-
-	if (h->req_Callback)
-	{
-		if (h->req_SID || !h->req_NT)
-		{
-			BuildResp2_upnphttp(h, 400, "Bad Request",
-				            "<html><body>Bad request</body></html>", 37);
-			type = E_INVALID;
-		}
-		else if (strncmp(h->req_Callback, "http://", 7) != 0 ||
-		         strncmp(h->req_NT, "upnp:event", h->req_NTLen) != 0)
-		{
-			/* Missing or invalid CALLBACK : 412 Precondition Failed.
-			 * If CALLBACK header is missing or does not contain a valid HTTP URL,
-			 * the publisher must respond with HTTP error 412 Precondition Failed*/
-			BuildResp2_upnphttp(h, 412, "Precondition Failed", 0, 0);
-			type = E_INVALID;
-		}
-		else
-			type = E_SUBSCRIBE;
-	}
-	else if (h->req_SID)
-	{
-		/* subscription renew */
-		if (h->req_NT)
-		{
-			BuildResp2_upnphttp(h, 400, "Bad Request",
-				            "<html><body>Bad request</body></html>", 37);
-			type = E_INVALID;
-		}
-		else
-			type = E_RENEW;
-	}
-	else
-	{
-		BuildResp2_upnphttp(h, 412, "Precondition Failed", 0, 0);
-		type = E_INVALID;
-	}
-
-	return type;
-}
-
-static void
-ProcessHTTPSubscribe_upnphttp(struct upnphttp * h, const char * path)
-{
-	const char * sid;
-	enum event_type type;
-	DPRINTF(E_DEBUG, L_HTTP, "ProcessHTTPSubscribe %s\n", path);
-	DPRINTF(E_DEBUG, L_HTTP, "Callback '%.*s' Timeout=%d\n",
-		h->req_CallbackLen, h->req_Callback, h->req_Timeout);
-	DPRINTF(E_DEBUG, L_HTTP, "SID '%.*s'\n", h->req_SIDLen, h->req_SID);
-
-	type = check_event(h);
-	if (type == E_SUBSCRIBE)
-	{
-		/* - add to the subscriber list
-		 * - respond HTTP/x.x 200 OK 
-		 * - Send the initial event message */
-		/* Server:, SID:; Timeout: Second-(xx|infinite) */
-		sid = upnpevents_addSubscriber(path, h->req_Callback,
-		                               h->req_CallbackLen, h->req_Timeout);
-		h->respflags = FLAG_TIMEOUT;
-		if (sid)
-		{
-			DPRINTF(E_DEBUG, L_HTTP, "generated sid=%s\n", sid);
-			h->respflags |= FLAG_SID;
-			h->req_SID = sid;
-			h->req_SIDLen = strlen(sid);
-		}
-		BuildResp_upnphttp(h, 0, 0);
-	}
-	else if (type == E_RENEW)
-	{
-		/* subscription renew */
-		if (renewSubscription(h->req_SID, h->req_SIDLen, h->req_Timeout) < 0)
-		{
-			/* Invalid SID
-			   412 Precondition Failed. If a SID does not correspond to a known,
-			   un-expired subscription, the publisher must respond
-			   with HTTP error 412 Precondition Failed. */
-			BuildResp2_upnphttp(h, 412, "Precondition Failed", 0, 0);
-		}
-		else
-		{
-			/* A DLNA device must enforce a 5 minute timeout */
-			h->respflags = FLAG_TIMEOUT;
-			h->req_Timeout = 300;
-			h->respflags |= FLAG_SID;
-			BuildResp_upnphttp(h, 0, 0);
-		}
-	}
-	SendResp_upnphttp(h);
-	CloseSocket_upnphttp(h);
-}
-
-static void
-ProcessHTTPUnSubscribe_upnphttp(struct upnphttp * h, const char * path)
-{
-	enum event_type type;
-	DPRINTF(E_DEBUG, L_HTTP, "ProcessHTTPUnSubscribe %s\n", path);
-	DPRINTF(E_DEBUG, L_HTTP, "SID '%.*s'\n", h->req_SIDLen, h->req_SID);
-	/* Remove from the list */
-	type = check_event(h);
-	if (type != E_INVALID)
-	{
-		if(upnpevents_removeSubscriber(h->req_SID, h->req_SIDLen) < 0)
-			BuildResp2_upnphttp(h, 412, "Precondition Failed", 0, 0);
-		else
-			BuildResp_upnphttp(h, 0, 0);
-	}
-	SendResp_upnphttp(h);
-	CloseSocket_upnphttp(h);
 }
 
 /* Parse and process Http Query 
@@ -904,41 +731,15 @@ ProcessHttpQuery_upnphttp(struct upnphttp * h)
 		{
 			sendXMLdesc(h, genConnectionManager);
 		}
-		else if(strcmp(X_MS_MEDIARECEIVERREGISTRAR_PATH, HttpUrl) == 0)
-		{
-			sendXMLdesc(h, genX_MS_MediaReceiverRegistrar);
-		}
 		else if(strncmp(HttpUrl, "/MediaItems/", 12) == 0)
 		{
 			SendResp_dlnafile(h, HttpUrl+12);
-		}
-		else if(strncmp(HttpUrl, "/Captions/", 10) == 0)
-		{
-			SendResp_caption(h, HttpUrl+10);
-		}
-		else if(strncmp(HttpUrl, "/status", 7) == 0)
-		{
-			SendResp_presentation(h);
-		}
-		else if(strcmp(HttpUrl, "/") == 0)
-		{
-			SendResp_presentation(h);
 		}
 		else
 		{
 			DPRINTF(E_WARN, L_HTTP, "%s not found, responding ERROR 404\n", HttpUrl);
 			Send404(h);
 		}
-	}
-	else if(strcmp("SUBSCRIBE", HttpCommand) == 0)
-	{
-		h->req_command = ESubscribe;
-		ProcessHTTPSubscribe_upnphttp(h, HttpUrl);
-	}
-	else if(strcmp("UNSUBSCRIBE", HttpCommand) == 0)
-	{
-		h->req_command = EUnSubscribe;
-		ProcessHTTPUnSubscribe_upnphttp(h, HttpUrl);
 	}
 	else
 	{
@@ -1283,54 +1084,6 @@ _open_file(const char *orig_path)
 		DPRINTF(E_ERROR, L_HTTP, "Error opening %s\n", path);
 
 	return fd;
-}
-
-static void
-SendResp_caption(struct upnphttp * h, char * object)
-{
-	char header[512];
-	char *path;
-	off_t size;
-	long long id;
-	int fd;
-	struct string_s str;
-
-	id = strtoll(object, NULL, 10);
-
-	path = sql_get_text_field(db, "SELECT PATH from CAPTIONS where ID = %lld", id);
-	if( !path )
-	{
-		DPRINTF(E_WARN, L_HTTP, "CAPTION ID %s not found, responding ERROR 404\n", object);
-		Send404(h);
-		return;
-	}
-	DPRINTF(E_INFO, L_HTTP, "Serving caption ID: %lld [%s]\n", id, path);
-
-	fd = _open_file(path);
-	if( fd < 0 ) {
-		sqlite3_free(path);
-		if (fd == -403)
-			Send403(h);
-		else
-			Send404(h);
-		return;
-	}
-	sqlite3_free(path);
-	size = lseek(fd, 0, SEEK_END);
-	lseek(fd, 0, SEEK_SET);
-
-	INIT_STR(str, header);
-
-	start_dlna_header(&str, 200, "Interactive", "smi/caption");
-	strcatf(&str, "Content-Length: %jd\r\n\r\n", (intmax_t)size);
-
-	if( send_data(h, str.data, str.off, MSG_MORE) == 0 )
-	{
-		if( h->req_command != EHead )
-			send_file(h, fd, 0, size-1);
-	}
-	close(fd);
-	CloseSocket_upnphttp(h);
 }
 
 static void

@@ -125,8 +125,6 @@ newSubscriber(const char * eventurl, const char * callback, int callbacklen)
 		tmp->service = EContentDirectory;
 	else if(strcmp(eventurl, CONNECTIONMGR_EVENTURL)==0)
 		tmp->service = EConnectionManager;
-	else if(strcmp(eventurl, X_MS_MEDIARECEIVERREGISTRAR_EVENTURL)==0)
-		tmp->service = EMSMediaReceiverRegistrar;
 	else {
 		free(tmp);
 		return NULL;
@@ -341,9 +339,6 @@ static void upnp_event_prepare(struct upnp_event_notify * obj)
 		break;
 	case EConnectionManager:
 		xml = getVarsConnectionManager(&l);
-		break;
-	case EMSMediaReceiverRegistrar:
-		xml = getVarsX_MS_MediaReceiverRegistrar(&l);
 		break;
 	default:
 		xml = NULL;
