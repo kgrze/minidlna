@@ -21,7 +21,7 @@
 #include <sys/time.h>
 #include <netinet/in.h>
 
-#define CLIENT_CACHE_SLOTS 25
+#define CLIENT_CACHE_SLOTS 5
 
 /* Client capability/quirk flags */
 #define FLAG_DLNA               0x00000001
