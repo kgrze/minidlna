@@ -279,19 +279,14 @@ set_filter_flags(char *filter, struct upnphttp *h)
 {
 	char *item, *saveptr = NULL;
 	uint32_t flags = 0;
-	int samsung = h->req_client && (h->req_client->type->flags & FLAG_SAMSUNG);
 
 	if( !filter || (strlen(filter) <= 1) ) {
 		/* Not the full 32 bits.  Skip vendor-specific stuff by default. */
 		flags = STANDARD_FILTER_MASK;
-		if (samsung)
-			flags |= FILTER_SEC_CAPTION_INFO_EX | FILTER_SEC_DCM_INFO;
 	}
 	if (flags)
 		return flags;
 
-	if( samsung )
-		flags |= FILTER_DLNA_NAMESPACE;
 	item = strtok_r(filter, ",", &saveptr);
 	while( item != NULL )
 	{
@@ -334,8 +329,6 @@ set_filter_flags(char *filter, struct upnphttp *h)
 		else if( strcmp(item, "upnp:albumArtURI") == 0 )
 		{
 			flags |= FILTER_UPNP_ALBUMARTURI;
-			if( samsung )
-				flags |= FILTER_UPNP_ALBUMARTURI_DLNA_PROFILEID;
 		}
 		else if( strcmp(item, "upnp:albumArtURI@dlna:profileID") == 0 )
 		{
@@ -551,9 +544,6 @@ add_resized_res(int srcw, int srch, int reqw, int reqh, char *dlna_pn,
 	int dstw = reqw;
 	int dsth = reqh;
 
-	if( (args->flags & FLAG_NO_RESIZE) && reqw > 160 && reqh > 160 )
-		return;
-
 	strcatf(args->str, "&lt;res ");
 	if( args->filter & FILTER_RES_RESOLUTION )
 	{
@@ -588,8 +578,6 @@ add_res(char *size, char *duration, char *bitrate, char *sampleFrequency,
 	}
 	if( bitrate && (args->filter & FILTER_RES_BITRATE) ) {
 		int br = atoi(bitrate);
-		if(args->flags & FLAG_MS_PFS)
-			br /= 8;
 		strcatf(args->str, "bitrate=\"%d\" ", br);
 	}
 	if( sampleFrequency && (args->filter & FILTER_RES_SAMPLEFREQUENCY) ) {
@@ -600,17 +588,6 @@ add_res(char *size, char *duration, char *bitrate, char *sampleFrequency,
 	}
 	if( resolution && (args->filter & FILTER_RES_RESOLUTION) ) {
 		strcatf(args->str, "resolution=\"%s\" ", resolution);
-	}
-	if( args->filter & FILTER_PV_SUBTITLE )
-	{
-		if( args->flags & FLAG_HAS_CAPTIONS )
-		{
-			if( args->filter & FILTER_PV_SUBTITLE_FILE_TYPE )
-				strcatf(args->str, "pv:subtitleFileType=\"SRT\" ");
-			if( args->filter & FILTER_PV_SUBTITLE_FILE_URI )
-				strcatf(args->str, "pv:subtitleFileUri=\"http://%s:%d/Captions/%s.srt\" ",
-					lan_addr[args->iface].str, runtime_vars.port, detailID);
-		}
 	}
 	strcatf(args->str, "protocolInfo=\"http-get:*:%s:%s\"&gt;"
 	                          "http://%s:%d/MediaItems/%s.%s"
@@ -694,111 +671,23 @@ callback(void *args, int argc, char **argv, char **azColName)
 #endif
 	}
 	passed_args->returned++;
-	passed_args->flags &= ~RESPONSE_FLAGS;
 
 	if( strncmp(class, "item", 4) == 0 )
 	{
 		uint32_t dlna_flags = DLNA_FLAG_DLNA_V1_5|DLNA_FLAG_HTTP_STALLING|DLNA_FLAG_TM_B;
-		char *alt_title = NULL;
 		/* We may need special handling for certain MIME types */
 		if( *mime == 'v' )
 		{
 			dlna_flags |= DLNA_FLAG_TM_S;
-			if( passed_args->flags & FLAG_MIME_AVI_DIVX )
-			{
-				if( strcmp(mime, "video/x-msvideo") == 0 )
-				{
-					if( creator )
-						strcpy(mime+6, "divx");
-					else
-						strcpy(mime+6, "avi");
-				}
-			}
-			else if( passed_args->flags & FLAG_MIME_AVI_AVI )
-			{
-				if( strcmp(mime, "video/x-msvideo") == 0 )
-				{
-					strcpy(mime+6, "avi");
-				}
-			}
-			else if( passed_args->client == EFreeBox && dlna_pn )
-			{
-				if( strncmp(dlna_pn, "AVC_TS", 6) == 0 ||
-				    strncmp(dlna_pn, "MPEG_TS", 7) == 0 )
-				{
-					strcpy(mime+6, "mp2t");
-				}
-			}
-			if( !(passed_args->flags & FLAG_DLNA) )
-			{
-				if( strcmp(mime+6, "vnd.dlna.mpeg-tts") == 0 )
-				{
-					strcpy(mime+6, "mpeg");
-				}
-			}
-			if( (passed_args->flags & FLAG_CAPTION_RES) ||
-			    (passed_args->filter & (FILTER_SEC_CAPTION_INFO_EX|FILTER_PV_SUBTITLE)) )
-			{
-				if( sql_get_int_field(db, "SELECT ID from CAPTIONS where ID = '%s'", detailID) > 0 )
-					passed_args->flags |= FLAG_HAS_CAPTIONS;
-			}
-			/* From what I read, Samsung TV's expect a [wrong] MIME type of x-mkv. */
-			if( passed_args->flags & FLAG_SAMSUNG )
-			{
-				if( strcmp(mime+6, "x-matroska") == 0 )
-				{
-					strcpy(mime+8, "mkv");
-				}
-			}
-			/* LG hack: subtitles won't get used unless dc:title contains a dot. */
-			else if( passed_args->client == ELGDevice && (passed_args->flags & FLAG_HAS_CAPTIONS) )
-			{
-				ret = asprintf(&alt_title, "%s.", title);
-				if( ret > 0 )
-					title = alt_title;
-				else
-					alt_title = NULL;
-			}
-			/* Asus OPlay reboots with titles longer than 23 characters with some file types. */
-			else if( passed_args->client == EAsusOPlay && (passed_args->flags & FLAG_HAS_CAPTIONS) )
-			{
-				if( strlen(title) > 23 )
-					title[23] = '\0';
-			}
-			/* Hyundai hack: Only titles with a media extension get recognized. */
-			else if( passed_args->client == EHyundaiTV )
-			{
-				ext = mime_to_ext(mime);
-				ret = asprintf(&alt_title, "%s.%s", title, ext);
-				if( ret > 0 )
-					title = alt_title;
-				else
-					alt_title = NULL;
-			}
 		}
 		else if( *mime == 'a' )
 		{
 			dlna_flags |= DLNA_FLAG_TM_S;
-			if( strcmp(mime+6, "x-flac") == 0 )
-			{
-				if( passed_args->flags & FLAG_MIME_FLAC_FLAC )
-				{
-					strcpy(mime+6, "flac");
-				}
-			}
-			else if( strcmp(mime+6, "x-wav") == 0 )
-			{
-				if( passed_args->flags & FLAG_MIME_WAV_WAV )
-				{
-					strcpy(mime+6, "wav");
-				}
-			}
 		}
 		else
+		{
 			dlna_flags |= DLNA_FLAG_TM_I;
-
-		if( passed_args->flags & FLAG_SKIP_DLNA_PN )
-			dlna_pn = NULL;
+		}
 
 		if( dlna_pn )
 			snprintf(dlna_buf, sizeof(dlna_buf), "DLNA.ORG_PN=%s;"
@@ -806,11 +695,6 @@ callback(void *args, int argc, char **argv, char **azColName)
 			                                     "DLNA.ORG_CI=0;"
 			                                     "DLNA.ORG_FLAGS=%08X%024X",
 			                                     dlna_pn, dlna_flags, 0);
-		else if( passed_args->flags & FLAG_DLNA )
-			snprintf(dlna_buf, sizeof(dlna_buf), "DLNA.ORG_OP=01;"
-			                                     "DLNA.ORG_CI=0;"
-			                                     "DLNA.ORG_FLAGS=%08X%024X",
-			                                     dlna_flags, 0);
 		else
 			strcpy(dlna_buf, "*");
 
@@ -885,7 +769,7 @@ callback(void *args, int argc, char **argv, char **azColName)
 					if( srcw > 640 || srch > 480 )
 						add_resized_res(srcw, srch, 640, 480, "JPEG_SM", detailID, passed_args);
 				}
-				if( !(passed_args->flags & FLAG_RESIZE_THUMBS) && NON_ZERO(tn) && IS_ZERO(rotate) ) {
+				if(NON_ZERO(tn) && IS_ZERO(rotate) ) {
 					ret = strcatf(str, "&lt;res protocolInfo=\"http-get:*:%s:%s\"&gt;"
 					                   "http://%s:%d/Thumbnails/%s.jpg"
 					                   "&lt;/res&gt;",
@@ -895,102 +779,13 @@ callback(void *args, int argc, char **argv, char **azColName)
 				else
 					add_resized_res(srcw, srch, 160, 160, "JPEG_TN", detailID, passed_args);
 			}
-			else if( *mime == 'v' ) {
-				switch( passed_args->client ) {
-				case EToshibaTV:
-					if( dlna_pn &&
-					    (strncmp(dlna_pn, "MPEG_TS_HD_NA", 13) == 0 ||
-					     strncmp(dlna_pn, "MPEG_TS_SD_NA", 13) == 0 ||
-					     strncmp(dlna_pn, "AVC_TS_MP_HD_AC3", 16) == 0 ||
-					     strncmp(dlna_pn, "AVC_TS_HP_HD_AC3", 16) == 0))
-					{
-						sprintf(dlna_buf, "DLNA.ORG_PN=%s;DLNA.ORG_OP=01;DLNA.ORG_CI=1", "MPEG_PS_NTSC");
-						add_res(size, duration, bitrate, sampleFrequency, nrAudioChannels,
-						        resolution, dlna_buf, mime, detailID, ext, passed_args);
-					}
-					break;
-				case ESonyBDP:
-					if( dlna_pn &&
-					    (strncmp(dlna_pn, "AVC_TS", 6) == 0 ||
-					     strncmp(dlna_pn, "MPEG_TS", 7) == 0) )
-					{
-						if( strncmp(dlna_pn, "MPEG_TS_SD_NA", 13) != 0 )
-						{
-							sprintf(dlna_buf, "DLNA.ORG_PN=%s;DLNA.ORG_OP=01;DLNA.ORG_CI=1", "MPEG_TS_SD_NA");
-							add_res(size, duration, bitrate, sampleFrequency, nrAudioChannels,
-							        resolution, dlna_buf, mime, detailID, ext, passed_args);
-						}
-						if( strncmp(dlna_pn, "MPEG_TS_SD_EU", 13) != 0 )
-						{
-							sprintf(dlna_buf, "DLNA.ORG_PN=%s;DLNA.ORG_OP=01;DLNA.ORG_CI=1", "MPEG_TS_SD_EU");
-							add_res(size, duration, bitrate, sampleFrequency, nrAudioChannels,
-							        resolution, dlna_buf, mime, detailID, ext, passed_args);
-						}
-					}
-					else if( (dlna_pn &&
-					          (strncmp(dlna_pn, "AVC_MP4", 7) == 0 ||
-					           strncmp(dlna_pn, "MPEG4_P2_MP4", 12) == 0)) ||
-					         strcmp(mime+6, "x-matroska") == 0 ||
-					         strcmp(mime+6, "x-msvideo") == 0 ||
-					         strcmp(mime+6, "mpeg") == 0 )
-					{
-						strcpy(mime+6, "avi");
-						if( !dlna_pn || strncmp(dlna_pn, "MPEG_PS_NTSC", 12) != 0 )
-						{
-							sprintf(dlna_buf, "DLNA.ORG_PN=%s;DLNA.ORG_OP=01;DLNA.ORG_CI=1", "MPEG_PS_NTSC");
-							add_res(size, duration, bitrate, sampleFrequency, nrAudioChannels,
-						        	resolution, dlna_buf, mime, detailID, ext, passed_args);
-						}
-						if( !dlna_pn || strncmp(dlna_pn, "MPEG_PS_PAL", 11) != 0 )
-						{
-							sprintf(dlna_buf, "DLNA.ORG_PN=%s;DLNA.ORG_OP=01;DLNA.ORG_CI=1", "MPEG_PS_PAL");
-							add_res(size, duration, bitrate, sampleFrequency, nrAudioChannels,
-						        	resolution, dlna_buf, mime, detailID, ext, passed_args);
-						}
-					}
-					break;
-				case ESonyBravia:
-					/* BRAVIA KDL-##*X### series TVs do natively support AVC/AC3 in TS, but
-					   require profile to be renamed (applies to _T and _ISO variants also) */
-					if( dlna_pn &&
-					    (strncmp(dlna_pn, "AVC_TS_MP_SD_AC3", 16) == 0 ||
-					     strncmp(dlna_pn, "AVC_TS_MP_HD_AC3", 16) == 0 ||
-					     strncmp(dlna_pn, "AVC_TS_HP_HD_AC3", 16) == 0))
-					{
-					        sprintf(dlna_buf, "DLNA.ORG_PN=AVC_TS_HD_50_AC3%s", dlna_pn + 16);
-						add_res(size, duration, bitrate, sampleFrequency, nrAudioChannels,
-						        resolution, dlna_buf, mime, detailID, ext, passed_args);
-					}
-					break;
-				case ESamsungSeriesCDE:
-				case ELGDevice:
-				case ELGNetCastDevice:
-				case EAsusOPlay:
-				default:
-					if( passed_args->flags & FLAG_HAS_CAPTIONS )
-					{
-						if( passed_args->flags & FLAG_CAPTION_RES )
-							ret = strcatf(str, "&lt;res protocolInfo=\"http-get:*:text/srt:*\"&gt;"
-									     "http://%s:%d/Captions/%s.srt"
-									   "&lt;/res&gt;",
-									   lan_addr[passed_args->iface].str, runtime_vars.port, detailID);
-						if( passed_args->filter & FILTER_SEC_CAPTION_INFO_EX )
-							ret = strcatf(str, "&lt;sec:CaptionInfoEx sec:type=\"srt\"&gt;"
-							                     "http://%s:%d/Captions/%s.srt"
-							                   "&lt;/sec:CaptionInfoEx&gt;",
-							                   lan_addr[passed_args->iface].str, runtime_vars.port, detailID);
-					}
-					free(alt_title);
-					break;
-				}
-			}
 		}
-		if( (passed_args->flags & FLAG_MS_PFS) && *mime == 'i' ) {
-			if( passed_args->client == EMediaRoom && !album )
+		if(*mime == 'i' ) {
+			if(!album )
 				ret = strcatf(str, "&lt;upnp:album&gt;%s&lt;/upnp:album&gt;", "[No Keywords]");
 
 			/* EVA2000 doesn't seem to handle embedded thumbnails */
-			if( !(passed_args->flags & FLAG_RESIZE_THUMBS) && NON_ZERO(tn) && IS_ZERO(rotate) ) {
+			if( NON_ZERO(tn) && IS_ZERO(rotate) ) {
 				ret = strcatf(str, "&lt;upnp:albumArtURI&gt;"
 				                   "http://%s:%d/Thumbnails/%s.jpg"
 				                   "&lt;/upnp:albumArtURI&gt;",
@@ -1053,6 +848,8 @@ callback(void *args, int argc, char **argv, char **azColName)
 		}
 		ret = strcatf(str, "&lt;/container&gt;");
 	}
+
+	(void)ret;
 
 	return 0;
 }
@@ -1135,8 +932,7 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 
 	args.returned = 0;
 	args.requested = RequestedCount;
-	args.client = h->req_client ? h->req_client->type->type : 0;
-	args.flags = h->req_client ? h->req_client->type->flags : 0;
+	args.flags = 0;
 	args.str = &str;
 	DPRINTF(E_DEBUG, L_HTTP, "Browsing ContentDirectory:\n"
 	                         " * ObjectID: %s\n"
@@ -1215,14 +1011,6 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 				else
 					ret = xasprintf(&orderBy, "order by length(OBJECT_ID), OBJECT_ID");
 			}
-			else if( args.flags & FLAG_FORCE_SORT )
-			{
-				__SORT_LIMIT
-				ret = xasprintf(&orderBy, "order by o.CLASS, d.DISC, d.TRACK, d.TITLE");
-			}
-			/* LG TV ordering bug */
-			else if( args.client == ELGDevice )
-				ret = xasprintf(&orderBy, "order by o.CLASS, d.TITLE");
 			else
 				orderBy = parse_sort_criteria(SortCriteria, &ret);
 			if( ret == -1 )
@@ -1233,7 +1021,7 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 			}
 		}
 		/* If it's a DLNA client, return an error for bad sort criteria */
-		if( ret < 0 && ((args.flags & FLAG_DLNA) || GETFLAG(DLNA_STRICT_MASK)) )
+		if(GETFLAG(DLNA_STRICT_MASK))
 		{
 			SoapError(h, 709, "Unsupported or invalid sort criteria");
 			goto browse_error;
@@ -1611,8 +1399,7 @@ SearchContentDirectory(struct upnphttp * h, const char * action)
 
 	args.returned = 0;
 	args.requested = RequestedCount;
-	args.client = h->req_client ? h->req_client->type->type : 0;
-	args.flags = h->req_client ? h->req_client->type->flags : 0;
+	args.flags = 0;
 	args.str = &str;
 	DPRINTF(E_DEBUG, L_HTTP, "Searching ContentDirectory:\n"
 	                         " * ObjectID: %s\n"
@@ -1664,7 +1451,7 @@ SearchContentDirectory(struct upnphttp * h, const char * action)
 	__SORT_LIMIT
 	orderBy = parse_sort_criteria(SortCriteria, &ret);
 	/* If it's a DLNA client, return an error for bad sort criteria */
-	if( ret < 0 && ((args.flags & FLAG_DLNA) || GETFLAG(DLNA_STRICT_MASK)) )
+	if( ret < 0 && GETFLAG(DLNA_STRICT_MASK))
 	{
 		SoapError(h, 709, "Unsupported or invalid sort criteria");
 		goto search_error;

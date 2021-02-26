@@ -86,7 +86,6 @@ struct upnphttp {
 	int req_contentlen;
 	int req_contentoff;     /* header length */
 	enum httpCommands req_command;
-	struct client_cache_s * req_client;
 	const char * req_soapAction;
 	int req_soapActionLen;
 	const char * req_Callback;	/* For SUBSCRIBE */

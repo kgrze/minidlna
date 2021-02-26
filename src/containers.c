@@ -16,7 +16,6 @@
  * along with MiniDLNA. If not, see <http://www.gnu.org/licenses/>.
  */
 #include <string.h>
-#include "clients.h"
 #include "minidlnatypes.h"
 #include "scanner.h"
 #include "upnpglobalvars.h"
@@ -98,28 +97,6 @@ struct magic_container_s magic_containers[] =
 	  50,
 	  0,
 	},
-
-	/* Microsoft PlaysForSure containers */
-	{ NULL, "4", &music_all_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-	{ NULL, "5", &music_genre_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-	{ NULL, "6", &music_artist_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-	{ NULL, "7", &music_album_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-	{ NULL, "8", &video_all_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-	{ NULL, "B", &image_all_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-	{ NULL, "C", &image_date_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-	{ NULL, "F", &music_plist_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-	{ NULL, "14", &music_dir_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-	{ NULL, "15", &video_dir_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-	{ NULL, "16", &image_dir_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-	{ NULL, "D2", &image_camera_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_MS_PFS },
-
-	/* Samsung DCM10 containers for Series E(?) */
-	{ NULL, "I", &image_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_SAMSUNG_DCM10 },
-	{ NULL, "A", &music_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_SAMSUNG_DCM10 },
-	{ NULL, "V", &video_id, NULL, NULL, NULL, NULL, NULL, NULL, -1, FLAG_SAMSUNG_DCM10 },
-
-	/* Jump straight to Music on audio-only devices */
-	{ NULL, "0", &music_id, NULL, "0", NULL, NULL, NULL, NULL, -1, FLAG_AUDIO_ONLY },
 
 	{ NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0 }
 };

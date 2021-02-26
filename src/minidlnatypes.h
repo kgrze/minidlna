@@ -30,9 +30,9 @@
 #define __MINIDLNATYPES_H__
 
 #include "config.h"
-#include "clients.h"
 #include <time.h>
 #include <fcntl.h>
+#include <netinet/in.h>
 
 #define MAX_LAN_ADDR 4
 /* structure for storing lan addresses

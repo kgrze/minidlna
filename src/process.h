@@ -30,12 +30,10 @@
 #define __PROCESS_H__
 
 #include <unistd.h>
-#include "clients.h"
 
 struct child {
 	pid_t pid;
 	time_t age;
-	struct client_cache_s *client;
 };
 
 extern struct child *children;
@@ -47,7 +45,7 @@ extern int number_of_children;
  * @return -1 if it couldn't fork, 0 in the child process, the pid of the
  *         child process in the parent process.
  */
-pid_t process_fork(struct client_cache_s *client);
+pid_t process_fork(void);
 
 /**
  * Handler to be called upon receiving SIGCHLD. This signal is received by the

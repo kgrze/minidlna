@@ -253,7 +253,6 @@ SendSSDPResponse(int s, struct sockaddr_in sockname, int st_no,
 	DPRINTF(E_DEBUG, L_SSDP, "Sending M-SEARCH response to %s:%d ST: %s\n",
 		inet_ntoa(sockname.sin_addr), ntohs(sockname.sin_port),
 		known_service_types[st_no]);
-	DPRINTF(E_DEBUG, L_SSDP, buf);
 	n = sendto(s, buf, l, 0,
 	           (struct sockaddr *)&sockname, len_r);
 	if (n < 0)
@@ -307,175 +306,12 @@ SendSSDPNotifies(int s, const char *host, unsigned short port,
 				l = sizeof(bufr);
 			}
 			DPRINTF(E_MAXDEBUG, L_SSDP, "Sending ssdp:alive [%d]\n", s);
-			DPRINTF(E_MAXDEBUG, L_SSDP, bufr);
 			n = sendto(s, bufr, l, 0,
 				(struct sockaddr *)&sockname, sizeof(struct sockaddr_in));
 			if (n < 0)
 				DPRINTF(E_ERROR, L_SSDP, "sendto(udp_notify=%d, %s): %s\n", s, host, strerror(errno));
 			i++;
 		}
-	}
-}
-
-static void
-ParseUPnPClient(char *location)
-{
-	char buf[8192];
-	struct sockaddr_in dest;
-	int s, n, do_headers = 0, nread = 0;
-	struct timeval tv;
-	char *addr, *path, *port_str;
-	long port = 80;
-	char *off = NULL, *p;
-	int content_len = sizeof(buf);
-	struct NameValueParserData xml;
-	struct client_cache_s *client;
-	int type = 0;
-	char *model, *serial, *name;
-
-	if (strncmp(location, "http://", 7) != 0)
-		return;
-	path = location + 7;
-	port_str = strsep(&path, "/");
-	if (!path)
-		return;
-	addr = strsep(&port_str, ":");
-	if (port_str)
-	{
-		port = strtol(port_str, NULL, 10);
-		if (!port)
-			port = 80;
-	}
-
-	memset(&dest, '\0', sizeof(dest));
-	if (!inet_aton(addr, &dest.sin_addr))
-		return;
-	/* Check if the client is already in cache */
-	dest.sin_family = AF_INET;
-	dest.sin_port = htons(port);
-
-	s = socket(PF_INET, SOCK_STREAM, 0);
-	if (s < 0)
-		return;
-
-	tv.tv_sec = 0;
-	tv.tv_usec = 500000;
-	setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
-	setsockopt(s, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv));
-
-	if (connect(s, (struct sockaddr*)&dest, sizeof(struct sockaddr_in)) < 0)
-		goto close;
-
-	n = snprintf(buf, sizeof(buf), "GET /%s HTTP/1.0\r\n"
-	                               "HOST: %s:%ld\r\n\r\n",
-	                               path, addr, port);
-	if (write(s, buf, n) < 1)
-		goto close;
-
-	while ((n = read(s, buf+nread, sizeof(buf)-nread-1)) > 0)
-	{
-		nread += n;
-		buf[nread] = '\0';
-		n = nread - 4;
-		p = buf;
-
-		while (!off && (n-- > 0))
-		{
-			if (p[0] == '\r' && p[1] == '\n' && p[2] == '\r' && p[3] == '\n')
-			{
-				off = p + 4;
-				do_headers = 1;
-			}
-			p++;
-		}
-		if (!off)
-			continue;
-
-		if (do_headers)
-		{
-			p = buf;
-			if (strncmp(p, "HTTP/", 5) != 0)
-				goto close;
-			while (*p != ' ' && *p != '\t')
-				p++;
-			/* If we don't get a 200 status, ignore it */
-			if (strtol(p, NULL, 10) != 200)
-				goto close;
-			p = strcasestr(p, "Content-Length:");
-			if (p)
-				content_len = strtol(p+15, NULL, 10);
-			do_headers = 0;
-		}
-		if ((buf + nread - off) >= content_len)
-			break;
-	}
-close:
-	close(s);
-	if (!off)
-		return;
-	nread -= off - buf;
-	ParseNameValue(off, nread, &xml, 0);
-	model = GetValueFromNameValueList(&xml, "modelName");
-	serial = GetValueFromNameValueList(&xml, "serialNumber");
-	name = GetValueFromNameValueList(&xml, "friendlyName");
-	if (model)
-	{
-		int i;
-		DPRINTF(E_DEBUG, L_SSDP, "Model: %s\n", model);
-		for (i = 0; client_types[i].name; i++)
-		{
-			if (client_types[i].match_type != EModelName)
-				continue;
-			if (strstr(model, client_types[i].match) != NULL)
-			{
-				type = i;
-				break;
-			}
-		}
-
-		/* Special Samsung handling.  It's very hard to tell Series A from B */
-		if (type > 0 && client_types[type].type == ESamsungSeriesB)
-		{
-			if (serial)
-			{
-				DPRINTF(E_DEBUG, L_SSDP, "Serial: %s\n", serial);
-				/* The Series B I saw was 20081224DMR.  Series A should be older than that. */
-				if (atoi(serial) < 20081201)
-					type = 0;
-			}
-			else
-			{
-				type = 0;
-			}
-		}
-
-		if (type == 0 && name != NULL)
-		{
-			for (i = 0; client_types[i].name; i++)
-			{
-				if (client_types[i].match_type != EFriendlyNameSSDP)
-					continue;
-				if (strcmp(name, client_types[i].match) == 0)
-				{
-					type = i;
-					break;
-				}
-			}
-		}
-	}
-	ClearNameValueList(&xml);
-	if (!type)
-		return;
-	/* Add this client to the cache if it's not there already. */
-	client = SearchClientCache(dest.sin_addr, 1);
-	if (!client)
-	{
-		AddClientCache(dest.sin_addr, type);
-	}
-	else
-	{
-		client->type = &client_types[type];
-		client->age = time(NULL);
 	}
 }
 
@@ -569,23 +405,6 @@ ProcessSSDPRequest(int s, unsigned short port)
 		    (strncmp(nt, "urn:schemas-upnp-org:device:MediaRenderer", 41) != 0))
 			return;
 		loc[loc_len] = '\0';
-		if ((strncmp(srv, "Allegro-Software-RomPlug", 24) == 0) || /* Roku */
-		    (strstr(loc, "SamsungMRDesc.xml") != NULL) || /* Samsung TV */
-		    (strstrc(srv, "DigiOn DiXiM", '\r') != NULL)) /* Marantz Receiver */
-		{
-			/* Check if the client is already in cache */
-			struct client_cache_s *client = SearchClientCache(sendername.sin_addr, 1);
-			if (client)
-			{
-				if (client->type->type < EStandardDLNA150 &&
-				    client->type->type != ESamsungSeriesA)
-				{
-					client->age = time(NULL);
-					return;
-				}
-			}
-			ParseUPnPClient(loc);
-		}
 	}
 	else if (memcmp(bufr, "M-SEARCH", 8) == 0)
 	{

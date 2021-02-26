@@ -106,9 +106,6 @@ OpenAndConfHTTPSocket(unsigned short port)
 	int i = 1;
 	struct sockaddr_in listenname;
 
-	/* Initialize client type cache */
-	memset(&clients, 0, sizeof(struct client_cache_s));
-
 	s = socket(PF_INET, SOCK_STREAM, 0);
 	if (s < 0)
 	{
@@ -158,8 +155,6 @@ sigusr1(int sig)
 {
 	signal(sig, sigusr1);
 	DPRINTF(E_WARN, L_GENERAL, "received signal %d, clear cache\n", sig);
-
-	memset(&clients, '\0', sizeof(clients));
 }
 
 static void

@@ -42,7 +42,6 @@ struct Response
 	int iface;
 	uint32_t filter;
 	uint32_t flags;
-	enum client_types client;
 };
 
 /* ExecuteSoapAction():

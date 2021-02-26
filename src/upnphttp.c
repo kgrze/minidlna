@@ -75,7 +75,6 @@
 #include "log.h"
 #include "sql.h"
 #include <libexif/exif-loader.h>
-#include "clients.h"
 #include "process.h"
 #include "sendfile.h"
 
@@ -134,7 +133,6 @@ Delete_upnphttp(struct upnphttp * h)
 static void
 ParseHttpHeaders(struct upnphttp * h)
 {
-	int client = 0;
 	char * line;
 	char * colon;
 	char * p;
@@ -272,46 +270,6 @@ ParseHttpHeaders(struct upnphttp * h)
 					}
 				}
 			}
-			else if(strncasecmp(line, "User-Agent", 10)==0)
-			{
-				int i;
-				/* Skip client detection if we already detected it. */
-				if( client )
-					goto next_header;
-				p = colon + 1;
-				while(isspace(*p))
-					p++;
-				for (i = 0; client_types[i].name; i++)
-				{
-					if (client_types[i].match_type != EUserAgent)
-						continue;
-					if (strstrc(p, client_types[i].match, '\r') != NULL)
-					{
-						client = i;
-						break;
-					}
-				}
-			}
-			else if(strncasecmp(line, "X-AV-Client-Info", 16)==0)
-			{
-				int i;
-				/* Skip client detection if we already detected it. */
-				if( client && client_types[client].type < EStandardDLNA150 )
-					goto next_header;
-				p = colon + 1;
-				while(isspace(*p))
-					p++;
-				for (i = 0; client_types[i].name; i++)
-				{
-					if (client_types[i].match_type != EXAVClientInfo)
-						continue;
-					if (strstrc(p, client_types[i].match, '\r') != NULL)
-					{
-						client = i;
-						break;
-					}
-				}
-			}
 			else if(strncasecmp(line, "Transfer-Encoding", 17)==0)
 			{
 				p = colon + 1;
@@ -376,30 +334,12 @@ ParseHttpHeaders(struct upnphttp * h)
 			{
 				h->reqflags |= FLAG_CAPTION;
 			}
-			else if(strncasecmp(line, "FriendlyName", 12)==0)
-			{
-				int i;
-				p = colon + 1;
-				while(isspace(*p))
-					p++;
-				for (i = 0; client_types[i].name; i++)
-				{
-					if (client_types[i].match_type != EFriendlyName)
-						continue;
-					if (strstrc(p, client_types[i].match, '\r') != NULL)
-					{
-						client = i;
-						break;
-					}
-				}
-			}
 			else if(strncasecmp(line, "uctt.upnp.org:", 14)==0)
 			{
 				/* Conformance testing */
 				SETFLAG(DLNA_STRICT_MASK);
 			}
 		}
-next_header:
 		line = strstr(line, "\r\n");
 		if (!line)
 			return;
@@ -428,27 +368,6 @@ next_header:
 			h->req_chunklen = -1;
 			return;
 		}
-	}
-	/* If the client type wasn't found, search the cache.
-	 * This is done because a lot of clients like to send a
-	 * different User-Agent with different types of requests. */
-	h->req_client = SearchClientCache(h->clientaddr, 0);
-	/* Add this client to the cache if it's not there already. */
-	if (!h->req_client)
-	{
-		h->req_client = AddClientCache(h->clientaddr, client);
-	}
-	else if (client)
-	{
-		enum client_types type = client_types[client].type;
-		enum client_types ctype = h->req_client->type->type;
-		/* If we know the client and our new detection is generic, use our cached info */
-		/* If we detected a Samsung Series B earlier, don't overwrite it with Series A info */
-		if ((ctype && ctype < EStandardDLNA150 && type >= EStandardDLNA150) ||
-		    (ctype == ESamsungSeriesB && type == ESamsungSeriesA))
-			return;
-		h->req_client->type = &client_types[client];
-		h->req_client->age = time(NULL);
 	}
 }
 
@@ -1098,19 +1017,16 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 	int64_t id;
 	int sendfh;
 	uint32_t dlna_flags = DLNA_FLAG_DLNA_V1_5|DLNA_FLAG_HTTP_STALLING|DLNA_FLAG_TM_B;
-	uint32_t cflags = h->req_client ? h->req_client->type->flags : 0;
 	const char *tmode;
-	enum client_types ctype = h->req_client ? h->req_client->type->type : 0;
 	static struct { int64_t id;
-	                enum client_types client;
 	                char path[PATH_MAX];
 	                char mime[32];
 	                char dlna[96];
-	              } last_file = { 0, 0 };
+	              } last_file = { 0 };
 	pid_t newpid = 0;
 
 	id = strtoll(object, NULL, 10);
-	if( id != last_file.id || ctype != last_file.client )
+	if( id != last_file.id )
 	{
 		snprintf(buf, sizeof(buf), "SELECT PATH, MIME, DLNA_PN from DETAILS where ID = '%lld'", (long long)id);
 		ret = sql_get_table(db, buf, &result, &rows, NULL);
@@ -1129,29 +1045,10 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 		}
 		/* Cache the result */
 		last_file.id = id;
-		last_file.client = ctype;
 		strncpy(last_file.path, result[3], sizeof(last_file.path)-1);
 		if( result[4] )
 		{
 			strncpy(last_file.mime, result[4], sizeof(last_file.mime)-1);
-			/* From what I read, Samsung TV's expect a [wrong] MIME type of x-mkv. */
-			if( cflags & FLAG_SAMSUNG )
-			{
-				if( strcmp(last_file.mime+6, "x-matroska") == 0 )
-					strcpy(last_file.mime+8, "mkv");
-				/* Samsung TV's such as the A750 can natively support many
-				   Xvid/DivX AVI's however, the DLNA server needs the 
-				   mime type to say video/mpeg */
-				else if( ctype == ESamsungSeriesA && strcmp(last_file.mime+6, "x-msvideo") == 0 )
-					strcpy(last_file.mime+6, "mpeg");
-			}
-			/* ... and Sony BDP-S370 won't play MKV unless we pretend it's a DiVX file */
-			else if( ctype == ESonyBDP )
-			{
-				if( strcmp(last_file.mime+6, "x-matroska") == 0 ||
-				    strcmp(last_file.mime+6, "mpeg") == 0 )
-					strcpy(last_file.mime+6, "divx");
-			}
 		}
 		if( result[5] )
 			snprintf(last_file.dlna, sizeof(last_file.dlna), "DLNA.ORG_PN=%s;", result[5]);
@@ -1159,7 +1056,7 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 			last_file.dlna[0] = '\0';
 		sqlite3_free_table(result);
 	}
-	newpid = process_fork(h->req_client);
+	newpid = process_fork();
 	if( newpid > 0 )
 	{
 		CloseSocket_upnphttp(h);
@@ -1190,7 +1087,7 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 			DPRINTF(E_WARN, L_HTTP, "Client tried to specify transferMode as Interactive without an image!\n");
 			/* Samsung TVs (well, at least the A950) do this for some reason,
 			 * and I don't see them fixing this bug any time soon. */
-			if( !(cflags & FLAG_SAMSUNG) || GETFLAG(DLNA_STRICT_MASK) )
+			if(GETFLAG(DLNA_STRICT_MASK) )
 			{
 				Send406(h);
 				goto error;

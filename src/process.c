@@ -47,7 +47,7 @@ struct child *children = NULL;
 int number_of_children = 0;
 
 static void
-add_process_info(pid_t pid, struct client_cache_s *client)
+add_process_info(pid_t pid)
 {
 	struct child *child;
 	int i;
@@ -58,7 +58,6 @@ add_process_info(pid_t pid, struct client_cache_s *client)
 		if (child->pid)
 			continue;
 		child->pid = pid;
-		child->client = client;
 		child->age = time(NULL);
 		break;
 	}
@@ -76,14 +75,12 @@ remove_process_info(pid_t pid)
 		if (child->pid != pid)
 			continue;
 		child->pid = 0;
-		if (child->client)
-			child->client->connections--;
 		break;
 	}
 }
 
 pid_t
-process_fork(struct client_cache_s *client)
+process_fork(void)
 {
 	if (number_of_children >= runtime_vars.max_connections)
 	{
@@ -96,9 +93,7 @@ process_fork(struct client_cache_s *client)
 	pid_t pid = fork();
 	if (pid > 0)
 	{
-		if (client)
-			client->connections++;
-		add_process_info(pid, client);
+		add_process_info(pid);
 		number_of_children++;
 	}
 

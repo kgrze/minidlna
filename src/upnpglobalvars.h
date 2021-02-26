@@ -52,7 +52,6 @@
 #include <time.h>
 
 #include "minidlnatypes.h"
-#include "clients.h"
 #include "config.h"
 
 #include <sqlite3.h>
