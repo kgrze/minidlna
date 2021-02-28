@@ -6,7 +6,10 @@
 	],
 	"settings": {
 		"files.associations": {
-			"minidlnatypes.h": "c"
+			"minidlnatypes.h": "c",
+			"process.h": "c",
+			"upnpreplyparse.h": "c",
+			"log.h": "c"
 		}
 	}
 }

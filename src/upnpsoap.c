@@ -65,7 +65,6 @@
 #include "utils.h"
 #include "upnphttp.h"
 #include "upnpsoap.h"
-#include "containers.h"
 #include "upnpreplyparse.h"
 #include "getifaddr.h"
 #include "scanner.h"
@@ -597,16 +596,10 @@ add_res(char *size, char *duration, char *bitrate, char *sampleFrequency,
 }
 
 static int
-get_child_count(const char *object, struct magic_container_s *magic)
+get_child_count(const char *object)
 {
 	int ret;
-
-	if (magic && magic->child_count)
-		ret = sql_get_int_field(db, "SELECT count(*) from %s", magic->child_count);
-	else if (magic && magic->objectid && *(magic->objectid))
-		ret = sql_get_int_field(db, "SELECT count(*) from OBJECTS where PARENT_ID = '%s';", *(magic->objectid));
-	else
-		ret = sql_get_int_field(db, "SELECT count(*) from OBJECTS where PARENT_ID = '%s';", object);
+	ret = sql_get_int_field(db, "SELECT count(*) from OBJECTS where PARENT_ID = '%s';", object);
 
 	return (ret > 0) ? ret : 0;
 }
@@ -802,12 +795,6 @@ callback(void *args, int argc, char **argv, char **azColName)
 	else if( strncmp(class, "container", 9) == 0 )
 	{
 		ret = strcatf(str, "&lt;container id=\"%s\" parentID=\"%s\" restricted=\"1\" ", id, parent);
-		if( passed_args->filter & FILTER_SEARCHABLE ) {
-			ret = strcatf(str, "searchable=\"%d\" ", check_magic_container(id, passed_args->flags) ? 0 : 1);
-		}
-		if( passed_args->filter & FILTER_CHILDCOUNT ) {
-			ret = strcatf(str, "childCount=\"%d\"", get_child_count(id, check_magic_container(id, passed_args->flags)));
-		}
 		/* If the client calls for BrowseMetadata on root, we have to include our "upnp:searchClass"'s, unless they're filtered out */
 		if( passed_args->requested == 1 && strcmp(id, "0") == 0 && (passed_args->filter & FILTER_UPNP_SEARCHCLASS) ) {
 			ret = strcatf(str, "&gt;"
@@ -863,7 +850,6 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 			"<Result>"
 			"&lt;DIDL-Lite"
 			CONTENT_DIRECTORY_SCHEMAS;
-	struct magic_container_s *magic;
 	char *zErrMsg = NULL;
 	char *sql, *ptr;
 	struct Response args;
@@ -948,16 +934,6 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 	{
 		const char *id = ObjectID;
 		args.requested = 1;
-		magic = in_magic_container(ObjectID, args.flags, &id);
-		if (magic)
-		{
-			if (magic->objectid_sql && strcmp(id, ObjectID) != 0)
-				objectid_sql = magic->objectid_sql;
-			if (magic->parentid_sql && strcmp(id, ObjectID) != 0)
-				parentid_sql = magic->parentid_sql;
-			if (magic->refid_sql)
-				refid_sql = magic->refid_sql;
-		}
 		sql = sqlite3_mprintf("SELECT %s, %s, %s, " COLUMNS
 				      "from OBJECTS o left join DETAILS d on (d.ID = o.DETAIL_ID)"
 				      " where OBJECT_ID = '%q';",
@@ -967,35 +943,11 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 	}
 	else
 	{
-		magic = check_magic_container(ObjectID, args.flags);
-		if (magic)
-		{
-			if (magic->objectid && *(magic->objectid))
-				ObjectID = *(magic->objectid);
-			if (magic->objectid_sql)
-				objectid_sql = magic->objectid_sql;
-			if (magic->parentid_sql)
-				parentid_sql = magic->parentid_sql;
-			if (magic->refid_sql)
-				refid_sql = magic->refid_sql;
-			if (magic->where)
-				strncpyt(where, magic->where, sizeof(where));
-			if (magic->orderby && !GETFLAG(DLNA_STRICT_MASK))
-				orderBy = strdup(magic->orderby);
-			if (magic->max_count > 0)
-			{
-				int limit = MAX(magic->max_count - StartingIndex, 0);
-				ret = get_child_count(ObjectID, magic);
-				totalMatches = MIN(ret, limit);
-				if (RequestedCount > limit || RequestedCount < 0)
-					RequestedCount = limit;
-			}
-		}
 		if (!where[0])
 			sqlite3_snprintf(sizeof(where), where, "PARENT_ID = '%q'", ObjectID);
 
 		if (!totalMatches)
-			totalMatches = get_child_count(ObjectID, magic);
+			totalMatches = get_child_count(ObjectID);
 		ret = 0;
 		if (SortCriteria && !orderBy)
 		{
@@ -1345,7 +1297,6 @@ SearchContentDirectory(struct upnphttp * h, const char * action)
 			"<Result>"
 			"&lt;DIDL-Lite"
 			CONTENT_DIRECTORY_SCHEMAS;
-	struct magic_container_s *magic;
 	char *zErrMsg = NULL;
 	char *sql, *ptr;
 	struct Response args;
@@ -1410,10 +1361,6 @@ SearchContentDirectory(struct upnphttp * h, const char * action)
 	                         " * SortCriteria: %s\n",
 				ContainerID, RequestedCount, StartingIndex,
 	                        SearchCriteria, Filter, SortCriteria);
-
-	magic = check_magic_container(ContainerID, args.flags);
-	if (magic && magic->objectid && *(magic->objectid))
-		ContainerID = *(magic->objectid);
 
 	if( strcmp(ContainerID, "0") == 0 )
 		ContainerID = "*";
@@ -1539,130 +1486,6 @@ QueryStateVariable(struct upnphttp * h, const char * action)
 	ClearNameValueList(&data);
 }
 
-/* For some reason, Kodi does URI encoding and appends a trailing slash */
-static void _kodi_decode(char *str)
-{
-	while (*str)
-	{
-		switch (*str) {
-		case '%':
-		{
-			if (isxdigit(str[1]) && isxdigit(str[2]))
-			{
-				char x[3] = { str[1], str[2], '\0' };
-				*str++ = (char)strtol(x, NULL, 16);
-				memmove(str, str+2, strlen(str+1));
-			}
-			break;
-		}
-		case '/':
-			if (!str[1])
-				*str = '\0';
-		default:
-			str++;
-			break;
-		}
-	}
-}
-
-static int duration_sec(const char *str)
-{
-	int hr, min, sec;
-
-	if (sscanf(str, "%d:%d:%d", &hr, &min, &sec) == 3)
-		return (hr * 3600) + (min * 60) + sec;
-
-	return atoi(str);
-}
-
-static void UpdateObject(struct upnphttp * h, const char * action)
-{
-	static const char resp[] =
-	    "<u:UpdateObjectResponse"
-	    " xmlns:u=\"urn:schemas-upnp-org:service:ContentDirectory:1\">"
-	    "</u:UpdateObjecResponse>";
-
-	struct NameValueParserData data;
-
-	ParseNameValue(h->req_buf + h->req_contentoff, h->req_contentlen, &data, 0);
-
-	char *ObjectID = GetValueFromNameValueList(&data, "ObjectID");
-	char *CurrentTagValue = GetValueFromNameValueList(&data, "CurrentTagValue");
-	char *NewTagValue = GetValueFromNameValueList(&data, "NewTagValue");
-	const char *rid = ObjectID;
-	char tag[32], current[32], new[32];
-	char *item, *saveptr = NULL;
-	int64_t detailID;
-	int ret = 1;
-
-	if (!ObjectID || !CurrentTagValue || !NewTagValue)
-	{
-		SoapError(h, 402, "Invalid Args");
-		ClearNameValueList(&data);
-		return;
-	}
-
-	_kodi_decode(ObjectID);
-	DPRINTF(E_DEBUG, L_HTTP, "UpdateObject %s: %s => %s\n", ObjectID, CurrentTagValue, NewTagValue);
-
-	in_magic_container(ObjectID, 0, &rid);
-	detailID = sql_get_int64_field(db, "SELECT DETAIL_ID from OBJECTS where OBJECT_ID = '%q'", rid);
-	if (detailID <= 0)
-	{
-		SoapError(h, 701, "No such object");
-		ClearNameValueList(&data);
-		return;
-	}
-
-	for (item = strtok_r(CurrentTagValue, ",", &saveptr); item; item = strtok_r(NULL, ",", &saveptr))
-	{
-		char *p;
-		if (sscanf(item, "&lt;%31[^&]&gt;%31[^&]", tag, current) != 2)
-			continue;
-		p = strstr(NewTagValue, tag);
-		if (!p || sscanf(p, "%*[^&]&gt;%31[^&]", new) != 1)
-			continue;
-
-		DPRINTF(E_DEBUG, L_HTTP, "Setting %s to %s\n", tag, new);
-		/* Kodi uses incorrect tag "upnp:playCount" instead of "upnp:playbackCount" */
-		if (strcmp(tag, "upnp:playbackCount") == 0 || strcmp(tag, "upnp:playCount") == 0)
-		{
-			//ret = sql_exec(db, "INSERT OR IGNORE into BOOKMARKS (ID, WATCH_COUNT)"
-			ret = sql_exec(db, "INSERT into BOOKMARKS (ID, WATCH_COUNT)"
-					   " VALUES (%lld, %Q)", (long long)detailID, new);
-			if (atoi(new))
-				ret = sql_exec(db, "UPDATE BOOKMARKS set WATCH_COUNT = %Q"
-						   " where WATCH_COUNT = %Q and ID = %lld",
-						   new, current, (long long)detailID);
-			else
-				ret = sql_exec(db, "UPDATE BOOKMARKS set WATCH_COUNT = 0"
-						   " where ID = %lld", (long long)detailID);
-		}
-		else if (strcmp(tag, "upnp:lastPlaybackPosition") == 0)
-		{
-			int sec = duration_sec(new);
-			if (sec < 30)
-				sec = 0;
-			else
-				sec -= 1;
-			ret = sql_exec(db, "INSERT OR IGNORE into BOOKMARKS (ID, SEC)"
-					   " VALUES (%lld, %d)", (long long)detailID, sec);
-			ret = sql_exec(db, "UPDATE BOOKMARKS set SEC = %d"
-					   " where SEC = %Q and ID = %lld",
-					   sec, current, (long long)detailID);
-		}
-		else
-			DPRINTF(E_WARN, L_HTTP, "Tag %s unsupported for writing\n", tag);
-	}
-
-	if (ret == SQLITE_OK)
-		BuildSendAndCloseSoapResp(h, resp, sizeof(resp)-1);
-	else
-		SoapError(h, 501, "Action Failed");
-
-	ClearNameValueList(&data);
-}
-
 static const struct
 {
 	const char * methodName;
@@ -1676,7 +1499,6 @@ soapMethods[] =
 	{ "GetSearchCapabilities", GetSearchCapabilities},
 	{ "GetSortCapabilities", GetSortCapabilities},
 	{ "GetSystemUpdateID", GetSystemUpdateID},
-	{ "UpdateObject", UpdateObject},
 	{ 0, 0 }
 };
 
