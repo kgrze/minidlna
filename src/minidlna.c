@@ -87,7 +87,6 @@
 #include "minissdp.h"
 #include "minidlnatypes.h"
 #include "process.h"
-#include "upnpevents.h"
 #include "scanner.h"
 #include "monitor.h"
 #include "log.h"
@@ -594,7 +593,6 @@ main(int argc, char **argv)
 			}
 		}
 		FD_ZERO(&writeset);
-		upnpevents_selectfds(&readset, &writeset, &max_fd);
 
 		ret = select(max_fd+1, &readset, &writeset, 0, &timeout);
 		if (ret < 0)
@@ -604,7 +602,6 @@ main(int argc, char **argv)
 			DPRINTF(E_ERROR, L_GENERAL, "select(all): %s\n", strerror(errno));
 			DPRINTF(E_FATAL, L_GENERAL, "Failed to select open sockets. EXITING\n");
 		}
-		upnpevents_processfds(&readset, &writeset);
 		/* process SSDP packets */
 		if (sssdp >= 0 && FD_ISSET(sssdp, &readset))
 		{
@@ -632,7 +629,6 @@ main(int argc, char **argv)
 			{
 				updateID++;
 				last_changecnt = sqlite3_total_changes(db);
-				upnp_event_var_change_notify(EContentDirectory);
 				lastupdatetime = timeofday.tv_sec;
 			}
 		}
@@ -727,8 +723,6 @@ shutdown:
 
 	sql_exec(db, "UPDATE SETTINGS set VALUE = '%u' where KEY = 'UPDATE_ID'", updateID);
 	sqlite3_close(db);
-
-	upnpevents_removeSubscribers();
 
 	if (pidfilename && unlink(pidfilename) < 0)
 		DPRINTF(E_ERROR, L_GENERAL, "Failed to remove pidfile %s: %s\n", pidfilename, strerror(errno));

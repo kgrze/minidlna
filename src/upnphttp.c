@@ -69,7 +69,6 @@
 #include "upnpdescgen.h"
 #include "minidlnapath.h"
 #include "upnpsoap.h"
-#include "upnpevents.h"
 #include "utils.h"
 #include "getifaddr.h"
 #include "log.h"
