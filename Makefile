@@ -1,7 +1,10 @@
 TARGET = minidlna
 
-CFLAGS = -c -m64 -O0 -g -ggdb3 -Wall -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -fprofile-arcs -ftest-coverage
-LFLAGS = -lpthread -ljpeg -lsqlite3 -lavformat -lavutil -lexif -fprofile-arcs -ftest-coverage
+CFLAGS_COV = -c -m64 -O0 -g -ggdb3 -Wall -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -fprofile-arcs -ftest-coverage
+LFLAGS_COV = -lpthread -ljpeg -lsqlite3 -lavformat -lavutil -lexif -fprofile-arcs -ftest-coverage
+
+CFLAGS = -c -m64 -O0 -g -ggdb3 -Wall -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
+LFLAGS = -lpthread -ljpeg -lsqlite3 -lavformat -lavutil -lexif
 
 SRCDIR = src
 BINDIR = bin
