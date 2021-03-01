@@ -83,65 +83,10 @@ get_next_available_id(const char *table, const char *parentID)
 		return objectID;
 }
 
-int
-insert_container(const char *item, const char *rootParent, const char *refID, const char *class,
-                 const char *artist, const char *genre, int64_t *objectID, int64_t *parentID)
-{
-	char *result;
-	char *base;
-	int ret = 0;
-
-	result = sql_get_text_field(db, "SELECT OBJECT_ID from OBJECTS o "
-					"left join DETAILS d on (o.DETAIL_ID = d.ID)"
-					" where o.PARENT_ID = '%s'"
-					" and o.NAME like '%q'"
-					" and d.ARTIST %s %Q"
-					" and o.CLASS = 'container.%s' limit 1",
-					rootParent, item, artist?"like":"is", artist, class);
-	if( result )
-	{
-		base = strrchr(result, '$');
-		if( base )
-			*parentID = strtoll(base+1, NULL, 16);
-		else
-			*parentID = 0;
-		*objectID = get_next_available_id("OBJECTS", result);
-	}
-	else
-	{
-		int64_t detailID = 0;
-		*objectID = 0;
-		*parentID = get_next_available_id("OBJECTS", rootParent);
-		if( refID )
-		{
-			result = sql_get_text_field(db, "SELECT DETAIL_ID from OBJECTS where OBJECT_ID = %Q", refID);
-			if( result )
-				detailID = strtoll(result, NULL, 10);
-		}
-		if( !detailID )
-		{
-			detailID = GetFolderMetadata(item, NULL);
-		}
-		ret = sql_exec(db, "INSERT into OBJECTS"
-		                   " (OBJECT_ID, PARENT_ID, REF_ID, DETAIL_ID, CLASS, NAME) "
-		                   "VALUES"
-		                   " ('%s$%llX', '%s', %Q, %lld, 'container.%s', '%q')",
-		                   rootParent, (long long)*parentID, rootParent,
-		                   refID, (long long)detailID, class, item);
-	}
-	sqlite3_free(result);
-
-	return ret;
-}
-
 static void
 insert_containers(const char *name, const char *path, const char *refID, const char *class, int64_t detailID)
 {
-	char sql[128];
 	char **result;
-	int ret;
-	int cols, row;
-	int64_t objectID, parentID;
 
 	if( strstr(class, "videoItem") )
 	{
