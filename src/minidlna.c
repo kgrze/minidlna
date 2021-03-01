@@ -241,20 +241,8 @@ check_db(sqlite3 *db, int new_db, pid_t *scanner_pid)
 	{
 		SETFLAG(SCANNING_MASK);
 		sqlite3_close(db);
-		*scanner_pid = fork();
 		open_db(&db);
-		if (*scanner_pid == 0) /* child (scanner) process */
-		{
-			start_scanner();
-			sqlite3_close(db);
-			log_close();
-			free(children);
-			exit(EXIT_SUCCESS);
-		}
-		else if (*scanner_pid < 0)
-		{
-			start_scanner();
-		}
+		start_scanner();
 	}
 }
 
