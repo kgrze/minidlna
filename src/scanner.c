@@ -120,7 +120,7 @@ insert_container(const char *item, const char *rootParent, const char *refID, co
 		}
 		if( !detailID )
 		{
-			detailID = GetFolderMetadata(item, NULL, artist, genre);
+			detailID = GetFolderMetadata(item, NULL);
 		}
 		ret = sql_exec(db, "INSERT into OBJECTS"
 		                   " (OBJECT_ID, PARENT_ID, REF_ID, DETAIL_ID, CLASS, NAME) "
@@ -432,7 +432,7 @@ insert_directory(const char *name, const char *path, const char *base, const cha
 		return 0;
 	}
 
-	detailID = GetFolderMetadata(name, path, NULL, NULL);
+	detailID = GetFolderMetadata(name, path);
 	sql_exec(db, "INSERT into OBJECTS"
 	             " (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME) "
 	             "VALUES"
@@ -537,7 +537,7 @@ CreateDatabase(void)
 		ret = sql_exec(db, "INSERT into OBJECTS (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME)"
 		                   " values "
 		                   "('%s', '%s', %lld, 'container.storageFolder', '%q')",
-		                   containers[i], containers[i+1], GetFolderMetadata(containers[i+2], NULL, NULL, NULL), containers[i+2]);
+		                   containers[i], containers[i+1], GetFolderMetadata(containers[i+2], NULL), containers[i+2]);
 		if( ret != SQLITE_OK )
 			goto sql_failed;
 	}
@@ -782,7 +782,7 @@ start_scanner(void)
 			parent = buf;
 		}
 		else
-			id = GetFolderMetadata(bname, media_path->path, NULL, NULL);
+			id = GetFolderMetadata(bname, media_path->path);
 		/* Use TIMESTAMP to store the media type */
 		sql_exec(db, "UPDATE DETAILS set TIMESTAMP = %d where ID = %lld", media_path->types, (long long)id);
 		ScanDirectory(media_path->path, parent, media_path->types);

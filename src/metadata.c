@@ -112,15 +112,11 @@ free_metadata(metadata_t *m, uint32_t flags)
 }
 
 int64_t
-GetFolderMetadata(const char *name, const char *path, const char *artist, const char *genre)
+GetFolderMetadata(const char *name, const char *path)
 {
 	int ret;
 
-	ret = sql_exec(db, "INSERT into DETAILS"
-	                   " (TITLE, PATH, CREATOR, ARTIST, GENRE) "
-	                   "VALUES"
-	                   " ('%q', %Q, %Q, %Q, %Q);",
-	                   name, path, artist, artist, genre);
+	ret = sql_exec(db, "INSERT into DETAILS (TITLE, PATH) VALUES ('%q', %Q);", name, path);
 	if( ret != SQLITE_OK )
 		ret = 0;
 	else

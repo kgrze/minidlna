@@ -39,7 +39,7 @@ int
 ends_with(const char *haystack, const char *needle);
 
 int64_t
-GetFolderMetadata(const char *name, const char *path, const char *artist, const char *genre);
+GetFolderMetadata(const char *name, const char *path);
 
 int64_t
 GetVideoMetadata(const char *path, const char *name);
