@@ -393,6 +393,8 @@ start_scanner(void)
 {
 	struct media_dir_s *media_path;
 	char path[MAXPATHLEN];
+	int64_t id;
+	char *bname, *parent = NULL;
 
 	if (setpriority(PRIO_PROCESS, 0, 15) == -1)
 		DPRINTF(E_WARN, L_INOTIFY,  "Failed to reduce scanner thread priority\n");
@@ -400,28 +402,16 @@ start_scanner(void)
 	setlocale(LC_COLLATE, "");
 	av_log_set_level(AV_LOG_PANIC);
 
-	for( media_path = media_dirs; media_path != NULL; media_path = media_path->next )
-	{
-		int64_t id;
-		char *bname, *parent = NULL;
-		char buf[8];
-		strncpyt(path, media_path->path, sizeof(path));
-		bname = basename(path);
-		/* If there are multiple media locations, add a level to the ContentDirectory */
-		if( !GETFLAG(MERGE_MEDIA_DIRS_MASK) && media_dirs->next )
-		{
-			int startID = get_next_available_id("OBJECTS", BROWSEDIR_ID);
-			id = insert_directory(bname, path, BROWSEDIR_ID, "", startID);
-			sprintf(buf, "$%X", startID);
-			parent = buf;
-		}
-		else
-			id = GetFolderMetadata(bname, media_path->path);
-		/* Use TIMESTAMP to store the media type */
-		sql_exec(db, "UPDATE DETAILS set TIMESTAMP = %d where ID = %lld", media_path->types, (long long)id);
-		ScanDirectory(media_path->path, parent, media_path->types);
-		sql_exec(db, "INSERT into SETTINGS values (%Q, %Q)", "media_dir", media_path->path);
-	}
+	media_path = media_dirs;
+
+	strncpyt(path, media_path->path, sizeof(path));
+	bname = basename(path);
+	id = GetFolderMetadata(bname, media_path->path);
+	/* Use TIMESTAMP to store the media type */
+	sql_exec(db, "UPDATE DETAILS set TIMESTAMP = %d where ID = %lld", media_path->types, (long long)id);
+	ScanDirectory(media_path->path, parent, media_path->types);
+	sql_exec(db, "INSERT into SETTINGS values (%Q, %Q)", "media_dir", media_path->path);
+	
 	/* Create this index after scanning, so it doesn't slow down the scanning process.
 	 * This index is very useful for large libraries used with an XBox360 (or any
 	 * client that uses UPnPSearch on large containers). */

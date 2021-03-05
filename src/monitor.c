@@ -138,14 +138,12 @@ inotify_create_watches(int fd)
 	unsigned int num_watches = 0, watch_limit;
 	char **result;
 	int i, rows = 0;
-	struct media_dir_s * media_path;
+	struct media_dir_s * media_path = media_dirs;
 
-	for( media_path = media_dirs; media_path != NULL; media_path = media_path->next )
-	{
-		DPRINTF(E_DEBUG, L_INOTIFY, "Add watch to %s\n", media_path->path);
-		add_watch(fd, media_path->path);
-		num_watches++;
-	}
+	DPRINTF(E_DEBUG, L_INOTIFY, "Add watch to %s\n", media_path->path);
+	add_watch(fd, media_path->path);
+	num_watches++;
+	
 	sql_get_table(db, "SELECT PATH from DETAILS where MIME is NULL and PATH is not NULL", &result, &rows, NULL);
 	for( i=1; i <= rows; i++ )
 	{

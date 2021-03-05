@@ -492,13 +492,10 @@ resolve_unknown_type(const char * path, media_types dir_type)
 media_types
 valid_media_types(const char *path)
 {
-	struct media_dir_s *media_dir;
+	struct media_dir_s *media_dir = media_dirs;
 
-	for (media_dir = media_dirs; media_dir; media_dir = media_dir->next)
-	{
-		if (strncmp(path, media_dir->path, strlen(media_dir->path)) == 0)
-			return media_dir->types;
-	}
+	if (strncmp(path, media_dir->path, strlen(media_dir->path)) == 0)
+		return media_dir->types;
 
 	return ALL_MEDIA;
 }

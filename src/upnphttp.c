@@ -967,7 +967,7 @@ start_dlna_header(struct string_s *str, int respcode, const char *tmode, const c
 static int
 _open_file(const char *orig_path)
 {
-	struct media_dir_s *media_path;
+	struct media_dir_s *media_path = media_dirs;
 	char buf[PATH_MAX];
 	const char *path;
 	int fd;
@@ -982,11 +982,6 @@ _open_file(const char *orig_path)
 			return -1;
 		}
 
-		for (media_path = media_dirs; media_path; media_path = media_path->next)
-		{
-			if (strncmp(path, media_path->path, strlen(media_path->path)) == 0)
-				break;
-		}
 		if (!media_path && strncmp(path, db_path, strlen(db_path)))
 		{
 			DPRINTF(E_ERROR, L_HTTP, "Rejecting wide link %s -> %s\n",
