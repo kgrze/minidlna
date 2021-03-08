@@ -564,30 +564,14 @@ add_resized_res(int srcw, int srch, int reqw, int reqh, char *dlna_pn,
 }
 
 inline static void
-add_res(char *size, char *duration, char *bitrate, char *sampleFrequency,
-        char *nrAudioChannels, char *resolution, char *dlna_pn, char *mime,
+add_res(char *size, char *dlna_pn, char *mime,
         char *detailID, const char *ext, struct Response *args)
 {
 	strcatf(args->str, "&lt;res ");
 	if( size && (args->filter & FILTER_RES_SIZE) ) {
 		strcatf(args->str, "size=\"%s\" ", size);
 	}
-	if( duration && (args->filter & FILTER_RES_DURATION) ) {
-		strcatf(args->str, "duration=\"%s\" ", duration);
-	}
-	if( bitrate && (args->filter & FILTER_RES_BITRATE) ) {
-		int br = atoi(bitrate);
-		strcatf(args->str, "bitrate=\"%d\" ", br);
-	}
-	if( sampleFrequency && (args->filter & FILTER_RES_SAMPLEFREQUENCY) ) {
-		strcatf(args->str, "sampleFrequency=\"%s\" ", sampleFrequency);
-	}
-	if( nrAudioChannels && (args->filter & FILTER_RES_NRAUDIOCHANNELS) ) {
-		strcatf(args->str, "nrAudioChannels=\"%s\" ", nrAudioChannels);
-	}
-	if( resolution && (args->filter & FILTER_RES_RESOLUTION) ) {
-		strcatf(args->str, "resolution=\"%s\" ", resolution);
-	}
+
 	strcatf(args->str, "protocolInfo=\"http-get:*:%s:%s\"&gt;"
 	                          "http://%s:%d/MediaItems/%s.%s"
 	                          "&lt;/res&gt;",
@@ -614,9 +598,7 @@ object_exists(const char *object)
 }
 
 #define COLUMNS "o.DETAIL_ID, o.CLASS," \
-                " d.SIZE, d.TITLE, d.DURATION, d.BITRATE, d.SAMPLERATE, d.ARTIST," \
-                " d.ALBUM, d.GENRE, d.COMMENT, d.CHANNELS, d.TRACK, d.DATE, d.RESOLUTION," \
-                " d.THUMBNAIL, d.CREATOR, d.DLNA_PN, d.MIME, d.ROTATION, d.DISC "
+                " d.SIZE, d.TITLE, d.MIME "
 #define SELECT_COLUMNS "SELECT o.OBJECT_ID, o.PARENT_ID, o.REF_ID, " COLUMNS
 
 #define NON_ZERO(x) (x && atoi(x))
@@ -626,10 +608,7 @@ static int
 callback(void *args, int argc, char **argv, char **azColName)
 {
 	struct Response *passed_args = (struct Response *)args;
-	char *id = argv[0], *parent = argv[1], *refID = argv[2], *detailID = argv[3], *class = argv[4], *size = argv[5], *title = argv[6],
-	     *duration = argv[7], *bitrate = argv[8], *sampleFrequency = argv[9], *artist = argv[10], *album = argv[11],
-	     *genre = argv[12], *comment = argv[13], *nrAudioChannels = argv[14], *track = argv[15], *date = argv[16], *resolution = argv[17],
-	     *tn = argv[18], *creator = argv[19], *dlna_pn = argv[20], *mime = argv[21], *rotate = argv[23];
+	char *id = argv[0], *parent = argv[1], *refID = argv[2], *detailID = argv[3], *class = argv[4], *size = argv[5], *title = argv[6], *mime = argv[7];
 	char dlna_buf[128];
 	const char *ext;
 	struct string_s *str = passed_args->str;
@@ -673,23 +652,8 @@ callback(void *args, int argc, char **argv, char **azColName)
 		{
 			dlna_flags |= DLNA_FLAG_TM_S;
 		}
-		else if( *mime == 'a' )
-		{
-			dlna_flags |= DLNA_FLAG_TM_S;
-		}
-		else
-		{
-			dlna_flags |= DLNA_FLAG_TM_I;
-		}
 
-		if( dlna_pn )
-			snprintf(dlna_buf, sizeof(dlna_buf), "DLNA.ORG_PN=%s;"
-			                                     "DLNA.ORG_OP=01;"
-			                                     "DLNA.ORG_CI=0;"
-			                                     "DLNA.ORG_FLAGS=%08X%024X",
-			                                     dlna_pn, dlna_flags, 0);
-		else
-			strcpy(dlna_buf, "*");
+		strcpy(dlna_buf, "*");
 
 		ret = strcatf(str, "&lt;item id=\"%s\" parentID=\"%s\" restricted=\"1\"", id, parent);
 		if( refID && (passed_args->filter & FILTER_REFID) ) {
@@ -699,97 +663,12 @@ callback(void *args, int argc, char **argv, char **azColName)
 		                   "&lt;dc:title&gt;%s&lt;/dc:title&gt;"
 		                   "&lt;upnp:class&gt;object.%s&lt;/upnp:class&gt;",
 		                   title, class);
-		if( comment && (passed_args->filter & FILTER_DC_DESCRIPTION) ) {
-			ret = strcatf(str, "&lt;dc:description&gt;%.384s&lt;/dc:description&gt;", comment);
-		}
-		if( creator && (passed_args->filter & FILTER_DC_CREATOR) ) {
-			ret = strcatf(str, "&lt;dc:creator&gt;%s&lt;/dc:creator&gt;", creator);
-		}
-		if( date && (passed_args->filter & FILTER_DC_DATE) ) {
-			ret = strcatf(str, "&lt;dc:date&gt;%s&lt;/dc:date&gt;", date);
-		}
-		if( (passed_args->filter & FILTER_BOOKMARK_MASK) ) {
-			/* Get bookmark */
-			int sec = sql_get_int_field(db, "SELECT SEC from BOOKMARKS where ID = '%s'", detailID);
-			if( sec > 0 && (passed_args->filter & FILTER_UPNP_LASTPLAYBACKPOSITION) ) {
-				/* This format is wrong according to the UPnP/AV spec.  It should be in duration format,
-				** so HH:MM:SS. But Kodi seems to be the only user of this tag, and it only works with a
-				** raw seconds value.
-				** If Kodi gets fixed, we can use duration_str(sec * 1000) here */
-				ret = strcatf(str, "&lt;upnp:lastPlaybackPosition&gt;%d&lt;/upnp:lastPlaybackPosition&gt;",
-				              sec);
-			}
-			if( passed_args->filter & FILTER_SEC_DCM_INFO )
-				ret = strcatf(str, "&lt;sec:dcmInfo&gt;CREATIONDATE=0,FOLDER=%s,BM=%d&lt;/sec:dcmInfo&gt;",
-				              title, sec);
-			if( passed_args->filter & FILTER_UPNP_PLAYBACKCOUNT ) {
-				ret = strcatf(str, "&lt;upnp:playbackCount&gt;%d&lt;/upnp:playbackCount&gt;",
-				              sql_get_int_field(db, "SELECT WATCH_COUNT from BOOKMARKS where ID = '%s'", detailID));
-			}
-		}
-		if( artist ) {
-			if( (*mime == 'v') && (passed_args->filter & FILTER_UPNP_ACTOR) ) {
-				ret = strcatf(str, "&lt;upnp:actor&gt;%s&lt;/upnp:actor&gt;", artist);
-			}
-			if( passed_args->filter & FILTER_UPNP_ARTIST ) {
-				ret = strcatf(str, "&lt;upnp:artist&gt;%s&lt;/upnp:artist&gt;", artist);
-			}
-		}
-		if( album && (passed_args->filter & FILTER_UPNP_ALBUM) ) {
-			ret = strcatf(str, "&lt;upnp:album&gt;%s&lt;/upnp:album&gt;", album);
-		}
-		if( genre && (passed_args->filter & FILTER_UPNP_GENRE) ) {
-			ret = strcatf(str, "&lt;upnp:genre&gt;%s&lt;/upnp:genre&gt;", genre);
-		}
-		if( strncmp(id, MUSIC_PLIST_ID, strlen(MUSIC_PLIST_ID)) == 0 ) {
-			track = strrchr(id, '$')+1;
-		}
-		if( NON_ZERO(track) && (passed_args->filter & FILTER_UPNP_ORIGINALTRACKNUMBER) ) {
-			ret = strcatf(str, "&lt;upnp:originalTrackNumber&gt;%s&lt;/upnp:originalTrackNumber&gt;", track);
-		}
+
 		if( passed_args->filter & FILTER_RES ) {
 			ext = mime_to_ext(mime);
-			add_res(size, duration, bitrate, sampleFrequency, nrAudioChannels,
-			        resolution, dlna_buf, mime, detailID, ext, passed_args);
-			if( *mime == 'i' ) {
-				int srcw, srch;
-				if( resolution && (sscanf(resolution, "%6dx%6d", &srcw, &srch) == 2) )
-				{
-					if( srcw > 4096 || srch > 4096 )
-						add_resized_res(srcw, srch, 4096, 4096, "JPEG_LRG", detailID, passed_args);
-					if( srcw > 1024 || srch > 768 )
-						add_resized_res(srcw, srch, 1024, 768, "JPEG_MED", detailID, passed_args);
-					if( srcw > 640 || srch > 480 )
-						add_resized_res(srcw, srch, 640, 480, "JPEG_SM", detailID, passed_args);
-				}
-				if(NON_ZERO(tn) && IS_ZERO(rotate) ) {
-					ret = strcatf(str, "&lt;res protocolInfo=\"http-get:*:%s:%s\"&gt;"
-					                   "http://%s:%d/Thumbnails/%s.jpg"
-					                   "&lt;/res&gt;",
-					                   mime, "DLNA.ORG_PN=JPEG_TN;DLNA.ORG_CI=1", lan_addr[passed_args->iface].str,
-					                   runtime_vars.port, detailID);
-				}
-				else
-					add_resized_res(srcw, srch, 160, 160, "JPEG_TN", detailID, passed_args);
-			}
+			add_res(size, dlna_buf, mime, detailID, ext, passed_args);
 		}
-		if(*mime == 'i' ) {
-			if(!album )
-				ret = strcatf(str, "&lt;upnp:album&gt;%s&lt;/upnp:album&gt;", "[No Keywords]");
 
-			/* EVA2000 doesn't seem to handle embedded thumbnails */
-			if( NON_ZERO(tn) && IS_ZERO(rotate) ) {
-				ret = strcatf(str, "&lt;upnp:albumArtURI&gt;"
-				                   "http://%s:%d/Thumbnails/%s.jpg"
-				                   "&lt;/upnp:albumArtURI&gt;",
-				                   lan_addr[passed_args->iface].str, runtime_vars.port, detailID);
-			} else {
-				ret = strcatf(str, "&lt;upnp:albumArtURI&gt;"
-				                   "http://%s:%d/Resized/%s.jpg?width=160,height=160"
-				                   "&lt;/upnp:albumArtURI&gt;",
-				                   lan_addr[passed_args->iface].str, runtime_vars.port, detailID);
-			}
-		}
 		ret = strcatf(str, "&lt;/item&gt;");
 	}
 	else if( strncmp(class, "container", 9) == 0 )
@@ -797,10 +676,7 @@ callback(void *args, int argc, char **argv, char **azColName)
 		ret = strcatf(str, "&lt;container id=\"%s\" parentID=\"%s\" restricted=\"1\" ", id, parent);
 		/* If the client calls for BrowseMetadata on root, we have to include our "upnp:searchClass"'s, unless they're filtered out */
 		if( passed_args->requested == 1 && strcmp(id, "0") == 0 && (passed_args->filter & FILTER_UPNP_SEARCHCLASS) ) {
-			ret = strcatf(str, "&gt;"
-			                   "&lt;upnp:searchClass includeDerived=\"1\"&gt;object.item.audioItem&lt;/upnp:searchClass&gt;"
-			                   "&lt;upnp:searchClass includeDerived=\"1\"&gt;object.item.imageItem&lt;/upnp:searchClass&gt;"
-			                   "&lt;upnp:searchClass includeDerived=\"1\"&gt;object.item.videoItem&lt;/upnp:searchClass");
+			ret = strcatf(str, "&gt;&lt;upnp:searchClass includeDerived=\"1\"&gt;object.item.videoItem&lt;/upnp:searchClass");
 		}
 		ret = strcatf(str, "&gt;"
 		                   "&lt;dc:title&gt;%s&lt;/dc:title&gt;"
@@ -810,23 +686,11 @@ callback(void *args, int argc, char **argv, char **azColName)
 			/* TODO: Implement real folder size tracking */
 			ret = strcatf(str, "&lt;upnp:storageUsed&gt;%s&lt;/upnp:storageUsed&gt;", (size ? size : "-1"));
 		}
-		if( creator && (passed_args->filter & FILTER_DC_CREATOR) ) {
-			ret = strcatf(str, "&lt;dc:creator&gt;%s&lt;/dc:creator&gt;", creator);
-		}
-		if( genre && (passed_args->filter & FILTER_UPNP_GENRE) ) {
-			ret = strcatf(str, "&lt;upnp:genre&gt;%s&lt;/upnp:genre&gt;", genre);
-		}
-		if( artist && (passed_args->filter & FILTER_UPNP_ARTIST) ) {
-			ret = strcatf(str, "&lt;upnp:artist&gt;%s&lt;/upnp:artist&gt;", artist);
-		}
+
 		if( passed_args->filter & FILTER_AV_MEDIA_CLASS ) {
 			char class;
-			if( strncmp(id, MUSIC_ID, sizeof(MUSIC_ID)) == 0 )
-				class = 'M';
-			else if( strncmp(id, VIDEO_ID, sizeof(VIDEO_ID)) == 0 )
+			if( strncmp(id, VIDEO_ID, sizeof(VIDEO_ID)) == 0 )
 				class = 'V';
-			else if( strncmp(id, IMAGE_ID, sizeof(IMAGE_ID)) == 0 )
-				class = 'P';
 			else
 				class = 0;
 			if( class )
@@ -1191,22 +1055,10 @@ parse_search_criteria(const char *str, char *sep)
 					like = 1;
 					continue;
 				}
-				else if (strncmp(s, "dc:date", 7) == 0)
-				{
-					strcatf(&criteria, "d.DATE");
-					s += 7;
-					continue;
-				}
 				else if (strncmp(s, "dc:title", 8) == 0)
 				{
 					strcatf(&criteria, "d.TITLE");
 					s += 8;
-					continue;
-				}
-				else if (strncmp(s, "dc:creator", 10) == 0)
-				{
-					strcatf(&criteria, "d.CREATOR");
-					s += 10;
 					continue;
 				}
 				else
@@ -1236,30 +1088,6 @@ parse_search_criteria(const char *str, char *sep)
 				if (strncmp(s, "upnp:class", 10) == 0)
 				{
 					strcatf(&criteria, "o.CLASS");
-					s += 10;
-					continue;
-				}
-				else if (strncmp(s, "upnp:actor", 10) == 0)
-				{
-					strcatf(&criteria, "d.ARTIST");
-					s += 10;
-					continue;
-				}
-				else if (strncmp(s, "upnp:artist", 11) == 0)
-				{
-					strcatf(&criteria, "d.ARTIST");
-					s += 11;
-					continue;
-				}
-				else if (strncmp(s, "upnp:album", 10) == 0)
-				{
-					strcatf(&criteria, "d.ALBUM");
-					s += 10;
-					continue;
-				}
-				else if (strncmp(s, "upnp:genre", 10) == 0)
-				{
-					strcatf(&criteria, "d.GENRE");
 					s += 10;
 					continue;
 				}

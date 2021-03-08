@@ -1022,7 +1022,7 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 	id = strtoll(object, NULL, 10);
 	if( id != last_file.id )
 	{
-		snprintf(buf, sizeof(buf), "SELECT PATH, MIME, DLNA_PN from DETAILS where ID = '%lld'", (long long)id);
+		snprintf(buf, sizeof(buf), "SELECT PATH, MIME from DETAILS where ID = '%lld'", (long long)id);
 		ret = sql_get_table(db, buf, &result, &rows, NULL);
 		if( (ret != SQLITE_OK) )
 		{
@@ -1030,7 +1030,7 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 			Send500(h);
 			return;
 		}
-		if( !rows || !result[3] || !result[4] )
+		if( !rows || !result[2] || !result[3] )
 		{
 			DPRINTF(E_WARN, L_HTTP, "%s not found, responding ERROR 404\n", object);
 			sqlite3_free_table(result);
@@ -1039,15 +1039,13 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 		}
 		/* Cache the result */
 		last_file.id = id;
-		strncpy(last_file.path, result[3], sizeof(last_file.path)-1);
+		strncpy(last_file.path, result[2], sizeof(last_file.path)-1);
 		if( result[4] )
 		{
-			strncpy(last_file.mime, result[4], sizeof(last_file.mime)-1);
+			strncpy(last_file.mime, result[3], sizeof(last_file.mime)-1);
 		}
-		if( result[5] )
-			snprintf(last_file.dlna, sizeof(last_file.dlna), "DLNA.ORG_PN=%s;", result[5]);
-		else
-			last_file.dlna[0] = '\0';
+
+		last_file.dlna[0] = '\0';
 		sqlite3_free_table(result);
 	}
 	newpid = process_fork();
