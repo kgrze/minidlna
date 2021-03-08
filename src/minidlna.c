@@ -462,12 +462,6 @@ main(int argc, char **argv)
 	LIST_INIT(&upnphttphead);
 
 	ret = open_db(NULL);
-	if (ret == 0)
-	{
-		updateID = sql_get_int_field(db, "SELECT VALUE from SETTINGS where KEY = 'UPDATE_ID'");
-		if (updateID == -1)
-			ret = -1;
-	}
 	check_db(db, ret, &scanner_pid);
 	lastdbtime = _get_dbtime();
 #ifdef HAVE_INOTIFY
@@ -709,7 +703,6 @@ shutdown:
 	process_reap_children();
 	free(children);
 
-	sql_exec(db, "UPDATE SETTINGS set VALUE = '%u' where KEY = 'UPDATE_ID'", updateID);
 	sqlite3_close(db);
 
 	if (pidfilename && unlink(pidfilename) < 0)

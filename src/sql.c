@@ -263,7 +263,6 @@ int
 db_upgrade(sqlite3 *db)
 {
 	int db_vers;
-	int ret;
 
 	db_vers = sql_get_int_field(db, "PRAGMA user_version");
 
@@ -277,17 +276,11 @@ db_upgrade(sqlite3 *db)
 		return db_vers;
 	if (db_vers < 10)
 	{
-		DPRINTF(E_WARN, L_DB_SQL, "Updating DB version to v%d\n", 10);
-		ret = sql_exec(db, "ALTER TABLE BOOKMARKS ADD WATCH_COUNT INTEGER");
-		if (ret != SQLITE_OK)
-			return 9;
+		return 9;
 	}
 	if (db_vers < 11)
 	{
-		DPRINTF(E_WARN, L_DB_SQL, "Updating DB version to v%d\n", 11);
-		ret = sql_exec(db, "ALTER TABLE PLAYLISTS ADD TIMESTAMP INTEGER DEFAULT 1");
-		if (ret != SQLITE_OK)
-			return 10;
+		return 10;
 	}
 	sql_exec(db, "PRAGMA user_version = %d", DB_VERSION);
 

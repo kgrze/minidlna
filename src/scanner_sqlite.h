@@ -56,28 +56,3 @@ char create_detailTable_sqlite[] = "CREATE TABLE DETAILS ("
 					"DLNA_PN TEXT, "
 					"MIME TEXT"
 					");";
-
-char create_captionTable_sqlite[] = "CREATE TABLE CAPTIONS ("
-					"ID INTEGER PRIMARY KEY, "
-					"PATH TEXT NOT NULL"
-					");";
-
-char create_bookmarkTable_sqlite[] = "CREATE TABLE BOOKMARKS ("
-					"ID INTEGER PRIMARY KEY, "
-					"SEC INTEGER, "
-					"WATCH_COUNT INTEGER"
-					");";
-
-char create_playlistTable_sqlite[] = "CREATE TABLE PLAYLISTS ("
-					"ID INTEGER PRIMARY KEY AUTOINCREMENT, "
-					"NAME TEXT NOT NULL, "
-					"PATH TEXT NOT NULL, "
-					"ITEMS INTEGER DEFAULT 0, "
-					"FOUND INTEGER DEFAULT 0, "
-					"TIMESTAMP INTEGER DEFAULT 0"
-					");";
-
-char create_settingsTable_sqlite[] = "CREATE TABLE SETTINGS ("
-					"KEY TEXT NOT NULL, "
-					"VALUE TEXT"
-					");";

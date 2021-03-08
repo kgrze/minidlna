@@ -1158,13 +1158,6 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 			break;
 	}
 
-	if( h->reqflags & FLAG_CAPTION )
-	{
-		if( sql_get_int_field(db, "SELECT ID from CAPTIONS where ID = '%lld'", (long long)id) > 0 )
-			strcatf(&str, "CaptionInfo.sec: http://%s:%d/Captions/%lld.srt\r\n",
-			              lan_addr[h->iface].str, runtime_vars.port, (long long)id);
-	}
-
 	strcatf(&str, "Accept-Ranges: bytes\r\n"
 	              "contentFeatures.dlna.org: %sDLNA.ORG_OP=%02X;DLNA.ORG_CI=%X;DLNA.ORG_FLAGS=%08X%024X\r\n\r\n",
 	              last_file.dlna, 1, 0, dlna_flags, 0);

@@ -249,21 +249,6 @@ CreateDatabase(void)
 	ret = sql_exec(db, create_detailTable_sqlite);
 	if( ret != SQLITE_OK )
 		goto sql_failed;
-	ret = sql_exec(db, create_captionTable_sqlite);
-	if( ret != SQLITE_OK )
-		goto sql_failed;
-	ret = sql_exec(db, create_bookmarkTable_sqlite);
-	if( ret != SQLITE_OK )
-		goto sql_failed;
-	ret = sql_exec(db, create_playlistTable_sqlite);
-	if( ret != SQLITE_OK )
-		goto sql_failed;
-	ret = sql_exec(db, create_settingsTable_sqlite);
-	if( ret != SQLITE_OK )
-		goto sql_failed;
-	ret = sql_exec(db, "INSERT into SETTINGS values ('UPDATE_ID', '0')");
-	if( ret != SQLITE_OK )
-		goto sql_failed;
 	for( i=0; containers[i]; i=i+3 )
 	{
 		ret = sql_exec(db, "INSERT into OBJECTS (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME)"
@@ -410,7 +395,6 @@ start_scanner(void)
 	/* Use TIMESTAMP to store the media type */
 	sql_exec(db, "UPDATE DETAILS set TIMESTAMP = %d where ID = %lld", media_path->types, (long long)id);
 	ScanDirectory(media_path->path, parent, media_path->types);
-	sql_exec(db, "INSERT into SETTINGS values (%Q, %Q)", "media_dir", media_path->path);
 	
 	/* Create this index after scanning, so it doesn't slow down the scanning process.
 	 * This index is very useful for large libraries used with an XBox360 (or any
