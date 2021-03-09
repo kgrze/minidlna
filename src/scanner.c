@@ -151,8 +151,6 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 	char objectID[64];
 	int64_t detailID = 0;
 	char base[8];
-	char *typedir_parentID;
-	char *baseid;
 	char *objname;
 	media_types mtype = get_media_type(name);
 
