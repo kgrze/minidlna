@@ -43,7 +43,6 @@
 #include "sql.h"
 #include "scanner.h"
 #include "log.h"
-#include "monitor.h"
 
 #if SCANDIR_CONST
 typedef const struct dirent scan_filter;
@@ -258,13 +257,6 @@ CreateDatabase(void)
 		if( ret != SQLITE_OK )
 			goto sql_failed;
 	}
-	sql_exec(db, "create INDEX IDX_OBJECTS_OBJECT_ID ON OBJECTS(OBJECT_ID);");
-	sql_exec(db, "create INDEX IDX_OBJECTS_PARENT_ID ON OBJECTS(PARENT_ID);");
-	sql_exec(db, "create INDEX IDX_OBJECTS_DETAIL_ID ON OBJECTS(DETAIL_ID);");
-	sql_exec(db, "create INDEX IDX_OBJECTS_CLASS ON OBJECTS(CLASS);");
-	sql_exec(db, "create INDEX IDX_DETAILS_PATH ON DETAILS(PATH);");
-	sql_exec(db, "create INDEX IDX_DETAILS_ID ON DETAILS(ID);");
-	sql_exec(db, "create INDEX IDX_SCANNER_OPT ON OBJECTS(PARENT_ID, NAME, OBJECT_ID);");
 
 sql_failed:
 	if( ret != SQLITE_OK )
@@ -395,11 +387,6 @@ start_scanner(void)
 	/* Use TIMESTAMP to store the media type */
 	sql_exec(db, "UPDATE DETAILS set TIMESTAMP = %d where ID = %lld", media_path->types, (long long)id);
 	ScanDirectory(media_path->path, parent, media_path->types);
-	
-	/* Create this index after scanning, so it doesn't slow down the scanning process.
-	 * This index is very useful for large libraries used with an XBox360 (or any
-	 * client that uses UPnPSearch on large containers). */
-	sql_exec(db, "create INDEX IDX_SEARCH_OPT ON OBJECTS(OBJECT_ID, CLASS, DETAIL_ID);");
 
 	DPRINTF(E_DEBUG, L_SCANNER, "Initial file scan completed\n");
 	//JM: Set up a db version number, so we know if we need to rebuild due to a new structure.

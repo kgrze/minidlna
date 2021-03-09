@@ -88,7 +88,6 @@
 #include "minidlnatypes.h"
 #include "process.h"
 #include "scanner.h"
-#include "monitor.h"
 #include "log.h"
 
 #if SQLITE_VERSION_NUMBER < 3005001
@@ -464,16 +463,7 @@ main(int argc, char **argv)
 	ret = open_db(NULL);
 	check_db(db, ret, &scanner_pid);
 	lastdbtime = _get_dbtime();
-#ifdef HAVE_INOTIFY
-	if( GETFLAG(INOTIFY_MASK) )
-	{
-		if (!sqlite3_threadsafe() || sqlite3_libversion_number() < 3005001)
-			DPRINTF(E_ERROR, L_GENERAL, "SQLite library is not threadsafe!  "
-			                            "Inotify will be disabled.\n");
-		else if (pthread_create(&inotify_thread, NULL, start_inotify, NULL) != 0)
-			DPRINTF(E_FATAL, L_GENERAL, "ERROR: pthread_create() failed for start_inotify. EXITING\n");
-	}
-#endif
+
 	smonitor = OpenAndConfMonitorSocket();
 
 	sssdp = OpenAndConfSSDPReceiveSocket();
