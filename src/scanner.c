@@ -82,35 +82,6 @@ get_next_available_id(const char *table, const char *parentID)
 		return objectID;
 }
 
-static void
-insert_containers(const char *name, const char *path, const char *refID, const char *class, int64_t detailID)
-{
-	char **result;
-
-	if( strstr(class, "videoItem") )
-	{
-		static long long last_all_objectID = 0;
-
-		/* All Videos */
-		if( !last_all_objectID )
-		{
-			last_all_objectID = get_next_available_id("OBJECTS", VIDEO_ALL_ID);
-		}
-		sql_exec(db, "INSERT into OBJECTS"
-		             " (OBJECT_ID, PARENT_ID, REF_ID, CLASS, DETAIL_ID, NAME) "
-		             "VALUES"
-		             " ('"VIDEO_ALL_ID"$%llX', '"VIDEO_ALL_ID"', '%s', '%s', %lld, %Q)",
-		             last_all_objectID++, refID, class, (long long)detailID, name);
-		return;
-	}
-	else
-	{
-		return;
-	}
-	sqlite3_free_table(result);
-	valid_cache = 1;
-}
-
 int64_t
 insert_directory(const char *name, const char *path, const char *base, const char *parentID, int objectID)
 {
@@ -209,26 +180,6 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 	             " ('%s', '%s%s', '%s', %lld, '%q')",
 	             objectID, BROWSEDIR_ID, parentID, class, detailID, objname);
 
-	if( *parentID )
-	{
-		int typedir_objectID = 0;
-		typedir_parentID = strdup(parentID);
-		baseid = strrchr(typedir_parentID, '$');
-		if( baseid )
-		{
-			typedir_objectID = strtol(baseid+1, NULL, 16);
-			*baseid = '\0';
-		}
-		insert_directory(objname, path, base, typedir_parentID, typedir_objectID);
-		free(typedir_parentID);
-	}
-	sql_exec(db, "INSERT into OBJECTS"
-	             " (OBJECT_ID, PARENT_ID, REF_ID, CLASS, DETAIL_ID, NAME) "
-	             "VALUES"
-	             " ('%s%s$%X', '%s%s', '%s', '%s', %lld, '%q')",
-	             base, parentID, object, base, parentID, objectID, class, detailID, objname);
-
-	insert_containers(objname, path, objectID, class, detailID);
 	free(objname);
 
 	return 0;
@@ -329,6 +280,7 @@ ScanDirectory(const char *dir, const char *parent, media_types dir_types)
 		type = TYPE_UNKNOWN;
 		snprintf(full_path, PATH_MAX, "%s/%s", dir, namelist[i]->d_name);
 		name = escape_tag(namelist[i]->d_name, 1);
+
 		if( is_dir(namelist[i]) == 1 )
 		{
 			type = TYPE_DIR;
@@ -337,10 +289,7 @@ ScanDirectory(const char *dir, const char *parent, media_types dir_types)
 		{
 			type = TYPE_FILE;
 		}
-		else
-		{
-			type = resolve_unknown_type(full_path, dir_types);
-		}
+
 		if( (type == TYPE_DIR) && (access(full_path, R_OK|X_OK) == 0) )
 		{
 			char *parent_id;
