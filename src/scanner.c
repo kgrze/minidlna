@@ -160,13 +160,6 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 		class = "item.videoItem";
 		detailID = GetVideoMetadata(path, name);
 	}
-	/* Some file extensions can be used for both audio and video.
-	** Fall back to audio on these files if video parsing fails. */
-	if( !detailID )
-	{
-		DPRINTF(E_WARN, L_SCANNER, "Unsuccessful getting details for %s\n", path);
-		return -1;
-	}
 
 	sprintf(objectID, "%s%s$%X", BROWSEDIR_ID, parentID, object);
 	objname = strdup(name);
