@@ -87,52 +87,6 @@ insert_directory(const char *name, const char *path, const char *base, const cha
 {
 	int64_t detailID = 0;
 	char class[] = "container.storageFolder";
-	char *result, *p;
-	static char last_found[256] = "-1";
-
-	if( strcmp(base, BROWSEDIR_ID) != 0 )
-	{
-		int found = 0;
-		char id_buf[64], parent_buf[64], refID[64];
-		char *dir_buf, *dir;
-
-		dir_buf = strdup(path);
-		dir = dirname(dir_buf);
-		snprintf(refID, sizeof(refID), "%s%s$%X", BROWSEDIR_ID, parentID, objectID);
-		snprintf(id_buf, sizeof(id_buf), "%s%s$%X", base, parentID, objectID);
-		snprintf(parent_buf, sizeof(parent_buf), "%s%s", base, parentID);
-		while( !found )
-		{
-			if( valid_cache && strcmp(id_buf, last_found) == 0 )
-				break;
-			if( sql_get_int_field(db, "SELECT count(*) from OBJECTS where OBJECT_ID = '%s'", id_buf) > 0 )
-			{
-				strcpy(last_found, id_buf);
-				break;
-			}
-			/* Does not exist.  Need to create, and may need to create parents also */
-			result = sql_get_text_field(db, "SELECT DETAIL_ID from OBJECTS where OBJECT_ID = '%s'", refID);
-			if( result )
-			{
-				detailID = strtoll(result, NULL, 10);
-				sqlite3_free(result);
-			}
-			sql_exec(db, "INSERT into OBJECTS"
-			             " (OBJECT_ID, PARENT_ID, REF_ID, DETAIL_ID, CLASS, NAME) "
-			             "VALUES"
-			             " ('%s', '%s', %Q, %lld, '%s', '%q')",
-			             id_buf, parent_buf, refID, detailID, class, strrchr(dir, '/')+1);
-			if( (p = strrchr(id_buf, '$')) )
-				*p = '\0';
-			if( (p = strrchr(parent_buf, '$')) )
-				*p = '\0';
-			if( (p = strrchr(refID, '$')) )
-				*p = '\0';
-			dir = dirname(dir);
-		}
-		free(dir_buf);
-		return 0;
-	}
 
 	detailID = GetFolderMetadata(name, path);
 	sql_exec(db, "INSERT into OBJECTS"
