@@ -719,8 +719,6 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 	int ret;
 	const char *ObjectID, *BrowseFlag;
 	char *Filter, *SortCriteria;
-	const char *objectid_sql = "o.OBJECT_ID";
-	const char *parentid_sql = "o.PARENT_ID";
 	char where[256] = "";
 	char *orderBy = NULL;
 	struct NameValueParserData data;
@@ -794,10 +792,9 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 	{
 		const char *id = ObjectID;
 		args.requested = 1;
-		sql = sqlite3_mprintf("SELECT %s, %s, " COLUMNS
+		sql = sqlite3_mprintf("SELECT o.OBJECT_ID, o.PARENT_ID, " COLUMNS
 				      "from OBJECTS o left join DETAILS d on (d.ID = o.DETAIL_ID)"
-				      " where OBJECT_ID = '%q';",
-				      objectid_sql, parentid_sql, id);
+				      " where OBJECT_ID = '%q';", id);
 		ret = sqlite3_exec(db, sql, callback, (void *) &args, &zErrMsg);
 		totalMatches = args.returned;
 	}
@@ -839,11 +836,9 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 			goto browse_error;
 		}
 
-		sql = sqlite3_mprintf("SELECT %s, %s, " COLUMNS
+		sql = sqlite3_mprintf("SELECT o.OBJECT_ID, o.PARENT_ID, " COLUMNS
 				      "from OBJECTS o left join DETAILS d on (d.ID = o.DETAIL_ID)"
-				      " where %s %s limit %d, %d;",
-				      objectid_sql, parentid_sql,
-				      where, THISORNUL(orderBy), StartingIndex, RequestedCount);
+				      " where %s %s limit %d, %d;", where, THISORNUL(orderBy), StartingIndex, RequestedCount);
 		DPRINTF(E_DEBUG, L_HTTP, "Browse SQL: %s\n", sql);
 		ret = sqlite3_exec(db, sql, callback, (void *) &args, &zErrMsg);
 	}
