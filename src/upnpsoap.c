@@ -599,7 +599,7 @@ object_exists(const char *object)
 
 #define COLUMNS "o.DETAIL_ID, o.CLASS," \
                 " d.SIZE, d.TITLE, d.MIME "
-#define SELECT_COLUMNS "SELECT o.OBJECT_ID, o.PARENT_ID, o.REF_ID, " COLUMNS
+#define SELECT_COLUMNS "SELECT o.OBJECT_ID, o.PARENT_ID, " COLUMNS
 
 #define NON_ZERO(x) (x && atoi(x))
 #define IS_ZERO(x) (!x || !atoi(x))
@@ -608,7 +608,7 @@ static int
 callback(void *args, int argc, char **argv, char **azColName)
 {
 	struct Response *passed_args = (struct Response *)args;
-	char *id = argv[0], *parent = argv[1], *refID = argv[2], *detailID = argv[3], *class = argv[4], *size = argv[5], *title = argv[6], *mime = argv[7];
+	char *id = argv[0], *parent = argv[1], *detailID = argv[2], *class = argv[3], *size = argv[4], *title = argv[5], *mime = argv[6];
 	char dlna_buf[128];
 	const char *ext;
 	struct string_s *str = passed_args->str;
@@ -656,9 +656,6 @@ callback(void *args, int argc, char **argv, char **azColName)
 		strcpy(dlna_buf, "*");
 
 		ret = strcatf(str, "&lt;item id=\"%s\" parentID=\"%s\" restricted=\"1\"", id, parent);
-		if( refID && (passed_args->filter & FILTER_REFID) ) {
-			ret = strcatf(str, " refID=\"%s\"", refID);
-		}
 		ret = strcatf(str, "&gt;"
 		                   "&lt;dc:title&gt;%s&lt;/dc:title&gt;"
 		                   "&lt;upnp:class&gt;object.%s&lt;/upnp:class&gt;",
@@ -724,7 +721,6 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 	char *Filter, *SortCriteria;
 	const char *objectid_sql = "o.OBJECT_ID";
 	const char *parentid_sql = "o.PARENT_ID";
-	const char *refid_sql = "o.REF_ID";
 	char where[256] = "";
 	char *orderBy = NULL;
 	struct NameValueParserData data;
@@ -798,10 +794,10 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 	{
 		const char *id = ObjectID;
 		args.requested = 1;
-		sql = sqlite3_mprintf("SELECT %s, %s, %s, " COLUMNS
+		sql = sqlite3_mprintf("SELECT %s, %s, " COLUMNS
 				      "from OBJECTS o left join DETAILS d on (d.ID = o.DETAIL_ID)"
 				      " where OBJECT_ID = '%q';",
-				      objectid_sql, parentid_sql, refid_sql, id);
+				      objectid_sql, parentid_sql, id);
 		ret = sqlite3_exec(db, sql, callback, (void *) &args, &zErrMsg);
 		totalMatches = args.returned;
 	}
@@ -843,10 +839,10 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 			goto browse_error;
 		}
 
-		sql = sqlite3_mprintf("SELECT %s, %s, %s, " COLUMNS
+		sql = sqlite3_mprintf("SELECT %s, %s, " COLUMNS
 				      "from OBJECTS o left join DETAILS d on (d.ID = o.DETAIL_ID)"
 				      " where %s %s limit %d, %d;",
-				      objectid_sql, parentid_sql, refid_sql,
+				      objectid_sql, parentid_sql,
 				      where, THISORNUL(orderBy), StartingIndex, RequestedCount);
 		DPRINTF(E_DEBUG, L_HTTP, "Browse SQL: %s\n", sql);
 		ret = sqlite3_exec(db, sql, callback, (void *) &args, &zErrMsg);
@@ -1014,13 +1010,7 @@ parse_search_criteria(const char *str, char *sep)
 					charcat(&criteria, *s);
 				break;
 			case '@':
-				if (strncmp(s, "@refID", 6) == 0)
-				{
-					strcatf(&criteria, "REF_ID");
-					s += 6;
-					continue;
-				}
-				else if (strncmp(s, "@id", 3) == 0)
+				if (strncmp(s, "@id", 3) == 0)
 				{
 					strcatf(&criteria, "OBJECT_ID");
 					s += 3;
