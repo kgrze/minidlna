@@ -82,19 +82,18 @@ get_next_available_id(const char *table, const char *parentID)
 		return objectID;
 }
 
-int64_t
+void
 insert_directory(const char *name, const char *path, const char *base, const char *parentID, int objectID)
 {
-	int64_t detailID = 0;
 	char class[] = "container.storageFolder";
 	
 	sql_exec(db, "INSERT into OBJECTS"
-	             " (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME, TITLE, PATH) "
+	             " (OBJECT_ID, PARENT_ID, CLASS, NAME, TITLE, PATH) "
 	             "VALUES"
-	             " ('%s%s$%X', '%s%s', %lld, '%s', '%q','%q', %Q)",
-	             base, parentID, objectID, base, parentID, detailID, class, name, name, path);
+	             " ('%s%s$%X', '%s%s', '%s', '%q','%q', %Q)",
+	             base, parentID, objectID, base, parentID, class, name, name, path);
 
-	return detailID;
+	return;
 }
 
 int
@@ -102,7 +101,6 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 {
 	const char *class;
 	char objectID[64];
-	int64_t detailID = 0;
 	char base[8];
 	char *objname;
 	media_types mtype = get_media_type(name);
@@ -119,10 +117,10 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 		strip_ext(objname);
 
 		sql_exec(db, "INSERT into OBJECTS"
-	             " (OBJECT_ID, PARENT_ID, CLASS, DETAIL_ID, NAME, PATH, SIZE, TITLE, MIME) "
+	             " (OBJECT_ID, PARENT_ID, CLASS, NAME, PATH, SIZE, TITLE, MIME) "
 	             "VALUES"
-	             " ('%s', '%s%s', '%s', %lld, '%q', %Q, %lld, '%q', '%q')",
-	             objectID, BROWSEDIR_ID, parentID, class, detailID, objname, path, (long long)meta.file_size, meta.title, meta.mime);
+	             " ('%s', '%s%s', '%s', '%q', %Q, %lld, '%q', '%q')",
+	             objectID, BROWSEDIR_ID, parentID, class, objname, path, (long long)meta.file_size, meta.title, meta.mime);
 	}
 
 	free(objname);
@@ -144,12 +142,10 @@ CreateDatabase(void)
 
 	for( i=0; containers[i]; i=i+3 )
 	{
-		int64_t id = 0;
-
-		ret = sql_exec(db, "INSERT into OBJECTS (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME, TITLE, PATH)"
+		ret = sql_exec(db, "INSERT into OBJECTS (OBJECT_ID, PARENT_ID, CLASS, NAME, TITLE, PATH)"
 		                   " values "
-		                   "('%s', '%s', %lld, 'container.storageFolder', '%q', '%q', %Q)",
-		                   containers[i], containers[i+1], id, containers[i+2], containers[i+2], NULL);
+		                   "('%s', '%s', 'container.storageFolder', '%q', '%q', %Q)",
+		                   containers[i], containers[i+1], containers[i+2], containers[i+2], NULL);
 		if( ret != SQLITE_OK )
 			goto sql_failed;
 	}

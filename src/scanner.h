@@ -70,7 +70,7 @@ is_image(const char *file);
 int64_t
 get_next_available_id(const char *table, const char *parentID);
 
-int64_t
+void
 insert_directory(const char *name, const char *path, const char *base, const char *parentID, int objectID);
 
 int
