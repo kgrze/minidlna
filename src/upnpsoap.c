@@ -290,8 +290,7 @@ object_exists(const char *object)
 	return (ret > 0);
 }
 
-#define COLUMNS "o.DETAIL_ID, o.CLASS," \
-                " d.SIZE, d.TITLE, d.MIME "
+#define COLUMNS "o.DETAIL_ID, o.CLASS, d.SIZE, d.TITLE, d.MIME "
 #define SELECT_COLUMNS "SELECT o.OBJECT_ID, o.PARENT_ID, " COLUMNS
 
 #define NON_ZERO(x) (x && atoi(x))
@@ -484,6 +483,7 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 		sql = sqlite3_mprintf("SELECT o.OBJECT_ID, o.PARENT_ID, " COLUMNS
 				      "from OBJECTS o left join DETAILS d on (d.ID = o.DETAIL_ID)"
 				      " where OBJECT_ID = '%q';", id);
+		DPRINTF(E_DEBUG, L_HTTP, "Browse SQL: %s\n", sql);
 		ret = sqlite3_exec(db, sql, callback, (void *) &args, &zErrMsg);
 		totalMatches = args.returned;
 	}

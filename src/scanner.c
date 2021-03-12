@@ -113,17 +113,17 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 		strcpy(base, VIDEO_DIR_ID);
 		class = "item.videoItem";
 		detailID = GetVideoMetadata(path, name);
-	}
 
-	sprintf(objectID, "%s%s$%X", BROWSEDIR_ID, parentID, object);
-	objname = strdup(name);
-	strip_ext(objname);
+		sprintf(objectID, "%s%s$%X", BROWSEDIR_ID, parentID, object);
+		objname = strdup(name);
+		strip_ext(objname);
 
-	sql_exec(db, "INSERT into OBJECTS"
+		sql_exec(db, "INSERT into OBJECTS"
 	             " (OBJECT_ID, PARENT_ID, CLASS, DETAIL_ID, NAME) "
 	             "VALUES"
 	             " ('%s', '%s%s', '%s', %lld, '%q')",
 	             objectID, BROWSEDIR_ID, parentID, class, detailID, objname);
+	}
 
 	free(objname);
 
@@ -264,8 +264,7 @@ start_scanner(void)
 {
 	struct media_dir_s *media_path;
 	char path[MAXPATHLEN];
-	int64_t id;
-	char *bname, *parent = NULL;
+	char *parent = NULL;
 
 	if (setpriority(PRIO_PROCESS, 0, 15) == -1)
 		DPRINTF(E_WARN, L_INOTIFY,  "Failed to reduce scanner thread priority\n");
@@ -276,10 +275,7 @@ start_scanner(void)
 	media_path = media_dirs;
 
 	strncpyt(path, media_path->path, sizeof(path));
-	bname = basename(path);
-	id = GetFolderMetadata(bname, media_path->path);
-	/* Use TIMESTAMP to store the media type */
-	sql_exec(db, "UPDATE DETAILS set TIMESTAMP = %d where ID = %lld", media_path->types, (long long)id);
+
 	ScanDirectory(media_path->path, parent, media_path->types);
 
 	DPRINTF(E_DEBUG, L_SCANNER, "Initial file scan completed\n");
