@@ -1022,7 +1022,7 @@ SendResp_dlnafile(struct upnphttp *h, char *object)
 	id = strtoll(object, NULL, 10);
 	if( id != last_file.id )
 	{
-		snprintf(buf, sizeof(buf), "SELECT PATH, MIME from DETAILS where ID = '%lld'", (long long)id);
+		snprintf(buf, sizeof(buf), "SELECT PATH, MIME from OBJECTS where ID = '%lld'", (long long)id);
 		ret = sql_get_table(db, buf, &result, &rows, NULL);
 		if( (ret != SQLITE_OK) )
 		{

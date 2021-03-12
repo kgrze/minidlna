@@ -28,11 +28,7 @@ char create_objectTable_sqlite[] = "CREATE TABLE OBJECTS ("
 					"PARENT_ID TEXT NOT NULL, "
 					"CLASS TEXT NOT NULL, "
 					"DETAIL_ID INTEGER DEFAULT NULL, "
-					"NAME TEXT DEFAULT NULL"
-					");";
-
-char create_detailTable_sqlite[] = "CREATE TABLE DETAILS ("
-					"ID INTEGER PRIMARY KEY AUTOINCREMENT, "
+					"NAME TEXT DEFAULT NULL,"
 					"PATH TEXT DEFAULT NULL, "
 					"SIZE INTEGER, "
 					"TITLE TEXT COLLATE NOCASE, "

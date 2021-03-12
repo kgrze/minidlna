@@ -290,8 +290,8 @@ object_exists(const char *object)
 	return (ret > 0);
 }
 
-#define COLUMNS "o.DETAIL_ID, o.CLASS, d.SIZE, d.TITLE, d.MIME "
-#define SELECT_COLUMNS "SELECT o.OBJECT_ID, o.PARENT_ID, " COLUMNS
+#define COLUMNS "ID, CLASS, SIZE, TITLE, MIME "
+#define SELECT_COLUMNS "SELECT OBJECT_ID, PARENT_ID, " COLUMNS
 
 #define NON_ZERO(x) (x && atoi(x))
 #define IS_ZERO(x) (!x || !atoi(x))
@@ -300,7 +300,7 @@ static int
 callback(void *args, int argc, char **argv, char **azColName)
 {
 	struct Response *passed_args = (struct Response *)args;
-	char *id = argv[0], *parent = argv[1], *detailID = argv[2], *class = argv[3], *size = argv[4], *title = argv[5], *mime = argv[6];
+	char *objectId = argv[0], *parent = argv[1], *id = argv[2], *class = argv[3], *size = argv[4], *title = argv[5], *mime = argv[6];
 	char dlna_buf[128];
 	const char *ext;
 	struct string_s *str = passed_args->str;
@@ -347,7 +347,7 @@ callback(void *args, int argc, char **argv, char **azColName)
 
 		strcpy(dlna_buf, "*");
 
-		ret = strcatf(str, "&lt;item id=\"%s\" parentID=\"%s\" restricted=\"1\"", id, parent);
+		ret = strcatf(str, "&lt;item id=\"%s\" parentID=\"%s\" restricted=\"1\"", objectId, parent);
 		ret = strcatf(str, "&gt;"
 		                   "&lt;dc:title&gt;%s&lt;/dc:title&gt;"
 		                   "&lt;upnp:class&gt;object.%s&lt;/upnp:class&gt;",
@@ -355,16 +355,16 @@ callback(void *args, int argc, char **argv, char **azColName)
 
 		if( passed_args->filter & FILTER_RES ) {
 			ext = mime_to_ext(mime);
-			add_res(size, dlna_buf, mime, detailID, ext, passed_args);
+			add_res(size, dlna_buf, mime, id, ext, passed_args);
 		}
 
 		ret = strcatf(str, "&lt;/item&gt;");
 	}
 	else if( strncmp(class, "container", 9) == 0 )
 	{
-		ret = strcatf(str, "&lt;container id=\"%s\" parentID=\"%s\" restricted=\"1\" ", id, parent);
+		ret = strcatf(str, "&lt;container id=\"%s\" parentID=\"%s\" restricted=\"1\" ", objectId, parent);
 		/* If the client calls for BrowseMetadata on root, we have to include our "upnp:searchClass"'s, unless they're filtered out */
-		if( passed_args->requested == 1 && strcmp(id, "0") == 0 && (passed_args->filter & FILTER_UPNP_SEARCHCLASS) ) {
+		if( passed_args->requested == 1 && strcmp(objectId, "0") == 0 && (passed_args->filter & FILTER_UPNP_SEARCHCLASS) ) {
 			ret = strcatf(str, "&gt;&lt;upnp:searchClass includeDerived=\"1\"&gt;object.item.videoItem&lt;/upnp:searchClass");
 		}
 		ret = strcatf(str, "&gt;"
@@ -378,7 +378,7 @@ callback(void *args, int argc, char **argv, char **azColName)
 
 		if( passed_args->filter & FILTER_AV_MEDIA_CLASS ) {
 			char class;
-			if( strncmp(id, VIDEO_ID, sizeof(VIDEO_ID)) == 0 )
+			if( strncmp(objectId, VIDEO_ID, sizeof(VIDEO_ID)) == 0 )
 				class = 'V';
 			else
 				class = 0;
@@ -480,9 +480,8 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 	{
 		const char *id = ObjectID;
 		args.requested = 1;
-		sql = sqlite3_mprintf("SELECT o.OBJECT_ID, o.PARENT_ID, " COLUMNS
-				      "from OBJECTS o left join DETAILS d on (d.ID = o.DETAIL_ID)"
-				      " where OBJECT_ID = '%q';", id);
+		sql = sqlite3_mprintf("SELECT OBJECT_ID, PARENT_ID, " COLUMNS
+				"from OBJECTS where OBJECT_ID = '%q';", id);
 		DPRINTF(E_DEBUG, L_HTTP, "Browse SQL: %s\n", sql);
 		ret = sqlite3_exec(db, sql, callback, (void *) &args, &zErrMsg);
 		totalMatches = args.returned;
@@ -503,9 +502,8 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 			goto browse_error;
 		}
 
-		sql = sqlite3_mprintf("SELECT o.OBJECT_ID, o.PARENT_ID, " COLUMNS
-				      "from OBJECTS o left join DETAILS d on (d.ID = o.DETAIL_ID)"
-				      " where %s %s limit %d, %d;", where, THISORNUL(orderBy), StartingIndex, RequestedCount);
+		sql = sqlite3_mprintf("SELECT OBJECT_ID, PARENT_ID, " COLUMNS
+				      "from OBJECTS where %s %s limit %d, %d;", where, THISORNUL(orderBy), StartingIndex, RequestedCount);
 		DPRINTF(E_DEBUG, L_HTTP, "Browse SQL: %s\n", sql);
 		ret = sqlite3_exec(db, sql, callback, (void *) &args, &zErrMsg);
 	}

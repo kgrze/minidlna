@@ -25,8 +25,8 @@
 #define __METADATA_H__
 
 typedef struct metadata_s {
-	char title[60];
-	char mime[60];
+	char title[150];
+	char mime[40];
 	__off64_t file_size;
 } metadata_t;
 

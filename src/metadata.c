@@ -285,18 +285,6 @@ video_no_dlna:
 
 	lav_close(ctx);
 
-	// ret = sql_exec(db, "INSERT into DETAILS"
-	// 				" (PATH, SIZE, TITLE, MIME) VALUES"
-	// 				" (%Q, %lld, '%q', '%q');", path, (long long)meta->file_size, meta->title, meta->mime);
-	// if( ret != SQLITE_OK )
-	// {
-	// 	DPRINTF(E_ERROR, L_METADATA, "Error inserting details for '%s'!\n", path);
-	// 	ret = 0;
-	// }
-	// else
-	// {
-	// 	ret = sqlite3_last_insert_rowid(db);
-	// }
 	free(path_cpy);
 
 	return;

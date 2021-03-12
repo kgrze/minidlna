@@ -87,15 +87,12 @@ insert_directory(const char *name, const char *path, const char *base, const cha
 {
 	int64_t detailID = 0;
 	char class[] = "container.storageFolder";
-
-	sql_exec(db, "INSERT into DETAILS (TITLE, PATH) VALUES ('%q', %Q);", name, path);
-	detailID = sqlite3_last_insert_rowid(db);
 	
 	sql_exec(db, "INSERT into OBJECTS"
-	             " (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME) "
+	             " (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME, TITLE, PATH) "
 	             "VALUES"
-	             " ('%s%s$%X', '%s%s', %lld, '%s', '%q')",
-	             base, parentID, objectID, base, parentID, detailID, class, name);
+	             " ('%s%s$%X', '%s%s', %lld, '%s', '%q','%q', %Q)",
+	             base, parentID, objectID, base, parentID, detailID, class, name, name, path);
 
 	return detailID;
 }
@@ -117,21 +114,15 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 		class = "item.videoItem";
 		GetVideoMetadata(&meta, path, name);
 
-		sql_exec(db, "INSERT into DETAILS"
-				" (PATH, SIZE, TITLE, MIME) VALUES"
-				" (%Q, %lld, '%q', '%q');", path, (long long)meta.file_size, meta.title, meta.mime);
-
-		detailID = sqlite3_last_insert_rowid(db);
-
 		sprintf(objectID, "%s%s$%X", BROWSEDIR_ID, parentID, object);
 		objname = strdup(name);
 		strip_ext(objname);
 
 		sql_exec(db, "INSERT into OBJECTS"
-	             " (OBJECT_ID, PARENT_ID, CLASS, DETAIL_ID, NAME) "
+	             " (OBJECT_ID, PARENT_ID, CLASS, DETAIL_ID, NAME, PATH, SIZE, TITLE, MIME) "
 	             "VALUES"
-	             " ('%s', '%s%s', '%s', %lld, '%q')",
-	             objectID, BROWSEDIR_ID, parentID, class, detailID, objname);
+	             " ('%s', '%s%s', '%s', %lld, '%q', %Q, %lld, '%q', '%q')",
+	             objectID, BROWSEDIR_ID, parentID, class, detailID, objname, path, (long long)meta.file_size, meta.title, meta.mime);
 	}
 
 	free(objname);
@@ -150,20 +141,15 @@ CreateDatabase(void)
 	ret = sql_exec(db, create_objectTable_sqlite);
 	if( ret != SQLITE_OK )
 		goto sql_failed;
-	ret = sql_exec(db, create_detailTable_sqlite);
-	if( ret != SQLITE_OK )
-		goto sql_failed;
+
 	for( i=0; containers[i]; i=i+3 )
 	{
-		int64_t id;
+		int64_t id = 0;
 
-		ret = sql_exec(db, "INSERT into DETAILS (TITLE, PATH) VALUES ('%q', %Q);", containers[i+2], NULL);
-		id = sqlite3_last_insert_rowid(db);
-
-		ret = sql_exec(db, "INSERT into OBJECTS (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME)"
+		ret = sql_exec(db, "INSERT into OBJECTS (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME, TITLE, PATH)"
 		                   " values "
-		                   "('%s', '%s', %lld, 'container.storageFolder', '%q')",
-		                   containers[i], containers[i+1], id, containers[i+2]);
+		                   "('%s', '%s', %lld, 'container.storageFolder', '%q', '%q', %Q)",
+		                   containers[i], containers[i+1], id, containers[i+2], containers[i+2], NULL);
 		if( ret != SQLITE_OK )
 			goto sql_failed;
 	}
