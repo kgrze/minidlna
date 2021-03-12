@@ -103,46 +103,23 @@ dlna_timestamp_is_present(const char *filename, int *raw_packet_size)
 }
 
 void
-free_metadata(metadata_t *m, uint32_t flags)
-{
-	if( flags & FLAG_TITLE )
-		free(m->title);
-	if( flags & FLAG_MIME )
-		free(m->mime);
-}
-
-int64_t
-GetFolderMetadata(const char *name, const char *path)
-{
-	int ret;
-
-	ret = sql_exec(db, "INSERT into DETAILS (TITLE, PATH) VALUES ('%q', %Q);", name, path);
-	if( ret != SQLITE_OK )
-		ret = 0;
-	else
-		ret = sqlite3_last_insert_rowid(db);
-
-	return ret;
-}
-
-int64_t
-GetVideoMetadata(const char *path, const char *name)
+GetVideoMetadata(metadata_t * const meta, const char *path, const char *name)
 {
 	struct stat file;
 	int ret, i;
 	AVFormatContext *ctx = NULL;
 	AVStream *vstream = NULL;
 	int video_stream = -1;
-	metadata_t m;
-	uint32_t free_flags = 0xFFFFFFFF;
 	char *path_cpy, *basepath;
 
-	memset(&m, '\0', sizeof(m));
+	memset(meta, '\0', sizeof(metadata_t));
 
 	DPRINTF(E_DEBUG, L_METADATA, "Parsing video %s...\n", name);
 	if ( stat(path, &file) != 0 )
-		return 0;
+		return;
 	DPRINTF(E_DEBUG, L_METADATA, " * size: %jd\n", file.st_size);
+
+	meta->file_size = file.st_size;
 
 	ret = lav_open(&ctx, path);
 	if( ret != 0 )
@@ -150,7 +127,7 @@ GetVideoMetadata(const char *path, const char *name)
 		char err[128];
 		av_strerror(ret, err, sizeof(err));
 		DPRINTF(E_WARN, L_METADATA, "Opening %s failed! [%s]\n", path, err);
-		return 0;
+		return;
 	}
 	for( i=0; i < ctx->nb_streams; i++)
 	{
@@ -174,16 +151,16 @@ GetVideoMetadata(const char *path, const char *name)
 		 * Skip DLNA parsing for everything else. */
 		if( strcmp(ctx->iformat->name, "avi") == 0 )
 		{
-			xasprintf(&m.mime, "video/x-msvideo");
+			sprintf(meta->mime, "video/x-msvideo");
 		}
 		else if( strcmp(ctx->iformat->name, "mov,mp4,m4a,3gp,3g2,mj2") == 0 &&
 		         ends_with(path, ".mov") )
-			xasprintf(&m.mime, "video/quicktime");
+			sprintf(meta->mime, "video/quicktime");
 		else if( strncmp(ctx->iformat->name, "matroska", 8) == 0 )
-			xasprintf(&m.mime, "video/x-matroska");
+			sprintf(meta->mime, "video/x-matroska");
 		else if( strcmp(ctx->iformat->name, "flv") == 0 )
-			xasprintf(&m.mime, "video/x-flv");
-		if( m.mime )
+			sprintf(meta->mime, "video/x-flv");
+		if( meta->mime )
 			goto video_no_dlna;
 
 		switch( lav_codec_id(vstream) )
@@ -191,7 +168,7 @@ GetVideoMetadata(const char *path, const char *name)
 			case AV_CODEC_ID_MPEG1VIDEO:
 				if( strcmp(ctx->iformat->name, "mpeg") == 0 )
 				{
-					xasprintf(&m.mime, "video/mpeg");
+					sprintf(meta->mime, "video/mpeg");
 				}
 				break;
 			case AV_CODEC_ID_MPEG2VIDEO:
@@ -209,18 +186,18 @@ GetVideoMetadata(const char *path, const char *name)
 					switch( ts_timestamp )
 					{
 						case NONE:
-							xasprintf(&m.mime, "video/mpeg");
+							sprintf(meta->mime, "video/mpeg");
 							break;
 						case VALID:
 						case EMPTY:
-							xasprintf(&m.mime, "video/vnd.dlna.mpeg-tts");
+							sprintf(meta->mime, "video/vnd.dlna.mpeg-tts");
 						default:
 							break;
 					}
 				}
 				else if( strcmp(ctx->iformat->name, "mpeg") == 0 )
 				{
-					xasprintf(&m.mime, "video/mpeg");
+					sprintf(meta->mime, "video/mpeg");
 				}
 				break;
 			case AV_CODEC_ID_H264:
@@ -248,7 +225,7 @@ GetVideoMetadata(const char *path, const char *name)
 							break;
 						case VALID:
 						case EMPTY:
-							xasprintf(&m.mime, "video/vnd.dlna.mpeg-tts");
+							sprintf(meta->mime, "video/vnd.dlna.mpeg-tts");
 						default:
 							break;
 					}
@@ -260,7 +237,7 @@ GetVideoMetadata(const char *path, const char *name)
 				{
 					if( ends_with(path, ".3gp") )
 					{
-						xasprintf(&m.mime, "video/3gpp");
+						sprintf(meta->mime, "video/3gpp");
 					}
 				}
 				break;
@@ -271,10 +248,10 @@ GetVideoMetadata(const char *path, const char *name)
 					break;
 				}
 				DPRINTF(E_DEBUG, L_METADATA, "Stream %d of %s is VC1\n", video_stream, basepath);
-				xasprintf(&m.mime, "video/x-ms-wmv");
+				sprintf(meta->mime, "video/x-ms-wmv");
 				break;
 			case AV_CODEC_ID_MSMPEG4V3:
-				xasprintf(&m.mime, "video/x-msvideo");
+				sprintf(meta->mime, "video/x-msvideo");
 			default:
 				break;
 		}
@@ -282,49 +259,45 @@ GetVideoMetadata(const char *path, const char *name)
 
 video_no_dlna:
 
-	if( !m.mime )
+	if( meta->mime[0] == '\0' )
 	{
 		if( strcmp(ctx->iformat->name, "avi") == 0 )
-			xasprintf(&m.mime, "video/x-msvideo");
+			sprintf(meta->mime, "video/x-msvideo");
 		else if( strncmp(ctx->iformat->name, "mpeg", 4) == 0 )
-			xasprintf(&m.mime, "video/mpeg");
+			sprintf(meta->mime, "video/mpeg");
 		else if( strcmp(ctx->iformat->name, "asf") == 0 )
-			xasprintf(&m.mime, "video/x-ms-wmv");
+			sprintf(meta->mime, "video/x-ms-wmv");
 		else if( strcmp(ctx->iformat->name, "mov,mp4,m4a,3gp,3g2,mj2") == 0 )
 			if( ends_with(path, ".mov") )
-				xasprintf(&m.mime, "video/quicktime");
+				sprintf(meta->mime, "video/quicktime");
 			else
-				xasprintf(&m.mime, "video/mp4");
+				sprintf(meta->mime, "video/mp4");
 		else if( strncmp(ctx->iformat->name, "matroska", 8) == 0 )
-			xasprintf(&m.mime, "video/x-matroska");
+			sprintf(meta->mime, "video/x-matroska");
 		else if( strcmp(ctx->iformat->name, "flv") == 0 )
-			xasprintf(&m.mime, "video/x-flv");
+			sprintf(meta->mime, "video/x-flv");
 		else
 			DPRINTF(E_WARN, L_METADATA, "%s: Unhandled format: %s\n", path, ctx->iformat->name);
 	}
 
-	if( !m.title )
-	{
-		m.title = strdup(name);
-		strip_ext(m.title);
-	}
+	strcpy(meta->title, name);
+	strip_ext(meta->title);
 
 	lav_close(ctx);
 
-	ret = sql_exec(db, "INSERT into DETAILS"
-					" (PATH, SIZE, TITLE, MIME) VALUES"
-					" (%Q, %lld, '%q', '%q');", path, (long long)file.st_size, m.title, m.mime);
-	if( ret != SQLITE_OK )
-	{
-		DPRINTF(E_ERROR, L_METADATA, "Error inserting details for '%s'!\n", path);
-		ret = 0;
-	}
-	else
-	{
-		ret = sqlite3_last_insert_rowid(db);
-	}
-	free_metadata(&m, free_flags);
+	// ret = sql_exec(db, "INSERT into DETAILS"
+	// 				" (PATH, SIZE, TITLE, MIME) VALUES"
+	// 				" (%Q, %lld, '%q', '%q');", path, (long long)meta->file_size, meta->title, meta->mime);
+	// if( ret != SQLITE_OK )
+	// {
+	// 	DPRINTF(E_ERROR, L_METADATA, "Error inserting details for '%s'!\n", path);
+	// 	ret = 0;
+	// }
+	// else
+	// {
+	// 	ret = sqlite3_last_insert_rowid(db);
+	// }
 	free(path_cpy);
 
-	return ret;
+	return;
 }

@@ -25,8 +25,9 @@
 #define __METADATA_H__
 
 typedef struct metadata_s {
-	char *       title;
-	char *       mime;
+	char title[60];
+	char mime[60];
+	__off64_t file_size;
 } metadata_t;
 
 typedef enum {
@@ -38,10 +39,7 @@ typedef enum {
 int
 ends_with(const char *haystack, const char *needle);
 
-int64_t
-GetFolderMetadata(const char *name, const char *path);
-
-int64_t
-GetVideoMetadata(const char *path, const char *name);
+void
+GetVideoMetadata(metadata_t * const meta, const char *path, const char *name);
 
 #endif

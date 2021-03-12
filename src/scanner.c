@@ -88,7 +88,9 @@ insert_directory(const char *name, const char *path, const char *base, const cha
 	int64_t detailID = 0;
 	char class[] = "container.storageFolder";
 
-	detailID = GetFolderMetadata(name, path);
+	sql_exec(db, "INSERT into DETAILS (TITLE, PATH) VALUES ('%q', %Q);", name, path);
+	detailID = sqlite3_last_insert_rowid(db);
+	
 	sql_exec(db, "INSERT into OBJECTS"
 	             " (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME) "
 	             "VALUES"
@@ -110,9 +112,16 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 
 	if( mtype == TYPE_VIDEO && (types & TYPE_VIDEO) )
 	{
+		metadata_t meta;
 		strcpy(base, VIDEO_DIR_ID);
 		class = "item.videoItem";
-		detailID = GetVideoMetadata(path, name);
+		GetVideoMetadata(&meta, path, name);
+
+		sql_exec(db, "INSERT into DETAILS"
+				" (PATH, SIZE, TITLE, MIME) VALUES"
+				" (%Q, %lld, '%q', '%q');", path, (long long)meta.file_size, meta.title, meta.mime);
+
+		detailID = sqlite3_last_insert_rowid(db);
 
 		sprintf(objectID, "%s%s$%X", BROWSEDIR_ID, parentID, object);
 		objname = strdup(name);
@@ -146,10 +155,15 @@ CreateDatabase(void)
 		goto sql_failed;
 	for( i=0; containers[i]; i=i+3 )
 	{
+		int64_t id;
+
+		ret = sql_exec(db, "INSERT into DETAILS (TITLE, PATH) VALUES ('%q', %Q);", containers[i+2], NULL);
+		id = sqlite3_last_insert_rowid(db);
+
 		ret = sql_exec(db, "INSERT into OBJECTS (OBJECT_ID, PARENT_ID, DETAIL_ID, CLASS, NAME)"
 		                   " values "
 		                   "('%s', '%s', %lld, 'container.storageFolder', '%q')",
-		                   containers[i], containers[i+1], GetFolderMetadata(containers[i+2], NULL), containers[i+2]);
+		                   containers[i], containers[i+1], id, containers[i+2]);
 		if( ret != SQLITE_OK )
 			goto sql_failed;
 	}
