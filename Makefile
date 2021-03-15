@@ -18,11 +18,11 @@ rm       = rm -rf
 
 $(TARGET): $(OBJECTS)
 	@echo "Linking $@"
-	@$(LD) $(OBJECTS) $(LFLAGS) -o $@
+	@$(LD) $(OBJECTS) $(LFLAGS_COV) -o $@
 
 $(OBJECTS): $(SRCDIR)/%.o : $(SRCDIR)/%.c
 	@echo "Compiling $<"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS_COV) -c $< -o $@
 
 clean:
 	$(rm) $(OBJECTS)
@@ -30,7 +30,11 @@ clean:
 	$(rm) $(SRCDIR)/*.gcno
 	$(rm) $(TARGET)
 	$(rm) cache
+	$(rm) cov
 
 help:
 	@echo "Build following target:"
 	@echo "$(TARGET)"
+
+#lcov --c --directory ./src --output-file coverage.inf
+#genhtml coverage.info --output-directory ./cov
