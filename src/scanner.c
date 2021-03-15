@@ -88,10 +88,10 @@ insert_directory(const char *name, const char *path, const char *base, const cha
 	char class[] = "container.storageFolder";
 	
 	sql_exec(db, "INSERT into OBJECTS"
-	             " (OBJECT_ID, PARENT_ID, CLASS, NAME, TITLE, PATH) "
+	             " (OBJECT_ID, PARENT_ID, CLASS, TITLE, PATH) "
 	             "VALUES"
-	             " ('%s%s$%X', '%s%s', '%s', '%q','%q', %Q)",
-	             base, parentID, objectID, base, parentID, class, name, name, path);
+	             " ('%s%s$%X', '%s%s', '%s', '%q', %Q)",
+	             base, parentID, objectID, base, parentID, class, name, path);
 
 	return;
 }
@@ -102,7 +102,6 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 	const char *class;
 	char objectID[64];
 	char base[8];
-	char *objname;
 	media_types mtype = get_media_type(name);
 
 	if( mtype == TYPE_VIDEO && (types & TYPE_VIDEO) )
@@ -113,17 +112,13 @@ insert_file(const char *name, const char *path, const char *parentID, int object
 		GetVideoMetadata(&meta, path, name);
 
 		sprintf(objectID, "%s%s$%X", BROWSEDIR_ID, parentID, object);
-		objname = strdup(name);
-		strip_ext(objname);
 
 		sql_exec(db, "INSERT into OBJECTS"
-	             " (OBJECT_ID, PARENT_ID, CLASS, NAME, PATH, SIZE, TITLE, MIME) "
+	             " (OBJECT_ID, PARENT_ID, CLASS, PATH, SIZE, TITLE, MIME) "
 	             "VALUES"
-	             " ('%s', '%s%s', '%s', '%q', %Q, %lld, '%q', '%q')",
-	             objectID, BROWSEDIR_ID, parentID, class, objname, path, (long long)meta.file_size, meta.title, meta.mime);
+	             " ('%s', '%s%s', '%s', %Q, %lld, '%q', '%q')",
+	             objectID, BROWSEDIR_ID, parentID, class, path, (long long)meta.file_size, meta.title, meta.mime);
 	}
-
-	free(objname);
 
 	return 0;
 }
@@ -142,10 +137,10 @@ CreateDatabase(void)
 
 	for( i=0; containers[i]; i=i+3 )
 	{
-		ret = sql_exec(db, "INSERT into OBJECTS (OBJECT_ID, PARENT_ID, CLASS, NAME, TITLE, PATH)"
+		ret = sql_exec(db, "INSERT into OBJECTS (OBJECT_ID, PARENT_ID, CLASS, TITLE, PATH)"
 		                   " values "
-		                   "('%s', '%s', 'container.storageFolder', '%q', '%q', %Q)",
-		                   containers[i], containers[i+1], containers[i+2], containers[i+2], NULL);
+		                   "('%s', '%s', 'container.storageFolder', '%q', %Q)",
+		                   containers[i], containers[i+1], containers[i+2], NULL);
 		if( ret != SQLITE_OK )
 			goto sql_failed;
 	}
