@@ -267,16 +267,6 @@ static const struct action ContentDirectoryActions[] =
 	{"Browse", BrowseArgs}, /* R */
 	{"Search", SearchArgs}, /* O */
 	{"UpdateObject", UpdateObjectArgs}, /* O */
-#if 0 // Not implementing optional features yet...
-	{"CreateObject", CreateObjectArgs}, /* O */
-	{"DestroyObject", DestroyObjectArgs}, /* O */
-	{"ImportResource", ImportResourceArgs}, /* O */
-	{"ExportResource", ExportResourceArgs}, /* O */
-	{"StopTransferResource", StopTransferResourceArgs}, /* O */
-	{"GetTransferProgress", GetTransferProgressArgs}, /* O */
-	{"DeleteResource", DeleteResourceArgs}, /* O */
-	{"CreateReference", CreateReferenceArgs}, /* O */
-#endif
 	{0, 0}
 };
 
@@ -471,29 +461,6 @@ genRootDesc(int * len)
 	return str;
 }
 
-char *
-genRootDescSamsung(int * len)
-{
-	char * str;
-	int tmplen;
-	struct XMLElt samsungRootDesc[sizeof(rootDesc)/sizeof(struct XMLElt)];
-	tmplen = 2560;
-	str = (char *)malloc(tmplen);
-	if(str == NULL)
-		return NULL;
-	* len = strlen(xmlver);
-	memcpy(str, xmlver, *len + 1);
-	/* Replace the optional modelURL and manufacturerURL fields with Samsung foo */
-	memcpy(&samsungRootDesc, &rootDesc, sizeof(rootDesc));
-	samsungRootDesc[8].eltname = "/sec:ProductCap";
-	samsungRootDesc[8].data = "smi,DCM10,getMediaInfo.sec,getCaptionInfo.sec";
-	samsungRootDesc[12].eltname = "/sec:X_ProductCap";
-	samsungRootDesc[12].data = "smi,DCM10,getMediaInfo.sec,getCaptionInfo.sec";
-	str = genXML(str, len, &tmplen, samsungRootDesc);
-	str[*len] = '\0';
-	return str;
-}
-
 /* genServiceDesc() :
  * Generate service description with allowed methods and 
  * related variables. */
@@ -612,69 +579,5 @@ char *
 genConnectionManager(int * len)
 {
 	return genServiceDesc(len, &scpdConnectionManager);
-}
-
-static char *
-genEventVars(int * len, const struct serviceDesc * s, const char * servns)
-{
-	const struct stateVar * v;
-	char * str;
-	int tmplen;
-	char buf[512];
-	tmplen = 512;
-	str = (char *)malloc(tmplen);
-	if(str == NULL)
-		return NULL;
-	*len = 0;
-	v = s->serviceStateTable;
-	snprintf(buf, sizeof(buf), "<e:propertyset xmlns:e=\"urn:schemas-upnp-org:event-1-0\" xmlns:s=\"%s\">", servns);
-	str = strcat_str(str, len, &tmplen, buf);
-	while(v->name) {
-		if(v->itype & EVENTED) {
-			snprintf(buf, sizeof(buf), "<e:property><%s>", v->name);
-			str = strcat_str(str, len, &tmplen, buf);
-			//printf("<e:property><s:%s>", v->name);
-			switch(v->ieventvalue) {
-			case 0:
-				break;
-			case 255:	/* Magical values should go around here */
-				if( strcmp(v->name, "SystemUpdateID") == 0 )
-				{
-					snprintf(buf, sizeof(buf), "%d", updateID);
-					str = strcat_str(str, len, &tmplen, buf);
-				}
-				break;
-			default:
-				str = strcat_str(str, len, &tmplen, upnpallowedvalues[v->ieventvalue]);
-				//printf("%s", upnpallowedvalues[v->ieventvalue]);
-			}
-			snprintf(buf, sizeof(buf), "</%s></e:property>", v->name);
-			str = strcat_str(str, len, &tmplen, buf);
-			//printf("</s:%s></e:property>\n", v->name);
-		}
-		v++;
-	}
-	str = strcat_str(str, len, &tmplen, "</e:propertyset>");
-	//printf("</e:propertyset>\n");
-	//printf("\n");
-	//printf("%d\n", tmplen);
-	str[*len] = '\0';
-	return str;
-}
-
-char *
-getVarsContentDirectory(int * l)
-{
-	return genEventVars(l,
-                        &scpdContentDirectory,
-	                    "urn:schemas-upnp-org:service:ContentDirectory:1");
-}
-
-char *
-getVarsConnectionManager(int * l)
-{
-	return genEventVars(l,
-                        &scpdConnectionManager,
-	                    "urn:schemas-upnp-org:service:ConnectionManager:1");
 }
 

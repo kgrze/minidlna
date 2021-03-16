@@ -221,7 +221,6 @@ extern char db_path[];
 extern char log_path[];
 extern struct media_dir_s *media_dirs;
 extern volatile short int quitting;
-extern volatile uint32_t updateID;
 extern const char *force_sort_criteria;
 
 #endif

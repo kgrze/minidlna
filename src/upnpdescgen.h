@@ -75,21 +75,12 @@ struct stateVar {
 char *
 genRootDesc(int * len);
 
-char *
-genRootDescSamsung(int * len);
-
 /* for the two following functions */
 char *
 genContentDirectory(int * len);
 
 char *
 genConnectionManager(int * len);
-
-char *
-getVarsContentDirectory(int * len);
-
-char *
-getVarsConnectionManager(int * len);
 
 #endif
 
