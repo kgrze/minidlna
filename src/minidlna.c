@@ -529,6 +529,8 @@ main(int argc, char **argv)
 			if (!scanner_pid || kill(scanner_pid, 0) != 0)
 			{
 				CLEARFLAG(SCANNING_MASK);
+				if (_get_dbtime() != lastdbtime)
+					updateID++;
 			}
 		}
 
@@ -597,6 +599,7 @@ main(int argc, char **argv)
 			}
 			if (sqlite3_total_changes(db) != last_changecnt)
 			{
+				updateID++;
 				last_changecnt = sqlite3_total_changes(db);
 				lastupdatetime = timeofday.tv_sec;
 			}

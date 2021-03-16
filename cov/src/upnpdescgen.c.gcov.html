@@ -1,0 +1,848 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - src/upnpdescgen.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - upnpdescgen.c<span style="font-size: 80%;"> (source / <a href="upnpdescgen.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">156</td>
+            <td class="headerCovTableEntry">194</td>
+            <td class="headerCovTableEntryMed">80.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2020-11-02 23:20:37</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryMed">76.9 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /* MiniUPnP project</a>
+<span class="lineNum">       2 </span>            :  * http://miniupnp.free.fr/ or http://miniupnp.tuxfamily.org/
+<span class="lineNum">       3 </span>            :  *
+<span class="lineNum">       4 </span>            :  * Copyright (c) 2006-2008, Thomas Bernard
+<span class="lineNum">       5 </span>            :  * All rights reserved.
+<span class="lineNum">       6 </span>            :  *
+<span class="lineNum">       7 </span>            :  * Redistribution and use in source and binary forms, with or without
+<span class="lineNum">       8 </span>            :  * modification, are permitted provided that the following conditions are met:
+<span class="lineNum">       9 </span>            :  *     * Redistributions of source code must retain the above copyright
+<span class="lineNum">      10 </span>            :  *       notice, this list of conditions and the following disclaimer.
+<span class="lineNum">      11 </span>            :  *     * Redistributions in binary form must reproduce the above copyright
+<span class="lineNum">      12 </span>            :  *       notice, this list of conditions and the following disclaimer in the
+<span class="lineNum">      13 </span>            :  *       documentation and/or other materials provided with the distribution.
+<span class="lineNum">      14 </span>            :  *     * The name of the author may not be used to endorse or promote products
+<span class="lineNum">      15 </span>            :  *       derived from this software without specific prior written permission.
+<span class="lineNum">      16 </span>            :  *
+<span class="lineNum">      17 </span>            :  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+<span class="lineNum">      18 </span>            :  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+<span class="lineNum">      19 </span>            :  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+<span class="lineNum">      20 </span>            :  * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+<span class="lineNum">      21 </span>            :  * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<span class="lineNum">      22 </span>            :  * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+<span class="lineNum">      23 </span>            :  * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+<span class="lineNum">      24 </span>            :  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+<span class="lineNum">      25 </span>            :  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+<span class="lineNum">      26 </span>            :  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+<span class="lineNum">      27 </span>            :  * POSSIBILITY OF SUCH DAMAGE.
+<span class="lineNum">      28 </span>            :  */
+<span class="lineNum">      29 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">      30 </span>            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      31 </span>            : #include &lt;string.h&gt;
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span>            : #include &quot;config.h&quot;
+<span class="lineNum">      34 </span>            : #include &quot;getifaddr.h&quot;
+<span class="lineNum">      35 </span>            : #include &quot;upnpdescgen.h&quot;
+<span class="lineNum">      36 </span>            : #include &quot;minidlnapath.h&quot;
+<span class="lineNum">      37 </span>            : #include &quot;upnpglobalvars.h&quot;
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            : #undef DESC_DEBUG
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span>            : static const char * const upnptypes[] =
+<span class="lineNum">      42 </span>            : {
+<span class="lineNum">      43 </span>            :         &quot;string&quot;,
+<span class="lineNum">      44 </span>            :         &quot;boolean&quot;,
+<span class="lineNum">      45 </span>            :         &quot;ui2&quot;,
+<span class="lineNum">      46 </span>            :         &quot;ui4&quot;,
+<span class="lineNum">      47 </span>            :         &quot;i4&quot;,
+<span class="lineNum">      48 </span>            :         &quot;uri&quot;,
+<span class="lineNum">      49 </span>            :         &quot;int&quot;,
+<span class="lineNum">      50 </span>            :         &quot;bin.base64&quot;
+<span class="lineNum">      51 </span>            : };
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span>            : static const char * const upnpdefaultvalues[] =
+<span class="lineNum">      54 </span>            : {
+<span class="lineNum">      55 </span>            :         0,
+<span class="lineNum">      56 </span>            :         &quot;Unconfigured&quot;
+<span class="lineNum">      57 </span>            : };
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            : static const char * const upnpallowedvalues[] =
+<span class="lineNum">      60 </span>            : {
+<span class="lineNum">      61 </span>            :         0,                      /* 0 */
+<span class="lineNum">      62 </span>            :         &quot;DSL&quot;,                        /* 1 */
+<span class="lineNum">      63 </span>            :         &quot;POTS&quot;,
+<span class="lineNum">      64 </span>            :         &quot;Cable&quot;,
+<span class="lineNum">      65 </span>            :         &quot;Ethernet&quot;,
+<span class="lineNum">      66 </span>            :         0,
+<span class="lineNum">      67 </span>            :         &quot;Up&quot;,                 /* 6 */
+<span class="lineNum">      68 </span>            :         &quot;Down&quot;,
+<span class="lineNum">      69 </span>            :         &quot;Initializing&quot;,
+<span class="lineNum">      70 </span>            :         &quot;Unavailable&quot;,
+<span class="lineNum">      71 </span>            :         0,
+<span class="lineNum">      72 </span>            :         &quot;TCP&quot;,                        /* 11 */
+<span class="lineNum">      73 </span>            :         &quot;UDP&quot;,
+<span class="lineNum">      74 </span>            :         0,
+<span class="lineNum">      75 </span>            :         &quot;Unconfigured&quot;,               /* 14 */
+<span class="lineNum">      76 </span>            :         &quot;IP_Routed&quot;,
+<span class="lineNum">      77 </span>            :         &quot;IP_Bridged&quot;,
+<span class="lineNum">      78 </span>            :         0,
+<span class="lineNum">      79 </span>            :         &quot;Unconfigured&quot;,               /* 18 */
+<span class="lineNum">      80 </span>            :         &quot;Connecting&quot;,
+<span class="lineNum">      81 </span>            :         &quot;Connected&quot;,
+<span class="lineNum">      82 </span>            :         &quot;PendingDisconnect&quot;,
+<span class="lineNum">      83 </span>            :         &quot;Disconnecting&quot;,
+<span class="lineNum">      84 </span>            :         &quot;Disconnected&quot;,
+<span class="lineNum">      85 </span>            :         0,
+<span class="lineNum">      86 </span>            :         &quot;ERROR_NONE&quot;,         /* 25 */
+<span class="lineNum">      87 </span>            :         0,
+<span class="lineNum">      88 </span>            :         &quot;OK&quot;,                 /* 27 */
+<span class="lineNum">      89 </span>            :         &quot;ContentFormatMismatch&quot;,
+<span class="lineNum">      90 </span>            :         &quot;InsufficientBandwidth&quot;,
+<span class="lineNum">      91 </span>            :         &quot;UnreliableChannel&quot;,
+<span class="lineNum">      92 </span>            :         &quot;Unknown&quot;,
+<span class="lineNum">      93 </span>            :         0,
+<span class="lineNum">      94 </span>            :         &quot;Input&quot;,              /* 33 */
+<span class="lineNum">      95 </span>            :         &quot;Output&quot;,
+<span class="lineNum">      96 </span>            :         0,
+<span class="lineNum">      97 </span>            :         &quot;BrowseMetadata&quot;,     /* 36 */
+<span class="lineNum">      98 </span>            :         &quot;BrowseDirectChildren&quot;,
+<span class="lineNum">      99 </span>            :         0,
+<span class="lineNum">     100 </span>            :         &quot;COMPLETED&quot;,          /* 39 */
+<span class="lineNum">     101 </span>            :         &quot;ERROR&quot;,
+<span class="lineNum">     102 </span>            :         &quot;IN_PROGRESS&quot;,
+<span class="lineNum">     103 </span>            :         &quot;STOPPED&quot;,
+<span class="lineNum">     104 </span>            :         0,
+<span class="lineNum">     105 </span>            :         RESOURCE_PROTOCOL_INFO_VALUES,          /* 44 */
+<span class="lineNum">     106 </span>            :         0,
+<span class="lineNum">     107 </span>            :         &quot;0&quot;,                  /* 46 */
+<span class="lineNum">     108 </span>            :         0,
+<span class="lineNum">     109 </span>            :         &quot;&quot;,                   /* 48 */
+<span class="lineNum">     110 </span>            :         0
+<span class="lineNum">     111 </span>            : };
+<span class="lineNum">     112 </span>            : 
+<span class="lineNum">     113 </span>            : static const char xmlver[] = 
+<span class="lineNum">     114 </span>            :         &quot;&lt;?xml version=\&quot;1.0\&quot;?&gt;\r\n&quot;;
+<span class="lineNum">     115 </span>            : static const char root_service[] =
+<span class="lineNum">     116 </span>            :         &quot;scpd xmlns=\&quot;urn:schemas-upnp-org:service-1-0\&quot;&quot;;
+<span class="lineNum">     117 </span>            : static const char root_device[] = 
+<span class="lineNum">     118 </span>            :         &quot;root xmlns=\&quot;urn:schemas-upnp-org:device-1-0\&quot;&quot;;
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span>            : /* root Description of the UPnP Device */
+<span class="lineNum">     121 </span>            : static const struct XMLElt rootDesc[] =
+<span class="lineNum">     122 </span>            : {
+<span class="lineNum">     123 </span>            :         {root_device, INITHELPER(1,2)},
+<span class="lineNum">     124 </span>            :         {&quot;specVersion&quot;, INITHELPER(3,2)},
+<span class="lineNum">     125 </span>            :         {&quot;device&quot;, INITHELPER(5,(14))},
+<span class="lineNum">     126 </span>            :         {&quot;/major&quot;, &quot;1&quot;},
+<span class="lineNum">     127 </span>            :         {&quot;/minor&quot;, &quot;0&quot;},
+<span class="lineNum">     128 </span>            :         {&quot;/deviceType&quot;, &quot;urn:schemas-upnp-org:device:MediaServer:1&quot;},
+<span class="lineNum">     129 </span>            :         {&quot;/friendlyName&quot;, friendly_name},     /* required */
+<span class="lineNum">     130 </span>            :         {&quot;/manufacturer&quot;, ROOTDEV_MANUFACTURER},              /* required */
+<span class="lineNum">     131 </span>            :         {&quot;/manufacturerURL&quot;, ROOTDEV_MANUFACTURERURL},        /* optional */
+<span class="lineNum">     132 </span>            :         {&quot;/modelDescription&quot;, ROOTDEV_MODELDESCRIPTION}, /* recommended */
+<span class="lineNum">     133 </span>            :         {&quot;/modelName&quot;, modelname},    /* required */
+<span class="lineNum">     134 </span>            :         {&quot;/modelNumber&quot;, modelnumber},
+<span class="lineNum">     135 </span>            :         {&quot;/modelURL&quot;, ROOTDEV_MODELURL},
+<span class="lineNum">     136 </span>            :         {&quot;/serialNumber&quot;, serialnumber},
+<span class="lineNum">     137 </span>            :         {&quot;/UDN&quot;, uuidvalue},  /* required */
+<span class="lineNum">     138 </span>            :         {&quot;/dlna:X_DLNADOC xmlns:dlna=\&quot;urn:schemas-dlna-org:device-1-0\&quot;&quot;, &quot;DMS-1.50&quot;},
+<span class="lineNum">     139 </span>            :         {&quot;/presentationURL&quot;, presentationurl},        /* recommended */
+<span class="lineNum">     140 </span>            :         {&quot;iconList&quot;, INITHELPER((19),4)},
+<span class="lineNum">     141 </span>            :         {&quot;serviceList&quot;, INITHELPER((43),3)},
+<span class="lineNum">     142 </span>            :         {&quot;icon&quot;, INITHELPER((23),5)},
+<span class="lineNum">     143 </span>            :         {&quot;icon&quot;, INITHELPER((28),5)},
+<span class="lineNum">     144 </span>            :         {&quot;icon&quot;, INITHELPER((33),5)},
+<span class="lineNum">     145 </span>            :         {&quot;icon&quot;, INITHELPER((38),5)},
+<span class="lineNum">     146 </span>            :         {&quot;/mimetype&quot;, &quot;image/png&quot;},
+<span class="lineNum">     147 </span>            :         {&quot;/width&quot;, &quot;48&quot;},
+<span class="lineNum">     148 </span>            :         {&quot;/height&quot;, &quot;48&quot;},
+<span class="lineNum">     149 </span>            :         {&quot;/depth&quot;, &quot;24&quot;},
+<span class="lineNum">     150 </span>            :         {&quot;/url&quot;, &quot;/icons/sm.png&quot;},
+<span class="lineNum">     151 </span>            :         {&quot;/mimetype&quot;, &quot;image/png&quot;},
+<span class="lineNum">     152 </span>            :         {&quot;/width&quot;, &quot;120&quot;},
+<span class="lineNum">     153 </span>            :         {&quot;/height&quot;, &quot;120&quot;},
+<span class="lineNum">     154 </span>            :         {&quot;/depth&quot;, &quot;24&quot;},
+<span class="lineNum">     155 </span>            :         {&quot;/url&quot;, &quot;/icons/lrg.png&quot;},
+<span class="lineNum">     156 </span>            :         {&quot;/mimetype&quot;, &quot;image/jpeg&quot;},
+<span class="lineNum">     157 </span>            :         {&quot;/width&quot;, &quot;48&quot;},
+<span class="lineNum">     158 </span>            :         {&quot;/height&quot;, &quot;48&quot;},
+<span class="lineNum">     159 </span>            :         {&quot;/depth&quot;, &quot;24&quot;},
+<span class="lineNum">     160 </span>            :         {&quot;/url&quot;, &quot;/icons/sm.jpg&quot;},
+<span class="lineNum">     161 </span>            :         {&quot;/mimetype&quot;, &quot;image/jpeg&quot;},
+<span class="lineNum">     162 </span>            :         {&quot;/width&quot;, &quot;120&quot;},
+<span class="lineNum">     163 </span>            :         {&quot;/height&quot;, &quot;120&quot;},
+<span class="lineNum">     164 </span>            :         {&quot;/depth&quot;, &quot;24&quot;},
+<span class="lineNum">     165 </span>            :         {&quot;/url&quot;, &quot;/icons/lrg.jpg&quot;},
+<span class="lineNum">     166 </span>            :         {&quot;service&quot;, INITHELPER((46),5)},
+<span class="lineNum">     167 </span>            :         {&quot;service&quot;, INITHELPER((51),5)},
+<span class="lineNum">     168 </span>            :         {&quot;service&quot;, INITHELPER((56),5)},
+<span class="lineNum">     169 </span>            :         {&quot;/serviceType&quot;, &quot;urn:schemas-upnp-org:service:ContentDirectory:1&quot;},
+<span class="lineNum">     170 </span>            :         {&quot;/serviceId&quot;, &quot;urn:upnp-org:serviceId:ContentDirectory&quot;},
+<span class="lineNum">     171 </span>            :         {&quot;/controlURL&quot;, CONTENTDIRECTORY_CONTROLURL},
+<span class="lineNum">     172 </span>            :         {&quot;/eventSubURL&quot;, CONTENTDIRECTORY_EVENTURL},
+<span class="lineNum">     173 </span>            :         {&quot;/SCPDURL&quot;, CONTENTDIRECTORY_PATH},
+<span class="lineNum">     174 </span>            :         {&quot;/serviceType&quot;, &quot;urn:schemas-upnp-org:service:ConnectionManager:1&quot;},
+<span class="lineNum">     175 </span>            :         {&quot;/serviceId&quot;, &quot;urn:upnp-org:serviceId:ConnectionManager&quot;},
+<span class="lineNum">     176 </span>            :         {&quot;/controlURL&quot;, CONNECTIONMGR_CONTROLURL},
+<span class="lineNum">     177 </span>            :         {&quot;/eventSubURL&quot;, CONNECTIONMGR_EVENTURL},
+<span class="lineNum">     178 </span>            :         {&quot;/SCPDURL&quot;, CONNECTIONMGR_PATH},
+<span class="lineNum">     179 </span>            :         {&quot;/serviceType&quot;, &quot;urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1&quot;},
+<span class="lineNum">     180 </span>            :         {&quot;/serviceId&quot;, &quot;urn:microsoft.com:serviceId:X_MS_MediaReceiverRegistrar&quot;},
+<span class="lineNum">     181 </span>            :         {&quot;/controlURL&quot;, X_MS_MEDIARECEIVERREGISTRAR_CONTROLURL},
+<span class="lineNum">     182 </span>            :         {&quot;/eventSubURL&quot;, X_MS_MEDIARECEIVERREGISTRAR_EVENTURL},
+<span class="lineNum">     183 </span>            :         {&quot;/SCPDURL&quot;, X_MS_MEDIARECEIVERREGISTRAR_PATH},
+<span class="lineNum">     184 </span>            :         {0, 0}
+<span class="lineNum">     185 </span>            : };
+<span class="lineNum">     186 </span>            : 
+<span class="lineNum">     187 </span>            : /* For ConnectionManager */
+<span class="lineNum">     188 </span>            : static const struct argument GetProtocolInfoArgs[] =
+<span class="lineNum">     189 </span>            : {
+<span class="lineNum">     190 </span>            :         {&quot;Source&quot;, 2, 0},
+<span class="lineNum">     191 </span>            :         {&quot;Sink&quot;, 2, 1},
+<span class="lineNum">     192 </span>            :         {NULL, 0, 0}
+<span class="lineNum">     193 </span>            : };
+<span class="lineNum">     194 </span>            : 
+<span class="lineNum">     195 </span>            : static const struct argument GetCurrentConnectionIDsArgs[] =
+<span class="lineNum">     196 </span>            : {
+<span class="lineNum">     197 </span>            :         {&quot;ConnectionIDs&quot;, 2, 2},
+<span class="lineNum">     198 </span>            :         {NULL, 0, 0}
+<span class="lineNum">     199 </span>            : };
+<span class="lineNum">     200 </span>            : 
+<span class="lineNum">     201 </span>            : static const struct argument GetCurrentConnectionInfoArgs[] =
+<span class="lineNum">     202 </span>            : {
+<span class="lineNum">     203 </span>            :         {&quot;ConnectionID&quot;, 1, 7},
+<span class="lineNum">     204 </span>            :         {&quot;RcsID&quot;, 2, 9},
+<span class="lineNum">     205 </span>            :         {&quot;AVTransportID&quot;, 2, 8},
+<span class="lineNum">     206 </span>            :         {&quot;ProtocolInfo&quot;, 2, 6},
+<span class="lineNum">     207 </span>            :         {&quot;PeerConnectionManager&quot;, 2, 4},
+<span class="lineNum">     208 </span>            :         {&quot;PeerConnectionID&quot;, 2, 7},
+<span class="lineNum">     209 </span>            :         {&quot;Direction&quot;, 2, 5},
+<span class="lineNum">     210 </span>            :         {&quot;Status&quot;, 2, 3},
+<span class="lineNum">     211 </span>            :         {NULL, 0, 0}
+<span class="lineNum">     212 </span>            : };
+<span class="lineNum">     213 </span>            : 
+<span class="lineNum">     214 </span>            : static const struct action ConnectionManagerActions[] =
+<span class="lineNum">     215 </span>            : {
+<span class="lineNum">     216 </span>            :         {&quot;GetProtocolInfo&quot;, GetProtocolInfoArgs}, /* R */
+<span class="lineNum">     217 </span>            :         {&quot;GetCurrentConnectionIDs&quot;, GetCurrentConnectionIDsArgs}, /* R */
+<span class="lineNum">     218 </span>            :         {&quot;GetCurrentConnectionInfo&quot;, GetCurrentConnectionInfoArgs}, /* R */
+<span class="lineNum">     219 </span>            :         {0, 0}
+<span class="lineNum">     220 </span>            : };
+<span class="lineNum">     221 </span>            : 
+<span class="lineNum">     222 </span>            : static const struct stateVar ConnectionManagerVars[] =
+<span class="lineNum">     223 </span>            : {
+<span class="lineNum">     224 </span>            :         {&quot;SourceProtocolInfo&quot;, 0|EVENTED, 0, 0, 44}, /* required */
+<span class="lineNum">     225 </span>            :         {&quot;SinkProtocolInfo&quot;, 0|EVENTED, 0, 0, 48}, /* required */
+<span class="lineNum">     226 </span>            :         {&quot;CurrentConnectionIDs&quot;, 0|EVENTED, 0, 0, 46}, /* required */
+<span class="lineNum">     227 </span>            :         {&quot;A_ARG_TYPE_ConnectionStatus&quot;, 0, 0, 27}, /* required */
+<span class="lineNum">     228 </span>            :         {&quot;A_ARG_TYPE_ConnectionManager&quot;, 0, 0}, /* required */
+<span class="lineNum">     229 </span>            :         {&quot;A_ARG_TYPE_Direction&quot;, 0, 0, 33}, /* required */
+<span class="lineNum">     230 </span>            :         {&quot;A_ARG_TYPE_ProtocolInfo&quot;, 0, 0}, /* required */
+<span class="lineNum">     231 </span>            :         {&quot;A_ARG_TYPE_ConnectionID&quot;, 4, 0}, /* required */
+<span class="lineNum">     232 </span>            :         {&quot;A_ARG_TYPE_AVTransportID&quot;, 4, 0}, /* required */
+<span class="lineNum">     233 </span>            :         {&quot;A_ARG_TYPE_RcsID&quot;, 4, 0}, /* required */
+<span class="lineNum">     234 </span>            :         {0, 0}
+<span class="lineNum">     235 </span>            : };
+<span class="lineNum">     236 </span>            : 
+<span class="lineNum">     237 </span>            : static const struct argument GetSearchCapabilitiesArgs[] =
+<span class="lineNum">     238 </span>            : {
+<span class="lineNum">     239 </span>            :         {&quot;SearchCaps&quot;, 2, 11},
+<span class="lineNum">     240 </span>            :         {0, 0}
+<span class="lineNum">     241 </span>            : };
+<span class="lineNum">     242 </span>            : 
+<span class="lineNum">     243 </span>            : static const struct argument GetSortCapabilitiesArgs[] =
+<span class="lineNum">     244 </span>            : {
+<span class="lineNum">     245 </span>            :         {&quot;SortCaps&quot;, 2, 12},
+<span class="lineNum">     246 </span>            :         {0, 0}
+<span class="lineNum">     247 </span>            : };
+<span class="lineNum">     248 </span>            : 
+<span class="lineNum">     249 </span>            : static const struct argument GetSystemUpdateIDArgs[] =
+<span class="lineNum">     250 </span>            : {
+<span class="lineNum">     251 </span>            :         {&quot;Id&quot;, 2, 13},
+<span class="lineNum">     252 </span>            :         {0, 0}
+<span class="lineNum">     253 </span>            : };
+<span class="lineNum">     254 </span>            : 
+<span class="lineNum">     255 </span>            : static const struct argument UpdateObjectArgs[] =
+<span class="lineNum">     256 </span>            : {
+<span class="lineNum">     257 </span>            :         {&quot;ObjectID&quot;, 1, 1},
+<span class="lineNum">     258 </span>            :         {&quot;CurrentTagValue&quot;, 1, 10},
+<span class="lineNum">     259 </span>            :         {&quot;NewTagValue&quot;, 1, 10},
+<span class="lineNum">     260 </span>            :         {0, 0}
+<span class="lineNum">     261 </span>            : };
+<span class="lineNum">     262 </span>            : 
+<span class="lineNum">     263 </span>            : static const struct argument BrowseArgs[] =
+<span class="lineNum">     264 </span>            : {
+<span class="lineNum">     265 </span>            :         {&quot;ObjectID&quot;, 1, 1},
+<span class="lineNum">     266 </span>            :         {&quot;BrowseFlag&quot;, 1, 4},
+<span class="lineNum">     267 </span>            :         {&quot;Filter&quot;, 1, 5},
+<span class="lineNum">     268 </span>            :         {&quot;StartingIndex&quot;, 1, 7},
+<span class="lineNum">     269 </span>            :         {&quot;RequestedCount&quot;, 1, 8},
+<span class="lineNum">     270 </span>            :         {&quot;SortCriteria&quot;, 1, 6},
+<span class="lineNum">     271 </span>            :         {&quot;Result&quot;, 2, 2},
+<span class="lineNum">     272 </span>            :         {&quot;NumberReturned&quot;, 2, 8},
+<span class="lineNum">     273 </span>            :         {&quot;TotalMatches&quot;, 2, 8},
+<span class="lineNum">     274 </span>            :         {&quot;UpdateID&quot;, 2, 9},
+<span class="lineNum">     275 </span>            :         {0, 0}
+<span class="lineNum">     276 </span>            : };
+<span class="lineNum">     277 </span>            : 
+<span class="lineNum">     278 </span>            : static const struct argument SearchArgs[] =
+<span class="lineNum">     279 </span>            : {
+<span class="lineNum">     280 </span>            :         {&quot;ContainerID&quot;, 1, 1},
+<span class="lineNum">     281 </span>            :         {&quot;SearchCriteria&quot;, 1, 3},
+<span class="lineNum">     282 </span>            :         {&quot;Filter&quot;, 1, 5},
+<span class="lineNum">     283 </span>            :         {&quot;StartingIndex&quot;, 1, 7},
+<span class="lineNum">     284 </span>            :         {&quot;RequestedCount&quot;, 1, 8},
+<span class="lineNum">     285 </span>            :         {&quot;SortCriteria&quot;, 1, 6},
+<span class="lineNum">     286 </span>            :         {&quot;Result&quot;, 2, 2},
+<span class="lineNum">     287 </span>            :         {&quot;NumberReturned&quot;, 2, 8},
+<span class="lineNum">     288 </span>            :         {&quot;TotalMatches&quot;, 2, 8},
+<span class="lineNum">     289 </span>            :         {&quot;UpdateID&quot;, 2, 9},
+<span class="lineNum">     290 </span>            :         {0, 0}
+<span class="lineNum">     291 </span>            : };
+<span class="lineNum">     292 </span>            : 
+<span class="lineNum">     293 </span>            : static const struct action ContentDirectoryActions[] =
+<span class="lineNum">     294 </span>            : {
+<span class="lineNum">     295 </span>            :         {&quot;GetSearchCapabilities&quot;, GetSearchCapabilitiesArgs}, /* R */
+<span class="lineNum">     296 </span>            :         {&quot;GetSortCapabilities&quot;, GetSortCapabilitiesArgs}, /* R */
+<span class="lineNum">     297 </span>            :         {&quot;GetSystemUpdateID&quot;, GetSystemUpdateIDArgs}, /* R */
+<span class="lineNum">     298 </span>            :         {&quot;Browse&quot;, BrowseArgs}, /* R */
+<span class="lineNum">     299 </span>            :         {&quot;Search&quot;, SearchArgs}, /* O */
+<span class="lineNum">     300 </span>            :         {&quot;UpdateObject&quot;, UpdateObjectArgs}, /* O */
+<span class="lineNum">     301 </span>            : #if 0 // Not implementing optional features yet...
+<span class="lineNum">     302 </span>            :         {&quot;CreateObject&quot;, CreateObjectArgs}, /* O */
+<span class="lineNum">     303 </span>            :         {&quot;DestroyObject&quot;, DestroyObjectArgs}, /* O */
+<span class="lineNum">     304 </span>            :         {&quot;ImportResource&quot;, ImportResourceArgs}, /* O */
+<span class="lineNum">     305 </span>            :         {&quot;ExportResource&quot;, ExportResourceArgs}, /* O */
+<span class="lineNum">     306 </span>            :         {&quot;StopTransferResource&quot;, StopTransferResourceArgs}, /* O */
+<span class="lineNum">     307 </span>            :         {&quot;GetTransferProgress&quot;, GetTransferProgressArgs}, /* O */
+<span class="lineNum">     308 </span>            :         {&quot;DeleteResource&quot;, DeleteResourceArgs}, /* O */
+<span class="lineNum">     309 </span>            :         {&quot;CreateReference&quot;, CreateReferenceArgs}, /* O */
+<span class="lineNum">     310 </span>            : #endif
+<span class="lineNum">     311 </span>            :         {0, 0}
+<span class="lineNum">     312 </span>            : };
+<span class="lineNum">     313 </span>            : 
+<span class="lineNum">     314 </span>            : static const struct stateVar ContentDirectoryVars[] =
+<span class="lineNum">     315 </span>            : {
+<span class="lineNum">     316 </span>            :         {&quot;TransferIDs&quot;, 0|EVENTED, 0, 0, 48}, /* 0 */
+<span class="lineNum">     317 </span>            :         {&quot;A_ARG_TYPE_ObjectID&quot;, 0, 0},
+<span class="lineNum">     318 </span>            :         {&quot;A_ARG_TYPE_Result&quot;, 0, 0},
+<span class="lineNum">     319 </span>            :         {&quot;A_ARG_TYPE_SearchCriteria&quot;, 0, 0},
+<span class="lineNum">     320 </span>            :         {&quot;A_ARG_TYPE_BrowseFlag&quot;, 0, 0, 36},
+<span class="lineNum">     321 </span>            :         /* Allowed Values : BrowseMetadata / BrowseDirectChildren */
+<span class="lineNum">     322 </span>            :         {&quot;A_ARG_TYPE_Filter&quot;, 0, 0}, /* 5 */
+<span class="lineNum">     323 </span>            :         {&quot;A_ARG_TYPE_SortCriteria&quot;, 0, 0},
+<span class="lineNum">     324 </span>            :         {&quot;A_ARG_TYPE_Index&quot;, 3, 0},
+<span class="lineNum">     325 </span>            :         {&quot;A_ARG_TYPE_Count&quot;, 3, 0},
+<span class="lineNum">     326 </span>            :         {&quot;A_ARG_TYPE_UpdateID&quot;, 3, 0},
+<span class="lineNum">     327 </span>            :         {&quot;A_ARG_TYPE_TagValueList&quot;, 0, 0},
+<span class="lineNum">     328 </span>            :         {&quot;SearchCapabilities&quot;, 0, 0},
+<span class="lineNum">     329 </span>            :         {&quot;SortCapabilities&quot;, 0, 0},
+<span class="lineNum">     330 </span>            :         {&quot;SystemUpdateID&quot;, 3|EVENTED, 0, 0, 255},
+<span class="lineNum">     331 </span>            :         {0, 0}
+<span class="lineNum">     332 </span>            : };
+<span class="lineNum">     333 </span>            : 
+<span class="lineNum">     334 </span>            : static const struct argument GetIsAuthorizedArgs[] =
+<span class="lineNum">     335 </span>            : {
+<span class="lineNum">     336 </span>            :         {&quot;DeviceID&quot;, 1, 0},
+<span class="lineNum">     337 </span>            :         {&quot;Result&quot;, 2, 3},
+<span class="lineNum">     338 </span>            :         {NULL, 0, 0}
+<span class="lineNum">     339 </span>            : };
+<span class="lineNum">     340 </span>            : 
+<span class="lineNum">     341 </span>            : static const struct argument GetIsValidatedArgs[] =
+<span class="lineNum">     342 </span>            : {
+<span class="lineNum">     343 </span>            :         {&quot;DeviceID&quot;, 1, 0},
+<span class="lineNum">     344 </span>            :         {&quot;Result&quot;, 2, 3},
+<span class="lineNum">     345 </span>            :         {NULL, 0, 0}
+<span class="lineNum">     346 </span>            : };
+<span class="lineNum">     347 </span>            : 
+<span class="lineNum">     348 </span>            : static const struct argument GetRegisterDeviceArgs[] =
+<span class="lineNum">     349 </span>            : {
+<span class="lineNum">     350 </span>            :         {&quot;RegistrationReqMsg&quot;, 1, 1},
+<span class="lineNum">     351 </span>            :         {&quot;RegistrationRespMsg&quot;, 2, 2},
+<span class="lineNum">     352 </span>            :         {NULL, 0, 0}
+<span class="lineNum">     353 </span>            : };
+<span class="lineNum">     354 </span>            : 
+<span class="lineNum">     355 </span>            : static const struct action X_MS_MediaReceiverRegistrarActions[] =
+<span class="lineNum">     356 </span>            : {
+<span class="lineNum">     357 </span>            :         {&quot;IsAuthorized&quot;, GetIsAuthorizedArgs}, /* R */
+<span class="lineNum">     358 </span>            :         {&quot;IsValidated&quot;, GetIsValidatedArgs}, /* R */
+<span class="lineNum">     359 </span>            :         {&quot;RegisterDevice&quot;, GetRegisterDeviceArgs},
+<span class="lineNum">     360 </span>            :         {0, 0}
+<span class="lineNum">     361 </span>            : };
+<span class="lineNum">     362 </span>            : 
+<span class="lineNum">     363 </span>            : static const struct stateVar X_MS_MediaReceiverRegistrarVars[] =
+<span class="lineNum">     364 </span>            : {
+<span class="lineNum">     365 </span>            :         {&quot;A_ARG_TYPE_DeviceID&quot;, 0, 0},
+<span class="lineNum">     366 </span>            :         {&quot;A_ARG_TYPE_RegistrationReqMsg&quot;, 7, 0},
+<span class="lineNum">     367 </span>            :         {&quot;A_ARG_TYPE_RegistrationRespMsg&quot;, 7, 0},
+<span class="lineNum">     368 </span>            :         {&quot;A_ARG_TYPE_Result&quot;, 6, 0},
+<span class="lineNum">     369 </span>            :         {&quot;AuthorizationDeniedUpdateID&quot;, 3|EVENTED, 0},
+<span class="lineNum">     370 </span>            :         {&quot;AuthorizationGrantedUpdateID&quot;, 3|EVENTED, 0},
+<span class="lineNum">     371 </span>            :         {&quot;ValidationRevokedUpdateID&quot;, 3|EVENTED, 0},
+<span class="lineNum">     372 </span>            :         {&quot;ValidationSucceededUpdateID&quot;, 3|EVENTED, 0},
+<span class="lineNum">     373 </span>            :         {0, 0}
+<span class="lineNum">     374 </span>            : };
+<span class="lineNum">     375 </span>            : 
+<span class="lineNum">     376 </span>            : static const struct serviceDesc scpdContentDirectory =
+<span class="lineNum">     377 </span>            : { ContentDirectoryActions, ContentDirectoryVars };
+<span class="lineNum">     378 </span>            : 
+<span class="lineNum">     379 </span>            : static const struct serviceDesc scpdConnectionManager =
+<span class="lineNum">     380 </span>            : { ConnectionManagerActions, ConnectionManagerVars };
+<span class="lineNum">     381 </span>            : 
+<span class="lineNum">     382 </span>            : static const struct serviceDesc scpdX_MS_MediaReceiverRegistrar =
+<span class="lineNum">     383 </span>            : { X_MS_MediaReceiverRegistrarActions, X_MS_MediaReceiverRegistrarVars };
+<span class="lineNum">     384 </span>            : 
+<span class="lineNum">     385 </span>            : /* strcat_str()
+<span class="lineNum">     386 </span>            :  * concatenate the string and use realloc to increase the
+<a name="387"><span class="lineNum">     387 </span>            :  * memory buffer if needed. */</a>
+<span class="lineNum">     388 </span>            : static char *
+<span class="lineNum">     389 </span><span class="lineCov">       5655 : strcat_str(char * str, int * len, int * tmplen, const char * s2)</span>
+<span class="lineNum">     390 </span>            : {
+<span class="lineNum">     391 </span>            :         char *p;
+<span class="lineNum">     392 </span>            :         int s2len;
+<span class="lineNum">     393 </span><span class="lineCov">       5655 :         s2len = (int)strlen(s2);</span>
+<span class="lineNum">     394 </span><span class="lineCov">       5655 :         if(*tmplen &lt;= (*len + s2len))</span>
+<span class="lineNum">     395 </span>            :         {
+<span class="lineNum">     396 </span><span class="lineCov">         22 :                 if(s2len &lt; 256)</span>
+<span class="lineNum">     397 </span><span class="lineCov">         21 :                         *tmplen += 256;</span>
+<span class="lineNum">     398 </span>            :                 else
+<span class="lineNum">     399 </span><span class="lineCov">          1 :                         *tmplen += s2len + 1;</span>
+<span class="lineNum">     400 </span><span class="lineCov">         22 :                 p = realloc(str, *tmplen);</span>
+<span class="lineNum">     401 </span><span class="lineCov">         22 :                 if (!p)</span>
+<span class="lineNum">     402 </span>            :                 {
+<span class="lineNum">     403 </span><span class="lineNoCov">          0 :                         if(s2len &lt; 256)</span>
+<span class="lineNum">     404 </span><span class="lineNoCov">          0 :                                 *tmplen -= 256;</span>
+<span class="lineNum">     405 </span>            :                         else
+<span class="lineNum">     406 </span><span class="lineNoCov">          0 :                                 *tmplen -= s2len + 1;</span>
+<span class="lineNum">     407 </span><span class="lineNoCov">          0 :                         return str;</span>
+<span class="lineNum">     408 </span>            :                 }
+<span class="lineNum">     409 </span>            :                 else
+<span class="lineNum">     410 </span><span class="lineCov">         22 :                         str = p;</span>
+<span class="lineNum">     411 </span>            :         }
+<span class="lineNum">     412 </span>            :         /*strcpy(str + *len, s2); */
+<span class="lineNum">     413 </span><span class="lineCov">       5655 :         memcpy(str + *len, s2, s2len + 1);</span>
+<span class="lineNum">     414 </span><span class="lineCov">       5655 :         *len += s2len;</span>
+<span class="lineNum">     415 </span><span class="lineCov">       5655 :         return str;</span>
+<span class="lineNum">     416 </span>            : }
+<span class="lineNum">     417 </span>            : 
+<span class="lineNum">     418 </span>            : /* strcat_char() :
+<span class="lineNum">     419 </span>            :  * concatenate a character and use realloc to increase the
+<a name="420"><span class="lineNum">     420 </span>            :  * size of the memory buffer if needed */</a>
+<span class="lineNum">     421 </span>            : static char *
+<span class="lineNum">     422 </span><span class="lineCov">      10660 : strcat_char(char * str, int * len, int * tmplen, char c)</span>
+<span class="lineNum">     423 </span>            : {
+<span class="lineNum">     424 </span>            :         char *p;
+<span class="lineNum">     425 </span><span class="lineCov">      10660 :         if(*tmplen &lt;= (*len + 1))</span>
+<span class="lineNum">     426 </span>            :         {
+<span class="lineNum">     427 </span><span class="lineNoCov">          0 :                 *tmplen += 256;</span>
+<span class="lineNum">     428 </span><span class="lineNoCov">          0 :                 p = (char *)realloc(str, *tmplen);</span>
+<span class="lineNum">     429 </span><span class="lineNoCov">          0 :                 if (!p)</span>
+<span class="lineNum">     430 </span>            :                 {
+<span class="lineNum">     431 </span><span class="lineNoCov">          0 :                         *tmplen -= 256;</span>
+<span class="lineNum">     432 </span><span class="lineNoCov">          0 :                         return str;</span>
+<span class="lineNum">     433 </span>            :                 }
+<span class="lineNum">     434 </span>            :                 else
+<span class="lineNum">     435 </span><span class="lineNoCov">          0 :                         str = p;</span>
+<span class="lineNum">     436 </span>            :         }
+<span class="lineNum">     437 </span><span class="lineCov">      10660 :         str[*len] = c;</span>
+<span class="lineNum">     438 </span><span class="lineCov">      10660 :         (*len)++;</span>
+<span class="lineNum">     439 </span><span class="lineCov">      10660 :         return str;</span>
+<span class="lineNum">     440 </span>            : }
+<span class="lineNum">     441 </span>            : 
+<span class="lineNum">     442 </span>            : /* iterative subroutine using a small stack
+<a name="443"><span class="lineNum">     443 </span>            :  * This way, the progam stack usage is kept low */</a>
+<span class="lineNum">     444 </span>            : static char *
+<span class="lineNum">     445 </span><span class="lineCov">         32 : genXML(char * str, int * len, int * tmplen,</span>
+<span class="lineNum">     446 </span>            :                    const struct XMLElt * p)
+<span class="lineNum">     447 </span>            : {
+<span class="lineNum">     448 </span>            :         uint16_t i, j, k;
+<span class="lineNum">     449 </span>            :         int top;
+<span class="lineNum">     450 </span>            :         const char * eltname, *s;
+<span class="lineNum">     451 </span>            :         char c;
+<span class="lineNum">     452 </span>            :         char element[64];
+<span class="lineNum">     453 </span>            :         struct {
+<span class="lineNum">     454 </span>            :                 unsigned short i;
+<span class="lineNum">     455 </span>            :                 unsigned short j;
+<span class="lineNum">     456 </span>            :                 const char * eltname;
+<span class="lineNum">     457 </span>            :         } pile[16]; /* stack */
+<span class="lineNum">     458 </span><span class="lineCov">         32 :         top = -1;</span>
+<span class="lineNum">     459 </span><span class="lineCov">         32 :         i = 0;  /* current node */</span>
+<span class="lineNum">     460 </span><span class="lineCov">         32 :         j = 1;  /* i + number of nodes*/</span>
+<span class="lineNum">     461 </span>            :         for(;;)
+<span class="lineNum">     462 </span>            :         {
+<span class="lineNum">     463 </span><span class="lineCov">       3872 :                 eltname = p[i].eltname;</span>
+<span class="lineNum">     464 </span><span class="lineCov">       1952 :                 if(!eltname)</span>
+<span class="lineNum">     465 </span><span class="lineNoCov">          0 :                         return str;</span>
+<span class="lineNum">     466 </span><span class="lineCov">       1952 :                 if(eltname[0] == '/')</span>
+<span class="lineNum">     467 </span>            :                 {
+<span class="lineNum">     468 </span>            :                         #ifdef DESC_DEBUG
+<span class="lineNum">     469 </span>            :                         printf(&quot;DBG: &lt;%s&gt;%s&lt;%s&gt;\n&quot;, eltname+1, p[i].data, eltname);
+<span class="lineNum">     470 </span>            :                         #endif
+<span class="lineNum">     471 </span><span class="lineCov">       1568 :                         str = strcat_char(str, len, tmplen, '&lt;');</span>
+<span class="lineNum">     472 </span><span class="lineCov">       1568 :                         str = strcat_str(str, len, tmplen, eltname+1);</span>
+<span class="lineNum">     473 </span><span class="lineCov">       1568 :                         str = strcat_char(str, len, tmplen, '&gt;');</span>
+<span class="lineNum">     474 </span><span class="lineCov">       1568 :                         str = strcat_str(str, len, tmplen, p[i].data);</span>
+<span class="lineNum">     475 </span><span class="lineCov">       1568 :                         str = strcat_char(str, len, tmplen, '&lt;');</span>
+<span class="lineNum">     476 </span><span class="lineCov">       1568 :                         sscanf(eltname, &quot;%s&quot;, element);</span>
+<span class="lineNum">     477 </span><span class="lineCov">       1568 :                         str = strcat_str(str, len, tmplen, element);</span>
+<span class="lineNum">     478 </span><span class="lineCov">       1568 :                         str = strcat_char(str, len, tmplen, '&gt;');</span>
+<span class="lineNum">     479 </span>            :                         for(;;)
+<span class="lineNum">     480 </span>            :                         {
+<span class="lineNum">     481 </span><span class="lineCov">       2336 :                                 if(top &lt; 0)</span>
+<span class="lineNum">     482 </span><span class="lineCov">         32 :                                         return str;</span>
+<span class="lineNum">     483 </span><span class="lineCov">       1920 :                                 i = ++(pile[top].i);</span>
+<span class="lineNum">     484 </span><span class="lineCov">       1920 :                                 j = pile[top].j;</span>
+<span class="lineNum">     485 </span>            :                                 #ifdef DESC_DEBUG
+<span class="lineNum">     486 </span>            :                                 printf(&quot;DBG:  pile[%d]\t%d %d\n&quot;, top, i, j); 
+<span class="lineNum">     487 </span>            :                                 #endif
+<span class="lineNum">     488 </span><span class="lineCov">       1920 :                                 if(i==j)</span>
+<span class="lineNum">     489 </span>            :                                 {
+<span class="lineNum">     490 </span>            :                                         #ifdef DESC_DEBUG
+<span class="lineNum">     491 </span>            :                                         printf(&quot;DBG: i==j, &lt;/%s&gt;\n&quot;, pile[top].eltname); 
+<span class="lineNum">     492 </span>            :                                         #endif
+<span class="lineNum">     493 </span><span class="lineCov">        384 :                                         str = strcat_char(str, len, tmplen, '&lt;');</span>
+<span class="lineNum">     494 </span><span class="lineCov">        384 :                                         str = strcat_char(str, len, tmplen, '/');</span>
+<span class="lineNum">     495 </span><span class="lineCov">        384 :                                         s = pile[top].eltname;</span>
+<span class="lineNum">     496 </span><span class="lineCov">       2848 :                                         for(c = *s; c &gt; ' '; c = *(++s))</span>
+<span class="lineNum">     497 </span><span class="lineCov">       2464 :                                                 str = strcat_char(str, len, tmplen, c);</span>
+<span class="lineNum">     498 </span><span class="lineCov">        384 :                                         str = strcat_char(str, len, tmplen, '&gt;');</span>
+<span class="lineNum">     499 </span><span class="lineCov">        384 :                                         top--;</span>
+<span class="lineNum">     500 </span>            :                                 }
+<span class="lineNum">     501 </span>            :                                 else
+<span class="lineNum">     502 </span><span class="lineCov">       1536 :                                         break;</span>
+<span class="lineNum">     503 </span>            :                         }
+<span class="lineNum">     504 </span>            :                 }
+<span class="lineNum">     505 </span>            :                 else
+<span class="lineNum">     506 </span>            :                 {
+<span class="lineNum">     507 </span>            :                         #ifdef DESC_DEBUG
+<span class="lineNum">     508 </span>            :                         printf(&quot;DBG: [%d] &lt;%s&gt;\n&quot;, i, eltname); 
+<span class="lineNum">     509 </span>            :                         #endif
+<span class="lineNum">     510 </span><span class="lineCov">        384 :                         str = strcat_char(str, len, tmplen, '&lt;');</span>
+<span class="lineNum">     511 </span><span class="lineCov">        384 :                         str = strcat_str(str, len, tmplen, eltname);</span>
+<span class="lineNum">     512 </span><span class="lineCov">        384 :                         str = strcat_char(str, len, tmplen, '&gt;');</span>
+<span class="lineNum">     513 </span><span class="lineCov">        384 :                         k = i;</span>
+<span class="lineNum">     514 </span>            :                         /*i = p[k].index; */
+<span class="lineNum">     515 </span>            :                         /*j = i + p[k].nchild; */
+<span class="lineNum">     516 </span><span class="lineCov">        384 :                         i = (unsigned long)p[k].data &amp; 0xffff;</span>
+<span class="lineNum">     517 </span><span class="lineCov">        384 :                         j = i + ((unsigned long)p[k].data &gt;&gt; 16);</span>
+<span class="lineNum">     518 </span><span class="lineCov">        384 :                         top++;</span>
+<span class="lineNum">     519 </span>            :                         #ifdef DESC_DEBUG
+<span class="lineNum">     520 </span>            :                         printf(&quot;DBG: +pile[%d]\t%d %d\n&quot;, top, i, j); 
+<span class="lineNum">     521 </span>            :                         #endif
+<span class="lineNum">     522 </span><span class="lineCov">        384 :                         pile[top].i = i;</span>
+<span class="lineNum">     523 </span><span class="lineCov">        384 :                         pile[top].j = j;</span>
+<span class="lineNum">     524 </span><span class="lineCov">        384 :                         pile[top].eltname = eltname;</span>
+<span class="lineNum">     525 </span>            :                 }
+<span class="lineNum">     526 </span>            :         }
+<span class="lineNum">     527 </span>            : }
+<span class="lineNum">     528 </span>            : 
+<span class="lineNum">     529 </span>            : /* genRootDesc() :
+<span class="lineNum">     530 </span>            :  * - Generate the root description of the UPnP device.
+<span class="lineNum">     531 </span>            :  * - the len argument is used to return the length of
+<span class="lineNum">     532 </span>            :  *   the returned string. 
+<a name="533"><span class="lineNum">     533 </span>            :  * - tmp_uuid argument is used to build the uuid string */</a>
+<span class="lineNum">     534 </span>            : char *
+<span class="lineNum">     535 </span><span class="lineCov">         32 : genRootDesc(int * len)</span>
+<span class="lineNum">     536 </span>            : {
+<span class="lineNum">     537 </span>            :         char * str;
+<span class="lineNum">     538 </span>            :         int tmplen;
+<span class="lineNum">     539 </span><span class="lineCov">         32 :         tmplen = 2560;</span>
+<span class="lineNum">     540 </span><span class="lineCov">         32 :         str = (char *)malloc(tmplen);</span>
+<span class="lineNum">     541 </span><span class="lineCov">         32 :         if(str == NULL)</span>
+<span class="lineNum">     542 </span><span class="lineNoCov">          0 :                 return NULL;</span>
+<span class="lineNum">     543 </span><span class="lineCov">         32 :         * len = strlen(xmlver);</span>
+<span class="lineNum">     544 </span><span class="lineCov">         32 :         memcpy(str, xmlver, *len + 1);</span>
+<span class="lineNum">     545 </span><span class="lineCov">         32 :         str = genXML(str, len, &amp;tmplen, rootDesc);</span>
+<span class="lineNum">     546 </span><span class="lineCov">         32 :         str[*len] = '\0';</span>
+<span class="lineNum">     547 </span><span class="lineCov">         32 :         return str;</span>
+<span class="lineNum">     548 </span>            : }
+<a name="549"><span class="lineNum">     549 </span>            : </a>
+<span class="lineNum">     550 </span>            : char *
+<span class="lineNum">     551 </span><span class="lineNoCov">          0 : genRootDescSamsung(int * len)</span>
+<span class="lineNum">     552 </span>            : {
+<span class="lineNum">     553 </span>            :         char * str;
+<span class="lineNum">     554 </span>            :         int tmplen;
+<span class="lineNum">     555 </span>            :         struct XMLElt samsungRootDesc[sizeof(rootDesc)/sizeof(struct XMLElt)];
+<span class="lineNum">     556 </span><span class="lineNoCov">          0 :         tmplen = 2560;</span>
+<span class="lineNum">     557 </span><span class="lineNoCov">          0 :         str = (char *)malloc(tmplen);</span>
+<span class="lineNum">     558 </span><span class="lineNoCov">          0 :         if(str == NULL)</span>
+<span class="lineNum">     559 </span><span class="lineNoCov">          0 :                 return NULL;</span>
+<span class="lineNum">     560 </span><span class="lineNoCov">          0 :         * len = strlen(xmlver);</span>
+<span class="lineNum">     561 </span><span class="lineNoCov">          0 :         memcpy(str, xmlver, *len + 1);</span>
+<span class="lineNum">     562 </span>            :         /* Replace the optional modelURL and manufacturerURL fields with Samsung foo */
+<span class="lineNum">     563 </span><span class="lineNoCov">          0 :         memcpy(&amp;samsungRootDesc, &amp;rootDesc, sizeof(rootDesc));</span>
+<span class="lineNum">     564 </span><span class="lineNoCov">          0 :         samsungRootDesc[8].eltname = &quot;/sec:ProductCap&quot;;</span>
+<span class="lineNum">     565 </span><span class="lineNoCov">          0 :         samsungRootDesc[8].data = &quot;smi,DCM10,getMediaInfo.sec,getCaptionInfo.sec&quot;;</span>
+<span class="lineNum">     566 </span><span class="lineNoCov">          0 :         samsungRootDesc[12].eltname = &quot;/sec:X_ProductCap&quot;;</span>
+<span class="lineNum">     567 </span><span class="lineNoCov">          0 :         samsungRootDesc[12].data = &quot;smi,DCM10,getMediaInfo.sec,getCaptionInfo.sec&quot;;</span>
+<span class="lineNum">     568 </span><span class="lineNoCov">          0 :         str = genXML(str, len, &amp;tmplen, samsungRootDesc);</span>
+<span class="lineNum">     569 </span><span class="lineNoCov">          0 :         str[*len] = '\0';</span>
+<span class="lineNum">     570 </span><span class="lineNoCov">          0 :         return str;</span>
+<span class="lineNum">     571 </span>            : }
+<span class="lineNum">     572 </span>            : 
+<span class="lineNum">     573 </span>            : /* genServiceDesc() :
+<span class="lineNum">     574 </span>            :  * Generate service description with allowed methods and 
+<a name="575"><span class="lineNum">     575 </span>            :  * related variables. */</a>
+<span class="lineNum">     576 </span>            : static char *
+<span class="lineNum">     577 </span><span class="lineCov">          2 : genServiceDesc(int * len, const struct serviceDesc * s)</span>
+<span class="lineNum">     578 </span>            : {
+<span class="lineNum">     579 </span>            :         int i, j;
+<span class="lineNum">     580 </span>            :         const struct action * acts;
+<span class="lineNum">     581 </span>            :         const struct stateVar * vars;
+<span class="lineNum">     582 </span>            :         const struct argument * args;
+<span class="lineNum">     583 </span>            :         const char * p;
+<span class="lineNum">     584 </span>            :         char * str;
+<span class="lineNum">     585 </span>            :         int tmplen;
+<span class="lineNum">     586 </span><span class="lineCov">          2 :         tmplen = 2048;</span>
+<span class="lineNum">     587 </span><span class="lineCov">          2 :         str = (char *)malloc(tmplen);</span>
+<span class="lineNum">     588 </span><span class="lineCov">          2 :         if(str == NULL)</span>
+<span class="lineNum">     589 </span><span class="lineNoCov">          0 :                 return NULL;</span>
+<span class="lineNum">     590 </span>            :         /*strcpy(str, xmlver); */
+<span class="lineNum">     591 </span><span class="lineCov">          2 :         *len = strlen(xmlver);</span>
+<span class="lineNum">     592 </span><span class="lineCov">          2 :         memcpy(str, xmlver, *len + 1);</span>
+<span class="lineNum">     593 </span>            :         
+<span class="lineNum">     594 </span><span class="lineCov">          2 :         acts = s-&gt;actionList;</span>
+<span class="lineNum">     595 </span><span class="lineCov">          2 :         vars = s-&gt;serviceStateTable;</span>
+<span class="lineNum">     596 </span>            : 
+<span class="lineNum">     597 </span><span class="lineCov">          2 :         str = strcat_char(str, len, &amp;tmplen, '&lt;');</span>
+<span class="lineNum">     598 </span><span class="lineCov">          2 :         str = strcat_str(str, len, &amp;tmplen, root_service);</span>
+<span class="lineNum">     599 </span><span class="lineCov">          2 :         str = strcat_char(str, len, &amp;tmplen, '&gt;');</span>
+<span class="lineNum">     600 </span>            : 
+<span class="lineNum">     601 </span><span class="lineCov">          2 :         str = strcat_str(str, len, &amp;tmplen,</span>
+<span class="lineNum">     602 </span>            :                 &quot;&lt;specVersion&gt;&lt;major&gt;1&lt;/major&gt;&lt;minor&gt;0&lt;/minor&gt;&lt;/specVersion&gt;&quot;);
+<span class="lineNum">     603 </span>            : 
+<span class="lineNum">     604 </span><span class="lineCov">          2 :         i = 0;</span>
+<span class="lineNum">     605 </span><span class="lineCov">          2 :         str = strcat_str(str, len, &amp;tmplen, &quot;&lt;actionList&gt;&quot;);</span>
+<span class="lineNum">     606 </span><span class="lineCov">         13 :         while(acts[i].name)</span>
+<span class="lineNum">     607 </span>            :         {
+<span class="lineNum">     608 </span><span class="lineCov">          9 :                 str = strcat_str(str, len, &amp;tmplen, &quot;&lt;action&gt;&lt;name&gt;&quot;);</span>
+<span class="lineNum">     609 </span><span class="lineCov">          9 :                 str = strcat_str(str, len, &amp;tmplen, acts[i].name);</span>
+<span class="lineNum">     610 </span><span class="lineCov">          9 :                 str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/name&gt;&quot;);</span>
+<span class="lineNum">     611 </span>            :                 /* argument List */
+<span class="lineNum">     612 </span><span class="lineCov">          9 :                 args = acts[i].args;</span>
+<span class="lineNum">     613 </span><span class="lineCov">          9 :                 if(args)</span>
+<span class="lineNum">     614 </span>            :                 {
+<span class="lineNum">     615 </span><span class="lineCov">          9 :                         str = strcat_str(str, len, &amp;tmplen, &quot;&lt;argumentList&gt;&quot;);</span>
+<span class="lineNum">     616 </span><span class="lineCov">          9 :                         j = 0;</span>
+<span class="lineNum">     617 </span><span class="lineCov">         55 :                         while(args[j].dir)</span>
+<span class="lineNum">     618 </span>            :                         {
+<span class="lineNum">     619 </span><span class="lineCov">         37 :                                 str = strcat_str(str, len, &amp;tmplen, &quot;&lt;argument&gt;&lt;name&gt;&quot;);</span>
+<span class="lineNum">     620 </span><span class="lineCov">         37 :                                 p = vars[args[j].relatedVar].name;</span>
+<span class="lineNum">     621 </span><span class="lineCov">         37 :                                 str = strcat_str(str, len, &amp;tmplen, (args[j].name ? args[j].name : p));</span>
+<span class="lineNum">     622 </span><span class="lineCov">         37 :                                 str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/name&gt;&lt;direction&gt;&quot;);</span>
+<span class="lineNum">     623 </span><span class="lineCov">         37 :                                 str = strcat_str(str, len, &amp;tmplen, args[j].dir==1?&quot;in&quot;:&quot;out&quot;);</span>
+<span class="lineNum">     624 </span><span class="lineCov">         37 :                                 str = strcat_str(str, len, &amp;tmplen,</span>
+<span class="lineNum">     625 </span>            :                                                 &quot;&lt;/direction&gt;&lt;relatedStateVariable&gt;&quot;);
+<span class="lineNum">     626 </span><span class="lineCov">         37 :                                 str = strcat_str(str, len, &amp;tmplen, p);</span>
+<span class="lineNum">     627 </span><span class="lineCov">         37 :                                 str = strcat_str(str, len, &amp;tmplen,</span>
+<span class="lineNum">     628 </span>            :                                                 &quot;&lt;/relatedStateVariable&gt;&lt;/argument&gt;&quot;);
+<span class="lineNum">     629 </span><span class="lineCov">         37 :                                 j++;</span>
+<span class="lineNum">     630 </span>            :                         }
+<span class="lineNum">     631 </span><span class="lineCov">          9 :                         str = strcat_str(str, len, &amp;tmplen,&quot;&lt;/argumentList&gt;&quot;);</span>
+<span class="lineNum">     632 </span>            :                 }
+<span class="lineNum">     633 </span><span class="lineCov">          9 :                 str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/action&gt;&quot;);</span>
+<span class="lineNum">     634 </span>            :                 /*str = strcat_char(str, len, &amp;tmplen, '\n'); // TEMP ! */
+<span class="lineNum">     635 </span><span class="lineCov">          9 :                 i++;</span>
+<span class="lineNum">     636 </span>            :         }
+<span class="lineNum">     637 </span><span class="lineCov">          2 :         str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/actionList&gt;&lt;serviceStateTable&gt;&quot;);</span>
+<span class="lineNum">     638 </span><span class="lineCov">          2 :         i = 0;</span>
+<span class="lineNum">     639 </span><span class="lineCov">         28 :         while(vars[i].name)</span>
+<span class="lineNum">     640 </span>            :         {
+<span class="lineNum">     641 </span><span class="lineCov">         24 :                 str = strcat_str(str, len, &amp;tmplen,</span>
+<span class="lineNum">     642 </span>            :                                 &quot;&lt;stateVariable sendEvents=\&quot;&quot;);
+<span class="lineNum">     643 </span><span class="lineCov">         24 :                 str = strcat_str(str, len, &amp;tmplen, (vars[i].itype &amp; EVENTED)?&quot;yes&quot;:&quot;no&quot;);</span>
+<span class="lineNum">     644 </span><span class="lineCov">         24 :                 str = strcat_str(str, len, &amp;tmplen, &quot;\&quot;&gt;&lt;name&gt;&quot;);</span>
+<span class="lineNum">     645 </span><span class="lineCov">         24 :                 str = strcat_str(str, len, &amp;tmplen, vars[i].name);</span>
+<span class="lineNum">     646 </span><span class="lineCov">         24 :                 str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/name&gt;&lt;dataType&gt;&quot;);</span>
+<span class="lineNum">     647 </span><span class="lineCov">         24 :                 str = strcat_str(str, len, &amp;tmplen, upnptypes[vars[i].itype &amp; 0x0f]);</span>
+<span class="lineNum">     648 </span><span class="lineCov">         24 :                 str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/dataType&gt;&quot;);</span>
+<span class="lineNum">     649 </span><span class="lineCov">         24 :                 if(vars[i].iallowedlist)</span>
+<span class="lineNum">     650 </span>            :                 {
+<span class="lineNum">     651 </span><span class="lineCov">          3 :                   str = strcat_str(str, len, &amp;tmplen, &quot;&lt;allowedValueList&gt;&quot;);</span>
+<span class="lineNum">     652 </span><span class="lineCov">         12 :                   for(j=vars[i].iallowedlist; upnpallowedvalues[j]; j++)</span>
+<span class="lineNum">     653 </span>            :                   {
+<span class="lineNum">     654 </span><span class="lineCov">          9 :                     str = strcat_str(str, len, &amp;tmplen, &quot;&lt;allowedValue&gt;&quot;);</span>
+<span class="lineNum">     655 </span><span class="lineCov">          9 :                     str = strcat_str(str, len, &amp;tmplen, upnpallowedvalues[j]);</span>
+<span class="lineNum">     656 </span><span class="lineCov">          9 :                     str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/allowedValue&gt;&quot;);</span>
+<span class="lineNum">     657 </span>            :                   }
+<span class="lineNum">     658 </span><span class="lineCov">          3 :                   str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/allowedValueList&gt;&quot;);</span>
+<span class="lineNum">     659 </span>            :                 }
+<span class="lineNum">     660 </span>            :                 /*if(vars[i].defaultValue) */
+<span class="lineNum">     661 </span><span class="lineCov">         24 :                 if(vars[i].idefault)</span>
+<span class="lineNum">     662 </span>            :                 {
+<span class="lineNum">     663 </span><span class="lineNoCov">          0 :                   str = strcat_str(str, len, &amp;tmplen, &quot;&lt;defaultValue&gt;&quot;);</span>
+<span class="lineNum">     664 </span>            :                   /*str = strcat_str(str, len, &amp;tmplen, vars[i].defaultValue); */
+<span class="lineNum">     665 </span><span class="lineNoCov">          0 :                   str = strcat_str(str, len, &amp;tmplen, upnpdefaultvalues[vars[i].idefault]);</span>
+<span class="lineNum">     666 </span><span class="lineNoCov">          0 :                   str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/defaultValue&gt;&quot;);</span>
+<span class="lineNum">     667 </span>            :                 }
+<span class="lineNum">     668 </span><span class="lineCov">         24 :                 str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/stateVariable&gt;&quot;);</span>
+<span class="lineNum">     669 </span>            :                 /*str = strcat_char(str, len, &amp;tmplen, '\n'); // TEMP ! */
+<span class="lineNum">     670 </span><span class="lineCov">         24 :                 i++;</span>
+<span class="lineNum">     671 </span>            :         }
+<span class="lineNum">     672 </span><span class="lineCov">          2 :         str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/serviceStateTable&gt;&lt;/scpd&gt;&quot;);</span>
+<span class="lineNum">     673 </span><span class="lineCov">          2 :         str[*len] = '\0';</span>
+<span class="lineNum">     674 </span><span class="lineCov">          2 :         return str;</span>
+<span class="lineNum">     675 </span>            : }
+<span class="lineNum">     676 </span>            : 
+<span class="lineNum">     677 </span>            : /* genContentDirectory() :
+<a name="678"><span class="lineNum">     678 </span>            :  * Generate the ContentDirectory xml description */</a>
+<span class="lineNum">     679 </span>            : char *
+<span class="lineNum">     680 </span><span class="lineCov">          1 : genContentDirectory(int * len)</span>
+<span class="lineNum">     681 </span>            : {
+<span class="lineNum">     682 </span><span class="lineCov">          1 :         return genServiceDesc(len, &amp;scpdContentDirectory);</span>
+<span class="lineNum">     683 </span>            : }
+<span class="lineNum">     684 </span>            : 
+<span class="lineNum">     685 </span>            : /* genConnectionManager() :
+<a name="686"><span class="lineNum">     686 </span>            :  * Generate the ConnectionManager xml description */</a>
+<span class="lineNum">     687 </span>            : char *
+<span class="lineNum">     688 </span><span class="lineCov">          1 : genConnectionManager(int * len)</span>
+<span class="lineNum">     689 </span>            : {
+<span class="lineNum">     690 </span><span class="lineCov">          1 :         return genServiceDesc(len, &amp;scpdConnectionManager);</span>
+<span class="lineNum">     691 </span>            : }
+<span class="lineNum">     692 </span>            : 
+<span class="lineNum">     693 </span>            : /* genX_MS_MediaReceiverRegistrar() :
+<a name="694"><span class="lineNum">     694 </span>            :  * Generate the X_MS_MediaReceiverRegistrar xml description */</a>
+<span class="lineNum">     695 </span>            : char *
+<span class="lineNum">     696 </span><span class="lineNoCov">          0 : genX_MS_MediaReceiverRegistrar(int * len)</span>
+<span class="lineNum">     697 </span>            : {
+<span class="lineNum">     698 </span><span class="lineNoCov">          0 :         return genServiceDesc(len, &amp;scpdX_MS_MediaReceiverRegistrar);</span>
+<span class="lineNum">     699 </span>            : }
+<a name="700"><span class="lineNum">     700 </span>            : </a>
+<span class="lineNum">     701 </span>            : static char *
+<span class="lineNum">     702 </span><span class="lineCov">          2 : genEventVars(int * len, const struct serviceDesc * s, const char * servns)</span>
+<span class="lineNum">     703 </span>            : {
+<span class="lineNum">     704 </span>            :         const struct stateVar * v;
+<span class="lineNum">     705 </span>            :         char * str;
+<span class="lineNum">     706 </span>            :         int tmplen;
+<span class="lineNum">     707 </span>            :         char buf[512];
+<span class="lineNum">     708 </span><span class="lineCov">          2 :         tmplen = 512;</span>
+<span class="lineNum">     709 </span><span class="lineCov">          2 :         str = (char *)malloc(tmplen);</span>
+<span class="lineNum">     710 </span><span class="lineCov">          2 :         if(str == NULL)</span>
+<span class="lineNum">     711 </span><span class="lineNoCov">          0 :                 return NULL;</span>
+<span class="lineNum">     712 </span><span class="lineCov">          2 :         *len = 0;</span>
+<span class="lineNum">     713 </span><span class="lineCov">          2 :         v = s-&gt;serviceStateTable;</span>
+<span class="lineNum">     714 </span><span class="lineCov">          2 :         snprintf(buf, sizeof(buf), &quot;&lt;e:propertyset xmlns:e=\&quot;urn:schemas-upnp-org:event-1-0\&quot; xmlns:s=\&quot;%s\&quot;&gt;&quot;, servns);</span>
+<span class="lineNum">     715 </span><span class="lineCov">          2 :         str = strcat_str(str, len, &amp;tmplen, buf);</span>
+<span class="lineNum">     716 </span><span class="lineCov">         28 :         while(v-&gt;name) {</span>
+<span class="lineNum">     717 </span><span class="lineCov">         24 :                 if(v-&gt;itype &amp; EVENTED) {</span>
+<span class="lineNum">     718 </span><span class="lineCov">          5 :                         snprintf(buf, sizeof(buf), &quot;&lt;e:property&gt;&lt;%s&gt;&quot;, v-&gt;name);</span>
+<span class="lineNum">     719 </span><span class="lineCov">          5 :                         str = strcat_str(str, len, &amp;tmplen, buf);</span>
+<span class="lineNum">     720 </span>            :                         //printf(&quot;&lt;e:property&gt;&lt;s:%s&gt;&quot;, v-&gt;name);
+<span class="lineNum">     721 </span><span class="lineCov">          5 :                         switch(v-&gt;ieventvalue) {</span>
+<span class="lineNum">     722 </span><span class="lineNoCov">          0 :                         case 0:</span>
+<span class="lineNum">     723 </span><span class="lineNoCov">          0 :                                 break;</span>
+<span class="lineNum">     724 </span><span class="lineCov">          1 :                         case 255:       /* Magical values should go around here */</span>
+<span class="lineNum">     725 </span><span class="lineCov">          1 :                                 if( strcmp(v-&gt;name, &quot;SystemUpdateID&quot;) == 0 )</span>
+<span class="lineNum">     726 </span>            :                                 {
+<span class="lineNum">     727 </span><span class="lineCov">          1 :                                         snprintf(buf, sizeof(buf), &quot;%d&quot;, updateID);</span>
+<span class="lineNum">     728 </span><span class="lineCov">          1 :                                         str = strcat_str(str, len, &amp;tmplen, buf);</span>
+<span class="lineNum">     729 </span>            :                                 }
+<span class="lineNum">     730 </span><span class="lineCov">          1 :                                 break;</span>
+<span class="lineNum">     731 </span><span class="lineCov">          4 :                         default:</span>
+<span class="lineNum">     732 </span><span class="lineCov">          4 :                                 str = strcat_str(str, len, &amp;tmplen, upnpallowedvalues[v-&gt;ieventvalue]);</span>
+<span class="lineNum">     733 </span>            :                                 //printf(&quot;%s&quot;, upnpallowedvalues[v-&gt;ieventvalue]);
+<span class="lineNum">     734 </span>            :                         }
+<span class="lineNum">     735 </span><span class="lineCov">          5 :                         snprintf(buf, sizeof(buf), &quot;&lt;/%s&gt;&lt;/e:property&gt;&quot;, v-&gt;name);</span>
+<span class="lineNum">     736 </span><span class="lineCov">          5 :                         str = strcat_str(str, len, &amp;tmplen, buf);</span>
+<span class="lineNum">     737 </span>            :                         //printf(&quot;&lt;/s:%s&gt;&lt;/e:property&gt;\n&quot;, v-&gt;name);
+<span class="lineNum">     738 </span>            :                 }
+<span class="lineNum">     739 </span><span class="lineCov">         24 :                 v++;</span>
+<span class="lineNum">     740 </span>            :         }
+<span class="lineNum">     741 </span><span class="lineCov">          2 :         str = strcat_str(str, len, &amp;tmplen, &quot;&lt;/e:propertyset&gt;&quot;);</span>
+<span class="lineNum">     742 </span>            :         //printf(&quot;&lt;/e:propertyset&gt;\n&quot;);
+<span class="lineNum">     743 </span>            :         //printf(&quot;\n&quot;);
+<span class="lineNum">     744 </span>            :         //printf(&quot;%d\n&quot;, tmplen);
+<span class="lineNum">     745 </span><span class="lineCov">          2 :         str[*len] = '\0';</span>
+<span class="lineNum">     746 </span><span class="lineCov">          2 :         return str;</span>
+<span class="lineNum">     747 </span>            : }
+<a name="748"><span class="lineNum">     748 </span>            : </a>
+<span class="lineNum">     749 </span>            : char *
+<span class="lineNum">     750 </span><span class="lineCov">          1 : getVarsContentDirectory(int * l)</span>
+<span class="lineNum">     751 </span>            : {
+<span class="lineNum">     752 </span><span class="lineCov">          1 :         return genEventVars(l,</span>
+<span class="lineNum">     753 </span>            :                         &amp;scpdContentDirectory,
+<span class="lineNum">     754 </span>            :                             &quot;urn:schemas-upnp-org:service:ContentDirectory:1&quot;);
+<span class="lineNum">     755 </span>            : }
+<a name="756"><span class="lineNum">     756 </span>            : </a>
+<span class="lineNum">     757 </span>            : char *
+<span class="lineNum">     758 </span><span class="lineCov">          1 : getVarsConnectionManager(int * l)</span>
+<span class="lineNum">     759 </span>            : {
+<span class="lineNum">     760 </span><span class="lineCov">          1 :         return genEventVars(l,</span>
+<span class="lineNum">     761 </span>            :                         &amp;scpdConnectionManager,
+<span class="lineNum">     762 </span>            :                             &quot;urn:schemas-upnp-org:service:ConnectionManager:1&quot;);
+<span class="lineNum">     763 </span>            : }
+<a name="764"><span class="lineNum">     764 </span>            : </a>
+<span class="lineNum">     765 </span>            : char *
+<span class="lineNum">     766 </span><span class="lineNoCov">          0 : getVarsX_MS_MediaReceiverRegistrar(int * l)</span>
+<span class="lineNum">     767 </span>            : {
+<span class="lineNum">     768 </span><span class="lineNoCov">          0 :         return genEventVars(l,</span>
+<span class="lineNum">     769 </span>            :                         &amp;scpdX_MS_MediaReceiverRegistrar,
+<span class="lineNum">     770 </span>            :                             &quot;urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1&quot;);
+<span class="lineNum">     771 </span>            : }
+<span class="lineNum">     772 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - src/monitor.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - monitor.c<span style="font-size: 80%;"> (source / <a href="monitor.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">64</td>
+            <td class="headerCovTableEntry">95</td>
+            <td class="headerCovTableEntryLo">67.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2020-11-02 23:20:37</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /* MiniDLNA media server</a>
+<span class="lineNum">       2 </span>            :  * Copyright (C) 2008-2010  Justin Maggard
+<span class="lineNum">       3 </span>            :  *
+<span class="lineNum">       4 </span>            :  * This file is part of MiniDLNA.
+<span class="lineNum">       5 </span>            :  *
+<span class="lineNum">       6 </span>            :  * MiniDLNA is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>            :  * it under the terms of the GNU General Public License version 2 as
+<span class="lineNum">       8 </span>            :  * published by the Free Software Foundation.
+<span class="lineNum">       9 </span>            :  *
+<span class="lineNum">      10 </span>            :  * MiniDLNA is distributed in the hope that it will be useful,
+<span class="lineNum">      11 </span>            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      12 </span>            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      13 </span>            :  * GNU General Public License for more details.
+<span class="lineNum">      14 </span>            :  *
+<span class="lineNum">      15 </span>            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      16 </span>            :  * along with MiniDLNA. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<span class="lineNum">      17 </span>            :  */
+<span class="lineNum">      18 </span>            : #include &quot;config.h&quot;
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">      21 </span>            : #include &lt;string.h&gt;
+<span class="lineNum">      22 </span>            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      23 </span>            : #include &lt;errno.h&gt;
+<span class="lineNum">      24 </span>            : #include &lt;unistd.h&gt;
+<span class="lineNum">      25 </span>            : #include &lt;dirent.h&gt;
+<span class="lineNum">      26 </span>            : #include &lt;libgen.h&gt;
+<span class="lineNum">      27 </span>            : #include &lt;signal.h&gt;
+<span class="lineNum">      28 </span>            : #include &lt;errno.h&gt;
+<span class="lineNum">      29 </span>            : #include &lt;sys/types.h&gt;
+<span class="lineNum">      30 </span>            : #include &lt;sys/stat.h&gt;
+<span class="lineNum">      31 </span>            : #include &lt;sys/time.h&gt;
+<span class="lineNum">      32 </span>            : #ifdef HAVE_INOTIFY
+<span class="lineNum">      33 </span>            : #include &lt;sys/resource.h&gt;
+<span class="lineNum">      34 </span>            : #include &lt;poll.h&gt;
+<span class="lineNum">      35 </span>            : #ifdef HAVE_SYS_INOTIFY_H
+<span class="lineNum">      36 </span>            : #include &lt;sys/inotify.h&gt;
+<span class="lineNum">      37 </span>            : #else
+<span class="lineNum">      38 </span>            : #include &quot;linux/inotify.h&quot;
+<span class="lineNum">      39 </span>            : #include &quot;linux/inotify-syscalls.h&quot;
+<span class="lineNum">      40 </span>            : #endif
+<span class="lineNum">      41 </span>            : #endif
+<span class="lineNum">      42 </span>            : #include &quot;libav.h&quot;
+<span class="lineNum">      43 </span>            : 
+<span class="lineNum">      44 </span>            : #include &quot;upnpglobalvars.h&quot;
+<span class="lineNum">      45 </span>            : #include &quot;monitor.h&quot;
+<span class="lineNum">      46 </span>            : #include &quot;utils.h&quot;
+<span class="lineNum">      47 </span>            : #include &quot;sql.h&quot;
+<span class="lineNum">      48 </span>            : #include &quot;scanner.h&quot;
+<span class="lineNum">      49 </span>            : #include &quot;metadata.h&quot;
+<span class="lineNum">      50 </span>            : #include &quot;log.h&quot;
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            : #ifdef HAVE_INOTIFY
+<span class="lineNum">      53 </span>            : #define EVENT_SIZE  ( sizeof (struct inotify_event) )
+<span class="lineNum">      54 </span>            : #define BUF_LEN     ( 1024 * ( EVENT_SIZE + 16 ) )
+<span class="lineNum">      55 </span>            : #define DESIRED_WATCH_LIMIT 65536
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            : #define PATH_BUF_SIZE PATH_MAX
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            : struct watch
+<span class="lineNum">      60 </span>            : {
+<span class="lineNum">      61 </span>            :         int wd;         /* watch descriptor */
+<span class="lineNum">      62 </span>            :         char *path;     /* watched path */
+<span class="lineNum">      63 </span>            :         struct watch *next;
+<span class="lineNum">      64 </span>            : };
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span>            : static struct watch *watches;
+<span class="lineNum">      67 </span>            : static struct watch *lastwatch = NULL;
+<a name="68"><span class="lineNum">      68 </span>            : </a>
+<span class="lineNum">      69 </span>            : static unsigned int
+<span class="lineNum">      70 </span><span class="lineNoCov">          0 : next_highest(unsigned int num)</span>
+<span class="lineNum">      71 </span>            : {
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :         num |= num &gt;&gt; 1;</span>
+<span class="lineNum">      73 </span><span class="lineNoCov">          0 :         num |= num &gt;&gt; 2;</span>
+<span class="lineNum">      74 </span><span class="lineNoCov">          0 :         num |= num &gt;&gt; 4;</span>
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 :         num |= num &gt;&gt; 8;</span>
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :         num |= num &gt;&gt; 16;</span>
+<span class="lineNum">      77 </span><span class="lineNoCov">          0 :         return ++num;</span>
+<span class="lineNum">      78 </span>            : }
+<a name="79"><span class="lineNum">      79 </span>            : </a>
+<span class="lineNum">      80 </span>            : static void
+<span class="lineNum">      81 </span><span class="lineNoCov">          0 : raise_watch_limit(unsigned int limit)</span>
+<span class="lineNum">      82 </span>            : {
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 :         FILE *max_watches = fopen(&quot;/proc/sys/fs/inotify/max_user_watches&quot;, &quot;r+&quot;);</span>
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 :         if (!max_watches)</span>
+<span class="lineNum">      85 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">      86 </span><span class="lineNoCov">          0 :         if (!limit)</span>
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :                 fscanf(max_watches, &quot;%u&quot;, &amp;limit);</span>
+<span class="lineNum">      88 </span><span class="lineNoCov">          0 :         fprintf(max_watches, &quot;%u&quot;, next_highest(limit));</span>
+<span class="lineNum">      89 </span><span class="lineNoCov">          0 :         fclose(max_watches);</span>
+<span class="lineNum">      90 </span>            : }
+<a name="91"><span class="lineNum">      91 </span>            : </a>
+<span class="lineNum">      92 </span>            : static int
+<span class="lineNum">      93 </span><span class="lineCov">          4 : add_watch(int fd, const char * path)</span>
+<span class="lineNum">      94 </span>            : {
+<span class="lineNum">      95 </span>            :         struct watch *nw;
+<span class="lineNum">      96 </span>            :         int wd;
+<span class="lineNum">      97 </span>            : 
+<span class="lineNum">      98 </span><span class="lineCov">          4 :         wd = inotify_add_watch(fd, path, IN_CREATE|IN_CLOSE_WRITE|IN_DELETE|IN_MOVE);</span>
+<span class="lineNum">      99 </span><span class="lineCov">          4 :         if( wd &lt; 0 &amp;&amp; errno == ENOSPC)</span>
+<span class="lineNum">     100 </span>            :         {
+<span class="lineNum">     101 </span><span class="lineNoCov">          0 :                 raise_watch_limit(0);</span>
+<span class="lineNum">     102 </span><span class="lineNoCov">          0 :                 wd = inotify_add_watch(fd, path, IN_CREATE|IN_CLOSE_WRITE|IN_DELETE|IN_MOVE);</span>
+<span class="lineNum">     103 </span>            :         }
+<span class="lineNum">     104 </span><span class="lineCov">          4 :         if( wd &lt; 0 )</span>
+<span class="lineNum">     105 </span>            :         {
+<span class="lineNum">     106 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_INOTIFY, &quot;inotify_add_watch(%s) [%s]\n&quot;, path, strerror(errno));</span>
+<span class="lineNum">     107 </span><span class="lineNoCov">          0 :                 return -1;</span>
+<span class="lineNum">     108 </span>            :         }
+<span class="lineNum">     109 </span>            : 
+<span class="lineNum">     110 </span><span class="lineCov">          4 :         nw = malloc(sizeof(struct watch));</span>
+<span class="lineNum">     111 </span><span class="lineCov">          4 :         if( nw == NULL )</span>
+<span class="lineNum">     112 </span>            :         {
+<span class="lineNum">     113 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_INOTIFY, &quot;malloc() error\n&quot;);</span>
+<span class="lineNum">     114 </span><span class="lineNoCov">          0 :                 return -1;</span>
+<span class="lineNum">     115 </span>            :         }
+<span class="lineNum">     116 </span><span class="lineCov">          4 :         nw-&gt;wd = wd;</span>
+<span class="lineNum">     117 </span><span class="lineCov">          4 :         nw-&gt;next = NULL;</span>
+<span class="lineNum">     118 </span><span class="lineCov">          4 :         nw-&gt;path = strdup(path);</span>
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span><span class="lineCov">          4 :         if( watches == NULL )</span>
+<span class="lineNum">     121 </span>            :         {
+<span class="lineNum">     122 </span><span class="lineCov">          1 :                 watches = nw;</span>
+<span class="lineNum">     123 </span>            :         }
+<span class="lineNum">     124 </span>            : 
+<span class="lineNum">     125 </span><span class="lineCov">          4 :         if( lastwatch != NULL )</span>
+<span class="lineNum">     126 </span>            :         {
+<span class="lineNum">     127 </span><span class="lineCov">          3 :                 lastwatch-&gt;next = nw;</span>
+<span class="lineNum">     128 </span>            :         }
+<span class="lineNum">     129 </span><span class="lineCov">          4 :         lastwatch = nw;</span>
+<span class="lineNum">     130 </span>            : 
+<span class="lineNum">     131 </span><span class="lineCov">          4 :         return wd;</span>
+<span class="lineNum">     132 </span>            : }
+<a name="133"><span class="lineNum">     133 </span>            : </a>
+<span class="lineNum">     134 </span>            : static int
+<span class="lineNum">     135 </span><span class="lineCov">          1 : inotify_create_watches(int fd)</span>
+<span class="lineNum">     136 </span>            : {
+<span class="lineNum">     137 </span>            :         FILE * max_watches;
+<span class="lineNum">     138 </span><span class="lineCov">          1 :         unsigned int num_watches = 0, watch_limit;</span>
+<span class="lineNum">     139 </span>            :         char **result;
+<span class="lineNum">     140 </span><span class="lineCov">          1 :         int i, rows = 0;</span>
+<span class="lineNum">     141 </span>            :         struct media_dir_s * media_path;
+<span class="lineNum">     142 </span>            : 
+<span class="lineNum">     143 </span><span class="lineCov">          2 :         for( media_path = media_dirs; media_path != NULL; media_path = media_path-&gt;next )</span>
+<span class="lineNum">     144 </span>            :         {
+<span class="lineNum">     145 </span><span class="lineCov">          1 :                 DPRINTF(E_DEBUG, L_INOTIFY, &quot;Add watch to %s\n&quot;, media_path-&gt;path);</span>
+<span class="lineNum">     146 </span><span class="lineCov">          1 :                 add_watch(fd, media_path-&gt;path);</span>
+<span class="lineNum">     147 </span><span class="lineCov">          1 :                 num_watches++;</span>
+<span class="lineNum">     148 </span>            :         }
+<span class="lineNum">     149 </span><span class="lineCov">          1 :         sql_get_table(db, &quot;SELECT PATH from DETAILS where MIME is NULL and PATH is not NULL&quot;, &amp;result, &amp;rows, NULL);</span>
+<span class="lineNum">     150 </span><span class="lineCov">          4 :         for( i=1; i &lt;= rows; i++ )</span>
+<span class="lineNum">     151 </span>            :         {
+<span class="lineNum">     152 </span><span class="lineCov">          3 :                 DPRINTF(E_DEBUG, L_INOTIFY, &quot;Add watch to %s\n&quot;, result[i]);</span>
+<span class="lineNum">     153 </span><span class="lineCov">          3 :                 add_watch(fd, result[i]);</span>
+<span class="lineNum">     154 </span><span class="lineCov">          3 :                 num_watches++;</span>
+<span class="lineNum">     155 </span>            :         }
+<span class="lineNum">     156 </span><span class="lineCov">          1 :         sqlite3_free_table(result);</span>
+<span class="lineNum">     157 </span>            :                 
+<span class="lineNum">     158 </span><span class="lineCov">          1 :         max_watches = fopen(&quot;/proc/sys/fs/inotify/max_user_watches&quot;, &quot;r&quot;);</span>
+<span class="lineNum">     159 </span><span class="lineCov">          1 :         if( max_watches )</span>
+<span class="lineNum">     160 </span>            :         {
+<span class="lineNum">     161 </span><span class="lineCov">          1 :                 if( fscanf(max_watches, &quot;%10u&quot;, &amp;watch_limit) &lt; 1 )</span>
+<span class="lineNum">     162 </span><span class="lineNoCov">          0 :                         watch_limit = 8192;</span>
+<span class="lineNum">     163 </span><span class="lineCov">          1 :                 fclose(max_watches);</span>
+<span class="lineNum">     164 </span><span class="lineCov">          1 :                 if( (watch_limit &lt; DESIRED_WATCH_LIMIT) || (watch_limit &lt; (num_watches*4/3)) )</span>
+<span class="lineNum">     165 </span>            :                 {
+<span class="lineNum">     166 </span><span class="lineCov">          1 :                         if (access(&quot;/proc/sys/fs/inotify/max_user_watches&quot;, W_OK) == 0)</span>
+<span class="lineNum">     167 </span>            :                         {
+<span class="lineNum">     168 </span><span class="lineNoCov">          0 :                                 if( DESIRED_WATCH_LIMIT &gt;= (num_watches*3/4) )</span>
+<span class="lineNum">     169 </span>            :                                 {
+<span class="lineNum">     170 </span><span class="lineNoCov">          0 :                                         raise_watch_limit(8191U);</span>
+<span class="lineNum">     171 </span>            :                                 }
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 :                                 else if( next_highest(num_watches) &gt;= (num_watches*3/4) )</span>
+<span class="lineNum">     173 </span>            :                                 {
+<span class="lineNum">     174 </span><span class="lineNoCov">          0 :                                         raise_watch_limit(num_watches);</span>
+<span class="lineNum">     175 </span>            :                                 }
+<span class="lineNum">     176 </span>            :                                 else
+<span class="lineNum">     177 </span>            :                                 {
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :                                         raise_watch_limit(next_highest(num_watches));</span>
+<span class="lineNum">     179 </span>            :                                 }
+<span class="lineNum">     180 </span>            :                         }
+<span class="lineNum">     181 </span>            :                         else
+<span class="lineNum">     182 </span>            :                         {
+<span class="lineNum">     183 </span><span class="lineCov">          1 :                                 DPRINTF(E_WARN, L_INOTIFY, &quot;WARNING: Inotify max_user_watches [%u] is low or close to the number of used watches [%u] &quot;</span>
+<span class="lineNum">     184 </span>            :                                                         &quot;and I do not have permission to increase this limit.  Please do so manually by &quot;
+<span class="lineNum">     185 </span>            :                                                         &quot;writing a higher value into /proc/sys/fs/inotify/max_user_watches.\n&quot;, watch_limit, num_watches);
+<span class="lineNum">     186 </span>            :                         }
+<span class="lineNum">     187 </span>            :                 }
+<span class="lineNum">     188 </span>            :         }
+<span class="lineNum">     189 </span>            :         else
+<span class="lineNum">     190 </span>            :         {
+<span class="lineNum">     191 </span><span class="lineNoCov">          0 :                 DPRINTF(E_WARN, L_INOTIFY, &quot;WARNING: Could not read inotify max_user_watches!  &quot;</span>
+<span class="lineNum">     192 </span>            :                                         &quot;Hopefully it is enough to cover %u current directories plus any new ones added.\n&quot;, num_watches);
+<span class="lineNum">     193 </span>            :         }
+<span class="lineNum">     194 </span>            : 
+<span class="lineNum">     195 </span><span class="lineCov">          1 :         return rows;</span>
+<span class="lineNum">     196 </span>            : }
+<a name="197"><span class="lineNum">     197 </span>            : </a>
+<span class="lineNum">     198 </span>            : static int
+<span class="lineNum">     199 </span><span class="lineCov">          1 : inotify_remove_watches(int fd)</span>
+<span class="lineNum">     200 </span>            : {
+<span class="lineNum">     201 </span><span class="lineCov">          1 :         struct watch *w = watches;</span>
+<span class="lineNum">     202 </span>            :         struct watch *last_w;
+<span class="lineNum">     203 </span><span class="lineCov">          1 :         int rm_watches = 0;</span>
+<span class="lineNum">     204 </span>            : 
+<span class="lineNum">     205 </span><span class="lineCov">          6 :         while( w )</span>
+<span class="lineNum">     206 </span>            :         {
+<span class="lineNum">     207 </span><span class="lineCov">          4 :                 last_w = w;</span>
+<span class="lineNum">     208 </span><span class="lineCov">          4 :                 inotify_rm_watch(fd, w-&gt;wd);</span>
+<span class="lineNum">     209 </span><span class="lineCov">          4 :                 free(w-&gt;path);</span>
+<span class="lineNum">     210 </span><span class="lineCov">          4 :                 rm_watches++;</span>
+<span class="lineNum">     211 </span><span class="lineCov">          4 :                 w = w-&gt;next;</span>
+<span class="lineNum">     212 </span><span class="lineCov">          4 :                 free(last_w);</span>
+<span class="lineNum">     213 </span>            :         }
+<span class="lineNum">     214 </span>            : 
+<span class="lineNum">     215 </span><span class="lineCov">          1 :         return rm_watches;</span>
+<span class="lineNum">     216 </span>            : }
+<span class="lineNum">     217 </span>            : #endif
+<span class="lineNum">     218 </span>            : 
+<a name="219"><span class="lineNum">     219 </span>            : #ifdef HAVE_INOTIFY</a>
+<span class="lineNum">     220 </span>            : void *
+<span class="lineNum">     221 </span><span class="lineCov">          1 : start_inotify(void)</span>
+<span class="lineNum">     222 </span>            : {
+<span class="lineNum">     223 </span>            :         struct pollfd pollfds[1];
+<span class="lineNum">     224 </span>            :         sigset_t set;
+<span class="lineNum">     225 </span>            : 
+<span class="lineNum">     226 </span><span class="lineCov">          1 :         sigfillset(&amp;set);</span>
+<span class="lineNum">     227 </span><span class="lineCov">          1 :         sigdelset(&amp;set, SIGCHLD);</span>
+<span class="lineNum">     228 </span><span class="lineCov">          1 :         pthread_sigmask(SIG_BLOCK, &amp;set, NULL);</span>
+<span class="lineNum">     229 </span>            : 
+<span class="lineNum">     230 </span><span class="lineCov">          1 :         pollfds[0].fd = inotify_init();</span>
+<span class="lineNum">     231 </span><span class="lineCov">          1 :         pollfds[0].events = POLLIN;</span>
+<span class="lineNum">     232 </span>            : 
+<span class="lineNum">     233 </span><span class="lineCov">          1 :         if ( pollfds[0].fd &lt; 0 )</span>
+<span class="lineNum">     234 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_INOTIFY, &quot;inotify_init() failed!\n&quot;);</span>
+<span class="lineNum">     235 </span>            : 
+<span class="lineNum">     236 </span><span class="lineCov">          3 :         while( GETFLAG(SCANNING_MASK) )</span>
+<span class="lineNum">     237 </span>            :         {
+<span class="lineNum">     238 </span><span class="lineCov">          1 :                 if( quitting )</span>
+<span class="lineNum">     239 </span><span class="lineNoCov">          0 :                         goto quitting;</span>
+<span class="lineNum">     240 </span><span class="lineCov">          1 :                 sleep(1);</span>
+<span class="lineNum">     241 </span>            :         }
+<span class="lineNum">     242 </span><span class="lineCov">          1 :         inotify_create_watches(pollfds[0].fd);</span>
+<span class="lineNum">     243 </span><span class="lineCov">          1 :         if (setpriority(PRIO_PROCESS, 0, 19) == -1)</span>
+<span class="lineNum">     244 </span><span class="lineNoCov">          0 :                 DPRINTF(E_WARN, L_INOTIFY,  &quot;Failed to reduce inotify thread priority\n&quot;);</span>
+<span class="lineNum">     245 </span><span class="lineCov">          1 :         sqlite3_release_memory(1&lt;&lt;31);</span>
+<span class="lineNum">     246 </span>            : 
+<span class="lineNum">     247 </span><span class="lineCov">          1 :         inotify_remove_watches(pollfds[0].fd);</span>
+<span class="lineNum">     248 </span><span class="lineCov">          1 : quitting:</span>
+<span class="lineNum">     249 </span><span class="lineCov">          1 :         close(pollfds[0].fd);</span>
+<span class="lineNum">     250 </span>            : 
+<span class="lineNum">     251 </span><span class="lineCov">          1 :         return 0;</span>
+<span class="lineNum">     252 </span>            : }
+<span class="lineNum">     253 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

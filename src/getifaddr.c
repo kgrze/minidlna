@@ -269,6 +269,41 @@ getsyshwaddr(char *buf, int len)
 	return ret;
 }
 
+int
+get_remote_mac(struct in_addr ip_addr, unsigned char *mac)
+{
+	struct in_addr arp_ent;
+	FILE * arp;
+	char remote_ip[16];
+	int matches, hwtype, flags;
+	memset(mac, 0xFF, 6);
+
+	arp = fopen("/proc/net/arp", "r");
+	if (!arp)
+		return 1;
+	while (!feof(arp))
+	{
+		matches = fscanf(arp, "%15s 0x%8X 0x%8X %2hhx:%2hhx:%2hhx:%2hhx:%2hhx:%2hhx",
+		                      remote_ip, &hwtype, &flags,
+		                      &mac[0], &mac[1], &mac[2], &mac[3], &mac[4], &mac[5]);
+		if (matches != 9)
+			continue;
+		inet_pton(AF_INET, remote_ip, &arp_ent);
+		if (ip_addr.s_addr == arp_ent.s_addr)
+			break;
+		mac[0] = 0xFF;
+	}
+	fclose(arp);
+
+	if (mac[0] == 0xFF)
+	{
+		memset(mac, 0xFF, 6);
+		return 1;
+	}
+
+	return 0;
+}
+
 void
 reload_ifaces(int force_notify)
 {

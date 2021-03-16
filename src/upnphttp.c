@@ -75,6 +75,7 @@
 #include "sql.h"
 #include <libexif/exif-loader.h>
 #include "process.h"
+#include "sendfile.h"
 
 #define MAX_BUFFER_SIZE 2147483647
 #define MIN_BUFFER_SIZE 65536
@@ -171,6 +172,67 @@ ParseHttpHeaders(struct upnphttp * h)
 				h->req_soapAction = p;
 				h->req_soapActionLen = n;
 			}
+			else if(strncasecmp(line, "Callback", 8)==0)
+			{
+				p = colon;
+				while(*p && *p != '<' && *p != '\r' )
+					p++;
+				n = 0;
+				while(p[n] && p[n] != '>' && p[n] != '\r' )
+					n++;
+				h->req_Callback = p + 1;
+				h->req_CallbackLen = MAX(0, n - 1);
+			}
+			else if(strncasecmp(line, "SID", 3)==0)
+			{
+				//zqiu: fix bug for test 4.0.5
+				//Skip extra headers like "SIDHEADER: xxxxxx xxx"
+				for(p=line+3;p<colon;p++)
+				{
+					if(!isspace(*p))
+					{
+						p = NULL; //unexpected header
+						break;
+					}
+				}
+				if(p) {
+					p = colon + 1;
+					while(isspace(*p))
+						p++;
+					n = 0;
+					while(p[n] && !isspace(p[n]))
+						n++;
+					h->req_SID = p;
+					h->req_SIDLen = n;
+				}
+			}
+			else if(strncasecmp(line, "NT", 2)==0)
+			{
+				p = colon + 1;
+				while(isspace(*p))
+					p++;
+				n = 0;
+				while(p[n] && !isspace(p[n]))
+					n++;
+				h->req_NT = p;
+				h->req_NTLen = n;
+			}
+			/* Timeout: Seconds-nnnn */
+			/* TIMEOUT
+			Recommended. Requested duration until subscription expires,
+			either number of seconds or infinite. Recommendation
+			by a UPnP Forum working committee. Defined by UPnP vendor.
+			Consists of the keyword "Second-" followed (without an
+			intervening space) by either an integer or the keyword "infinite". */
+			else if(strncasecmp(line, "Timeout", 7)==0)
+			{
+				p = colon + 1;
+				while(isspace(*p))
+					p++;
+				if(strncasecmp(p, "Second-", 7)==0) {
+					h->req_Timeout = atoi(p+7);
+				}
+			}
 			// Range: bytes=xxx-yyy
 			else if(strncasecmp(line, "Range", 5)==0)
 			{
@@ -207,15 +269,104 @@ ParseHttpHeaders(struct upnphttp * h)
 					}
 				}
 			}
+			else if(strncasecmp(line, "Transfer-Encoding", 17)==0)
+			{
+				p = colon + 1;
+				while(isspace(*p))
+					p++;
+				if(strncasecmp(p, "chunked", 7)==0)
+				{
+					h->reqflags |= FLAG_CHUNKED;
+				}
+			}
 			else if(strncasecmp(line, "Accept-Language", 15)==0)
 			{
 				h->reqflags |= FLAG_LANGUAGE;
+			}
+			else if(strncasecmp(line, "getcontentFeatures.dlna.org", 27)==0)
+			{
+				p = colon + 1;
+				while(isspace(*p))
+					p++;
+				if( (*p != '1') || !isspace(p[1]) )
+					h->reqflags |= FLAG_INVALID_REQ;
+			}
+			else if(strncasecmp(line, "TimeSeekRange.dlna.org", 22)==0)
+			{
+				h->reqflags |= FLAG_TIMESEEK;
+			}
+			else if(strncasecmp(line, "PlaySpeed.dlna.org", 18)==0)
+			{
+				h->reqflags |= FLAG_PLAYSPEED;
+			}
+			else if(strncasecmp(line, "realTimeInfo.dlna.org", 21)==0)
+			{
+				h->reqflags |= FLAG_REALTIMEINFO;
+			}
+			else if(strncasecmp(line, "getAvailableSeekRange.dlna.org", 21)==0)
+			{
+				p = colon + 1;
+				while(isspace(*p))
+					p++;
+				if( (*p != '1') || !isspace(p[1]) )
+					h->reqflags |= FLAG_INVALID_REQ;
+			}
+			else if(strncasecmp(line, "transferMode.dlna.org", 21)==0)
+			{
+				p = colon + 1;
+				while(isspace(*p))
+					p++;
+				if(strncasecmp(p, "Streaming", 9)==0)
+				{
+					h->reqflags |= FLAG_XFERSTREAMING;
+				}
+				if(strncasecmp(p, "Interactive", 11)==0)
+				{
+					h->reqflags |= FLAG_XFERINTERACTIVE;
+				}
+				if(strncasecmp(p, "Background", 10)==0)
+				{
+					h->reqflags |= FLAG_XFERBACKGROUND;
+				}
+			}
+			else if(strncasecmp(line, "getCaptionInfo.sec", 18)==0)
+			{
+				h->reqflags |= FLAG_CAPTION;
+			}
+			else if(strncasecmp(line, "uctt.upnp.org:", 14)==0)
+			{
+				/* Conformance testing */
+				SETFLAG(DLNA_STRICT_MASK);
 			}
 		}
 		line = strstr(line, "\r\n");
 		if (!line)
 			return;
 		line += 2;
+	}
+	if( h->reqflags & FLAG_CHUNKED )
+	{
+		char *endptr;
+		h->req_chunklen = -1;
+		if( h->req_buflen <= h->req_contentoff )
+			return;
+		while( (line < (h->req_buf + h->req_buflen)) &&
+		       (h->req_chunklen = strtol(line, &endptr, 16)) &&
+		       (endptr != line) )
+		{
+			endptr = strstr(endptr, "\r\n");
+			if (!endptr)
+			{
+				return;
+			}
+			line = endptr+h->req_chunklen+2;
+		}
+
+		if( endptr == line )
+		{
+			h->req_chunklen = -1;
+			return;
+		}
 	}
 }
 
@@ -418,6 +569,42 @@ ProcessHttpQuery_upnphttp(struct upnphttp * h)
 
 	ParseHttpHeaders(h);
 
+	/* see if we need to wait for remaining data */
+	if( (h->reqflags & FLAG_CHUNKED) )
+	{
+		if( h->req_chunklen == -1)
+		{
+			Send400(h);
+			return;
+		}
+		if( h->req_chunklen )
+		{
+			h->state = 2;
+			return;
+		}
+		char *chunkstart, *chunk, *endptr, *endbuf;
+		chunk = endbuf = chunkstart = h->req_buf + h->req_contentoff;
+
+		while( (h->req_chunklen = strtol(chunk, &endptr, 16)) && (endptr != chunk) )
+		{
+			endptr = strstr(endptr, "\r\n");
+			if (!endptr)
+			{
+				Send400(h);
+				return;
+			}
+			endptr += 2;
+
+			memmove(endbuf, endptr, h->req_chunklen);
+
+			endbuf += h->req_chunklen;
+			chunk = endptr + h->req_chunklen;
+		}
+		h->req_contentlen = endbuf - chunkstart;
+		h->req_buflen = endbuf - h->req_buf;
+		h->state = 100;
+	}
+
 	DPRINTF(E_DEBUG, L_HTTP, "HTTP REQUEST: %.*s\n", h->req_buflen, h->req_buf);
 	if(strcmp("POST", HttpCommand) == 0)
 	{
@@ -485,49 +672,98 @@ Process_upnphttp(struct upnphttp * h)
 {
 	char buf[2048];
 	int n;
-
-	n = recv(h->socket, buf, 2048, 0);
-	if(n<0)
+	if(!h)
+		return;
+	switch(h->state)
 	{
-		DPRINTF(E_ERROR, L_HTTP, "recv (state0): %s\n", strerror(errno));
-		h->state = 100;
-	}
-	else if(n==0)
-	{
-		DPRINTF(E_WARN, L_HTTP, "HTTP Connection closed unexpectedly\n");
-		h->state = 100;
-	}
-	else
-	{
-		int new_req_buflen;
-		const char * endheaders;
-		/* if 1st arg of realloc() is null,
-			* realloc behaves the same as malloc() */
-		new_req_buflen = n + h->req_buflen + 1;
-		if (new_req_buflen >= 1024 * 1024)
+	case 0:
+		n = recv(h->socket, buf, 2048, 0);
+		if(n<0)
 		{
-			DPRINTF(E_ERROR, L_HTTP, "Receive headers too large (received %d bytes)\n", new_req_buflen);
+			DPRINTF(E_ERROR, L_HTTP, "recv (state0): %s\n", strerror(errno));
 			h->state = 100;
-			return;
 		}
-		h->req_buf = (char *)realloc(h->req_buf, new_req_buflen);
-		if (!h->req_buf)
+		else if(n==0)
 		{
-			DPRINTF(E_ERROR, L_HTTP, "Receive headers: %s\n", strerror(errno));
+			DPRINTF(E_WARN, L_HTTP, "HTTP Connection closed unexpectedly\n");
 			h->state = 100;
-			return;
 		}
-		memcpy(h->req_buf + h->req_buflen, buf, n);
-		h->req_buflen += n;
-		h->req_buf[h->req_buflen] = '\0';
-		/* search for the string "\r\n\r\n" */
-		endheaders = strstr(h->req_buf, "\r\n\r\n");
-		if(endheaders)
+		else
 		{
-			h->req_contentoff = endheaders - h->req_buf + 4;
-			h->req_contentlen = h->req_buflen - h->req_contentoff;
-			ProcessHttpQuery_upnphttp(h);
+			int new_req_buflen;
+			const char * endheaders;
+			/* if 1st arg of realloc() is null,
+			 * realloc behaves the same as malloc() */
+			new_req_buflen = n + h->req_buflen + 1;
+			if (new_req_buflen >= 1024 * 1024)
+			{
+				DPRINTF(E_ERROR, L_HTTP, "Receive headers too large (received %d bytes)\n", new_req_buflen);
+				h->state = 100;
+				break;
+			}
+			h->req_buf = (char *)realloc(h->req_buf, new_req_buflen);
+			if (!h->req_buf)
+			{
+				DPRINTF(E_ERROR, L_HTTP, "Receive headers: %s\n", strerror(errno));
+				h->state = 100;
+				break;
+			}
+			memcpy(h->req_buf + h->req_buflen, buf, n);
+			h->req_buflen += n;
+			h->req_buf[h->req_buflen] = '\0';
+			/* search for the string "\r\n\r\n" */
+			endheaders = strstr(h->req_buf, "\r\n\r\n");
+			if(endheaders)
+			{
+				h->req_contentoff = endheaders - h->req_buf + 4;
+				h->req_contentlen = h->req_buflen - h->req_contentoff;
+				ProcessHttpQuery_upnphttp(h);
+			}
 		}
+		break;
+	case 1:
+	case 2:
+		n = recv(h->socket, buf, sizeof(buf), 0);
+		if(n < 0)
+		{
+			DPRINTF(E_ERROR, L_HTTP, "recv (state%d): %s\n", h->state, strerror(errno));
+			h->state = 100;
+		}
+		else if(n == 0)
+		{
+			DPRINTF(E_WARN, L_HTTP, "HTTP Connection closed unexpectedly\n");
+			h->state = 100;
+		}
+		else
+		{
+			buf[sizeof(buf)-1] = '\0';
+			/*fwrite(buf, 1, n, stdout);*/	/* debug */
+			h->req_buf = (char *)realloc(h->req_buf, n + h->req_buflen);
+			if (!h->req_buf)
+			{
+				DPRINTF(E_ERROR, L_HTTP, "Receive request body: %s\n", strerror(errno));
+				h->state = 100;
+				break;
+			}
+			memcpy(h->req_buf + h->req_buflen, buf, n);
+			h->req_buflen += n;
+			if((h->req_buflen - h->req_contentoff) >= h->req_contentlen)
+			{
+				/* Need the struct to point to the realloc'd memory locations */
+				if( h->state == 1 )
+				{
+					ParseHttpHeaders(h);
+					ProcessHTTPPOST_upnphttp(h);
+				}
+				else if( h->state == 2 )
+				{
+					ProcessHttpQuery_upnphttp(h);
+				}
+			}
+		}
+		break;
+	default:
+		DPRINTF(E_WARN, L_HTTP, "Unexpected state: %d\n", h->state);
 	}
 }
 
@@ -656,9 +892,33 @@ send_file(struct upnphttp * h, int sendfd, off_t offset, off_t end_offset)
 	off_t send_size;
 	off_t ret;
 	char *buf = NULL;
+#if HAVE_SENDFILE
+	int try_sendfile = 1;
+#endif
 
 	while( offset <= end_offset )
 	{
+#if HAVE_SENDFILE
+		if( try_sendfile )
+		{
+			send_size = ( ((end_offset - offset) < MAX_BUFFER_SIZE) ? (end_offset - offset + 1) : MAX_BUFFER_SIZE);
+			ret = sys_sendfile(h->socket, sendfd, &offset, send_size);
+			if( ret == -1 )
+			{
+				DPRINTF(E_DEBUG, L_HTTP, "sendfile error :: error no. %d [%s]\n", errno, strerror(errno));
+				/* If sendfile isn't supported on the filesystem, don't bother trying to use it again. */
+				if( errno == EOVERFLOW || errno == EINVAL )
+					try_sendfile = 0;
+				else if( errno != EAGAIN )
+					break;
+			}
+			else
+			{
+				//DPRINTF(E_DEBUG, L_HTTP, "sent %lld bytes to %d. offset is now %lld.\n", ret, h->socket, offset);
+				continue;
+			}
+		}
+#endif
 		/* Fall back to regular I/O */
 		if( !buf )
 			buf = malloc(MIN_BUFFER_SIZE);

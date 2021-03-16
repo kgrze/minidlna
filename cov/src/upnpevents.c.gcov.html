@@ -1,0 +1,577 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - src/upnpevents.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - upnpevents.c<span style="font-size: 80%;"> (source / <a href="upnpevents.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">161</td>
+            <td class="headerCovTableEntry">239</td>
+            <td class="headerCovTableEntryLo">67.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2020-11-02 23:20:37</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntryMed">85.7 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /* MiniDLNA project</a>
+<span class="lineNum">       2 </span>            :  * http://minidlna.sourceforge.net/
+<span class="lineNum">       3 </span>            :  *
+<span class="lineNum">       4 </span>            :  * MiniDLNA media server
+<span class="lineNum">       5 </span>            :  * Copyright (C) 2008-2009  Justin Maggard
+<span class="lineNum">       6 </span>            :  *
+<span class="lineNum">       7 </span>            :  * This file is part of MiniDLNA.
+<span class="lineNum">       8 </span>            :  *
+<span class="lineNum">       9 </span>            :  * MiniDLNA is free software; you can redistribute it and/or modify
+<span class="lineNum">      10 </span>            :  * it under the terms of the GNU General Public License version 2 as
+<span class="lineNum">      11 </span>            :  * published by the Free Software Foundation.
+<span class="lineNum">      12 </span>            :  *
+<span class="lineNum">      13 </span>            :  * MiniDLNA is distributed in the hope that it will be useful,
+<span class="lineNum">      14 </span>            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      15 </span>            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      16 </span>            :  * GNU General Public License for more details.
+<span class="lineNum">      17 </span>            :  *
+<span class="lineNum">      18 </span>            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      19 </span>            :  * along with MiniDLNA. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<span class="lineNum">      20 </span>            :  *
+<span class="lineNum">      21 </span>            :  * Portions of the code from the MiniUPnP project:
+<span class="lineNum">      22 </span>            :  *
+<span class="lineNum">      23 </span>            :  * Copyright (c) 2006-2007, Thomas Bernard
+<span class="lineNum">      24 </span>            :  * All rights reserved.
+<span class="lineNum">      25 </span>            :  *
+<span class="lineNum">      26 </span>            :  * Redistribution and use in source and binary forms, with or without
+<span class="lineNum">      27 </span>            :  * modification, are permitted provided that the following conditions are met:
+<span class="lineNum">      28 </span>            :  *     * Redistributions of source code must retain the above copyright
+<span class="lineNum">      29 </span>            :  *       notice, this list of conditions and the following disclaimer.
+<span class="lineNum">      30 </span>            :  *     * Redistributions in binary form must reproduce the above copyright
+<span class="lineNum">      31 </span>            :  *       notice, this list of conditions and the following disclaimer in the
+<span class="lineNum">      32 </span>            :  *       documentation and/or other materials provided with the distribution.
+<span class="lineNum">      33 </span>            :  *     * The name of the author may not be used to endorse or promote products
+<span class="lineNum">      34 </span>            :  *       derived from this software without specific prior written permission.
+<span class="lineNum">      35 </span>            :  *
+<span class="lineNum">      36 </span>            :  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+<span class="lineNum">      37 </span>            :  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+<span class="lineNum">      38 </span>            :  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+<span class="lineNum">      39 </span>            :  * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+<span class="lineNum">      40 </span>            :  * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<span class="lineNum">      41 </span>            :  * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+<span class="lineNum">      42 </span>            :  * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+<span class="lineNum">      43 </span>            :  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+<span class="lineNum">      44 </span>            :  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+<span class="lineNum">      45 </span>            :  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+<span class="lineNum">      46 </span>            :  * POSSIBILITY OF SUCH DAMAGE.
+<span class="lineNum">      47 </span>            :  */
+<span class="lineNum">      48 </span>            : #include &quot;config.h&quot;
+<span class="lineNum">      49 </span>            : 
+<span class="lineNum">      50 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">      51 </span>            : #include &lt;string.h&gt;
+<span class="lineNum">      52 </span>            : #include &lt;errno.h&gt;
+<span class="lineNum">      53 </span>            : #include &lt;sys/queue.h&gt;
+<span class="lineNum">      54 </span>            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      55 </span>            : #include &lt;unistd.h&gt;
+<span class="lineNum">      56 </span>            : #include &lt;time.h&gt;
+<span class="lineNum">      57 </span>            : #include &lt;sys/types.h&gt;
+<span class="lineNum">      58 </span>            : #include &lt;sys/socket.h&gt;
+<span class="lineNum">      59 </span>            : #include &lt;sys/param.h&gt;
+<span class="lineNum">      60 </span>            : #include &lt;netinet/in.h&gt;
+<span class="lineNum">      61 </span>            : #include &lt;arpa/inet.h&gt;
+<span class="lineNum">      62 </span>            : #include &lt;fcntl.h&gt;
+<span class="lineNum">      63 </span>            : #include &lt;errno.h&gt;
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span>            : #include &quot;upnpevents.h&quot;
+<span class="lineNum">      66 </span>            : #include &quot;minidlnapath.h&quot;
+<span class="lineNum">      67 </span>            : #include &quot;upnpglobalvars.h&quot;
+<span class="lineNum">      68 </span>            : #include &quot;upnpdescgen.h&quot;
+<span class="lineNum">      69 </span>            : #include &quot;uuid.h&quot;
+<span class="lineNum">      70 </span>            : #include &quot;utils.h&quot;
+<span class="lineNum">      71 </span>            : #include &quot;log.h&quot;
+<span class="lineNum">      72 </span>            : 
+<span class="lineNum">      73 </span>            : /* stuctures definitions */
+<span class="lineNum">      74 </span>            : struct subscriber {
+<span class="lineNum">      75 </span>            :         LIST_ENTRY(subscriber) entries;
+<span class="lineNum">      76 </span>            :         struct upnp_event_notify * notify;
+<span class="lineNum">      77 </span>            :         time_t timeout;
+<span class="lineNum">      78 </span>            :         uint32_t seq;
+<span class="lineNum">      79 </span>            :         enum subscriber_service_enum service;
+<span class="lineNum">      80 </span>            :         char uuid[42];
+<span class="lineNum">      81 </span>            :         char callback[];
+<span class="lineNum">      82 </span>            : };
+<span class="lineNum">      83 </span>            : 
+<span class="lineNum">      84 </span>            : struct upnp_event_notify {
+<span class="lineNum">      85 </span>            :         LIST_ENTRY(upnp_event_notify) entries;
+<span class="lineNum">      86 </span>            :         int s;  /* socket */
+<span class="lineNum">      87 </span>            :         enum { ECreated=1,
+<span class="lineNum">      88 </span>            :                EConnecting,
+<span class="lineNum">      89 </span>            :                ESending,
+<span class="lineNum">      90 </span>            :                EWaitingForResponse,
+<span class="lineNum">      91 </span>            :                EFinished,
+<span class="lineNum">      92 </span>            :                EError } state;
+<span class="lineNum">      93 </span>            :         struct subscriber * sub;
+<span class="lineNum">      94 </span>            :         char * buffer;
+<span class="lineNum">      95 </span>            :         int buffersize;
+<span class="lineNum">      96 </span>            :         int tosend;
+<span class="lineNum">      97 </span>            :         int sent;
+<span class="lineNum">      98 </span>            :         const char * path;
+<span class="lineNum">      99 </span>            :         char addrstr[16];
+<span class="lineNum">     100 </span>            :         char portstr[8];
+<span class="lineNum">     101 </span>            : };
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span>            : /* prototypes */
+<span class="lineNum">     104 </span>            : static void
+<span class="lineNum">     105 </span>            : upnp_event_create_notify(struct subscriber * sub);
+<span class="lineNum">     106 </span>            : 
+<span class="lineNum">     107 </span>            : /* Subscriber list */
+<span class="lineNum">     108 </span>            : LIST_HEAD(listhead, subscriber) subscriberlist = { NULL };
+<span class="lineNum">     109 </span>            : 
+<span class="lineNum">     110 </span>            : /* notify list */
+<span class="lineNum">     111 </span>            : LIST_HEAD(listheadnotif, upnp_event_notify) notifylist = { NULL };
+<span class="lineNum">     112 </span>            : 
+<span class="lineNum">     113 </span>            : #define MAX_SUBSCRIBERS 500
+<span class="lineNum">     114 </span>            : static uint16_t nsubscribers = 0;
+<span class="lineNum">     115 </span>            : 
+<a name="116"><span class="lineNum">     116 </span>            : /* create a new subscriber */</a>
+<span class="lineNum">     117 </span>            : static struct subscriber *
+<span class="lineNum">     118 </span><span class="lineCov">          2 : newSubscriber(const char * eventurl, const char * callback, int callbacklen)</span>
+<span class="lineNum">     119 </span>            : {
+<span class="lineNum">     120 </span>            :         struct subscriber * tmp;
+<span class="lineNum">     121 </span><span class="lineCov">          2 :         if(!eventurl || !callback || !callbacklen)</span>
+<span class="lineNum">     122 </span><span class="lineNoCov">          0 :                 return NULL;</span>
+<span class="lineNum">     123 </span><span class="lineCov">          2 :         tmp = calloc(1, sizeof(struct subscriber)+callbacklen+1);</span>
+<span class="lineNum">     124 </span><span class="lineCov">          2 :         if(strcmp(eventurl, CONTENTDIRECTORY_EVENTURL)==0)</span>
+<span class="lineNum">     125 </span><span class="lineCov">          1 :                 tmp-&gt;service = EContentDirectory;</span>
+<span class="lineNum">     126 </span><span class="lineCov">          1 :         else if(strcmp(eventurl, CONNECTIONMGR_EVENTURL)==0)</span>
+<span class="lineNum">     127 </span><span class="lineCov">          1 :                 tmp-&gt;service = EConnectionManager;</span>
+<span class="lineNum">     128 </span><span class="lineNoCov">          0 :         else if(strcmp(eventurl, X_MS_MEDIARECEIVERREGISTRAR_EVENTURL)==0)</span>
+<span class="lineNum">     129 </span><span class="lineNoCov">          0 :                 tmp-&gt;service = EMSMediaReceiverRegistrar;</span>
+<span class="lineNum">     130 </span>            :         else {
+<span class="lineNum">     131 </span><span class="lineNoCov">          0 :                 free(tmp);</span>
+<span class="lineNum">     132 </span><span class="lineNoCov">          0 :                 return NULL;</span>
+<span class="lineNum">     133 </span>            :         }
+<span class="lineNum">     134 </span><span class="lineCov">          2 :         memcpy(tmp-&gt;callback, callback, callbacklen);</span>
+<span class="lineNum">     135 </span><span class="lineCov">          2 :         tmp-&gt;callback[callbacklen] = '\0';</span>
+<span class="lineNum">     136 </span>            :         /* make a dummy uuid */
+<span class="lineNum">     137 </span><span class="lineCov">          2 :         strncpyt(tmp-&gt;uuid, uuidvalue, sizeof(tmp-&gt;uuid));</span>
+<span class="lineNum">     138 </span><span class="lineCov">          2 :         if( get_uuid_string(tmp-&gt;uuid+5) != 0 )</span>
+<span class="lineNum">     139 </span>            :         {
+<span class="lineNum">     140 </span><span class="lineNoCov">          0 :                 tmp-&gt;uuid[sizeof(tmp-&gt;uuid)-1] = '\0';</span>
+<span class="lineNum">     141 </span><span class="lineNoCov">          0 :                 snprintf(tmp-&gt;uuid+37, 5, &quot;%04lx&quot;, random() &amp; 0xffff);</span>
+<span class="lineNum">     142 </span>            :         }
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span><span class="lineCov">          2 :         return tmp;</span>
+<span class="lineNum">     145 </span>            : }
+<span class="lineNum">     146 </span>            : 
+<span class="lineNum">     147 </span>            : /* creates a new subscriber and adds it to the subscriber list
+<a name="148"><span class="lineNum">     148 </span>            :  * also initiate 1st notify */</a>
+<span class="lineNum">     149 </span>            : const char *
+<span class="lineNum">     150 </span><span class="lineCov">          2 : upnpevents_addSubscriber(const char * eventurl,</span>
+<span class="lineNum">     151 </span>            :                          const char * callback, int callbacklen,
+<span class="lineNum">     152 </span>            :                          int timeout)
+<span class="lineNum">     153 </span>            : {
+<span class="lineNum">     154 </span>            :         struct subscriber * tmp;
+<span class="lineNum">     155 </span><span class="lineCov">          2 :         DPRINTF(E_DEBUG, L_HTTP, &quot;addSubscriber(%s, %.*s, %d)\n&quot;,</span>
+<span class="lineNum">     156 </span>            :                eventurl, callbacklen, callback, timeout);
+<span class="lineNum">     157 </span><span class="lineCov">          2 :         if (nsubscribers &gt;= MAX_SUBSCRIBERS)</span>
+<span class="lineNum">     158 </span><span class="lineNoCov">          0 :                 return NULL;</span>
+<span class="lineNum">     159 </span><span class="lineCov">          2 :         tmp = newSubscriber(eventurl, callback, callbacklen);</span>
+<span class="lineNum">     160 </span><span class="lineCov">          2 :         if(!tmp)</span>
+<span class="lineNum">     161 </span><span class="lineNoCov">          0 :                 return NULL;</span>
+<span class="lineNum">     162 </span><span class="lineCov">          2 :         if(timeout)</span>
+<span class="lineNum">     163 </span><span class="lineCov">          2 :                 tmp-&gt;timeout = time(NULL) + timeout;</span>
+<span class="lineNum">     164 </span><span class="lineCov">          2 :         LIST_INSERT_HEAD(&amp;subscriberlist, tmp, entries);</span>
+<span class="lineNum">     165 </span><span class="lineCov">          2 :         nsubscribers++;</span>
+<span class="lineNum">     166 </span><span class="lineCov">          2 :         upnp_event_create_notify(tmp);</span>
+<span class="lineNum">     167 </span><span class="lineCov">          2 :         return tmp-&gt;uuid;</span>
+<span class="lineNum">     168 </span>            : }
+<span class="lineNum">     169 </span>            : 
+<a name="170"><span class="lineNum">     170 </span>            : /* renew a subscription (update the timeout) */</a>
+<span class="lineNum">     171 </span>            : int
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 : renewSubscription(const char * sid, int sidlen, int timeout)</span>
+<span class="lineNum">     173 </span>            : {
+<span class="lineNum">     174 </span>            :         struct subscriber * sub;
+<span class="lineNum">     175 </span><span class="lineNoCov">          0 :         for(sub = subscriberlist.lh_first; sub != NULL; sub = sub-&gt;entries.le_next) {</span>
+<span class="lineNum">     176 </span><span class="lineNoCov">          0 :                 if(memcmp(sid, sub-&gt;uuid, 41) == 0) {</span>
+<span class="lineNum">     177 </span><span class="lineNoCov">          0 :                         sub-&gt;timeout = (timeout ? time(NULL) + timeout : 0);</span>
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :                         return 0;</span>
+<span class="lineNum">     179 </span>            :                 }
+<span class="lineNum">     180 </span>            :         }
+<span class="lineNum">     181 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">     182 </span>            : }
+<a name="183"><span class="lineNum">     183 </span>            : </a>
+<span class="lineNum">     184 </span>            : int
+<span class="lineNum">     185 </span><span class="lineCov">          2 : upnpevents_removeSubscriber(const char * sid, int sidlen)</span>
+<span class="lineNum">     186 </span>            : {
+<span class="lineNum">     187 </span>            :         struct subscriber * sub;
+<span class="lineNum">     188 </span><span class="lineCov">          2 :         if(!sid)</span>
+<span class="lineNum">     189 </span><span class="lineNoCov">          0 :                 return -1;</span>
+<span class="lineNum">     190 </span><span class="lineCov">          2 :         DPRINTF(E_DEBUG, L_HTTP, &quot;removeSubscriber(%.*s)\n&quot;,</span>
+<span class="lineNum">     191 </span>            :                sidlen, sid);
+<span class="lineNum">     192 </span><span class="lineCov">          2 :         for(sub = subscriberlist.lh_first; sub != NULL; sub = sub-&gt;entries.le_next) {</span>
+<span class="lineNum">     193 </span><span class="lineCov">          2 :                 if(memcmp(sid, sub-&gt;uuid, 41) == 0) {</span>
+<span class="lineNum">     194 </span><span class="lineCov">          2 :                         if(sub-&gt;notify) {</span>
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :                                 sub-&gt;notify-&gt;sub = NULL;</span>
+<span class="lineNum">     196 </span>            :                         }
+<span class="lineNum">     197 </span><span class="lineCov">          2 :                         LIST_REMOVE(sub, entries);</span>
+<span class="lineNum">     198 </span><span class="lineCov">          2 :                         nsubscribers--;</span>
+<span class="lineNum">     199 </span><span class="lineCov">          2 :                         free(sub);</span>
+<span class="lineNum">     200 </span><span class="lineCov">          2 :                         return 0;</span>
+<span class="lineNum">     201 </span>            :                 }
+<span class="lineNum">     202 </span>            :         }
+<span class="lineNum">     203 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">     204 </span>            : }
+<a name="205"><span class="lineNum">     205 </span>            : </a>
+<span class="lineNum">     206 </span>            : void
+<span class="lineNum">     207 </span><span class="lineCov">          1 : upnpevents_removeSubscribers(void)</span>
+<span class="lineNum">     208 </span>            : {
+<span class="lineNum">     209 </span>            :         struct subscriber * sub;
+<span class="lineNum">     210 </span>            : 
+<span class="lineNum">     211 </span><span class="lineCov">          3 :         for(sub = subscriberlist.lh_first; sub != NULL; sub = subscriberlist.lh_first) {</span>
+<span class="lineNum">     212 </span><span class="lineCov">          2 :                 upnpevents_removeSubscriber(sub-&gt;uuid, sizeof(sub-&gt;uuid));</span>
+<span class="lineNum">     213 </span>            :         }
+<span class="lineNum">     214 </span><span class="lineCov">          1 : }</span>
+<span class="lineNum">     215 </span>            : 
+<a name="216"><span class="lineNum">     216 </span>            : /* notifies all subscribers of a SystemUpdateID change */</a>
+<span class="lineNum">     217 </span>            : void
+<span class="lineNum">     218 </span><span class="lineNoCov">          0 : upnp_event_var_change_notify(enum subscriber_service_enum service)</span>
+<span class="lineNum">     219 </span>            : {
+<span class="lineNum">     220 </span>            :         struct subscriber * sub;
+<span class="lineNum">     221 </span><span class="lineNoCov">          0 :         for(sub = subscriberlist.lh_first; sub != NULL; sub = sub-&gt;entries.le_next) {</span>
+<span class="lineNum">     222 </span><span class="lineNoCov">          0 :                 if(sub-&gt;service == service &amp;&amp; sub-&gt;notify == NULL)</span>
+<span class="lineNum">     223 </span><span class="lineNoCov">          0 :                         upnp_event_create_notify(sub);</span>
+<span class="lineNum">     224 </span>            :         }
+<span class="lineNum">     225 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     226 </span>            : 
+<a name="227"><span class="lineNum">     227 </span>            : /* create and add the notify object to the list */</a>
+<span class="lineNum">     228 </span>            : static void
+<span class="lineNum">     229 </span><span class="lineCov">          2 : upnp_event_create_notify(struct subscriber * sub)</span>
+<span class="lineNum">     230 </span>            : {
+<span class="lineNum">     231 </span>            :         struct upnp_event_notify * obj;
+<span class="lineNum">     232 </span>            :         int flags;
+<span class="lineNum">     233 </span><span class="lineCov">          2 :         obj = calloc(1, sizeof(struct upnp_event_notify));</span>
+<span class="lineNum">     234 </span><span class="lineCov">          2 :         if(!obj) {</span>
+<span class="lineNum">     235 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_HTTP, &quot;%s: calloc(): %s\n&quot;, &quot;upnp_event_create_notify&quot;, strerror(errno));</span>
+<span class="lineNum">     236 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">     237 </span>            :         }
+<span class="lineNum">     238 </span><span class="lineCov">          2 :         obj-&gt;sub = sub;</span>
+<span class="lineNum">     239 </span><span class="lineCov">          2 :         obj-&gt;state = ECreated;</span>
+<span class="lineNum">     240 </span><span class="lineCov">          2 :         obj-&gt;s = socket(PF_INET, SOCK_STREAM, 0);</span>
+<span class="lineNum">     241 </span><span class="lineCov">          2 :         if(obj-&gt;s&lt;0) {</span>
+<span class="lineNum">     242 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_HTTP, &quot;%s: socket(): %s\n&quot;, &quot;upnp_event_create_notify&quot;, strerror(errno));</span>
+<span class="lineNum">     243 </span><span class="lineNoCov">          0 :                 goto error;</span>
+<span class="lineNum">     244 </span>            :         }
+<span class="lineNum">     245 </span><span class="lineCov">          2 :         if((flags = fcntl(obj-&gt;s, F_GETFL, 0)) &lt; 0) {</span>
+<span class="lineNum">     246 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_HTTP, &quot;%s: fcntl(..F_GETFL..): %s\n&quot;,</span>
+<span class="lineNum">     247 </span>            :                        &quot;upnp_event_create_notify&quot;, strerror(errno));
+<span class="lineNum">     248 </span><span class="lineNoCov">          0 :                 goto error;</span>
+<span class="lineNum">     249 </span>            :         }
+<span class="lineNum">     250 </span><span class="lineCov">          2 :         if(fcntl(obj-&gt;s, F_SETFL, flags | O_NONBLOCK) &lt; 0) {</span>
+<span class="lineNum">     251 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_HTTP, &quot;%s: fcntl(..F_SETFL..): %s\n&quot;,</span>
+<span class="lineNum">     252 </span>            :                        &quot;upnp_event_create_notify&quot;, strerror(errno));
+<span class="lineNum">     253 </span><span class="lineNoCov">          0 :                 goto error;</span>
+<span class="lineNum">     254 </span>            :         }
+<span class="lineNum">     255 </span><span class="lineCov">          2 :         if(sub)</span>
+<span class="lineNum">     256 </span><span class="lineCov">          2 :                 sub-&gt;notify = obj;</span>
+<span class="lineNum">     257 </span><span class="lineCov">          2 :         LIST_INSERT_HEAD(&amp;notifylist, obj, entries);</span>
+<span class="lineNum">     258 </span><span class="lineCov">          2 :         return;</span>
+<span class="lineNum">     259 </span><span class="lineNoCov">          0 : error:</span>
+<span class="lineNum">     260 </span><span class="lineNoCov">          0 :         if(obj-&gt;s &gt;= 0)</span>
+<span class="lineNum">     261 </span><span class="lineNoCov">          0 :                 close(obj-&gt;s);</span>
+<span class="lineNum">     262 </span><span class="lineNoCov">          0 :         free(obj);</span>
+<span class="lineNum">     263 </span>            : }
+<a name="264"><span class="lineNum">     264 </span>            : </a>
+<span class="lineNum">     265 </span>            : static void
+<span class="lineNum">     266 </span><span class="lineCov">          2 : upnp_event_notify_connect(struct upnp_event_notify * obj)</span>
+<span class="lineNum">     267 </span>            : {
+<span class="lineNum">     268 </span>            :         int i;
+<span class="lineNum">     269 </span>            :         const char * p;
+<span class="lineNum">     270 </span>            :         unsigned short port;
+<span class="lineNum">     271 </span>            :         struct sockaddr_in addr;
+<span class="lineNum">     272 </span><span class="lineCov">          2 :         if(!obj)</span>
+<span class="lineNum">     273 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">     274 </span><span class="lineCov">          2 :         memset(&amp;addr, 0, sizeof(addr));</span>
+<span class="lineNum">     275 </span><span class="lineCov">          2 :         i = 0;</span>
+<span class="lineNum">     276 </span><span class="lineCov">          2 :         if(obj-&gt;sub == NULL) {</span>
+<span class="lineNum">     277 </span><span class="lineNoCov">          0 :                 obj-&gt;state = EError;</span>
+<span class="lineNum">     278 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">     279 </span>            :         }
+<span class="lineNum">     280 </span><span class="lineCov">          2 :         p = obj-&gt;sub-&gt;callback;</span>
+<span class="lineNum">     281 </span><span class="lineCov">          2 :         p += 7; /* http:// */</span>
+<span class="lineNum">     282 </span><span class="lineCov">         26 :         while(*p != '/' &amp;&amp; *p != ':' &amp;&amp; i &lt; (sizeof(obj-&gt;addrstr)-1))</span>
+<span class="lineNum">     283 </span><span class="lineCov">         22 :                 obj-&gt;addrstr[i++] = *(p++);</span>
+<span class="lineNum">     284 </span><span class="lineCov">          2 :         obj-&gt;addrstr[i] = '\0';</span>
+<span class="lineNum">     285 </span><span class="lineCov">          2 :         if(*p == ':') {</span>
+<span class="lineNum">     286 </span><span class="lineCov">          2 :                 obj-&gt;portstr[0] = *p;</span>
+<span class="lineNum">     287 </span><span class="lineCov">          2 :                 i = 1;</span>
+<span class="lineNum">     288 </span><span class="lineCov">          2 :                 p++;</span>
+<span class="lineNum">     289 </span><span class="lineCov">          2 :                 port = (unsigned short)atoi(p);</span>
+<span class="lineNum">     290 </span><span class="lineCov">         14 :                 while(*p != '/' &amp;&amp; *p != '\0') {</span>
+<span class="lineNum">     291 </span><span class="lineCov">         10 :                         if(i&lt;7) obj-&gt;portstr[i++] = *p;</span>
+<span class="lineNum">     292 </span><span class="lineCov">         10 :                         p++;</span>
+<span class="lineNum">     293 </span>            :                 }
+<span class="lineNum">     294 </span><span class="lineCov">          2 :                 obj-&gt;portstr[i] = 0;</span>
+<span class="lineNum">     295 </span>            :         } else {
+<span class="lineNum">     296 </span><span class="lineNoCov">          0 :                 port = 80;</span>
+<span class="lineNum">     297 </span><span class="lineNoCov">          0 :                 obj-&gt;portstr[0] = '\0';</span>
+<span class="lineNum">     298 </span>            :         }
+<span class="lineNum">     299 </span><span class="lineCov">          2 :         if( *p )</span>
+<span class="lineNum">     300 </span><span class="lineCov">          2 :                 obj-&gt;path = p;</span>
+<span class="lineNum">     301 </span>            :         else
+<span class="lineNum">     302 </span><span class="lineNoCov">          0 :                 obj-&gt;path = &quot;/&quot;;</span>
+<span class="lineNum">     303 </span><span class="lineCov">          2 :         addr.sin_family = AF_INET;</span>
+<span class="lineNum">     304 </span><span class="lineCov">          2 :         inet_aton(obj-&gt;addrstr, &amp;addr.sin_addr);</span>
+<span class="lineNum">     305 </span><span class="lineCov">          2 :         addr.sin_port = htons(port);</span>
+<span class="lineNum">     306 </span><span class="lineCov">          2 :         DPRINTF(E_DEBUG, L_HTTP, &quot;%s: '%s' %hu '%s'\n&quot;, &quot;upnp_event_notify_connect&quot;,</span>
+<span class="lineNum">     307 </span>            :                obj-&gt;addrstr, port, obj-&gt;path);
+<span class="lineNum">     308 </span><span class="lineCov">          2 :         obj-&gt;state = EConnecting;</span>
+<span class="lineNum">     309 </span><span class="lineCov">          2 :         if(connect(obj-&gt;s, (struct sockaddr *)&amp;addr, sizeof(addr)) &lt; 0) {</span>
+<span class="lineNum">     310 </span><span class="lineCov">          2 :                 if(errno != EINPROGRESS &amp;&amp; errno != EWOULDBLOCK) {</span>
+<span class="lineNum">     311 </span><span class="lineNoCov">          0 :                         DPRINTF(E_ERROR, L_HTTP, &quot;%s: connect(): %s\n&quot;, &quot;upnp_event_notify_connect&quot;, strerror(errno));</span>
+<span class="lineNum">     312 </span><span class="lineNoCov">          0 :                         obj-&gt;state = EError;</span>
+<span class="lineNum">     313 </span>            :                 }
+<span class="lineNum">     314 </span>            :         }
+<a name="315"><span class="lineNum">     315 </span>            : }</a>
+<span class="lineNum">     316 </span>            : 
+<span class="lineNum">     317 </span><span class="lineCov">          2 : static void upnp_event_prepare(struct upnp_event_notify * obj)</span>
+<span class="lineNum">     318 </span>            : {
+<span class="lineNum">     319 </span>            :         static const char notifymsg[] = 
+<span class="lineNum">     320 </span>            :                 &quot;NOTIFY %s HTTP/1.1\r\n&quot;
+<span class="lineNum">     321 </span>            :                 &quot;Host: %s%s\r\n&quot;
+<span class="lineNum">     322 </span>            :                 &quot;Content-Type: text/xml; charset=\&quot;utf-8\&quot;\r\n&quot;
+<span class="lineNum">     323 </span>            :                 &quot;Content-Length: %d\r\n&quot;
+<span class="lineNum">     324 </span>            :                 &quot;NT: upnp:event\r\n&quot;
+<span class="lineNum">     325 </span>            :                 &quot;NTS: upnp:propchange\r\n&quot;
+<span class="lineNum">     326 </span>            :                 &quot;SID: %s\r\n&quot;
+<span class="lineNum">     327 </span>            :                 &quot;SEQ: %u\r\n&quot;
+<span class="lineNum">     328 </span>            :                 &quot;Connection: close\r\n&quot;
+<span class="lineNum">     329 </span>            :                 &quot;Cache-Control: no-cache\r\n&quot;
+<span class="lineNum">     330 </span>            :                 &quot;\r\n&quot;
+<span class="lineNum">     331 </span>            :                 &quot;%.*s\r\n&quot;;
+<span class="lineNum">     332 </span>            :         char * xml;
+<span class="lineNum">     333 </span>            :         int l;
+<span class="lineNum">     334 </span><span class="lineCov">          2 :         if(obj-&gt;sub == NULL) {</span>
+<span class="lineNum">     335 </span><span class="lineNoCov">          0 :                 obj-&gt;state = EError;</span>
+<span class="lineNum">     336 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">     337 </span>            :         }
+<span class="lineNum">     338 </span><span class="lineCov">          2 :         switch(obj-&gt;sub-&gt;service) {</span>
+<span class="lineNum">     339 </span><span class="lineCov">          1 :         case EContentDirectory:</span>
+<span class="lineNum">     340 </span><span class="lineCov">          1 :                 xml = getVarsContentDirectory(&amp;l);</span>
+<span class="lineNum">     341 </span><span class="lineCov">          1 :                 break;</span>
+<span class="lineNum">     342 </span><span class="lineCov">          1 :         case EConnectionManager:</span>
+<span class="lineNum">     343 </span><span class="lineCov">          1 :                 xml = getVarsConnectionManager(&amp;l);</span>
+<span class="lineNum">     344 </span><span class="lineCov">          1 :                 break;</span>
+<span class="lineNum">     345 </span><span class="lineNoCov">          0 :         case EMSMediaReceiverRegistrar:</span>
+<span class="lineNum">     346 </span><span class="lineNoCov">          0 :                 xml = getVarsX_MS_MediaReceiverRegistrar(&amp;l);</span>
+<span class="lineNum">     347 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     348 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     349 </span><span class="lineNoCov">          0 :                 xml = NULL;</span>
+<span class="lineNum">     350 </span><span class="lineNoCov">          0 :                 l = 0;</span>
+<span class="lineNum">     351 </span>            :         }
+<span class="lineNum">     352 </span><span class="lineCov">          8 :         obj-&gt;tosend = asprintf(&amp;(obj-&gt;buffer), notifymsg,</span>
+<span class="lineNum">     353 </span><span class="lineCov">          2 :                                obj-&gt;path, obj-&gt;addrstr, obj-&gt;portstr, l+2,</span>
+<span class="lineNum">     354 </span><span class="lineCov">          4 :                                obj-&gt;sub-&gt;uuid, obj-&gt;sub-&gt;seq,</span>
+<span class="lineNum">     355 </span>            :                                l, xml);
+<span class="lineNum">     356 </span><span class="lineCov">          2 :         obj-&gt;buffersize = obj-&gt;tosend;</span>
+<span class="lineNum">     357 </span><span class="lineCov">          2 :         free(xml);</span>
+<span class="lineNum">     358 </span><span class="lineCov">          2 :         DPRINTF(E_DEBUG, L_HTTP, &quot;Sending UPnP Event response:\n%s\n&quot;, obj-&gt;buffer);</span>
+<span class="lineNum">     359 </span><span class="lineCov">          2 :         obj-&gt;state = ESending;</span>
+<a name="360"><span class="lineNum">     360 </span>            : }</a>
+<span class="lineNum">     361 </span>            : 
+<span class="lineNum">     362 </span><span class="lineCov">          2 : static void upnp_event_send(struct upnp_event_notify * obj)</span>
+<span class="lineNum">     363 </span>            : {
+<span class="lineNum">     364 </span>            :         int i;
+<span class="lineNum">     365 </span>            :         //DEBUG DPRINTF(E_DEBUG, L_HTTP, &quot;Sending UPnP Event:\n%s&quot;, obj-&gt;buffer+obj-&gt;sent);
+<span class="lineNum">     366 </span><span class="lineCov">          6 :         while( obj-&gt;sent &lt; obj-&gt;tosend ) {</span>
+<span class="lineNum">     367 </span><span class="lineCov">          2 :                 i = send(obj-&gt;s, obj-&gt;buffer + obj-&gt;sent, obj-&gt;tosend - obj-&gt;sent, 0);</span>
+<span class="lineNum">     368 </span><span class="lineCov">          2 :                 if(i&lt;0) {</span>
+<span class="lineNum">     369 </span><span class="lineNoCov">          0 :                         DPRINTF(E_WARN, L_HTTP, &quot;%s: send(): %s\n&quot;, &quot;upnp_event_send&quot;, strerror(errno));</span>
+<span class="lineNum">     370 </span><span class="lineNoCov">          0 :                         obj-&gt;state = EError;</span>
+<span class="lineNum">     371 </span><span class="lineNoCov">          0 :                         return;</span>
+<span class="lineNum">     372 </span>            :                 }
+<span class="lineNum">     373 </span><span class="lineCov">          2 :                 obj-&gt;sent += i;</span>
+<span class="lineNum">     374 </span>            :         }
+<span class="lineNum">     375 </span><span class="lineCov">          2 :         if(obj-&gt;sent == obj-&gt;tosend)</span>
+<span class="lineNum">     376 </span><span class="lineCov">          2 :                 obj-&gt;state = EWaitingForResponse;</span>
+<a name="377"><span class="lineNum">     377 </span>            : }</a>
+<span class="lineNum">     378 </span>            : 
+<span class="lineNum">     379 </span><span class="lineCov">          2 : static void upnp_event_recv(struct upnp_event_notify * obj)</span>
+<span class="lineNum">     380 </span>            : {
+<span class="lineNum">     381 </span>            :         int n;
+<span class="lineNum">     382 </span><span class="lineCov">          2 :         n = recv(obj-&gt;s, obj-&gt;buffer, obj-&gt;buffersize, 0);</span>
+<span class="lineNum">     383 </span><span class="lineCov">          2 :         if(n&lt;0) {</span>
+<span class="lineNum">     384 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_HTTP, &quot;%s: recv(): %s\n&quot;, &quot;upnp_event_recv&quot;, strerror(errno));</span>
+<span class="lineNum">     385 </span><span class="lineNoCov">          0 :                 obj-&gt;state = EError;</span>
+<span class="lineNum">     386 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">     387 </span>            :         }
+<span class="lineNum">     388 </span><span class="lineCov">          2 :         DPRINTF(E_DEBUG, L_HTTP, &quot;%s: (%dbytes) %.*s\n&quot;, &quot;upnp_event_recv&quot;,</span>
+<span class="lineNum">     389 </span>            :                n, n, obj-&gt;buffer);
+<span class="lineNum">     390 </span><span class="lineCov">          2 :         obj-&gt;state = EFinished;</span>
+<span class="lineNum">     391 </span><span class="lineCov">          2 :         if(obj-&gt;sub)</span>
+<span class="lineNum">     392 </span>            :         {
+<span class="lineNum">     393 </span><span class="lineCov">          2 :                 obj-&gt;sub-&gt;seq++;</span>
+<span class="lineNum">     394 </span><span class="lineCov">          2 :                 if (!obj-&gt;sub-&gt;seq)</span>
+<span class="lineNum">     395 </span><span class="lineNoCov">          0 :                         obj-&gt;sub-&gt;seq++;</span>
+<span class="lineNum">     396 </span>            :         }
+<span class="lineNum">     397 </span>            : }
+<a name="398"><span class="lineNum">     398 </span>            : </a>
+<span class="lineNum">     399 </span>            : static void
+<span class="lineNum">     400 </span><span class="lineCov">          4 : upnp_event_process_notify(struct upnp_event_notify * obj)</span>
+<span class="lineNum">     401 </span>            : {
+<span class="lineNum">     402 </span><span class="lineCov">          4 :         switch(obj-&gt;state) {</span>
+<span class="lineNum">     403 </span><span class="lineCov">          2 :         case EConnecting:</span>
+<span class="lineNum">     404 </span>            :                 /* now connected or failed to connect */
+<span class="lineNum">     405 </span><span class="lineCov">          2 :                 upnp_event_prepare(obj);</span>
+<span class="lineNum">     406 </span><span class="lineCov">          2 :                 upnp_event_send(obj);</span>
+<span class="lineNum">     407 </span><span class="lineCov">          2 :                 break;</span>
+<span class="lineNum">     408 </span><span class="lineNoCov">          0 :         case ESending:</span>
+<span class="lineNum">     409 </span><span class="lineNoCov">          0 :                 upnp_event_send(obj);</span>
+<span class="lineNum">     410 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     411 </span><span class="lineCov">          2 :         case EWaitingForResponse:</span>
+<span class="lineNum">     412 </span><span class="lineCov">          2 :                 upnp_event_recv(obj);</span>
+<span class="lineNum">     413 </span><span class="lineCov">          2 :                 break;</span>
+<span class="lineNum">     414 </span><span class="lineNoCov">          0 :         case EFinished:</span>
+<span class="lineNum">     415 </span><span class="lineNoCov">          0 :                 close(obj-&gt;s);</span>
+<span class="lineNum">     416 </span><span class="lineNoCov">          0 :                 obj-&gt;s = -1;</span>
+<span class="lineNum">     417 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     418 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     419 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_HTTP, &quot;upnp_event_process_notify: unknown state\n&quot;);</span>
+<span class="lineNum">     420 </span>            :         }
+<a name="421"><span class="lineNum">     421 </span><span class="lineCov">          4 : }</span></a>
+<span class="lineNum">     422 </span>            : 
+<span class="lineNum">     423 </span><span class="lineCov">        372 : void upnpevents_selectfds(fd_set *readset, fd_set *writeset, int * max_fd)</span>
+<span class="lineNum">     424 </span>            : {
+<span class="lineNum">     425 </span>            :         struct upnp_event_notify * obj;
+<span class="lineNum">     426 </span><span class="lineCov">        380 :         for(obj = notifylist.lh_first; obj != NULL; obj = obj-&gt;entries.le_next) {</span>
+<span class="lineNum">     427 </span><span class="lineCov">          8 :                 DPRINTF(E_DEBUG, L_HTTP, &quot;upnpevents_selectfds: %p %d %d\n&quot;,</span>
+<span class="lineNum">     428 </span>            :                        obj, obj-&gt;state, obj-&gt;s);
+<span class="lineNum">     429 </span><span class="lineCov">          8 :                 if(obj-&gt;s &gt;= 0) {</span>
+<span class="lineNum">     430 </span><span class="lineCov">          8 :                         switch(obj-&gt;state) {</span>
+<span class="lineNum">     431 </span><span class="lineCov">          2 :                         case ECreated:</span>
+<span class="lineNum">     432 </span><span class="lineCov">          2 :                                 upnp_event_notify_connect(obj);</span>
+<span class="lineNum">     433 </span><span class="lineCov">          2 :                                 if(obj-&gt;state != EConnecting)</span>
+<span class="lineNum">     434 </span><span class="lineNoCov">          0 :                                         break;</span>
+<span class="lineNum">     435 </span>            :                         case EConnecting:
+<span class="lineNum">     436 </span>            :                         case ESending:
+<span class="lineNum">     437 </span><span class="lineCov">          2 :                                 FD_SET(obj-&gt;s, writeset);</span>
+<span class="lineNum">     438 </span><span class="lineCov">          2 :                                 if(obj-&gt;s &gt; *max_fd)</span>
+<span class="lineNum">     439 </span><span class="lineCov">          2 :                                         *max_fd = obj-&gt;s;</span>
+<span class="lineNum">     440 </span><span class="lineCov">          2 :                                 break;</span>
+<span class="lineNum">     441 </span><span class="lineCov">          6 :                         case EWaitingForResponse:</span>
+<span class="lineNum">     442 </span><span class="lineCov">          6 :                                 FD_SET(obj-&gt;s, readset);</span>
+<span class="lineNum">     443 </span><span class="lineCov">          6 :                                 if(obj-&gt;s &gt; *max_fd)</span>
+<span class="lineNum">     444 </span><span class="lineNoCov">          0 :                                         *max_fd = obj-&gt;s;</span>
+<span class="lineNum">     445 </span><span class="lineCov">          6 :                                 break;</span>
+<span class="lineNum">     446 </span><span class="lineNoCov">          0 :                         default:</span>
+<span class="lineNum">     447 </span><span class="lineNoCov">          0 :                                 break;</span>
+<span class="lineNum">     448 </span>            :                         }
+<span class="lineNum">     449 </span><span class="lineNoCov">          0 :                 }</span>
+<span class="lineNum">     450 </span>            :         }
+<a name="451"><span class="lineNum">     451 </span><span class="lineCov">        372 : }</span></a>
+<span class="lineNum">     452 </span>            : 
+<span class="lineNum">     453 </span><span class="lineCov">        355 : void upnpevents_processfds(fd_set *readset, fd_set *writeset)</span>
+<span class="lineNum">     454 </span>            : {
+<span class="lineNum">     455 </span>            :         struct upnp_event_notify * obj;
+<span class="lineNum">     456 </span>            :         struct upnp_event_notify * next;
+<span class="lineNum">     457 </span>            :         struct subscriber * sub;
+<span class="lineNum">     458 </span>            :         struct subscriber * subnext;
+<span class="lineNum">     459 </span>            :         time_t curtime;
+<span class="lineNum">     460 </span><span class="lineCov">        363 :         for(obj = notifylist.lh_first; obj != NULL; obj = obj-&gt;entries.le_next) {</span>
+<span class="lineNum">     461 </span><span class="lineCov">          8 :                 DPRINTF(E_DEBUG, L_HTTP, &quot;%s: %p %d %d %d %d\n&quot;,</span>
+<span class="lineNum">     462 </span>            :                        &quot;upnpevents_processfds&quot;, obj, obj-&gt;state, obj-&gt;s,
+<span class="lineNum">     463 </span>            :                        FD_ISSET(obj-&gt;s, readset), FD_ISSET(obj-&gt;s, writeset));
+<span class="lineNum">     464 </span><span class="lineCov">          8 :                 if(obj-&gt;s &gt;= 0) {</span>
+<span class="lineNum">     465 </span><span class="lineCov">          8 :                         if(FD_ISSET(obj-&gt;s, readset) || FD_ISSET(obj-&gt;s, writeset))</span>
+<span class="lineNum">     466 </span><span class="lineCov">          4 :                                 upnp_event_process_notify(obj);</span>
+<span class="lineNum">     467 </span>            :                 }
+<span class="lineNum">     468 </span>            :         }
+<span class="lineNum">     469 </span><span class="lineCov">        355 :         obj = notifylist.lh_first;</span>
+<span class="lineNum">     470 </span><span class="lineCov">        718 :         while(obj != NULL) {</span>
+<span class="lineNum">     471 </span><span class="lineCov">          8 :                 next = obj-&gt;entries.le_next;</span>
+<span class="lineNum">     472 </span><span class="lineCov">          8 :                 if(obj-&gt;state == EError || obj-&gt;state == EFinished) {</span>
+<span class="lineNum">     473 </span><span class="lineCov">          2 :                         if(obj-&gt;s &gt;= 0) {</span>
+<span class="lineNum">     474 </span><span class="lineCov">          2 :                                 close(obj-&gt;s);</span>
+<span class="lineNum">     475 </span>            :                         }
+<span class="lineNum">     476 </span><span class="lineCov">          2 :                         if(obj-&gt;sub)</span>
+<span class="lineNum">     477 </span><span class="lineCov">          2 :                                 obj-&gt;sub-&gt;notify = NULL;</span>
+<span class="lineNum">     478 </span>            :                         /* remove also the subscriber from the list if there was an error */
+<span class="lineNum">     479 </span><span class="lineCov">          2 :                         if(obj-&gt;state == EError &amp;&amp; obj-&gt;sub) {</span>
+<span class="lineNum">     480 </span><span class="lineNoCov">          0 :                                 LIST_REMOVE(obj-&gt;sub, entries);</span>
+<span class="lineNum">     481 </span><span class="lineNoCov">          0 :                                 nsubscribers--;</span>
+<span class="lineNum">     482 </span><span class="lineNoCov">          0 :                                 free(obj-&gt;sub);</span>
+<span class="lineNum">     483 </span>            :                         }
+<span class="lineNum">     484 </span><span class="lineCov">          2 :                         free(obj-&gt;buffer);</span>
+<span class="lineNum">     485 </span><span class="lineCov">          2 :                         LIST_REMOVE(obj, entries);</span>
+<span class="lineNum">     486 </span><span class="lineCov">          2 :                         free(obj);</span>
+<span class="lineNum">     487 </span>            :                 }
+<span class="lineNum">     488 </span><span class="lineCov">          8 :                 obj = next;</span>
+<span class="lineNum">     489 </span>            :         }
+<span class="lineNum">     490 </span>            :         /* remove timed-out subscribers */
+<span class="lineNum">     491 </span><span class="lineCov">        355 :         curtime = time(NULL);</span>
+<span class="lineNum">     492 </span><span class="lineCov">       1369 :         for(sub = subscriberlist.lh_first; sub != NULL; ) {</span>
+<span class="lineNum">     493 </span><span class="lineCov">        659 :                 subnext = sub-&gt;entries.le_next;</span>
+<span class="lineNum">     494 </span><span class="lineCov">        659 :                 if(sub-&gt;timeout &amp;&amp; curtime &gt; sub-&gt;timeout &amp;&amp; sub-&gt;notify == NULL) {</span>
+<span class="lineNum">     495 </span><span class="lineNoCov">          0 :                         LIST_REMOVE(sub, entries);</span>
+<span class="lineNum">     496 </span><span class="lineNoCov">          0 :                         nsubscribers--;</span>
+<span class="lineNum">     497 </span><span class="lineNoCov">          0 :                         free(sub);</span>
+<span class="lineNum">     498 </span>            :                 }
+<span class="lineNum">     499 </span><span class="lineCov">        659 :                 sub = subnext;</span>
+<span class="lineNum">     500 </span>            :         }
+<span class="lineNum">     501 </span><span class="lineCov">        355 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

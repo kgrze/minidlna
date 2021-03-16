@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - src/utils.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - utils.h<span style="font-size: 80%;"> (source / <a href="utils.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntryHi">94.1 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2020-11-02 23:20:37</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /* Utility functions</a>
+<span class="lineNum">       2 </span>            :  *
+<span class="lineNum">       3 </span>            :  * Project : minidlna
+<span class="lineNum">       4 </span>            :  * Website : http://sourceforge.net/projects/minidlna/
+<span class="lineNum">       5 </span>            :  * Author  : Justin Maggard
+<span class="lineNum">       6 </span>            :  *
+<span class="lineNum">       7 </span>            :  * MiniDLNA media server
+<span class="lineNum">       8 </span>            :  * Copyright (C) 2008-2017  Justin Maggard
+<span class="lineNum">       9 </span>            :  *
+<span class="lineNum">      10 </span>            :  * This file is part of MiniDLNA.
+<span class="lineNum">      11 </span>            :  *
+<span class="lineNum">      12 </span>            :  * MiniDLNA is free software; you can redistribute it and/or modify
+<span class="lineNum">      13 </span>            :  * it under the terms of the GNU General Public License version 2 as
+<span class="lineNum">      14 </span>            :  * published by the Free Software Foundation.
+<span class="lineNum">      15 </span>            :  *
+<span class="lineNum">      16 </span>            :  * MiniDLNA is distributed in the hope that it will be useful,
+<span class="lineNum">      17 </span>            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      18 </span>            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      19 </span>            :  * GNU General Public License for more details.
+<span class="lineNum">      20 </span>            :  *
+<span class="lineNum">      21 </span>            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      22 </span>            :  * along with MiniDLNA. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<span class="lineNum">      23 </span>            :  */
+<span class="lineNum">      24 </span>            : #ifndef __UTILS_H__
+<span class="lineNum">      25 </span>            : #define __UTILS_H__
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span>            : #include &lt;stdarg.h&gt;
+<span class="lineNum">      28 </span>            : #include &lt;dirent.h&gt;
+<span class="lineNum">      29 </span>            : #include &lt;sys/param.h&gt;
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            : #include &quot;minidlnatypes.h&quot;
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span>            : /* String functions */
+<span class="lineNum">      34 </span>            : /* We really want this one inlined, since it has a major performance impact */
+<a name="35"><span class="lineNum">      35 </span>            : static inline int</a>
+<span class="lineNum">      36 </span>            : __attribute__((__format__ (__printf__, 2, 3)))
+<span class="lineNum">      37 </span><span class="lineCov">        929 : strcatf(struct string_s *str, const char *fmt, ...)</span>
+<span class="lineNum">      38 </span>            : {
+<span class="lineNum">      39 </span>            :         int ret;
+<span class="lineNum">      40 </span>            :         int size;
+<span class="lineNum">      41 </span>            :         va_list ap;
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span><span class="lineCov">        929 :         if (str-&gt;off &gt;= str-&gt;size)</span>
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :                 return 0;</span>
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span><span class="lineCov">        929 :         va_start(ap, fmt);</span>
+<span class="lineNum">      47 </span><span class="lineCov">        929 :         size = str-&gt;size - str-&gt;off;</span>
+<span class="lineNum">      48 </span><span class="lineCov">        929 :         ret = vsnprintf(str-&gt;data + str-&gt;off, size, fmt, ap);</span>
+<span class="lineNum">      49 </span><span class="lineCov">        929 :         str-&gt;off += MIN(ret, size);</span>
+<span class="lineNum">      50 </span><span class="lineCov">        929 :         va_end(ap);</span>
+<span class="lineNum">      51 </span>            : 
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">        929 :         return ret;</span></a>
+<span class="lineNum">      53 </span>            : }
+<span class="lineNum">      54 </span><span class="lineCov">         14 : static inline void strncpyt(char *dst, const char *src, size_t len)</span>
+<span class="lineNum">      55 </span>            : {
+<span class="lineNum">      56 </span><span class="lineCov">         14 :         strncpy(dst, src, len);</span>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">         14 :         dst[len-1] = '\0';</span></a>
+<span class="lineNum">      58 </span><span class="lineCov">         14 : }</span>
+<span class="lineNum">      59 </span><span class="lineCov">         14 : static inline int is_reg(const struct dirent *d)</span>
+<span class="lineNum">      60 </span>            : {
+<span class="lineNum">      61 </span>            : #if HAVE_STRUCT_DIRENT_D_TYPE
+<span class="lineNum">      62 </span><span class="lineCov">         14 :         return (d-&gt;d_type == DT_REG);</span>
+<span class="lineNum">      63 </span>            : #else
+<span class="lineNum">      64 </span>            :         return -1;
+<a name="65"><span class="lineNum">      65 </span>            : #endif</a>
+<span class="lineNum">      66 </span>            : }
+<span class="lineNum">      67 </span><span class="lineCov">          8 : static inline int is_dir(const struct dirent *d)</span>
+<span class="lineNum">      68 </span>            : {
+<span class="lineNum">      69 </span>            : #if HAVE_STRUCT_DIRENT_D_TYPE
+<span class="lineNum">      70 </span><span class="lineCov">          8 :         return (d-&gt;d_type == DT_DIR);</span>
+<span class="lineNum">      71 </span>            : #else
+<span class="lineNum">      72 </span>            :         return -1;
+<span class="lineNum">      73 </span>            : #endif
+<span class="lineNum">      74 </span>            : }
+<span class="lineNum">      75 </span>            : int xasprintf(char **strp, char *fmt, ...) __attribute__((__format__ (__printf__, 2, 3)));
+<span class="lineNum">      76 </span>            : int ends_with(const char * haystack, const char * needle);
+<span class="lineNum">      77 </span>            : char *trim(char *str);
+<span class="lineNum">      78 </span>            : char *strstrc(const char *s, const char *p, const char t);
+<span class="lineNum">      79 </span>            : char *strcasestrc(const char *s, const char *p, const char t);
+<span class="lineNum">      80 </span>            : char *modifyString(char *string, const char *before, const char *after, int noalloc);
+<span class="lineNum">      81 </span>            : char *escape_tag(const char *tag, int force_alloc);
+<span class="lineNum">      82 </span>            : char *unescape_tag(const char *tag, int force_alloc);
+<span class="lineNum">      83 </span>            : char *duration_str(int msec);
+<span class="lineNum">      84 </span>            : char *strip_ext(char *name);
+<span class="lineNum">      85 </span>            : 
+<span class="lineNum">      86 </span>            : /* Metadata functions */
+<span class="lineNum">      87 </span>            : int is_video(const char * file);
+<span class="lineNum">      88 </span>            : int is_audio(const char * file);
+<span class="lineNum">      89 </span>            : int is_image(const char * file);
+<span class="lineNum">      90 </span>            : int is_playlist(const char * file);
+<span class="lineNum">      91 </span>            : int is_caption(const char * file);
+<span class="lineNum">      92 </span>            : #define is_nfo(file) ends_with(file, &quot;.nfo&quot;)
+<span class="lineNum">      93 </span>            : media_types get_media_type(const char *file);
+<span class="lineNum">      94 </span>            : media_types valid_media_types(const char *path);
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span>            : int resolve_unknown_type(const char * path, media_types dir_type);
+<span class="lineNum">      97 </span>            : const char *mime_to_ext(const char * mime);
+<span class="lineNum">      98 </span>            : 
+<span class="lineNum">      99 </span>            : /* Others */
+<span class="lineNum">     100 </span>            : int make_dir(char * path, mode_t mode);
+<span class="lineNum">     101 </span>            : unsigned int DJBHash(uint8_t *data, int len);
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

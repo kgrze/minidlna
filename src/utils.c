@@ -67,6 +67,61 @@ ends_with(const char * haystack, const char * needle)
 }
 
 char *
+trim(char *str)
+{
+	int i;
+	int len;
+
+	if (!str)
+		return(NULL);
+
+	len = strlen(str);
+	for (i=len-1; i >= 0 && isspace(str[i]); i--)
+	{
+		str[i] = '\0';
+		len--;
+	}
+	while (isspace(*str))
+	{
+		str++;
+		len--;
+	}
+
+	if (str[0] == '"' && str[len-1] == '"')
+	{
+		str[0] = '\0';
+		str[len-1] = '\0';
+		str++;
+	}
+
+	return str;
+}
+
+/* Find the first occurrence of p in s, where s is terminated by t */
+char *
+strstrc(const char *s, const char *p, const char t)
+{
+	char *endptr;
+	size_t slen, plen;
+
+	endptr = strchr(s, t);
+	if (!endptr)
+		return strstr(s, p);
+
+	plen = strlen(p);
+	slen = endptr - s;
+	while (slen >= plen)
+	{
+		if (*s == *p && strncmp(s+1, p+1, plen-1) == 0)
+			return (char*)s;
+		s++;
+		slen--;
+	}
+
+	return NULL;
+} 
+
+char *
 strcasestrc(const char *s, const char *p, const char t)
 {
 	char *endptr;
@@ -135,6 +190,28 @@ modifyString(char *string, const char *before, const char *after, int noalloc)
 }
 
 char *
+unescape_tag(const char *tag, int force_alloc)
+{
+	char *esc_tag = NULL;
+
+	if (strchr(tag, '&') &&
+	    (strstr(tag, "&amp;") || strstr(tag, "&lt;") || strstr(tag, "&gt;") ||
+	     strstr(tag, "&quot;") || strstr(tag, "&apos;")))
+	{
+		esc_tag = strdup(tag);
+		esc_tag = modifyString(esc_tag, "&amp;", "&", 1);
+		esc_tag = modifyString(esc_tag, "&lt;", "<", 1);
+		esc_tag = modifyString(esc_tag, "&gt;", ">", 1);
+		esc_tag = modifyString(esc_tag, "&quot;", "\"", 1);
+		esc_tag = modifyString(esc_tag, "&apos;", "'", 1);
+	}
+	else if( force_alloc )
+		esc_tag = strdup(tag);
+
+	return esc_tag;
+}
+
+char *
 escape_tag(const char *tag, int force_alloc)
 {
 	char *esc_tag = NULL;
@@ -151,6 +228,20 @@ escape_tag(const char *tag, int force_alloc)
 		esc_tag = strdup(tag);
 
 	return esc_tag;
+}
+
+char *
+duration_str(int msec)
+{
+	char *str;
+
+	xasprintf(&str, "%d:%02d:%02d.%03d",
+			(msec / 3600000),
+			(msec / 60000 % 60),
+			(msec / 1000 % 60),
+			(msec % 1000));
+
+	return str;
 }
 
 char *
@@ -216,33 +307,81 @@ make_dir(char * path, mode_t mode)
 	} while (1);
 }
 
+/* Simple, efficient hash function from Daniel J. Bernstein */
+unsigned int
+DJBHash(uint8_t *data, int len)
+{
+	unsigned int hash = 5381;
+	unsigned int i = 0;
+
+	for(i = 0; i < len; data++, i++)
+	{
+		hash = ((hash << 5) + hash) + (*data);
+	}
+
+	return hash;
+}
+
 const char *
 mime_to_ext(const char * mime)
 {
-	if( strcmp(mime+6, "avi") == 0 )
-		return "avi";
-	else if( strcmp(mime+6, "divx") == 0 )
-		return "avi";
-	else if( strcmp(mime+6, "x-msvideo") == 0 )
-		return "avi";
-	else if( strcmp(mime+6, "mpeg") == 0 )
-		return "mpg";
-	else if( strcmp(mime+6, "mp4") == 0 )
-		return "mp4";
-	else if( strcmp(mime+6, "x-ms-wmv") == 0 )
-		return "wmv";
-	else if( strcmp(mime+6, "x-matroska") == 0 )
-		return "mkv";
-	else if( strcmp(mime+6, "x-mkv") == 0 )
-		return "mkv";
-	else if( strcmp(mime+6, "x-flv") == 0 )
-		return "flv";
-	else if( strcmp(mime+6, "vnd.dlna.mpeg-tts") == 0 )
-		return "mpg";
-	else if( strcmp(mime+6, "quicktime") == 0 )
-		return "mov";
-	else if( strcmp(mime+6, "3gpp") == 0 )
-		return "3gp";
+	switch( *mime )
+	{
+		/* Audio extensions */
+		case 'a':
+			if( strcmp(mime+6, "mpeg") == 0 )
+				return "mp3";
+			else if( strcmp(mime+6, "mp4") == 0 )
+				return "m4a";
+			else if( strcmp(mime+6, "x-ms-wma") == 0 )
+				return "wma";
+			else if( strcmp(mime+6, "x-flac") == 0 )
+				return "flac";
+			else if( strcmp(mime+6, "flac") == 0 )
+				return "flac";
+			else if( strcmp(mime+6, "x-wav") == 0 )
+				return "wav";
+			else if( strncmp(mime+6, "L16", 3) == 0 )
+				return "pcm";
+			else if( strcmp(mime+6, "3gpp") == 0 )
+				return "3gp";
+			else if( strcmp(mime, "application/ogg") == 0 )
+				return "ogg";
+			break;
+		case 'v':
+			if( strcmp(mime+6, "avi") == 0 )
+				return "avi";
+			else if( strcmp(mime+6, "divx") == 0 )
+				return "avi";
+			else if( strcmp(mime+6, "x-msvideo") == 0 )
+				return "avi";
+			else if( strcmp(mime+6, "mpeg") == 0 )
+				return "mpg";
+			else if( strcmp(mime+6, "mp4") == 0 )
+				return "mp4";
+			else if( strcmp(mime+6, "x-ms-wmv") == 0 )
+				return "wmv";
+			else if( strcmp(mime+6, "x-matroska") == 0 )
+				return "mkv";
+			else if( strcmp(mime+6, "x-mkv") == 0 )
+				return "mkv";
+			else if( strcmp(mime+6, "x-flv") == 0 )
+				return "flv";
+			else if( strcmp(mime+6, "vnd.dlna.mpeg-tts") == 0 )
+				return "mpg";
+			else if( strcmp(mime+6, "quicktime") == 0 )
+				return "mov";
+			else if( strcmp(mime+6, "3gpp") == 0 )
+				return "3gp";
+		case 'i':
+			if( strcmp(mime+6, "jpeg") == 0 )
+				return "jpg";
+			else if( strcmp(mime+6, "png") == 0 )
+				return "png";
+			break;
+		default:
+			break;
+	}
 	return "dat";
 }
 
@@ -260,14 +399,52 @@ is_video(const char * file)
 		ends_with(file, ".mov") || ends_with(file, ".3gp"));
 }
 
+int
+is_audio(const char * file)
+{
+	return (ends_with(file, ".mp3") || ends_with(file, ".flac") ||
+		ends_with(file, ".wma") || ends_with(file, ".asf")  ||
+		ends_with(file, ".fla") || ends_with(file, ".flc")  ||
+		ends_with(file, ".m4a") || ends_with(file, ".aac")  ||
+		ends_with(file, ".mp4") || ends_with(file, ".m4p")  ||
+		ends_with(file, ".wav") || ends_with(file, ".ogg")  ||
+		ends_with(file, ".pcm") || ends_with(file, ".3gp"));
+}
+
+int
+is_image(const char * file)
+{
+	return (ends_with(file, ".jpg") || ends_with(file, ".jpeg"));
+}
+
+int
+is_playlist(const char * file)
+{
+	return (ends_with(file, ".m3u") || ends_with(file, ".pls"));
+}
+
+int
+is_caption(const char * file)
+{
+	return (ends_with(file, ".srt") || ends_with(file, ".smi"));
+}
+
 media_types
 get_media_type(const char *file)
 {
 	const char *ext = strrchr(file, '.');
 	if (!ext)
 		return NO_MEDIA;
+	if (is_image(ext))
+		return TYPE_IMAGE;
 	if (is_video(ext))
 		return TYPE_VIDEO;
+	if (is_audio(ext))
+		return TYPE_AUDIO;
+	if (is_playlist(ext))
+		return TYPE_PLAYLIST;
+	if (is_caption(ext))
+		return TYPE_CAPTION;
 	if (is_nfo(ext))
 		return TYPE_NFO;
 	return NO_MEDIA;
