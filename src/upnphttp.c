@@ -891,58 +891,25 @@ send_file(struct upnphttp * h, int sendfd, off_t offset, off_t end_offset)
 {
 	off_t send_size;
 	off_t ret;
-	char *buf = NULL;
-#if HAVE_SENDFILE
-	int try_sendfile = 1;
-#endif
 
 	while( offset <= end_offset )
 	{
-#if HAVE_SENDFILE
-		if( try_sendfile )
-		{
 			send_size = ( ((end_offset - offset) < MAX_BUFFER_SIZE) ? (end_offset - offset + 1) : MAX_BUFFER_SIZE);
 			ret = sys_sendfile(h->socket, sendfd, &offset, send_size);
 			if( ret == -1 )
 			{
 				DPRINTF(E_DEBUG, L_HTTP, "sendfile error :: error no. %d [%s]\n", errno, strerror(errno));
 				/* If sendfile isn't supported on the filesystem, don't bother trying to use it again. */
-				if( errno == EOVERFLOW || errno == EINVAL )
-					try_sendfile = 0;
-				else if( errno != EAGAIN )
+				if( errno != EAGAIN )
 					break;
 			}
 			else
 			{
-				//DPRINTF(E_DEBUG, L_HTTP, "sent %lld bytes to %d. offset is now %lld.\n", ret, h->socket, offset);
+				DPRINTF(E_DEBUG, L_HTTP, "sent %lld bytes to %d. offset is now %lld.\n", (long long int)ret, h->socket, (long long int)offset);
 				continue;
 			}
-		}
-#endif
-		/* Fall back to regular I/O */
-		if( !buf )
-			buf = malloc(MIN_BUFFER_SIZE);
-		send_size = (((end_offset - offset) < MIN_BUFFER_SIZE) ? (end_offset - offset + 1) : MIN_BUFFER_SIZE);
-		lseek(sendfd, offset, SEEK_SET);
-		ret = read(sendfd, buf, send_size);
-		if( ret == -1 ) {
-			DPRINTF(E_DEBUG, L_HTTP, "read error :: error no. %d [%s]\n", errno, strerror(errno));
-			if( errno == EAGAIN )
-				continue;
-			else
-				break;
-		}
-		ret = write(h->socket, buf, ret);
-		if( ret == -1 ) {
-			DPRINTF(E_DEBUG, L_HTTP, "write error :: error no. %d [%s]\n", errno, strerror(errno));
-			if( errno == EAGAIN )
-				continue;
-			else
-				break;
-		}
 		offset += ret;
 	}
-	free(buf);
 }
 
 static void

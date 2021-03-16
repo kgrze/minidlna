@@ -30,7 +30,6 @@ clean:
 	$(rm) $(SRCDIR)/*.gcno
 	$(rm) $(TARGET)
 	$(rm) cache
-	$(rm) cov
 
 help:
 	@echo "Build following target:"
