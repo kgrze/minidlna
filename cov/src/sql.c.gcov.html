@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2021-03-16 14:57:09</td>
+            <td class="headerValue">2021-03-16 15:25:55</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -110,25 +110,25 @@
 <a name="48"><span class="lineNum">      48 </span>            : }</a>
 <a name="49"><span class="lineNum">      49 </span>            : </a>
 <a name="50"><span class="lineNum">      50 </span>            : int</a>
-<a name="51"><span class="lineNum">      51 </span><span class="lineCov">         12 : sql_get_table(sqlite3 *db, const char *sql, char ***pazResult, int *pnRow, int *pnColumn)</span></a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">         14 : sql_get_table(sqlite3 *db, const char *sql, char ***pazResult, int *pnRow, int *pnColumn)</span></a>
 <a name="52"><span class="lineNum">      52 </span>            : {</a>
 <a name="53"><span class="lineNum">      53 </span>            :         int ret;</a>
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">         12 :         char *errMsg = NULL;</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">         14 :         char *errMsg = NULL;</span></a>
 <a name="55"><span class="lineNum">      55 </span>            :         //DPRINTF(E_DEBUG, L_DB_SQL, &quot;SQL: %s\n&quot;, sql);</a>
 <a name="56"><span class="lineNum">      56 </span>            :         </a>
-<a name="57"><span class="lineNum">      57 </span><span class="lineCov">         12 :         ret = sqlite3_get_table(db, sql, pazResult, pnRow, pnColumn, &amp;errMsg);</span></a>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">         12 :         if( ret != SQLITE_OK )</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">         14 :         ret = sqlite3_get_table(db, sql, pazResult, pnRow, pnColumn, &amp;errMsg);</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">         14 :         if( ret != SQLITE_OK )</span></a>
 <a name="59"><span class="lineNum">      59 </span>            :         {</a>
 <a name="60"><span class="lineNum">      60 </span><span class="lineNoCov">          0 :                 DPRINTF(E_ERROR, L_DB_SQL, &quot;SQL ERROR %d [%s]\n%s\n&quot;, ret, errMsg, sql);</span></a>
 <a name="61"><span class="lineNum">      61 </span><span class="lineNoCov">          0 :                 if (errMsg)</span></a>
 <a name="62"><span class="lineNum">      62 </span><span class="lineNoCov">          0 :                         sqlite3_free(errMsg);</span></a>
 <a name="63"><span class="lineNum">      63 </span>            :         }</a>
 <a name="64"><span class="lineNum">      64 </span>            : </a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">         12 :         return ret;</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">         14 :         return ret;</span></a>
 <a name="66"><span class="lineNum">      66 </span>            : }</a>
 <a name="67"><span class="lineNum">      67 </span>            : </a>
 <a name="68"><span class="lineNum">      68 </span>            : int</a>
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">         26 : sql_get_int_field(sqlite3 *db, const char *fmt, ...)</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">         31 : sql_get_int_field(sqlite3 *db, const char *fmt, ...)</span></a>
 <a name="70"><span class="lineNum">      70 </span>            : {</a>
 <a name="71"><span class="lineNum">      71 </span>            :         va_list         ap;</a>
 <a name="72"><span class="lineNum">      72 </span>            :         int             counter, result;</a>
@@ -136,24 +136,24 @@
 <a name="74"><span class="lineNum">      74 </span>            :         int             ret;</a>
 <a name="75"><span class="lineNum">      75 </span>            :         sqlite3_stmt    *stmt;</a>
 <a name="76"><span class="lineNum">      76 </span>            :         </a>
-<a name="77"><span class="lineNum">      77 </span><span class="lineCov">         26 :         va_start(ap, fmt);</span></a>
-<a name="78"><span class="lineNum">      78 </span><span class="lineCov">         26 :         sql = sqlite3_vmprintf(fmt, ap);</span></a>
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">         26 :         va_end(ap);</span></a>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">         31 :         va_start(ap, fmt);</span></a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">         31 :         sql = sqlite3_vmprintf(fmt, ap);</span></a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">         31 :         va_end(ap);</span></a>
 <a name="80"><span class="lineNum">      80 </span>            : </a>
 <a name="81"><span class="lineNum">      81 </span>            :         //DPRINTF(E_DEBUG, L_DB_SQL, &quot;sql: %s\n&quot;, sql);</a>
 <a name="82"><span class="lineNum">      82 </span>            : </a>
-<a name="83"><span class="lineNum">      83 </span><span class="lineCov">         26 :         switch (sqlite3_prepare_v2(db, sql, -1, &amp;stmt, NULL))</span></a>
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">         31 :         switch (sqlite3_prepare_v2(db, sql, -1, &amp;stmt, NULL))</span></a>
 <a name="84"><span class="lineNum">      84 </span>            :         {</a>
-<a name="85"><span class="lineNum">      85 </span><span class="lineCov">         26 :                 case SQLITE_OK:</span></a>
-<a name="86"><span class="lineNum">      86 </span><span class="lineCov">         26 :                         break;</span></a>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">         31 :                 case SQLITE_OK:</span></a>
+<a name="86"><span class="lineNum">      86 </span><span class="lineCov">         31 :                         break;</span></a>
 <a name="87"><span class="lineNum">      87 </span><span class="lineNoCov">          0 :                 default:</span></a>
 <a name="88"><span class="lineNum">      88 </span><span class="lineNoCov">          0 :                         DPRINTF(E_ERROR, L_DB_SQL, &quot;prepare failed: %s\n%s\n&quot;, sqlite3_errmsg(db), sql);</span></a>
 <a name="89"><span class="lineNum">      89 </span><span class="lineNoCov">          0 :                         sqlite3_free(sql);</span></a>
 <a name="90"><span class="lineNum">      90 </span><span class="lineNoCov">          0 :                         return -1;</span></a>
 <a name="91"><span class="lineNum">      91 </span>            :         }</a>
 <a name="92"><span class="lineNum">      92 </span>            : </a>
-<a name="93"><span class="lineNum">      93 </span><span class="lineCov">         52 :         for (counter = 0;</span></a>
-<a name="94"><span class="lineNum">      94 </span><span class="lineCov">         52 :              ((result = sqlite3_step(stmt)) == SQLITE_BUSY || result == SQLITE_LOCKED) &amp;&amp; counter &lt; 2;</span></a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">         62 :         for (counter = 0;</span></a>
+<a name="94"><span class="lineNum">      94 </span><span class="lineCov">         62 :              ((result = sqlite3_step(stmt)) == SQLITE_BUSY || result == SQLITE_LOCKED) &amp;&amp; counter &lt; 2;</span></a>
 <a name="95"><span class="lineNum">      95 </span><span class="lineNoCov">          0 :              counter++) {</span></a>
 <a name="96"><span class="lineNum">      96 </span>            :                 /* While SQLITE_BUSY has a built in timeout,</a>
 <a name="97"><span class="lineNum">      97 </span>            :                  * SQLITE_LOCKED does not, so sleep */</a>
@@ -161,29 +161,29 @@
 <a name="99"><span class="lineNum">      99 </span><span class="lineNoCov">          0 :                         sleep(1);</span></a>
 <a name="100"><span class="lineNum">     100 </span>            :         }</a>
 <a name="101"><span class="lineNum">     101 </span>            : </a>
-<a name="102"><span class="lineNum">     102 </span><span class="lineCov">         26 :         switch (result)</span></a>
+<a name="102"><span class="lineNum">     102 </span><span class="lineCov">         31 :         switch (result)</span></a>
 <a name="103"><span class="lineNum">     103 </span>            :         {</a>
 <a name="104"><span class="lineNum">     104 </span><span class="lineNoCov">          0 :                 case SQLITE_DONE:</span></a>
 <a name="105"><span class="lineNum">     105 </span>            :                         /* no rows returned */</a>
 <a name="106"><span class="lineNum">     106 </span><span class="lineNoCov">          0 :                         ret = 0;</span></a>
 <a name="107"><span class="lineNum">     107 </span><span class="lineNoCov">          0 :                         break;</span></a>
-<a name="108"><span class="lineNum">     108 </span><span class="lineCov">         26 :                 case SQLITE_ROW:</span></a>
-<a name="109"><span class="lineNum">     109 </span><span class="lineCov">         26 :                         if (sqlite3_column_type(stmt, 0) == SQLITE_NULL)</span></a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineCov">         31 :                 case SQLITE_ROW:</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineCov">         31 :                         if (sqlite3_column_type(stmt, 0) == SQLITE_NULL)</span></a>
 <a name="110"><span class="lineNum">     110 </span>            :                         {</a>
 <a name="111"><span class="lineNum">     111 </span><span class="lineNoCov">          0 :                                 ret = 0;</span></a>
 <a name="112"><span class="lineNum">     112 </span><span class="lineNoCov">          0 :                                 break;</span></a>
 <a name="113"><span class="lineNum">     113 </span>            :                         }</a>
-<a name="114"><span class="lineNum">     114 </span><span class="lineCov">         26 :                         ret = sqlite3_column_int(stmt, 0);</span></a>
-<a name="115"><span class="lineNum">     115 </span><span class="lineCov">         26 :                         break;</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">         31 :                         ret = sqlite3_column_int(stmt, 0);</span></a>
+<a name="115"><span class="lineNum">     115 </span><span class="lineCov">         31 :                         break;</span></a>
 <a name="116"><span class="lineNum">     116 </span><span class="lineNoCov">          0 :                 default:</span></a>
 <a name="117"><span class="lineNum">     117 </span><span class="lineNoCov">          0 :                         DPRINTF(E_WARN, L_DB_SQL, &quot;%s: step failed: %s\n%s\n&quot;, __func__, sqlite3_errmsg(db), sql);</span></a>
 <a name="118"><span class="lineNum">     118 </span><span class="lineNoCov">          0 :                         ret = -1;</span></a>
 <a name="119"><span class="lineNum">     119 </span><span class="lineNoCov">          0 :                         break;</span></a>
 <a name="120"><span class="lineNum">     120 </span>            :         }</a>
-<a name="121"><span class="lineNum">     121 </span><span class="lineCov">         26 :         sqlite3_free(sql);</span></a>
-<a name="122"><span class="lineNum">     122 </span><span class="lineCov">         26 :         sqlite3_finalize(stmt);</span></a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">         31 :         sqlite3_free(sql);</span></a>
+<a name="122"><span class="lineNum">     122 </span><span class="lineCov">         31 :         sqlite3_finalize(stmt);</span></a>
 <a name="123"><span class="lineNum">     123 </span>            : </a>
-<a name="124"><span class="lineNum">     124 </span><span class="lineCov">         26 :         return ret;</span></a>
+<a name="124"><span class="lineNum">     124 </span><span class="lineCov">         31 :         return ret;</span></a>
 <a name="125"><span class="lineNum">     125 </span>            : }</a>
 <a name="126"><span class="lineNum">     126 </span>            : </a>
 <a name="127"><span class="lineNum">     127 </span>            : char *</a>

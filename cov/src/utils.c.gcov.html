@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2021-03-16 14:57:09</td>
+            <td class="headerValue">2021-03-16 15:25:55</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">10</td>
@@ -115,17 +115,17 @@
 <a name="53"><span class="lineNum">      53 </span>            : }</a>
 <a name="54"><span class="lineNum">      54 </span>            : </a>
 <a name="55"><span class="lineNum">      55 </span>            : int</a>
-<a name="56"><span class="lineNum">      56 </span><span class="lineCov">         99 : ends_with(const char * haystack, const char * needle)</span></a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">         97 : ends_with(const char * haystack, const char * needle)</span></a>
 <a name="57"><span class="lineNum">      57 </span>            : {</a>
 <a name="58"><span class="lineNum">      58 </span>            :         const char * end;</a>
-<a name="59"><span class="lineNum">      59 </span><span class="lineCov">         99 :         int nlen = strlen(needle);</span></a>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">         99 :         int hlen = strlen(haystack);</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">         97 :         int nlen = strlen(needle);</span></a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">         97 :         int hlen = strlen(haystack);</span></a>
 <a name="61"><span class="lineNum">      61 </span>            : </a>
-<a name="62"><span class="lineNum">      62 </span><span class="lineCov">         99 :         if( nlen &gt; hlen )</span></a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">         97 :         if( nlen &gt; hlen )</span></a>
 <a name="63"><span class="lineNum">      63 </span><span class="lineCov">         15 :                 return 0;</span></a>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         84 :         end = haystack + hlen - nlen;</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         82 :         end = haystack + hlen - nlen;</span></a>
 <a name="65"><span class="lineNum">      65 </span>            : </a>
-<a name="66"><span class="lineNum">      66 </span><span class="lineCov">         84 :         return (strcasecmp(end, needle) ? 0 : 1);</span></a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">         82 :         return (strcasecmp(end, needle) ? 0 : 1);</span></a>
 <a name="67"><span class="lineNum">      67 </span>            : }</a>
 <a name="68"><span class="lineNum">      68 </span>            : </a>
 <a name="69"><span class="lineNum">      69 </span>            : char *</a>
@@ -184,23 +184,23 @@
 <a name="122"><span class="lineNum">     122 </span>            : } </a>
 <a name="123"><span class="lineNum">     123 </span>            : </a>
 <a name="124"><span class="lineNum">     124 </span>            : char *</a>
-<a name="125"><span class="lineNum">     125 </span><span class="lineCov">         69 : strcasestrc(const char *s, const char *p, const char t)</span></a>
+<a name="125"><span class="lineNum">     125 </span><span class="lineCov">         79 : strcasestrc(const char *s, const char *p, const char t)</span></a>
 <a name="126"><span class="lineNum">     126 </span>            : {</a>
 <a name="127"><span class="lineNum">     127 </span>            :         char *endptr;</a>
 <a name="128"><span class="lineNum">     128 </span>            :         size_t slen, plen;</a>
 <a name="129"><span class="lineNum">     129 </span>            : </a>
-<a name="130"><span class="lineNum">     130 </span><span class="lineCov">         69 :         endptr = strchr(s, t);</span></a>
-<a name="131"><span class="lineNum">     131 </span><span class="lineCov">         69 :         if (!endptr)</span></a>
+<a name="130"><span class="lineNum">     130 </span><span class="lineCov">         79 :         endptr = strchr(s, t);</span></a>
+<a name="131"><span class="lineNum">     131 </span><span class="lineCov">         79 :         if (!endptr)</span></a>
 <a name="132"><span class="lineNum">     132 </span><span class="lineNoCov">          0 :                 return strcasestr(s, p);</span></a>
 <a name="133"><span class="lineNum">     133 </span>            : </a>
-<a name="134"><span class="lineNum">     134 </span><span class="lineCov">         69 :         plen = strlen(p);</span></a>
-<a name="135"><span class="lineNum">     135 </span><span class="lineCov">         69 :         slen = endptr - s;</span></a>
-<a name="136"><span class="lineNum">     136 </span><span class="lineCov">        207 :         while (slen &gt;= plen)</span></a>
+<a name="134"><span class="lineNum">     134 </span><span class="lineCov">         79 :         plen = strlen(p);</span></a>
+<a name="135"><span class="lineNum">     135 </span><span class="lineCov">         79 :         slen = endptr - s;</span></a>
+<a name="136"><span class="lineNum">     136 </span><span class="lineCov">        237 :         while (slen &gt;= plen)</span></a>
 <a name="137"><span class="lineNum">     137 </span>            :         {</a>
-<a name="138"><span class="lineNum">     138 </span><span class="lineCov">        207 :                 if (*s == *p &amp;&amp; strncasecmp(s+1, p+1, plen-1) == 0)</span></a>
-<a name="139"><span class="lineNum">     139 </span><span class="lineCov">         69 :                         return (char*)s;</span></a>
-<a name="140"><span class="lineNum">     140 </span><span class="lineCov">        138 :                 s++;</span></a>
-<a name="141"><span class="lineNum">     141 </span><span class="lineCov">        138 :                 slen--;</span></a>
+<a name="138"><span class="lineNum">     138 </span><span class="lineCov">        237 :                 if (*s == *p &amp;&amp; strncasecmp(s+1, p+1, plen-1) == 0)</span></a>
+<a name="139"><span class="lineNum">     139 </span><span class="lineCov">         79 :                         return (char*)s;</span></a>
+<a name="140"><span class="lineNum">     140 </span><span class="lineCov">        158 :                 s++;</span></a>
+<a name="141"><span class="lineNum">     141 </span><span class="lineCov">        158 :                 slen--;</span></a>
 <a name="142"><span class="lineNum">     142 </span>            :         }</a>
 <a name="143"><span class="lineNum">     143 </span>            : </a>
 <a name="144"><span class="lineNum">     144 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
@@ -385,9 +385,9 @@
 <a name="323"><span class="lineNum">     323 </span>            : }</a>
 <a name="324"><span class="lineNum">     324 </span>            : </a>
 <a name="325"><span class="lineNum">     325 </span>            : const char *</a>
-<a name="326"><span class="lineNum">     326 </span><span class="lineCov">         21 : mime_to_ext(const char * mime)</span></a>
+<a name="326"><span class="lineNum">     326 </span><span class="lineCov">         25 : mime_to_ext(const char * mime)</span></a>
 <a name="327"><span class="lineNum">     327 </span>            : {</a>
-<a name="328"><span class="lineNum">     328 </span><span class="lineCov">         21 :         switch( *mime )</span></a>
+<a name="328"><span class="lineNum">     328 </span><span class="lineCov">         25 :         switch( *mime )</span></a>
 <a name="329"><span class="lineNum">     329 </span>            :         {</a>
 <a name="330"><span class="lineNum">     330 </span>            :                 /* Audio extensions */</a>
 <a name="331"><span class="lineNum">     331 </span><span class="lineNoCov">          0 :                 case 'a':</span></a>
@@ -410,21 +410,21 @@
 <a name="348"><span class="lineNum">     348 </span><span class="lineNoCov">          0 :                         else if( strcmp(mime, &quot;application/ogg&quot;) == 0 )</span></a>
 <a name="349"><span class="lineNum">     349 </span><span class="lineNoCov">          0 :                                 return &quot;ogg&quot;;</span></a>
 <a name="350"><span class="lineNum">     350 </span><span class="lineNoCov">          0 :                         break;</span></a>
-<a name="351"><span class="lineNum">     351 </span><span class="lineCov">         21 :                 case 'v':</span></a>
-<a name="352"><span class="lineNum">     352 </span><span class="lineCov">         21 :                         if( strcmp(mime+6, &quot;avi&quot;) == 0 )</span></a>
+<a name="351"><span class="lineNum">     351 </span><span class="lineCov">         25 :                 case 'v':</span></a>
+<a name="352"><span class="lineNum">     352 </span><span class="lineCov">         25 :                         if( strcmp(mime+6, &quot;avi&quot;) == 0 )</span></a>
 <a name="353"><span class="lineNum">     353 </span><span class="lineNoCov">          0 :                                 return &quot;avi&quot;;</span></a>
-<a name="354"><span class="lineNum">     354 </span><span class="lineCov">         21 :                         else if( strcmp(mime+6, &quot;divx&quot;) == 0 )</span></a>
+<a name="354"><span class="lineNum">     354 </span><span class="lineCov">         25 :                         else if( strcmp(mime+6, &quot;divx&quot;) == 0 )</span></a>
 <a name="355"><span class="lineNum">     355 </span><span class="lineNoCov">          0 :                                 return &quot;avi&quot;;</span></a>
-<a name="356"><span class="lineNum">     356 </span><span class="lineCov">         21 :                         else if( strcmp(mime+6, &quot;x-msvideo&quot;) == 0 )</span></a>
+<a name="356"><span class="lineNum">     356 </span><span class="lineCov">         25 :                         else if( strcmp(mime+6, &quot;x-msvideo&quot;) == 0 )</span></a>
 <a name="357"><span class="lineNum">     357 </span><span class="lineNoCov">          0 :                                 return &quot;avi&quot;;</span></a>
-<a name="358"><span class="lineNum">     358 </span><span class="lineCov">         21 :                         else if( strcmp(mime+6, &quot;mpeg&quot;) == 0 )</span></a>
+<a name="358"><span class="lineNum">     358 </span><span class="lineCov">         25 :                         else if( strcmp(mime+6, &quot;mpeg&quot;) == 0 )</span></a>
 <a name="359"><span class="lineNum">     359 </span><span class="lineNoCov">          0 :                                 return &quot;mpg&quot;;</span></a>
-<a name="360"><span class="lineNum">     360 </span><span class="lineCov">         21 :                         else if( strcmp(mime+6, &quot;mp4&quot;) == 0 )</span></a>
-<a name="361"><span class="lineNum">     361 </span><span class="lineCov">         10 :                                 return &quot;mp4&quot;;</span></a>
-<a name="362"><span class="lineNum">     362 </span><span class="lineCov">         11 :                         else if( strcmp(mime+6, &quot;x-ms-wmv&quot;) == 0 )</span></a>
+<a name="360"><span class="lineNum">     360 </span><span class="lineCov">         25 :                         else if( strcmp(mime+6, &quot;mp4&quot;) == 0 )</span></a>
+<a name="361"><span class="lineNum">     361 </span><span class="lineCov">         13 :                                 return &quot;mp4&quot;;</span></a>
+<a name="362"><span class="lineNum">     362 </span><span class="lineCov">         12 :                         else if( strcmp(mime+6, &quot;x-ms-wmv&quot;) == 0 )</span></a>
 <a name="363"><span class="lineNum">     363 </span><span class="lineNoCov">          0 :                                 return &quot;wmv&quot;;</span></a>
-<a name="364"><span class="lineNum">     364 </span><span class="lineCov">         11 :                         else if( strcmp(mime+6, &quot;x-matroska&quot;) == 0 )</span></a>
-<a name="365"><span class="lineNum">     365 </span><span class="lineCov">          6 :                                 return &quot;mkv&quot;;</span></a>
+<a name="364"><span class="lineNum">     364 </span><span class="lineCov">         12 :                         else if( strcmp(mime+6, &quot;x-matroska&quot;) == 0 )</span></a>
+<a name="365"><span class="lineNum">     365 </span><span class="lineCov">          7 :                                 return &quot;mkv&quot;;</span></a>
 <a name="366"><span class="lineNum">     366 </span><span class="lineCov">          5 :                         else if( strcmp(mime+6, &quot;x-mkv&quot;) == 0 )</span></a>
 <a name="367"><span class="lineNum">     367 </span><span class="lineNoCov">          0 :                                 return &quot;mkv&quot;;</span></a>
 <a name="368"><span class="lineNum">     368 </span><span class="lineCov">          5 :                         else if( strcmp(mime+6, &quot;x-flv&quot;) == 0 )</span></a>

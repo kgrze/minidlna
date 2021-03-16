@@ -163,39 +163,9 @@ BuildSendAndCloseSoapResp(struct upnphttp * h,
 }
 
 /* Standard DLNA/UPnP filter flags */
-#define FILTER_CHILDCOUNT			0x00000001
-#define FILTER_DC_CREATOR			0x00000002
-#define FILTER_DC_DATE				0x00000004
-#define FILTER_DC_DESCRIPTION			0x00000008
-#define FILTER_DLNA_NAMESPACE			0x00000010
-#define FILTER_REFID				0x00000020
 #define FILTER_RES				0x00000040
-#define FILTER_RES_BITRATE			0x00000080
-#define FILTER_RES_DURATION			0x00000100
-#define FILTER_RES_NRAUDIOCHANNELS		0x00000200
-#define FILTER_RES_RESOLUTION			0x00000400
-#define FILTER_RES_SAMPLEFREQUENCY		0x00000800
 #define FILTER_RES_SIZE				0x00001000
-#define FILTER_SEARCHABLE			0x00002000
-#define FILTER_UPNP_ACTOR			0x00004000
-#define FILTER_UPNP_ALBUM			0x00008000
-#define FILTER_UPNP_ALBUMARTURI			0x00010000
-#define FILTER_UPNP_ALBUMARTURI_DLNA_PROFILEID	0x00020000
-#define FILTER_UPNP_ARTIST			0x00040000
-#define FILTER_UPNP_GENRE			0x00080000
-#define FILTER_UPNP_ORIGINALTRACKNUMBER		0x00100000
-#define FILTER_UPNP_SEARCHCLASS			0x00200000
 #define FILTER_UPNP_STORAGEUSED			0x00400000
-/* Not normally used, so leave out of the default filter */
-#define FILTER_UPNP_PLAYBACKCOUNT		0x01000000
-#define FILTER_UPNP_LASTPLAYBACKPOSITION	0x02000000
-/* Vendor-specific filter flags */
-#define FILTER_SEC_CAPTION_INFO_EX		0x04000000
-#define FILTER_SEC_DCM_INFO			0x08000000
-#define FILTER_PV_SUBTITLE_FILE_TYPE		0x10000000
-#define FILTER_PV_SUBTITLE_FILE_URI		0x20000000
-#define FILTER_PV_SUBTITLE			0x30000000
-#define FILTER_AV_MEDIA_CLASS			0x40000000
 /* Masks */
 #define STANDARD_FILTER_MASK			0x00FFFFFF
 
@@ -230,33 +200,6 @@ set_filter_flags(char *filter)
 }
 
 inline static void
-add_resized_res(int srcw, int srch, int reqw, int reqh, char *dlna_pn,
-                char *detailID, struct Response *args)
-{
-	int dstw = reqw;
-	int dsth = reqh;
-
-	strcatf(args->str, "&lt;res ");
-	if( args->filter & FILTER_RES_RESOLUTION )
-	{
-		dstw = reqw;
-		dsth = ((((reqw<<10)/srcw)*srch)>>10);
-		if( dsth > reqh ) {
-			dsth = reqh;
-			dstw = (((reqh<<10)/srch) * srcw>>10);
-		}
-		strcatf(args->str, "resolution=\"%dx%d\" ", dstw, dsth);
-	}
-	strcatf(args->str, "protocolInfo=\"http-get:*:image/jpeg:"
-	                          "DLNA.ORG_PN=%s;DLNA.ORG_CI=1;DLNA.ORG_FLAGS=%08X%024X\"&gt;"
-	                          "http://%s:%d/Resized/%s.jpg?width=%d,height=%d"
-	                          "&lt;/res&gt;",
-	                          dlna_pn, DLNA_FLAG_DLNA_V1_5|DLNA_FLAG_HTTP_STALLING|DLNA_FLAG_TM_B|DLNA_FLAG_TM_I, 0,
-	                          lan_addr[args->iface].str, runtime_vars.port,
-	                          detailID, dstw, dsth);
-}
-
-inline static void
 add_res(char *size, char *dlna_pn, char *mime,
         char *detailID, const char *ext, struct Response *args)
 {
@@ -281,15 +224,6 @@ get_child_count(const char *object)
 	return (ret > 0) ? ret : 0;
 }
 
-static int
-object_exists(const char *object)
-{
-	int ret;
-	ret = sql_get_int_field(db, "SELECT count(*) from OBJECTS where OBJECT_ID = '%q'",
-				strcmp(object, "*") == 0 ? "0" : object);
-	return (ret > 0);
-}
-
 #define COLUMNS "ID, CLASS, SIZE, TITLE, MIME "
 #define SELECT_COLUMNS "SELECT OBJECT_ID, PARENT_ID, " COLUMNS
 
@@ -306,34 +240,6 @@ callback(void *args, int argc, char **argv, char **azColName)
 	struct string_s *str = passed_args->str;
 	int ret = 0;
 
-	/* Make sure we have at least 8KB left of allocated memory to finish the response. */
-	if( str->off > (str->size - 8192) )
-	{
-#if MAX_RESPONSE_SIZE > 0
-		if( (str->size+DEFAULT_RESP_SIZE) <= MAX_RESPONSE_SIZE )
-		{
-#endif
-			str->data = realloc(str->data, (str->size+DEFAULT_RESP_SIZE));
-			if( str->data )
-			{
-				str->size += DEFAULT_RESP_SIZE;
-				DPRINTF(E_DEBUG, L_HTTP, "UPnP SOAP response enlarged to %lu. [%d results so far]\n",
-					(unsigned long)str->size, passed_args->returned);
-			}
-			else
-			{
-				DPRINTF(E_ERROR, L_HTTP, "UPnP SOAP response was too big, and realloc failed!\n");
-				return -1;
-			}
-#if MAX_RESPONSE_SIZE > 0
-		}
-		else
-		{
-			DPRINTF(E_ERROR, L_HTTP, "UPnP SOAP response cut short, to not exceed the max response size [%lld]!\n", (long long int)MAX_RESPONSE_SIZE);
-			return -1;
-		}
-#endif
-	}
 	passed_args->returned++;
 
 	if( strncmp(class, "item", 4) == 0 )
@@ -363,10 +269,6 @@ callback(void *args, int argc, char **argv, char **azColName)
 	else if( strncmp(class, "container", 9) == 0 )
 	{
 		ret = strcatf(str, "&lt;container id=\"%s\" parentID=\"%s\" restricted=\"1\" ", objectId, parent);
-		/* If the client calls for BrowseMetadata on root, we have to include our "upnp:searchClass"'s, unless they're filtered out */
-		if( passed_args->requested == 1 && strcmp(objectId, "0") == 0 && (passed_args->filter & FILTER_UPNP_SEARCHCLASS) ) {
-			ret = strcatf(str, "&gt;&lt;upnp:searchClass includeDerived=\"1\"&gt;object.item.videoItem&lt;/upnp:searchClass");
-		}
 		ret = strcatf(str, "&gt;"
 		                   "&lt;dc:title&gt;%s&lt;/dc:title&gt;"
 		                   "&lt;upnp:class&gt;object.%s&lt;/upnp:class&gt;",
@@ -376,16 +278,6 @@ callback(void *args, int argc, char **argv, char **azColName)
 			ret = strcatf(str, "&lt;upnp:storageUsed&gt;%s&lt;/upnp:storageUsed&gt;", (size ? size : "-1"));
 		}
 
-		if( passed_args->filter & FILTER_AV_MEDIA_CLASS ) {
-			char class;
-			if( strncmp(objectId, VIDEO_ID, sizeof(VIDEO_ID)) == 0 )
-				class = 'V';
-			else
-				class = 0;
-			if( class )
-				ret = strcatf(str, "&lt;av:mediaClass xmlns:av=\"urn:schemas-sony-com:av\"&gt;"
-				                    "%c&lt;/av:mediaClass&gt;", class);
-		}
 		ret = strcatf(str, "&lt;/container&gt;");
 	}
 
@@ -515,15 +407,7 @@ BrowseContentDirectory(struct upnphttp * h, const char * action)
 		goto browse_error;
 	}
 	sqlite3_free(sql);
-	/* Does the object even exist? */
-	if( !totalMatches )
-	{
-		if( !object_exists(ObjectID) )
-		{
-			SoapError(h, 701, "No such object error");
-			goto browse_error;
-		}
-	}
+
 	ret = strcatf(&str, "&lt;/DIDL-Lite&gt;</Result>\n"
 	                    "<NumberReturned>%u</NumberReturned>\n"
 	                    "<TotalMatches>%u</TotalMatches>\n"
