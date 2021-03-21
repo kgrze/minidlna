@@ -18,11 +18,11 @@ rm       = rm -rf
 
 $(TARGET): $(OBJECTS)
 	@echo "Linking $@"
-	@$(LD) $(OBJECTS) $(LFLAGS_COV) -o $@
+	@$(LD) $(OBJECTS) $(LFLAGS) -o $@
 
 $(OBJECTS): $(SRCDIR)/%.o : $(SRCDIR)/%.c
 	@echo "Compiling $<"
-	@$(CC) $(CFLAGS_COV) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(rm) $(OBJECTS)
