@@ -56,38 +56,6 @@
 #define SSDP_PORT (1900)
 #define SSDP_MCAST_ADDR ("239.255.255.250")
 
-static int
-AddMulticastMembership(int s, struct lan_addr_s *iface)
-{
-	int ret;
-#ifdef HAVE_STRUCT_IP_MREQN
-	struct ip_mreqn imr;	/* Ip multicast membership */
-	/* setting up imr structure */
-	memset(&imr, '\0', sizeof(imr));
-	imr.imr_multiaddr.s_addr = inet_addr(SSDP_MCAST_ADDR);
-	imr.imr_ifindex = iface->ifindex;
-#else
-	struct ip_mreq imr;	/* Ip multicast membership */
-	/* setting up imr structure */
-	memset(&imr, '\0', sizeof(imr));
-	imr.imr_multiaddr.s_addr = inet_addr(SSDP_MCAST_ADDR);
-	imr.imr_interface.s_addr = iface->addr.s_addr;
-#endif
-	/* Setting the socket options will guarantee, tha we will only receive
-	 * multicast traffic on a specific Interface.
-	 * In addition the kernel is instructed to send an igmp message (choose
-	 * mcast group) on the specific interface/subnet. */
-	ret = setsockopt(s, IPPROTO_IP, IP_ADD_MEMBERSHIP, (void *)&imr, sizeof(imr));
-	if (ret < 0 && errno != EADDRINUSE)
-	{
-		DPRINTF(E_ERROR, L_SSDP, "setsockopt(udp, IP_ADD_MEMBERSHIP): %s\n",
-			strerror(errno));
-		return -1;
-	}
-
-	return 0;
-}
-
 /* Open and configure the socket listening for 
  * SSDP udp packets sent on 239.255.255.250 port 1900 */
 int
@@ -142,51 +110,12 @@ int
 OpenAndConfSSDPNotifySocket(struct lan_addr_s *iface)
 {
 	int s;
-	unsigned char loopchar = 0;
-	uint8_t ttl = 4;
-	struct in_addr mc_if;
-	struct sockaddr_in sockname;
 	
 	s = socket(PF_INET, SOCK_DGRAM, 0);
 	if (s < 0)
 	{
 		DPRINTF(E_ERROR, L_SSDP, "socket(udp_notify): %s\n", strerror(errno));
 		return -1;
-	}
-
-	mc_if.s_addr = iface->addr.s_addr;
-
-	if (setsockopt(s, IPPROTO_IP, IP_MULTICAST_LOOP, (char *)&loopchar, sizeof(loopchar)) < 0)
-	{
-		DPRINTF(E_ERROR, L_SSDP, "setsockopt(udp_notify, IP_MULTICAST_LOOP): %s\n", strerror(errno));
-		close(s);
-		return -1;
-	}
-
-	if (setsockopt(s, IPPROTO_IP, IP_MULTICAST_IF, (char *)&mc_if, sizeof(mc_if)) < 0)
-	{
-		DPRINTF(E_ERROR, L_SSDP, "setsockopt(udp_notify, IP_MULTICAST_IF): %s\n", strerror(errno));
-		close(s);
-		return -1;
-	}
-
-	setsockopt(s, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl));
-
-	memset(&sockname, 0, sizeof(struct sockaddr_in));
-	sockname.sin_family = AF_INET;
-	sockname.sin_addr.s_addr = iface->addr.s_addr;
-
-	if (bind(s, (struct sockaddr *)&sockname, sizeof(struct sockaddr_in)) < 0)
-	{
-		DPRINTF(E_ERROR, L_SSDP, "bind(udp_notify): %s\n", strerror(errno));
-		close(s);
-		return -1;
-	}
-
-	if (AddMulticastMembership(sssdp, iface) < 0)
-	{
-		DPRINTF(E_WARN, L_SSDP, "Failed to add multicast membership for address %s\n", 
-			iface->str);
 	}
 
 	return s;
@@ -306,7 +235,7 @@ SendSSDPNotifies(int s, const char *host, unsigned short port,
 				l = sizeof(bufr);
 			}
 			DPRINTF(E_MAXDEBUG, L_SSDP, "Sending ssdp:alive [%d]\n", s);
-			n = sendto(s, bufr, l, 0,
+			n = sendto(s, bufr, l, MSG_CONFIRM,
 				(struct sockaddr *)&sockname, sizeof(struct sockaddr_in));
 			if (n < 0)
 				DPRINTF(E_ERROR, L_SSDP, "sendto(udp_notify=%d, %s): %s\n", s, host, strerror(errno));
