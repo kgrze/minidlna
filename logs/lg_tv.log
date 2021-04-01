@@ -1,0 +1,3265 @@
+[2021/04/01 23:51:44] src/minidlna.c:455: warn: Starting MiniDLNA version 1.2.1.
+[2021/04/01 23:51:44] src/minidlna.c:221: warn: Creating new database at ./cache/db/files.db
+[2021/04/01 23:51:44] src/scanner.c:193: warn: Scanning /home/kgrze/dev/dlna/content
+[2021/04/01 23:51:44] src/scanner.c:193: info: Scanning /home/kgrze/dev/dlna/content/BBB
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video bbb_h264_mp4.mp4...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 16324771
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'mov,mp4,m4a,3gp,3g2,mj2' [bbb_h264_mp4.mp4]
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video bbb_sunflower_1080p_30fps_normal.mp4...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 276134947
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'mov,mp4,m4a,3gp,3g2,mj2' [bbb_sunflower_1080p_30fps_normal.mp4]
+[2021/04/01 23:51:44] src/scanner.c:193: info: Scanning /home/kgrze/dev/dlna/content/justice
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video justice.avi...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 61713928
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'mov,mp4,m4a,3gp,3g2,mj2' [justice.avi]
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video Justice.League.Dark.Apokolips.War.2020.1080p.WEBRip.x264-RARBG.mp4...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 1845397812
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'mov,mp4,m4a,3gp,3g2,mj2' [Justice.League.Dark.Apokolips.War.2020.1080p.WEBRip.x264-RARBG.mp4]
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video justice.mp4...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 28258453
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'mov,mp4,m4a,3gp,3g2,mj2' [justice.mp4]
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video justice_mp4.mp4...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 61713928
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'mov,mp4,m4a,3gp,3g2,mj2' [justice_mp4.mp4]
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video output.mp4...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 19686814
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'mov,mp4,m4a,3gp,3g2,mj2' [output.mp4]
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video output_xvid.avi...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 12932418
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'avi' [output_xvid.avi]
+[2021/04/01 23:51:44] src/scanner.c:193: info: Scanning /home/kgrze/dev/dlna/content/Sintel
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video Sintel.2010.1080p.mkv...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 1172428172
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'matroska,webm' [Sintel.2010.1080p.mkv]
+[2021/04/01 23:51:44] src/scanner.c:193: info: Scanning /home/kgrze/dev/dlna/content/Tears of steel
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video tears_of_steel_1080p.mov...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 583774083
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'mov,mp4,m4a,3gp,3g2,mj2' [tears_of_steel_1080p.mov]
+[2021/04/01 23:51:44] src/scanner.c:193: info: Scanning /home/kgrze/dev/dlna/content/tv_series
+[2021/04/01 23:51:44] src/scanner.c:193: info: Scanning /home/kgrze/dev/dlna/content/tv_series/s1
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video bbb_sunflower_1080p_30fps_normal.mp4...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 276134947
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'mov,mp4,m4a,3gp,3g2,mj2' [bbb_sunflower_1080p_30fps_normal.mp4]
+[2021/04/01 23:51:44] src/scanner.c:193: info: Scanning /home/kgrze/dev/dlna/content/tv_series/s2
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video sinter_h264_mp4.mp4...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 3207380
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'mov,mp4,m4a,3gp,3g2,mj2' [sinter_h264_mp4.mp4]
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video sinter.mkv...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 1172428172
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'matroska,webm' [sinter.mkv]
+[2021/04/01 23:51:44] src/metadata.c:58: debug: Parsing video sinter_mp4.mp4...
+[2021/04/01 23:51:44] src/metadata.c:61: debug:  * size: 1172875720
+[2021/04/01 23:51:44] src/metadata.c:88: debug: Container: 'mov,mp4,m4a,3gp,3g2,mj2' [sinter_mp4.mp4]
+[2021/04/01 23:51:44] src/scanner.c:249: warn: Scanning /home/kgrze/dev/dlna/content finished (14 files)!
+[2021/04/01 23:51:44] src/scanner.c:272: debug: Initial file scan completed
+[2021/04/01 23:51:44] src/minidlna.c:481: warn: HTTP listening on port 8200
+[2021/04/01 23:51:44] src/getifaddr.c:302: info: Enabling interface 192.168.1.11/255.255.255.0
+[2021/04/01 23:51:44] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:51:44] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:51:44] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:51:44] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:51:44] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:51:44] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:51:44] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:51:44] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:51:44] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:51:44] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:51:44] src/minissdp.c:275: maxdebug: Sending ssdp:alive [9]
+[2021/04/01 23:51:44] src/minissdp.c:275: maxdebug: Sending ssdp:alive [9]
+[2021/04/01 23:51:44] src/minissdp.c:275: maxdebug: Sending ssdp:alive [9]
+[2021/04/01 23:51:44] src/minissdp.c:275: maxdebug: Sending ssdp:alive [9]
+[2021/04/01 23:51:44] src/minissdp.c:275: maxdebug: Sending ssdp:alive [9]
+[2021/04/01 23:51:44] src/minissdp.c:275: maxdebug: Sending ssdp:alive [9]
+[2021/04/01 23:51:44] src/minissdp.c:275: maxdebug: Sending ssdp:alive [9]
+[2021/04/01 23:51:44] src/minissdp.c:275: maxdebug: Sending ssdp:alive [9]
+[2021/04/01 23:51:44] src/minissdp.c:275: maxdebug: Sending ssdp:alive [9]
+[2021/04/01 23:51:44] src/minissdp.c:275: maxdebug: Sending ssdp:alive [9]
+[2021/04/01 23:51:44] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52643
+[2021/04/01 23:51:44] src/upnphttp.c:608: debug: HTTP REQUEST: GET /rootDesc.xml HTTP/1.1
+HOST: 192.168.1.11:8200
+DATE: Thu, 01 Apr 2021 21:51:43 GMT
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+friendlyName.dlna.org: LG DLNA DMC v0.1
+
+
+[2021/04/01 23:51:44] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 1349
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:44 GMT
+EXT:
+
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0"><specVersion><major>1</major><minor>0</minor></specVersion><device><deviceType>urn:schemas-upnp-org:device:MediaServer:1</deviceType><friendlyName>DLNA_TEST_KGRZE</friendlyName><manufacturer>Justin Maggard</manufacturer><manufacturerURL>http://www.netgear.com/</manufacturerURL><modelDescription>MiniDLNA on Linux</modelDescription><modelName>Windows Media Connect compatible (MiniDLNA)</modelName><modelNumber>1.2.1</modelNumber><modelURL>http://www.netgear.com</modelURL><serialNumber>00000000</serialNumber><UDN>uuid:4d696e69-444c-164e-9d41-54ab3aa53c53</UDN><dlna:X_DLNADOC xmlns:dlna="urn:schemas-dlna-org:device-1-0">DMS-1.50</dlna:X_DLNADOC><presentationURL>/</presentationURL><serviceList><service><serviceType>urn:schemas-upnp-org:service:ContentDirectory:1</serviceType><serviceId>urn:upnp-org:serviceId:ContentDirectory</serviceId><controlURL>/ctl/ContentDir</controlURL><eventSubURL>/evt/ContentDir</eventSubURL><SCPDURL>/ContentDir.xml</SCPDURL></service><service><serviceType>urn:schemas-upnp-org:service:ConnectionManager:1</serviceType><serviceId>urn:upnp-org:serviceId:ConnectionManager</serviceId><controlURL>/ctl/ConnectionMgr</controlURL><eventSubURL>/evt/ConnectionMgr</eventSubURL><SCPDURL>/ConnectionMgr.xml</SCPDURL></service></serviceList></device></root>
+[2021/04/01 23:51:44] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52644
+[2021/04/01 23:51:44] src/upnphttp.c:608: debug: HTTP REQUEST: GET /ContentDir.xml HTTP/1.1
+HOST: 192.168.1.11:8200
+DATE: Thu, 01 Apr 2021 21:51:44 GMT
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+friendlyName.dlna.org: LG DLNA DMC v0.1
+
+
+[2021/04/01 23:51:44] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 5686
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:44 GMT
+EXT:
+
+<?xml version="1.0"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0"><specVersion><major>1</major><minor>0</minor></specVersion><actionList><action><name>GetSearchCapabilities</name><argumentList><argument><name>SearchCaps</name><direction>out</direction><relatedStateVariable>SearchCapabilities</relatedStateVariable></argument></argumentList></action><action><name>GetSortCapabilities</name><argumentList><argument><name>SortCaps</name><direction>out</direction><relatedStateVariable>SortCapabilities</relatedStateVariable></argument></argumentList></action><action><name>GetSystemUpdateID</name><argumentList><argument><name>Id</name><direction>out</direction><relatedStateVariable>SystemUpdateID</relatedStateVariable></argument></argumentList></action><action><name>Browse</name><argumentList><argument><name>ObjectID</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_ObjectID</relatedStateVariable></argument><argument><name>BrowseFlag</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_BrowseFlag</relatedStateVariable></argument><argument><name>Filter</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_Filter</relatedStateVariable></argument><argument><name>StartingIndex</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_Index</relatedStateVariable></argument><argument><name>RequestedCount</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_Count</relatedStateVariable></argument><argument><name>SortCriteria</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_SortCriteria</relatedStateVariable></argument><argument><name>Result</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_Result</relatedStateVariable></argument><argument><name>NumberReturned</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_Count</relatedStateVariable></argument><argument><name>TotalMatches</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_Count</relatedStateVariable></argument><argument><name>UpdateID</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_UpdateID</relatedStateVariable></argument></argumentList></action><action><name>Search</name><argumentList><argument><name>ContainerID</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_ObjectID</relatedStateVariable></argument><argument><name>SearchCriteria</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_SearchCriteria</relatedStateVariable></argument><argument><name>Filter</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_Filter</relatedStateVariable></argument><argument><name>StartingIndex</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_Index</relatedStateVariable></argument><argument><name>RequestedCount</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_Count</relatedStateVariable></argument><argument><name>SortCriteria</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_SortCriteria</relatedStateVariable></argument><argument><name>Result</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_Result</relatedStateVariable></argument><argument><name>NumberReturned</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_Count</relatedStateVariable></argument><argument><name>TotalMatches</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_Count</relatedStateVariable></argument><argument><name>UpdateID</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_UpdateID</relatedStateVariable></argument></argumentList></action><action><name>UpdateObject</name><argumentList><argument><name>ObjectID</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_ObjectID</relatedStateVariable></argument><argument><name>CurrentTagValue</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_TagValueList</relatedStateVariable></argument><argument><name>NewTagValue</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_TagValueList</relatedStateVariable></argument></argumentList></action></actionList><serviceStateTable><stateVariable sendEvents="yes"><name>TransferIDs</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_ObjectID</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_Result</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_SearchCriteria</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_BrowseFlag</name><dataType>string</dataType><allowedValueList><allowedValue>BrowseMetadata</allowedValue><allowedValue>BrowseDirectChildren</allowedValue></allowedValueList></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_Filter</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_SortCriteria</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_Index</name><dataType>ui4</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_Count</name><dataType>ui4</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_UpdateID</name><dataType>ui4</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_TagValueList</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="no"><name>SearchCapabilities</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="no"><name>SortCapabilities</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="yes"><name>SystemUpdateID</name><dataType>ui4</dataType></stateVariable></serviceStateTable></scpd>
+[2021/04/01 23:51:44] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52645
+[2021/04/01 23:51:44] src/upnphttp.c:608: debug: HTTP REQUEST: GET /ConnectionMgr.xml HTTP/1.1
+HOST: 192.168.1.11:8200
+DATE: Thu, 01 Apr 2021 21:51:44 GMT
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+friendlyName.dlna.org: LG DLNA DMC v0.1
+
+
+[2021/04/01 23:51:44] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 3380
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:44 GMT
+EXT:
+
+<?xml version="1.0"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0"><specVersion><major>1</major><minor>0</minor></specVersion><actionList><action><name>GetProtocolInfo</name><argumentList><argument><name>Source</name><direction>out</direction><relatedStateVariable>SourceProtocolInfo</relatedStateVariable></argument><argument><name>Sink</name><direction>out</direction><relatedStateVariable>SinkProtocolInfo</relatedStateVariable></argument></argumentList></action><action><name>GetCurrentConnectionIDs</name><argumentList><argument><name>ConnectionIDs</name><direction>out</direction><relatedStateVariable>CurrentConnectionIDs</relatedStateVariable></argument></argumentList></action><action><name>GetCurrentConnectionInfo</name><argumentList><argument><name>ConnectionID</name><direction>in</direction><relatedStateVariable>A_ARG_TYPE_ConnectionID</relatedStateVariable></argument><argument><name>RcsID</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_RcsID</relatedStateVariable></argument><argument><name>AVTransportID</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_AVTransportID</relatedStateVariable></argument><argument><name>ProtocolInfo</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_ProtocolInfo</relatedStateVariable></argument><argument><name>PeerConnectionManager</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_ConnectionManager</relatedStateVariable></argument><argument><name>PeerConnectionID</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_ConnectionID</relatedStateVariable></argument><argument><name>Direction</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_Direction</relatedStateVariable></argument><argument><name>Status</name><direction>out</direction><relatedStateVariable>A_ARG_TYPE_ConnectionStatus</relatedStateVariable></argument></argumentList></action></actionList><serviceStateTable><stateVariable sendEvents="yes"><name>SourceProtocolInfo</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="yes"><name>SinkProtocolInfo</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="yes"><name>CurrentConnectionIDs</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_ConnectionStatus</name><dataType>string</dataType><allowedValueList><allowedValue>OK</allowedValue><allowedValue>ContentFormatMismatch</allowedValue><allowedValue>InsufficientBandwidth</allowedValue><allowedValue>UnreliableChannel</allowedValue><allowedValue>Unknown</allowedValue></allowedValueList></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_ConnectionManager</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_Direction</name><dataType>string</dataType><allowedValueList><allowedValue>Input</allowedValue><allowedValue>Output</allowedValue></allowedValueList></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_ProtocolInfo</name><dataType>string</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_ConnectionID</name><dataType>i4</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_AVTransportID</name><dataType>i4</dataType></stateVariable><stateVariable sendEvents="no"><name>A_ARG_TYPE_RcsID</name><dataType>i4</dataType></stateVariable></serviceStateTable></scpd>
+[2021/04/01 23:51:44] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52646
+[2021/04/01 23:51:44] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:44] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:44] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:44 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:44] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52647
+[2021/04/01 23:51:44] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:44] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:44] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:44 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:44] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52648
+[2021/04/01 23:51:44] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 259
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"></u:GetSystemUpdateID>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:44] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID
+[2021/04/01 23:51:44] src/upnpsoap.c:453: debug: SoapMethod: GetSystemUpdateID
+[2021/04/01 23:51:44] src/upnpsoap.c:465: warn: SoapMethod: Unknown: GetSystemUpdateID
+[2021/04/01 23:51:44] src/upnpsoap.c:122: warn: Returning UPnPError 401: Invalid Action
+[2021/04/01 23:51:44] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 398
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:44 GMT
+EXT:
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><s:Fault><faultcode>s:Client</faultcode><faultstring>UPnPError</faultstring><detail><UPnPError xmlns="urn:schemas-upnp-org:control-1-0"><errorCode>401</errorCode><errorDescription>Invalid Action</errorDescription></UPnPError></detail></s:Fault></s:Body></s:Envelope>
+[2021/04/01 23:51:44] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52649
+[2021/04/01 23:51:44] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:44] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:44] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:44 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:44] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52650
+[2021/04/01 23:51:44] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:44] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:44] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:44 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:46] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52651
+[2021/04/01 23:51:46] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 259
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"></u:GetSystemUpdateID>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:46] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID
+[2021/04/01 23:51:46] src/upnpsoap.c:453: debug: SoapMethod: GetSystemUpdateID
+[2021/04/01 23:51:46] src/upnpsoap.c:465: warn: SoapMethod: Unknown: GetSystemUpdateID
+[2021/04/01 23:51:46] src/upnpsoap.c:122: warn: Returning UPnPError 401: Invalid Action
+[2021/04/01 23:51:46] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 398
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:46 GMT
+EXT:
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><s:Fault><faultcode>s:Client</faultcode><faultstring>UPnPError</faultstring><detail><UPnPError xmlns="urn:schemas-upnp-org:control-1-0"><errorCode>401</errorCode><errorDescription>Invalid Action</errorDescription></UPnPError></detail></s:Fault></s:Body></s:Envelope>
+[2021/04/01 23:51:46] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52652
+[2021/04/01 23:51:46] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:46] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:46] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:46 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:46] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52653
+[2021/04/01 23:51:46] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:46] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:46] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:46 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:48] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52654
+[2021/04/01 23:51:48] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 259
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"></u:GetSystemUpdateID>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:48] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID
+[2021/04/01 23:51:48] src/upnpsoap.c:453: debug: SoapMethod: GetSystemUpdateID
+[2021/04/01 23:51:48] src/upnpsoap.c:465: warn: SoapMethod: Unknown: GetSystemUpdateID
+[2021/04/01 23:51:48] src/upnpsoap.c:122: warn: Returning UPnPError 401: Invalid Action
+[2021/04/01 23:51:48] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 398
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:48 GMT
+EXT:
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><s:Fault><faultcode>s:Client</faultcode><faultstring>UPnPError</faultstring><detail><UPnPError xmlns="urn:schemas-upnp-org:control-1-0"><errorCode>401</errorCode><errorDescription>Invalid Action</errorDescription></UPnPError></detail></s:Fault></s:Body></s:Envelope>
+[2021/04/01 23:51:48] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52655
+[2021/04/01 23:51:48] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:48] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:48] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:48 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:48] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52656
+[2021/04/01 23:51:48] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:48] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:48] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:48 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:49] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52657
+[2021/04/01 23:51:49] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:49] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:49] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:49 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:49] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52658
+[2021/04/01 23:51:49] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:49] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:49] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:49 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:49] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52659
+[2021/04/01 23:51:49] src/upnphttp.c:688: warn: HTTP Connection closed unexpectedly
+[2021/04/01 23:51:49] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52660
+[2021/04/01 23:51:49] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 259
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"></u:GetSystemUpdateID>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:49] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID
+[2021/04/01 23:51:49] src/upnpsoap.c:453: debug: SoapMethod: GetSystemUpdateID
+[2021/04/01 23:51:49] src/upnpsoap.c:465: warn: SoapMethod: Unknown: GetSystemUpdateID
+[2021/04/01 23:51:49] src/upnpsoap.c:122: warn: Returning UPnPError 401: Invalid Action
+[2021/04/01 23:51:49] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 398
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:49 GMT
+EXT:
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><s:Fault><faultcode>s:Client</faultcode><faultstring>UPnPError</faultstring><detail><UPnPError xmlns="urn:schemas-upnp-org:control-1-0"><errorCode>401</errorCode><errorDescription>Invalid Action</errorDescription></UPnPError></detail></s:Fault></s:Body></s:Envelope>
+[2021/04/01 23:51:51] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52661
+[2021/04/01 23:51:51] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:51] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:51] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:51 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:51] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52662
+[2021/04/01 23:51:51] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:51] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:51] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:51 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:51] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52663
+[2021/04/01 23:51:51] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 259
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"></u:GetSystemUpdateID>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:51] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID
+[2021/04/01 23:51:51] src/upnpsoap.c:453: debug: SoapMethod: GetSystemUpdateID
+[2021/04/01 23:51:51] src/upnpsoap.c:465: warn: SoapMethod: Unknown: GetSystemUpdateID
+[2021/04/01 23:51:51] src/upnpsoap.c:122: warn: Returning UPnPError 401: Invalid Action
+[2021/04/01 23:51:51] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 398
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:51 GMT
+EXT:
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><s:Fault><faultcode>s:Client</faultcode><faultstring>UPnPError</faultstring><detail><UPnPError xmlns="urn:schemas-upnp-org:control-1-0"><errorCode>401</errorCode><errorDescription>Invalid Action</errorDescription></UPnPError></detail></s:Fault></s:Body></s:Envelope>
+[2021/04/01 23:51:53] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52664
+[2021/04/01 23:51:53] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:53] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:53] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:53 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:53] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52665
+[2021/04/01 23:51:53] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:53] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:53] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:53 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:53] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52666
+[2021/04/01 23:51:53] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 259
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"></u:GetSystemUpdateID>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:53] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID
+[2021/04/01 23:51:53] src/upnpsoap.c:453: debug: SoapMethod: GetSystemUpdateID
+[2021/04/01 23:51:53] src/upnpsoap.c:465: warn: SoapMethod: Unknown: GetSystemUpdateID
+[2021/04/01 23:51:53] src/upnpsoap.c:122: warn: Returning UPnPError 401: Invalid Action
+[2021/04/01 23:51:53] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 398
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:53 GMT
+EXT:
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><s:Fault><faultcode>s:Client</faultcode><faultstring>UPnPError</faultstring><detail><UPnPError xmlns="urn:schemas-upnp-org:control-1-0"><errorCode>401</errorCode><errorDescription>Invalid Action</errorDescription></UPnPError></detail></s:Fault></s:Body></s:Envelope>
+[2021/04/01 23:51:54] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52667
+[2021/04/01 23:51:54] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:54] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:54] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:54 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:54] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52668
+[2021/04/01 23:51:54] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:54] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:54] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:54 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:54] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52669
+[2021/04/01 23:51:54] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 259
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"></u:GetSystemUpdateID>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:54] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID
+[2021/04/01 23:51:54] src/upnpsoap.c:453: debug: SoapMethod: GetSystemUpdateID
+[2021/04/01 23:51:54] src/upnpsoap.c:465: warn: SoapMethod: Unknown: GetSystemUpdateID
+[2021/04/01 23:51:54] src/upnpsoap.c:122: warn: Returning UPnPError 401: Invalid Action
+[2021/04/01 23:51:54] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 398
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:54 GMT
+EXT:
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><s:Fault><faultcode>s:Client</faultcode><faultstring>UPnPError</faultstring><detail><UPnPError xmlns="urn:schemas-upnp-org:control-1-0"><errorCode>401</errorCode><errorDescription>Invalid Action</errorDescription></UPnPError></detail></s:Fault></s:Body></s:Envelope>
+[2021/04/01 23:51:55] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52670
+[2021/04/01 23:51:55] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 725
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>0</ObjectID>
+<BrowseFlag>BrowseMetadata</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>0</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:55] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:51:55] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:51:55] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 0
+ * Count: -1
+ * StartingIndex: 0
+ * BrowseFlag: BrowseMetadata
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:51:55] src/upnpsoap.c:377: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where OBJECT_ID = '0';
+[2021/04/01 23:51:55] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 810
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:55 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="0" parentID="-1" restricted="1" &gt;&lt;dc:title&gt;root&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:51:55] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52671
+[2021/04/01 23:51:55] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 732
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>0</ObjectID>
+<BrowseFlag>BrowseDirectChildren</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>24</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:55] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:51:55] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:51:55] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 0
+ * Count: 24
+ * StartingIndex: 0
+ * BrowseFlag: BrowseDirectChildren
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:51:55] src/upnpsoap.c:399: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where PARENT_ID = '0'  limit 0, 24;
+[2021/04/01 23:51:55] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 811
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:55 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="64" parentID="0" restricted="1" &gt;&lt;dc:title&gt;VIDEO&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:51:55] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52672
+[2021/04/01 23:51:55] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:55] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:55] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:55 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:55] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52673
+[2021/04/01 23:51:55] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:55] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:55] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:55 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:55] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52674
+[2021/04/01 23:51:55] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 259
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"></u:GetSystemUpdateID>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:55] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID
+[2021/04/01 23:51:55] src/upnpsoap.c:453: debug: SoapMethod: GetSystemUpdateID
+[2021/04/01 23:51:55] src/upnpsoap.c:465: warn: SoapMethod: Unknown: GetSystemUpdateID
+[2021/04/01 23:51:55] src/upnpsoap.c:122: warn: Returning UPnPError 401: Invalid Action
+[2021/04/01 23:51:55] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 398
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:55 GMT
+EXT:
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><s:Fault><faultcode>s:Client</faultcode><faultstring>UPnPError</faultstring><detail><UPnPError xmlns="urn:schemas-upnp-org:control-1-0"><errorCode>401</errorCode><errorDescription>Invalid Action</errorDescription></UPnPError></detail></s:Fault></s:Body></s:Envelope>
+[2021/04/01 23:51:56] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52675
+[2021/04/01 23:51:56] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:56] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:56] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:56 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:56] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52676
+[2021/04/01 23:51:56] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:56] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:56] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:56 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:56] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52677
+[2021/04/01 23:51:56] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 259
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"></u:GetSystemUpdateID>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:56] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID
+[2021/04/01 23:51:56] src/upnpsoap.c:453: debug: SoapMethod: GetSystemUpdateID
+[2021/04/01 23:51:56] src/upnpsoap.c:465: warn: SoapMethod: Unknown: GetSystemUpdateID
+[2021/04/01 23:51:56] src/upnpsoap.c:122: warn: Returning UPnPError 401: Invalid Action
+[2021/04/01 23:51:56] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 398
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:56 GMT
+EXT:
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><s:Fault><faultcode>s:Client</faultcode><faultstring>UPnPError</faultstring><detail><UPnPError xmlns="urn:schemas-upnp-org:control-1-0"><errorCode>401</errorCode><errorDescription>Invalid Action</errorDescription></UPnPError></detail></s:Fault></s:Body></s:Envelope>
+[2021/04/01 23:51:56] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52678
+[2021/04/01 23:51:56] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 726
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64</ObjectID>
+<BrowseFlag>BrowseMetadata</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>0</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:56] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:51:56] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:51:56] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64
+ * Count: -1
+ * StartingIndex: 0
+ * BrowseFlag: BrowseMetadata
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:51:56] src/upnpsoap.c:377: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where OBJECT_ID = '64';
+[2021/04/01 23:51:56] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 811
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:56 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="64" parentID="0" restricted="1" &gt;&lt;dc:title&gt;VIDEO&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:51:56] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52679
+[2021/04/01 23:51:56] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 733
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64</ObjectID>
+<BrowseFlag>BrowseDirectChildren</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>24</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:56] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:51:56] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:51:56] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64
+ * Count: 24
+ * StartingIndex: 0
+ * BrowseFlag: BrowseDirectChildren
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:51:56] src/upnpsoap.c:399: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where PARENT_ID = '64'  limit 0, 24;
+[2021/04/01 23:51:56] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 1752
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:56 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="64$0" parentID="64" restricted="1" &gt;&lt;dc:title&gt;BBB&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$1" parentID="64" restricted="1" &gt;&lt;dc:title&gt;justice&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$2" parentID="64" restricted="1" &gt;&lt;dc:title&gt;Sintel&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$3" parentID="64" restricted="1" &gt;&lt;dc:title&gt;Tears of steel&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$4" parentID="64" restricted="1" &gt;&lt;dc:title&gt;tv_series&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>5</NumberReturned>
+<TotalMatches>5</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:51:58] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52680
+[2021/04/01 23:51:58] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:58] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:58] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:58 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:58] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52681
+[2021/04/01 23:51:58] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:58] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:58] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:58 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:58] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52682
+[2021/04/01 23:51:58] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 259
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"></u:GetSystemUpdateID>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:58] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID
+[2021/04/01 23:51:58] src/upnpsoap.c:453: debug: SoapMethod: GetSystemUpdateID
+[2021/04/01 23:51:58] src/upnpsoap.c:465: warn: SoapMethod: Unknown: GetSystemUpdateID
+[2021/04/01 23:51:58] src/upnpsoap.c:122: warn: Returning UPnPError 401: Invalid Action
+[2021/04/01 23:51:58] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 398
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:58 GMT
+EXT:
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><s:Fault><faultcode>s:Client</faultcode><faultstring>UPnPError</faultstring><detail><UPnPError xmlns="urn:schemas-upnp-org:control-1-0"><errorCode>401</errorCode><errorDescription>Invalid Action</errorDescription></UPnPError></detail></s:Fault></s:Body></s:Envelope>
+[2021/04/01 23:51:59] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52683
+[2021/04/01 23:51:59] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:59] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:59] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:59 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:59] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52684
+[2021/04/01 23:51:59] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:51:59] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:51:59] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:59 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:51:59] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52685
+[2021/04/01 23:51:59] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 259
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"></u:GetSystemUpdateID>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:59] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID
+[2021/04/01 23:51:59] src/upnpsoap.c:453: debug: SoapMethod: GetSystemUpdateID
+[2021/04/01 23:51:59] src/upnpsoap.c:465: warn: SoapMethod: Unknown: GetSystemUpdateID
+[2021/04/01 23:51:59] src/upnpsoap.c:122: warn: Returning UPnPError 401: Invalid Action
+[2021/04/01 23:51:59] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 398
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:59 GMT
+EXT:
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><s:Fault><faultcode>s:Client</faultcode><faultstring>UPnPError</faultstring><detail><UPnPError xmlns="urn:schemas-upnp-org:control-1-0"><errorCode>401</errorCode><errorDescription>Invalid Action</errorDescription></UPnPError></detail></s:Fault></s:Body></s:Envelope>
+[2021/04/01 23:51:59] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52686
+[2021/04/01 23:51:59] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 728
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64$0</ObjectID>
+<BrowseFlag>BrowseMetadata</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>0</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:59] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:51:59] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:51:59] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64$0
+ * Count: -1
+ * StartingIndex: 0
+ * BrowseFlag: BrowseMetadata
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:51:59] src/upnpsoap.c:377: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where OBJECT_ID = '64$0';
+[2021/04/01 23:51:59] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 812
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:59 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="64$0" parentID="64" restricted="1" &gt;&lt;dc:title&gt;BBB&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:51:59] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52687
+[2021/04/01 23:51:59] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 735
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64$0</ObjectID>
+<BrowseFlag>BrowseDirectChildren</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>24</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:51:59] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:51:59] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:51:59] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64$0
+ * Count: 24
+ * StartingIndex: 0
+ * BrowseFlag: BrowseDirectChildren
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:51:59] src/upnpsoap.c:399: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where PARENT_ID = '64$0'  limit 0, 24;
+[2021/04/01 23:51:59] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 1149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:51:59 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;item id="64$0$0" parentID="64$0" restricted="1"&gt;&lt;dc:title&gt;bbb_h264_mp4&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;&lt;res protocolInfo="http-get:*:video/mp4:*"&gt;http://192.168.1.11:8200/MediaItems/4.mp4&lt;/res&gt;&lt;/item&gt;&lt;item id="64$0$1" parentID="64$0" restricted="1"&gt;&lt;dc:title&gt;bbb_sunflower_1080p_30fps_normal&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;&lt;res protocolInfo="http-get:*:video/mp4:*"&gt;http://192.168.1.11:8200/MediaItems/5.mp4&lt;/res&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>2</NumberReturned>
+<TotalMatches>2</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:51:59] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52688
+[2021/04/01 23:51:59] src/upnphttp.c:688: warn: HTTP Connection closed unexpectedly
+[2021/04/01 23:52:00] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52689
+[2021/04/01 23:52:00] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:00] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:00] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:00 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:00] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52690
+[2021/04/01 23:52:00] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:00] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:00] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:00 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:01] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52691
+[2021/04/01 23:52:01] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:01] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:01] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:01 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:01] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52692
+[2021/04/01 23:52:01] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:01] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:01] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:01 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:02] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52693
+[2021/04/01 23:52:02] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:02] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:02] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:02 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:02] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52694
+[2021/04/01 23:52:02] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:02] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:02] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:02 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:03] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52695
+[2021/04/01 23:52:03] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:03] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:03] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:03 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:03] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52696
+[2021/04/01 23:52:03] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:03] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:03] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:03 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:03] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52697
+[2021/04/01 23:52:03] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 423
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64$0$0</ObjectID>
+<BrowseFlag>BrowseMetadata</BrowseFlag>
+<Filter>*</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>0</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:52:03] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:52:03] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:52:03] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64$0$0
+ * Count: -1
+ * StartingIndex: 0
+ * BrowseFlag: BrowseMetadata
+ * Filter: *
+ * SortCriteria: (null)
+[2021/04/01 23:52:03] src/upnpsoap.c:377: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where OBJECT_ID = '64$0$0';
+[2021/04/01 23:52:03] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 872
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:03 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;item id="64$0$0" parentID="64$0" restricted="1"&gt;&lt;dc:title&gt;bbb_h264_mp4&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;&lt;res size="16324771" protocolInfo="http-get:*:video/mp4:*"&gt;http://192.168.1.11:8200/MediaItems/4.mp4&lt;/res&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:52:04] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52698
+[2021/04/01 23:52:04] src/upnphttp.c:608: debug: HTTP REQUEST: GET /MediaItems/4.mp4 HTTP/1.1
+Host: 192.168.1.11:8200
+Connection: close
+icy-metadata: 1
+User-Agent: GStreamer souphttpsrc (compatible; LG NetCast.TV-2012) libsoup/2.34.2
+
+
+[2021/04/01 23:52:04] src/upnphttp.c:1025: info: Serving DetailID: 4 [/home/kgrze/dev/dlna/content/BBB/bbb_h264_mp4.mp4]
+[2021/04/01 23:52:04] src/upnphttp.c:908: debug: sent 225493 bytes to 11. offset is now 225493.
+[2021/04/01 23:52:04] src/upnphttp.c:901: debug: sendfile error :: error no. 32 [Broken pipe]
+[2021/04/01 23:52:04] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52699
+[2021/04/01 23:52:04] src/upnphttp.c:246: debug: Range Start-End: 16312732 - -1
+[2021/04/01 23:52:04] src/upnphttp.c:608: debug: HTTP REQUEST: GET /MediaItems/4.mp4 HTTP/1.1
+Host: 192.168.1.11:8200
+Connection: close
+icy-metadata: 1
+Range: bytes=16312732-
+User-Agent: GStreamer souphttpsrc (compatible; LG NetCast.TV-2012) libsoup/2.34.2
+
+
+[2021/04/01 23:52:04] src/upnphttp.c:1025: info: Serving DetailID: 4 [/home/kgrze/dev/dlna/content/BBB/bbb_h264_mp4.mp4]
+[2021/04/01 23:52:04] src/upnphttp.c:908: debug: sent 12039 bytes to 11. offset is now 16324771.
+[2021/04/01 23:52:04] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52700
+[2021/04/01 23:52:04] src/upnphttp.c:246: debug: Range Start-End: 40 - -1
+[2021/04/01 23:52:04] src/upnphttp.c:608: debug: HTTP REQUEST: GET /MediaItems/4.mp4 HTTP/1.1
+Host: 192.168.1.11:8200
+Connection: close
+icy-metadata: 1
+Range: bytes=40-
+User-Agent: GStreamer souphttpsrc (compatible; LG NetCast.TV-2012) libsoup/2.34.2
+
+
+[2021/04/01 23:52:04] src/upnphttp.c:1025: info: Serving DetailID: 4 [/home/kgrze/dev/dlna/content/BBB/bbb_h264_mp4.mp4]
+[2021/04/01 23:52:04] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52701
+[2021/04/01 23:52:04] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:04] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:04] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:04 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:04] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52702
+[2021/04/01 23:52:04] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:04] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:04] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:04 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:05] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52703
+[2021/04/01 23:52:05] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:05] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:05] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:05 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:05] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52704
+[2021/04/01 23:52:05] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:05] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:05] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:05 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:06] src/upnphttp.c:908: debug: sent 16324731 bytes to 11. offset is now 16324771.
+[2021/04/01 23:52:07] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52705
+[2021/04/01 23:52:07] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:07] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:07] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:07 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:07] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52706
+[2021/04/01 23:52:07] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:07] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:07] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:07 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:08] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52707
+[2021/04/01 23:52:08] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:08] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:08] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:08 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:08] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52708
+[2021/04/01 23:52:08] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:08] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:08] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:08 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:09] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52709
+[2021/04/01 23:52:09] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:09] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:09] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:09 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:09] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52710
+[2021/04/01 23:52:09] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:09] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:09] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:09 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:09] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52711
+[2021/04/01 23:52:09] src/upnphttp.c:688: warn: HTTP Connection closed unexpectedly
+[2021/04/01 23:52:11] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52712
+[2021/04/01 23:52:11] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:11] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:11] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:11 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:11] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52713
+[2021/04/01 23:52:11] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:11] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:11] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:11 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:12] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52714
+[2021/04/01 23:52:12] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:12] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:12] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:12 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:12] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52715
+[2021/04/01 23:52:12] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:12] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:12] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:12 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:13] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52716
+[2021/04/01 23:52:13] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:13] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:13] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:13 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:13] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52717
+[2021/04/01 23:52:13] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:13] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:13] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:13 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:15] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52718
+[2021/04/01 23:52:15] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:15] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:15] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:15 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:15] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52719
+[2021/04/01 23:52:15] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:15] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:15] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:15 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:16] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52720
+[2021/04/01 23:52:16] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:16] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:16] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:16 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:16] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52721
+[2021/04/01 23:52:16] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:16] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:16] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:16 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:18] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52722
+[2021/04/01 23:52:18] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:18] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:18] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:18 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:18] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52723
+[2021/04/01 23:52:18] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:18] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:18] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:18 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:19] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52724
+[2021/04/01 23:52:19] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 423
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64$0$1</ObjectID>
+<BrowseFlag>BrowseMetadata</BrowseFlag>
+<Filter>*</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>0</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:52:19] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:52:19] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:52:19] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64$0$1
+ * Count: -1
+ * StartingIndex: 0
+ * BrowseFlag: BrowseMetadata
+ * Filter: *
+ * SortCriteria: (null)
+[2021/04/01 23:52:19] src/upnpsoap.c:377: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where OBJECT_ID = '64$0$1';
+[2021/04/01 23:52:19] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 893
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:19 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;item id="64$0$1" parentID="64$0" restricted="1"&gt;&lt;dc:title&gt;bbb_sunflower_1080p_30fps_normal&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;&lt;res size="276134947" protocolInfo="http-get:*:video/mp4:*"&gt;http://192.168.1.11:8200/MediaItems/5.mp4&lt;/res&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:52:19] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52725
+[2021/04/01 23:52:19] src/upnphttp.c:608: debug: HTTP REQUEST: GET /MediaItems/5.mp4 HTTP/1.1
+Host: 192.168.1.11:8200
+Connection: close
+icy-metadata: 1
+User-Agent: GStreamer souphttpsrc (compatible; LG NetCast.TV-2012) libsoup/2.34.2
+
+
+[2021/04/01 23:52:19] src/upnphttp.c:1025: info: Serving DetailID: 5 [/home/kgrze/dev/dlna/content/BBB/bbb_sunflower_1080p_30fps_normal.mp4]
+[2021/04/01 23:52:19] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52726
+[2021/04/01 23:52:19] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:19] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:19] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:19 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:19] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52727
+[2021/04/01 23:52:19] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:19] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:19] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:19 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:19] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52728
+[2021/04/01 23:52:19] src/upnphttp.c:688: warn: HTTP Connection closed unexpectedly
+[2021/04/01 23:52:20] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52729
+[2021/04/01 23:52:20] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:20] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:20] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:20 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:20] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52730
+[2021/04/01 23:52:20] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:20] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:20] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:20 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:21] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52731
+[2021/04/01 23:52:21] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:21] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:21] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:21 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:21] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52732
+[2021/04/01 23:52:21] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:21] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:21] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:21 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:22] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52733
+[2021/04/01 23:52:22] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:22] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:22] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:22 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:22] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52734
+[2021/04/01 23:52:22] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:22] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:22] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:22 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:23] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52735
+[2021/04/01 23:52:23] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:23] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:23] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:23 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:23] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52736
+[2021/04/01 23:52:23] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:23] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:23] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:23 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:24] src/upnphttp.c:908: debug: sent 30543716 bytes to 11. offset is now 30543716.
+[2021/04/01 23:52:24] src/upnphttp.c:901: debug: sendfile error :: error no. 32 [Broken pipe]
+[2021/04/01 23:52:25] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52737
+[2021/04/01 23:52:25] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:25] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:25] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:25 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:25] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52738
+[2021/04/01 23:52:25] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:25] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:25] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:25 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:25] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52739
+[2021/04/01 23:52:25] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 726
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64</ObjectID>
+<BrowseFlag>BrowseMetadata</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>0</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:52:25] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:52:25] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:52:25] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64
+ * Count: -1
+ * StartingIndex: 0
+ * BrowseFlag: BrowseMetadata
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:52:25] src/upnpsoap.c:377: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where OBJECT_ID = '64';
+[2021/04/01 23:52:25] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 811
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:25 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="64" parentID="0" restricted="1" &gt;&lt;dc:title&gt;VIDEO&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:52:25] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52740
+[2021/04/01 23:52:25] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 733
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64</ObjectID>
+<BrowseFlag>BrowseDirectChildren</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>24</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:52:25] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:52:25] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:52:25] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64
+ * Count: 24
+ * StartingIndex: 0
+ * BrowseFlag: BrowseDirectChildren
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:52:25] src/upnpsoap.c:399: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where PARENT_ID = '64'  limit 0, 24;
+[2021/04/01 23:52:25] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 1752
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:25 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="64$0" parentID="64" restricted="1" &gt;&lt;dc:title&gt;BBB&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$1" parentID="64" restricted="1" &gt;&lt;dc:title&gt;justice&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$2" parentID="64" restricted="1" &gt;&lt;dc:title&gt;Sintel&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$3" parentID="64" restricted="1" &gt;&lt;dc:title&gt;Tears of steel&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$4" parentID="64" restricted="1" &gt;&lt;dc:title&gt;tv_series&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>5</NumberReturned>
+<TotalMatches>5</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:52:26] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52741
+[2021/04/01 23:52:26] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:26] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:26] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:26 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:26] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52742
+[2021/04/01 23:52:26] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:26] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:26] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:26 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:27] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52743
+[2021/04/01 23:52:27] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:27] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:27] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:27 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:27] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52744
+[2021/04/01 23:52:27] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:27] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:27] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:27 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:28] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52745
+[2021/04/01 23:52:28] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:28] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:28] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:28 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:28] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52746
+[2021/04/01 23:52:28] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:28] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:28] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:28 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:28] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52747
+[2021/04/01 23:52:28] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 728
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64$1</ObjectID>
+<BrowseFlag>BrowseMetadata</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>0</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:52:28] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:52:28] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:52:28] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64$1
+ * Count: -1
+ * StartingIndex: 0
+ * BrowseFlag: BrowseMetadata
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:52:28] src/upnpsoap.c:377: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where OBJECT_ID = '64$1';
+[2021/04/01 23:52:28] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 816
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:28 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="64$1" parentID="64" restricted="1" &gt;&lt;dc:title&gt;justice&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:52:28] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52748
+[2021/04/01 23:52:28] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 735
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64$1</ObjectID>
+<BrowseFlag>BrowseDirectChildren</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>24</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:52:28] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:52:28] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:52:28] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64$1
+ * Count: 24
+ * StartingIndex: 0
+ * BrowseFlag: BrowseDirectChildren
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:52:28] src/upnpsoap.c:399: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where PARENT_ID = '64$1'  limit 0, 24;
+[2021/04/01 23:52:28] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 2262
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:28 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;item id="64$1$0" parentID="64$1" restricted="1"&gt;&lt;dc:title&gt;justice&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;&lt;res protocolInfo="http-get:*:video/mp4:*"&gt;http://192.168.1.11:8200/MediaItems/7.mp4&lt;/res&gt;&lt;/item&gt;&lt;item id="64$1$1" parentID="64$1" restricted="1"&gt;&lt;dc:title&gt;Justice.League.Dark.Apokolips.War.2020.1080p.WEBRip.x264-RARBG&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;&lt;res protocolInfo="http-get:*:video/mp4:*"&gt;http://192.168.1.11:8200/MediaItems/8.mp4&lt;/res&gt;&lt;/item&gt;&lt;item id="64$1$2" parentID="64$1" restricted="1"&gt;&lt;dc:title&gt;justice&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;&lt;res protocolInfo="http-get:*:video/mp4:*"&gt;http://192.168.1.11:8200/MediaItems/9.mp4&lt;/res&gt;&lt;/item&gt;&lt;item id="64$1$3" parentID="64$1" restricted="1"&gt;&lt;dc:title&gt;justice_mp4&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;&lt;res protocolInfo="http-get:*:video/mp4:*"&gt;http://192.168.1.11:8200/MediaItems/10.mp4&lt;/res&gt;&lt;/item&gt;&lt;item id="64$1$4" parentID="64$1" restricted="1"&gt;&lt;dc:title&gt;output&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;&lt;res protocolInfo="http-get:*:video/mp4:*"&gt;http://192.168.1.11:8200/MediaItems/11.mp4&lt;/res&gt;&lt;/item&gt;&lt;item id="64$1$5" parentID="64$1" restricted="1"&gt;&lt;dc:title&gt;output_xvid&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;&lt;res protocolInfo="http-get:*:video/x-msvideo:*"&gt;http://192.168.1.11:8200/MediaItems/12.avi&lt;/res&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>6</NumberReturned>
+<TotalMatches>6</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:52:29] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52749
+[2021/04/01 23:52:29] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:29] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:29] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:29 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:29] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52750
+[2021/04/01 23:52:29] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:29] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:29] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:29 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:30] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52751
+[2021/04/01 23:52:30] src/upnphttp.c:688: warn: HTTP Connection closed unexpectedly
+[2021/04/01 23:52:30] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52752
+[2021/04/01 23:52:30] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:30] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:30] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:30 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:30] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52753
+[2021/04/01 23:52:30] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:30] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:30] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:30 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:31] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52754
+[2021/04/01 23:52:31] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 423
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64$1$0</ObjectID>
+<BrowseFlag>BrowseMetadata</BrowseFlag>
+<Filter>*</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>0</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:52:31] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:52:31] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:52:31] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64$1$0
+ * Count: -1
+ * StartingIndex: 0
+ * BrowseFlag: BrowseMetadata
+ * Filter: *
+ * SortCriteria: (null)
+[2021/04/01 23:52:31] src/upnpsoap.c:377: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where OBJECT_ID = '64$1$0';
+[2021/04/01 23:52:31] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 867
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:31 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;item id="64$1$0" parentID="64$1" restricted="1"&gt;&lt;dc:title&gt;justice&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;&lt;res size="61713928" protocolInfo="http-get:*:video/mp4:*"&gt;http://192.168.1.11:8200/MediaItems/7.mp4&lt;/res&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:52:31] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52755
+[2021/04/01 23:52:31] src/upnphttp.c:608: debug: HTTP REQUEST: GET /MediaItems/7.mp4 HTTP/1.1
+Host: 192.168.1.11:8200
+Connection: close
+icy-metadata: 1
+User-Agent: GStreamer souphttpsrc (compatible; LG NetCast.TV-2012) libsoup/2.34.2
+
+
+[2021/04/01 23:52:31] src/upnphttp.c:1025: info: Serving DetailID: 7 [/home/kgrze/dev/dlna/content/justice/justice.avi]
+[2021/04/01 23:52:31] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52756
+[2021/04/01 23:52:31] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:31] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:31] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:31 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:31] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52757
+[2021/04/01 23:52:31] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:31] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:31] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:31 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:32] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52758
+[2021/04/01 23:52:32] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:32] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:32] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:32 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:32] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52759
+[2021/04/01 23:52:32] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:32] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:32] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:32 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:33] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52760
+[2021/04/01 23:52:33] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:33] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:33] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:33 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:33] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52761
+[2021/04/01 23:52:33] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:33] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:33] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:33 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:34] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52762
+[2021/04/01 23:52:34] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:34] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:34] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:34 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:34] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52763
+[2021/04/01 23:52:34] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:34] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:34] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:34 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:36] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52764
+[2021/04/01 23:52:36] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:36] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:36] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:36 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:36] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52765
+[2021/04/01 23:52:36] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:36] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:36] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:36 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:38] src/upnphttp.c:908: debug: sent 32830109 bytes to 11. offset is now 32830109.
+[2021/04/01 23:52:38] src/upnphttp.c:901: debug: sendfile error :: error no. 32 [Broken pipe]
+[2021/04/01 23:52:38] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52766
+[2021/04/01 23:52:38] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:38] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:38] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:38 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:38] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52767
+[2021/04/01 23:52:38] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:38] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:38] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:38 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:39] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52768
+[2021/04/01 23:52:39] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 726
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64</ObjectID>
+<BrowseFlag>BrowseMetadata</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>0</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:52:39] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:52:39] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:52:39] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64
+ * Count: -1
+ * StartingIndex: 0
+ * BrowseFlag: BrowseMetadata
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:52:39] src/upnpsoap.c:377: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where OBJECT_ID = '64';
+[2021/04/01 23:52:39] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 811
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:39 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="64" parentID="0" restricted="1" &gt;&lt;dc:title&gt;VIDEO&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:52:39] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52769
+[2021/04/01 23:52:39] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 733
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>64</ObjectID>
+<BrowseFlag>BrowseDirectChildren</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>24</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:52:39] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:52:39] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:52:39] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 64
+ * Count: 24
+ * StartingIndex: 0
+ * BrowseFlag: BrowseDirectChildren
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:52:39] src/upnpsoap.c:399: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where PARENT_ID = '64'  limit 0, 24;
+[2021/04/01 23:52:39] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 1752
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:39 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="64$0" parentID="64" restricted="1" &gt;&lt;dc:title&gt;BBB&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$1" parentID="64" restricted="1" &gt;&lt;dc:title&gt;justice&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$2" parentID="64" restricted="1" &gt;&lt;dc:title&gt;Sintel&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$3" parentID="64" restricted="1" &gt;&lt;dc:title&gt;Tears of steel&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;container id="64$4" parentID="64" restricted="1" &gt;&lt;dc:title&gt;tv_series&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>5</NumberReturned>
+<TotalMatches>5</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:52:39] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52770
+[2021/04/01 23:52:39] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:39] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:39] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:39 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:39] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52771
+[2021/04/01 23:52:39] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:39] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:39] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:39 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:39] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52772
+[2021/04/01 23:52:39] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 725
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>0</ObjectID>
+<BrowseFlag>BrowseMetadata</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>0</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:52:39] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:52:39] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:52:39] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 0
+ * Count: -1
+ * StartingIndex: 0
+ * BrowseFlag: BrowseMetadata
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:52:39] src/upnpsoap.c:377: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where OBJECT_ID = '0';
+[2021/04/01 23:52:39] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 810
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:39 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="0" parentID="-1" restricted="1" &gt;&lt;dc:title&gt;root&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:52:39] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52773
+[2021/04/01 23:52:39] src/upnphttp.c:608: debug: HTTP REQUEST: POST /ctl/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CONTENT-LENGTH: 732
+CONTENT-TYPE: text/xml; charset="utf-8"
+SOAPACTION: "urn:schemas-upnp-org:service:ContentDirectory:1#Browse"
+USER-AGENT: Linux/2.6.35 UPnP/1.0 DLNADOC/1.50 INTEL_NMPR/2.0 LGE_DLNA_SDK/1.6.0
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<ObjectID>0</ObjectID>
+<BrowseFlag>BrowseDirectChildren</BrowseFlag>
+<Filter>@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize</Filter>
+<StartingIndex>0</StartingIndex>
+<RequestedCount>24</RequestedCount>
+<SortCriteria></SortCriteria>
+</u:Browse>
+</s:Body>
+</s:Envelope>
+
+[2021/04/01 23:52:39] src/upnphttp.c:507: debug: SOAPAction: urn:schemas-upnp-org:service:ContentDirectory:1#Browse
+[2021/04/01 23:52:39] src/upnpsoap.c:453: debug: SoapMethod: Browse
+[2021/04/01 23:52:39] src/upnpsoap.c:361: debug: Browsing ContentDirectory:
+ * ObjectID: 0
+ * Count: 24
+ * StartingIndex: 0
+ * BrowseFlag: BrowseDirectChildren
+ * Filter: @id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize
+ * SortCriteria: (null)
+[2021/04/01 23:52:39] src/upnpsoap.c:399: debug: Browse SQL: SELECT OBJECT_ID, PARENT_ID, ID, CLASS, SIZE, TITLE, MIME from OBJECTS where PARENT_ID = '0'  limit 0, 24;
+[2021/04/01 23:52:39] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 200 OK
+Content-Type: text/xml; charset="utf-8"
+Connection: close
+Content-Length: 811
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:39 GMT
+EXT:
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"><Result>&lt;DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"&gt;
+&lt;container id="64" parentID="0" restricted="1" &gt;&lt;dc:title&gt;VIDEO&lt;/dc:title&gt;&lt;upnp:class&gt;object.container.storageFolder&lt;/upnp:class&gt;&lt;upnp:storageUsed&gt;-1&lt;/upnp:storageUsed&gt;&lt;/container&gt;&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>1</NumberReturned>
+<TotalMatches>1</TotalMatches>
+<UpdateID>1</UpdateID></u:BrowseResponse></s:Body></s:Envelope>
+
+[2021/04/01 23:52:40] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52774
+[2021/04/01 23:52:40] src/upnphttp.c:688: warn: HTTP Connection closed unexpectedly
+[2021/04/01 23:52:40] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52775
+[2021/04/01 23:52:40] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:40] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:40] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:40 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:40] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52776
+[2021/04/01 23:52:40] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:40] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:40] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:40 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:41] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52777
+[2021/04/01 23:52:41] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:41] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:41] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:41 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:41] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52778
+[2021/04/01 23:52:41] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:41] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:41] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:41 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:43] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52779
+[2021/04/01 23:52:43] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:43] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:43] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:43 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:43] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52780
+[2021/04/01 23:52:43] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:43] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:43] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:43 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:44] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52781
+[2021/04/01 23:52:44] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:44] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:44] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:44 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:44] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52782
+[2021/04/01 23:52:44] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:44] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:44] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:44 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:45] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52783
+[2021/04/01 23:52:45] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:45] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:45] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:45 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:45] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52784
+[2021/04/01 23:52:45] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:45] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:45] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:45 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:47] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52785
+[2021/04/01 23:52:47] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:47] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:47] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:47 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:47] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52786
+[2021/04/01 23:52:47] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:47] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:47] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:47 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:48] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52787
+[2021/04/01 23:52:48] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ConnectionMgr HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:48] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:48] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:48 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:48] src/minidlna.c:628: debug: HTTP connection from 192.168.1.3:52788
+[2021/04/01 23:52:48] src/upnphttp.c:608: debug: HTTP REQUEST: SUBSCRIBE /evt/ContentDir HTTP/1.1
+HOST: 192.168.1.11:8200
+CALLBACK: <http://192.168.1.3:47944/>
+NT: upnp:event
+TIMEOUT: Second-1800
+
+
+[2021/04/01 23:52:48] src/upnphttp.c:664: warn: Unsupported HTTP Command SUBSCRIBE
+[2021/04/01 23:52:48] src/upnphttp.c:852: debug: HTTP RESPONSE: HTTP/1.1 501 Not Implemented
+Content-Type: text/html
+Connection: close
+Content-Length: 149
+Server: 5.4.0-26-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.2.1
+Date: Thu, 01 Apr 2021 21:52:48 GMT
+EXT:
+
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD><BODY><H1>Not Implemented</H1>The HTTP Method is not implemented by this server.</BODY></HTML>
+
+[2021/04/01 23:52:49] src/minidlna.c:146: warn: received signal 2, good-bye
+[2021/04/01 23:52:49] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:52:49] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:52:49] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:52:49] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:52:49] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:52:49] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:52:49] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:52:49] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:52:49] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
+[2021/04/01 23:52:49] src/minissdp.c:579: maxdebug: Sending ssdp:byebye [9]
