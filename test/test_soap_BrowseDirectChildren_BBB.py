@@ -7,11 +7,11 @@ soap_encoding = "http://schemas.xmlsoap.org/soap/encoding/"
 soap_env = "http://schemas.xmlsoap.org/soap/envelope"
 service_ns = "urn:schemas-upnp-org:service:ContentDirectory:1"
 browse_args =   {
-                'ObjectID': 0,
-                'BrowseFlag': 'BrowseMetadata',
+                'ObjectID': '64$0',
+                'BrowseFlag': 'BrowseDirectChildren',
                 'Filter': '@id,@parentID,@restricted,@childCount,dc:title,dc:creator,upnp:artist,upnp:class,dc:date,upnp:album,upnp:genre,res,res@size,res@duration,res@protection,res@bitrate,res@resolution,res@protocolInfo,res@nrAudioChannels,res@sampleFrequency,upnp:albumArtURI,upnp:albumArtURI@dlna:profileID, res@dlna:cleartextSize',
                 'StartingIndex': 0,
-                'RequestedCount': 0,
+                'RequestedCount': 24,
                 'SortCriteria': '',
                 }
 arg_values = '\n'.join( ['<%s>%s</%s>' % (k, v, k) for k, v in browse_args.items()] )
@@ -43,10 +43,10 @@ try:
     request = urllib2.Request(ctrl_url, body, headers)
     try:
         response = urllib2.urlopen(request)
-        response_xml = open("./dut_xml/browse_root.xml", "w")
+        response_xml = open("./dut_xml/browse_BrowseDirectChildren_BBB.xml", "w")
         response_xml.write(response.read())
         response_xml.close()
-        diff = main.diff_files('ref_xml/browse_root.xml', 'dut_xml/browse_root.xml')
+        diff = main.diff_files('ref_xml/browse_BrowseDirectChildren_BBB.xml', 'dut_xml/browse_BrowseDirectChildren_BBB.xml')
         if len(diff) is 0:
             print '\nTEST PASSED\n' 
         else:
